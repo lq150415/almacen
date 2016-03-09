@@ -75,6 +75,7 @@ header nav ul li .children li {
 	display:block;
 	overflow: hidden;
 	border-bottom: 1px solid rgba(255,255,255,.5);
+	background: #087;
 }
 
 header nav ul li .children li a {
@@ -133,7 +134,9 @@ display: inline;
 	header.lat nav ul li .children li a {
 		margin-left:20px;
 	}
-
+	header.lat nav.lateral ul li .children {
+		background: #087;
+	}
 	header.lat nav ul .usuario {
 
 	
@@ -176,9 +179,22 @@ div.formulario{
 	border-radius: 12px ; 
 	overflow: auto;
 }
+.formularioreg{
+	zoom:1;
+}
 @media screen and (min-width: 950px) {
  header.lat nav.lateral {
  	right: 0;
+ }
+}
+@media screen and (max-width: 800px) {
+ .formularioreg {
+ 	zoom:0.8;
+ }
+}
+@media screen and (max-width: 731px) {
+ .formularioreg {
+ 	zoom:0.6;
  }
 }
 @media screen and (max-width: 950px) {
@@ -315,6 +331,7 @@ div.formulario{
 
 	header.lat nav.lateral ul li .children li a {
 		margin-left:20px;
+		background:#087;
 	}
 
 	header.lat nav.lateral ul .usuario {
@@ -352,9 +369,9 @@ div.formulario{
 }
 
 #VentanaModal {
-	height: 300px;
+	height: auto;
 	width: 400px;
-	margin-top: -150px;
+	margin-top: -5%;
 	margin-left: -200px;
 }
 }
@@ -379,11 +396,12 @@ div.formulario{
 	left: 0px;
 	top: 0px;
 	visibility: hidden;
+	overflow: auto;
 
 }
 #VentanaModal {
 	background-color: #CCC;
-	height: 70%;
+	height: auto;
 	width: 50%;
 	border-radius: 8px;
 	position: absolute;
@@ -392,5 +410,6 @@ div.formulario{
 	margin-top: -15%;
 	margin-left: -25%;
 	padding: 10px;
-	overflow: auto
+	overflow: auto;
+
 }

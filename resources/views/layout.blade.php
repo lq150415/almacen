@@ -32,7 +32,42 @@ function despliegaModal( _valor ){
 	}
 
 </script>
+<!--Esto es para el datepicker-->
 
+<link rel="stylesheet" type="text/css" href="<?php echo asset('css/jquery-ui.theme.css')?>">
+<link rel="stylesheet" type="text/css" href="<?php echo asset('css/jquery-ui.structure.css')?>">
+<link rel="stylesheet" type="text/css" href="<?php echo asset('css/jquery-ui.css')?>">
+
+<script type="text/javascript" language="javascript" src="<?php echo asset('js/jquery-ui.js')?>"></script>
+<script type="text/javascript" language="javascript" src="<?php echo asset('js/jquery-ui.min.js')?>"></script>
+<script type="text/javascript">
+jQuery(function($){
+	$.datepicker.regional['es'] = {
+		closeText: 'Cerrar',
+		prevText: '&#x3c;Ant',
+		nextText: 'Sig&#x3e;',
+		currentText: 'Hoy',
+		monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio',
+		'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
+		monthNamesShort: ['Ene','Feb','Mar','Abr','May','Jun',
+		'Jul','Ago','Sep','Oct','Nov','Dic'],
+		dayNames: ['Domingo','Lunes','Martes','Mi&eacute;rcoles','Jueves','Viernes','S&aacute;bado'],
+		dayNamesShort: ['Dom','Lun','Mar','Mi&eacute;','Juv','Vie','S&aacute;b'],
+		dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','S&aacute;'],
+		weekHeader: 'Sm',
+		dateFormat: 'dd/mm/yy',
+		firstDay: 1,
+		isRTL: false,
+		showMonthAfterYear: false,
+		yearSuffix: ''};
+	$.datepicker.setDefaults($.datepicker.regional['es']);
+});    
+ 
+$(document).ready(function() {
+   $("#datepicker").datepicker();
+   $("#datepicker2").datepicker();
+ });
+</script>
 <body>
 @yield('VM')
 <div>
@@ -43,9 +78,9 @@ function despliegaModal( _valor ){
  
 		<nav class="vert">
 			<ul>
-				<li><a href="#"><span class="icon-house"></span>Inicio</a></li>
+				<li><a href="index"><span class="icon-house"></span>Inicio</a></li>
 				<li class="submenu">
-					<a href="#"><span class="icon-folder-upload"></span>Ingresos<span class="caret icon-arrow-down6"></span></a>
+					<a href="ingreso"><span class="icon-folder-upload"></span>Ingresos<span class="caret icon-arrow-down6"></span></a>
 					
 				</li><li class="submenu">
 					<a href="#"><span class="icon-folder-download"></span>Salidas<span class="caret icon-arrow-down6"></span></a>
@@ -53,13 +88,13 @@ function despliegaModal( _valor ){
 				<li class="submenu">
 					<a href="#"><span class="icon-book"></span>Reportes<span class="caret icon-arrow-down6"></span></a>
 					<ul class="children">
-						<li><a href="#">Reporte General<span class="icon-dot"></span></a></li>
-						<li><a href="#">Reporte por Rubro<span class="icon-dot"></span></a></li>
-						<li><a href="#">Reporte de Usuarios<span class="icon-dot"></span></a></li>
+						<li><a href="#">Reporte de Saldos<span class="icon-dot"></span></a></li>
+						<li><a href="#">Reporte de Ingresos<span class="icon-dot"></span></a></li>
+						<li><a href="#">Reporte de Movimientos (Kardex)<span class="icon-dot"></span></a></li>
 					</ul>
 				</li>
 				<li class="submenu">
-					<a href="#"><span class="icon-eye"></span>Alertas<span class="caret icon-arrow-down6"></span></a>
+					<a href="alerta"><span class="icon-alarm"></span>Alertas<span class="caret icon-arrow-down6"></span></a>
 					
 				</li>
 				<li class="usuario" >
@@ -100,10 +135,8 @@ function despliegaModal( _valor ){
 							<li><a href="consultapr">Por rubro<span class="icon-dot"></span></a></li>
 							<li><a href="consultapp">Por producto<span class="icon-dot"></span></a></li>
 							<li><a href="consultapu">Por usuario<span class="icon-dot"></span></a></li>
-							<li><a href="#">Por fecha de ingreso<span class="icon-dot"></span></a></li>
-							<li><a href="#">Por fecha de salida<span class="icon-dot"></span></a></li>
-							<li><a href="#">Por fecha de solicitud<span class="icon-dot"></span></a></li>
-							<li><a href="#">Por fecha de respuesta<span class="icon-dot"></span></a></li>
+							<li><a href="consultapf">Por fechas<span class="icon-dot"></span></a></li>
+							
 						</ul>
 					</li>
 				</ul>

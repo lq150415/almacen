@@ -128,6 +128,14 @@
   color: #2E3133;
   text-transform: uppercase;
 }
+.txtcampo.textarea{
+  width: auto;
+  height: auto;
+}
+.txtcampo.large2{
+  width: 90%;
+  
+}
 .txtcampo:hover{
   color: #2E3133;
   border-color: #08395F;
@@ -146,4 +154,9 @@
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
   -o-border-radius: 4px;
+}
+#portada{
+background-image: url(../img/portada2.jpg);
+height:450px;
+background-repeat: repeat;
 }

@@ -2,7 +2,38 @@
 	@section ('VM')
 		<div id="bgVentanaModal" class="bgventanaModal">
 <div id="VentanaModal" class="VentanaModal">
-<p><a href="javascript:despliegaModal('hidden');">Cerrar Ventana Modal</a></p>
+<a href="javascript:despliegaModal('hidden');" title="Cerrar"><span class="icon-undo2" style="float: right; color: #000; font-size: 20px;"></span></a>
+		</br>
+		<fieldset class="fieldcuerpo" align="left">
+			<legend>REGISTRO DE NUEVO PRODUCTO</legend>
+			<form class="formularioreg">
+				<table style="margin-top: 4%;  margin-left: 10%;">
+						<tr style="height: 50px;">
+							<td width="130px" class="lblnombre">Nombre del producto</td>
+							<td width="250px"><input type="text" name="" class="txtcampo large2" placeholder="NOMBRE DEL PRODUCTO" onkeypress="return sololetras(event);" onpaste="return false" ></td>
+						</tr>
+						<tr style="height: 50px;">
+							<td width="130px" class="lblnombre">Descripcion del producto</td>
+							<td><textarea class="txtcampo textarea" placeholder="DESCRIPCION DEL PRODUCTO" cols="55" rows="5" onpaste="return false" ></textarea></td>
+						</tr>
+						<tr style="height: 50px;">
+							<td width="130px" class="lblnombre">Precio unitario </td>
+							<td width="250px"><input type="text" name="" class="txtcampo large" placeholder="P/U en Bs." onkeypress="return sololetras(event);" onpaste="return false" ></td>
+						</tr>
+							<td width="130px" class="lblnombre">Cantidad del producto </td>
+							<td width="250px"><input type="text" name="" class="txtcampo large" placeholder="CANTIDAD DEL PRODUCTO" onkeypress="return sololetras(event);" onpaste="return false" ></td>
+						</tr>
+					</table>
+					<table style="margin-left: 30%;">
+						<tr style="height: 50px;">
+							<td>
+								<input type="submit" name="submit_reg_arc" class="botones ico-btnsave" value="REGISTRAR">
+                 				<input type="reset"  onclick="document.location.reload();" class="botones ico-btnlimpiar" value="LIMPIAR DATOS">
+                 			</td>
+						</tr>
+					</table>
+			</form>
+		</fieldset>
 </div>
 </div>
 

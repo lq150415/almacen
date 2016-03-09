@@ -40,3 +40,22 @@ Route::get('consultapp', function(){
 Route::get('consultapu', function(){
     return view('consultaporusuario');
 });
+Route::get('consultapf', function(){
+    return view('consultaporfecha');
+});
+Route::get('solicitud', function(){
+    return view('solicitud');
+});
+Route::get('respuesta', function(){
+    return view('respuesta');
+});
+Route::get('ingreso', function(){
+    return view('ingreso');
+});
+Route::get('index', function(){
+    return view('index');
+});
+Route::get('alerta', function(){
+    return view('alertas');
+});
+
