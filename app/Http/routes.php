@@ -32,16 +32,16 @@ Route::get('usuario', function(){
     return view('usuario');
 });
 Route::get('consultapr', function(){
-    return view('consultaporrubro');
+    return view('consulta/consultaporrubro');
 });
 Route::get('consultapp', function(){
-    return view('consultaporproducto');
+    return view('consulta/consultaporproducto');
 });
 Route::get('consultapu', function(){
-    return view('consultaporusuario');
+    return view('consulta/consultaporusuario');
 });
 Route::get('consultapf', function(){
-    return view('consultaporfecha');
+    return view('consulta/consultaporfecha');
 });
 Route::get('solicitud', function(){
     return view('solicitud');
@@ -59,3 +59,23 @@ Route::get('alerta', function(){
     return view('alertas');
 });
 
+Route::get('login', function(){
+    return view('login');
+});
+
+Route::get('indexcl', function(){
+    return view('cliente/index_clie');
+});
+
+Route::get('solicitudcl', function(){
+    return view('cliente/form_sol');
+});
+Route::get('respuestacl', function(){
+    return view('cliente/resp_sol');
+});
+Route::get('solacepcl', function(){
+    return view('cliente/sol_ace');
+});
+Route::get('solreccl', function(){
+    return view('cliente/sol_rec');
+});

@@ -26,9 +26,26 @@
 				$('#example').DataTable();
 			} );
 		</script>
+		<script type="text/javascript" language="javascript" class="init">
+			$(document).ready(function() {
+				$('#example2').DataTable();
+			} );
+		</script>
 <script type="text/javascript">
 function despliegaModal( _valor ){
 	document.getElementById("bgVentanaModal").style.visibility=_valor;
+	}
+
+</script>
+<script type="text/javascript">
+function despliegaModal2( _valor ){
+	document.getElementById("bgVentanaModal2").style.visibility=_valor;
+	}
+
+</script>
+<script type="text/javascript">
+function despliegaModal3( _valor ){
+	document.getElementById("bgVentanaModal3").style.visibility=_valor;
 	}
 
 </script>
@@ -68,6 +85,7 @@ $(document).ready(function() {
    $("#datepicker2").datepicker();
  });
 </script>
+</head>
 <body>
 @yield('VM')
 <div>

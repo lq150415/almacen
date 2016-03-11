@@ -1,18 +1,16 @@
-	@extends ('layout')
-	@section ('VM')
-		<div id="bgVentanaModal" class="bgventanaModal">
-<div id="VentanaModal" class="VentanaModal">
-<a href="javascript:despliegaModal('hidden');" title="Cerrar"><span class="icon-undo2" style="float: right; color: #000; font-size: 20px;"></span></a>
-		</br>
-		<fieldset class="fieldcuerpo" align="left">
-			<legend>REGISTRO DE NUEVO USUARIO</legend>
+	@extends ('cliente/layout_clie')
+	@section ('cuerpo')
+	<div class="ventanamodal5">
+	<center>
+	<fieldset class="fieldcuerposol" align="left">
+			<legend>REGISTRO DE NUEVA SOLICITUD</legend>
 			<form class="formularioreg">
 				<fieldset class="fieldcuerpo" align="left">
-				<legend>DATOS PERSONALES</legend>
+				<legend>DATOS GENERALES</legend>
 				<table >
 						<tr style="height: 30px;">
-							<td width="100px" class="lblnombre">CI</td>
-							<td width="240px" ><input type="text" name="ntm_arc" class="txtcampo" placeholder="NUMERO DE CARNET" onkeypress="return solonumeros(event);" onpaste="return false"></td>
+							<td width="100px" class="lblnombre">ID</td>
+							<td width="240px" ><input type="label" name="ntm_arc" class="txtcampo" placeholder="ID DE USUARIO" onkeypress="return solonumeros(event);" onpaste="return false"></td>
 							<td width="100px" class="lblnombre">Nombre</td>
 							<td width="240px" ><input type="text" name="ncj_arc" class="txtcampo" placeholder="NOMBRE" onkeypress="return solonumeros(event);" onpaste="return false"></td>
 						</tr>
@@ -45,7 +43,7 @@
 						</table>
 						</fieldset>
 						<fieldset class="fieldcuerpo" align="left" >
-					<legend>DATOS DE CUENTA</legend>
+					<legend>PRODUCTOS</legend>
 					<table>
 						<tr style="height:30px;">
 							
@@ -82,52 +80,6 @@
 					</table>
 			</form>
 		</fieldset>
-</div>
-</div>
-
-	@stop
-	@section ('contenido')
-		<fieldset class="fieldcuerpo" align="left">
-					<legend>Usuarios</legend>
-	  	<div>
-
-	  	<a href="javascript:despliegaModal('visible');">+ Nuevo usuario</a>
-	  	</br>
-	  	</br>	  	
-	  	</div>
-	  	<fieldset class="fieldcuerpo" align="left">
-					<legend>DETALLE</legend>
-		<table id="example" class="display" cellspacing="5" width="100%" style="border-radius:4px;-moz-border-radius:4px;-webkit-border-radius:4px;border:1px #444444 solid;">
-	<thead style="font-size:13px;color:#FFF;background-color:#444444;height:40px;">
-		<tr>
-			<th>ID</th>
-			<th>C.I.</th>
-            <th>NOMBRE</th>
-			<th>APELLIDO PATERNO</th>
-			<th>APELLIDO MATERNO</th>
-			<th>AREA</th>
-			<th>CARGO</th>
-			<th>NIVEL</th>
-			<th>ACCIONES</th>	
-		</tr>
-	</thead>
-	<tfoot style="font-size:13px;color:#FFF;background-color:#444444;height:40px;">
-		<tr>
-			<th>ID</th>
-			<th>C.I.</th>
-            <th>NOMBRE</th>
-			<th>APELLIDO PATERNO</th>
-			<th>APELLIDO MATERNO</th>
-			<th>AREA</th>
-			<th>CARGO</th>
-			<th>NIVEL</th>
-			<th>ACCIONES</th>	
-		</tr>
-	</tfoot>
-	<tbody style="font-size:11px;">
+		</center>
+		</div>
 		
-	</tbody>
-</table>
-</fieldset>
-
-	@stop

@@ -16,6 +16,7 @@ body {background:#000;}
 .menu_bar2 {
 	display:none;
 }
+
 header {
 	width: 100%;
 }
@@ -89,7 +90,9 @@ header nav ul li .children li a span {
 	margin-right:0;
 	margin-left:10px;
 }
-
+header nav ul li .children li a:hover {
+	background-color: #079;
+}
 header nav ul li .caret {
 	position: relative;
 	top:3px;
@@ -146,6 +149,88 @@ display: inline;
 	header.lat nav ul li .caret {
 		float: right;
 	}
+header.clie {
+	width: 100%;
+}
+
+
+
+header.clie nav {
+	background:#000;
+	z-index:1000;
+	max-width: 100%;
+	width:100%;
+	padding-left:10%;
+	padding-right:10%;
+}
+
+header.clie nav ul {
+	list-style:none;
+}
+
+header.clie nav ul li {
+	display:inline-block;
+	position: relative;
+}
+header.clie nav ul .usuario {
+	
+	float: right;
+}
+
+header.clie nav ul li:hover {
+	background:#089;
+}
+
+header.clie nav ul li a {
+	color:#fff;
+	display:block;
+	text-decoration:none;
+	padding: 20px;
+}
+
+header.clie nav ul li a span {
+	margin-right:10px;
+}
+
+header.clie nav ul li:hover .children {
+	display:block;
+}
+
+header.clie nav ul li .children {
+	display: none;
+	background:#087;
+	position: absolute;
+	width: 150%;
+	z-index:1000;
+}
+
+header.clie nav ul li .children li {
+	display:block;
+	overflow: hidden;
+	border-bottom: 1px solid rgba(255,255,255,.5);
+	background: #087;
+}
+
+header.clie nav ul li .children li a {
+	display: block;
+}
+
+header.clie nav ul li .children li a span {
+	float: right;
+	position: relative;
+	top:3px;
+	margin-right:0;
+	margin-left:10px;
+}
+header.clie nav ul li .children li a:hover {
+	background-color: #079;
+}
+header.clie nav ul li .caret {
+	position: relative;
+	top:3px;
+	margin-left:10px;
+	margin-right:0px;
+}
 div.banner{
 	padding-left: 10%;
 	padding-right: 5%;
@@ -361,9 +446,7 @@ div.formulario{
 	
 	width: 95%;  
 }
-	div img{
-		width: 80%;
-	}
+	
 	header.lat {
 	width: 100%;
 }
@@ -374,6 +457,7 @@ div.formulario{
 	margin-top: -5%;
 	margin-left: -200px;
 }
+
 }
 @media screen and (max-width: 480px) {
 .menu_bar .bt-menu {
@@ -409,6 +493,117 @@ div.formulario{
 	top: 50%;
 	margin-top: -15%;
 	margin-left: -25%;
+	padding: 10px;
+	overflow: auto;
+
+}
+#bgVentanaModal2 {
+	background-image: url(../img/bg-modal.png);
+	position: fixed;
+	z-index: 1;
+	height: 100%;
+	width: 100%;
+	left: 0px;
+	top: 0px;
+	visibility: hidden;
+	overflow: auto;
+
+}
+#VentanaModal2 {
+	background-color: #CCC;
+	height: auto;
+	width: 50%;
+	border-radius: 8px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin-top: -15%;
+	margin-left: -25%;
+	padding: 10px;
+	overflow: auto;
+
+}
+#bgVentanaModal3 {
+	background-image: url(../img/bg-modal.png);
+	position: fixed;
+	z-index: 1;
+	height: 100%;
+	width: 100%;
+	left: 0px;
+	top: 0px;
+	visibility: hidden;
+	overflow: auto;
+
+}
+#VentanaModal3 {
+	background-color: #CCC;
+	height: auto;
+	width: 50%;
+	border-radius: 8px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin-top: -15%;
+	margin-left: -25%;
+	padding: 10px;
+	overflow: auto;
+
+}
+#Ventanalogin {
+	background-color: #000;
+	height: 300px;
+	width: 620px;
+	border-radius: 5px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin-top: -150px;
+	margin-left: -300px;
+	
+	overflow: auto;
+		border: 3px #089 solid;
+
+}
+.titulologin{
+	background-color: #089;
+	color: #fff;
+	height: 70px;
+	position: relative;
+}
+.cuerpologin{
+	color: #089;
+	background:url(../img/banner.png) no-repeat;
+	float: left;
+	overflow: auto;
+	width: 250px;
+	height:200px;
+	zoom:0.89;
+	margin-top: 3%;
+}
+.cuerpoblogin{
+	color: #fff;
+	float: right;
+	width: 350px;
+	height:224px;
+	padding: 10px;
+}
+.VentanaModal4 {
+	background-color: #000;
+	height: 80%;
+	width: 70%;
+	border-radius: 8px;
+	position: absolute;
+	margin: 0% 10% 3% 15%;
+	padding: 10px;
+
+}
+.VentanaModal5 {
+	background-color: #fff;
+	height: 73%;
+	width: 50%;
+	border-radius: 8px;
+	position: absolute;
+	margin: 10% 10% 3% 25%;
 	padding: 10px;
 	overflow: auto;
 
