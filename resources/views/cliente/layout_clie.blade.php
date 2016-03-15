@@ -32,7 +32,7 @@
 					<ul class="children">
 						<li><a href="#">Ver Perfil<span class="icon-dot"></span></a></li>
 						<li><a href="#">Editar Perfil<span class="icon-dot"></span></a></li>
-						<li><a href="#">Cerrar Sesión<span class="icon-dot"></span></a></li>
+						<li><a href="logout">Cerrar Sesión<span class="icon-dot"></span></a></li>
 					</ul>
 				</li>
 			</ul>

@@ -364,3 +364,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ad164b', end
 .link_boton:hover{
  font-size: 101%;
 }
+.mensajevalidacion{
+  
+  -webkit-color: red;
+  -ms-color: red;
+  -moz-color: red;
+  color: red;
+  font-size: 9px;
+}

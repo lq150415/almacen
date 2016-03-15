@@ -27,7 +27,7 @@ trait AuthenticatesAndRegistersUsers {
 	 */
 	public function getRegister()
 	{
-		return view('auth.register');
+		return view('register');
 	}
 
 	/**
@@ -59,7 +59,7 @@ trait AuthenticatesAndRegistersUsers {
 	 */
 	public function getLogin()
 	{
-		return view('auth.login');
+		return view('login');
 	}
 
 	/**
@@ -69,7 +69,7 @@ trait AuthenticatesAndRegistersUsers {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function postLogin(Request $request)
-	{
+	{   $mensaje='Usuario y/o Contraseña incorrectos';
 		$this->validate($request, [
 			'email' => 'required', 'password' => 'required',
 		]);
@@ -97,7 +97,7 @@ trait AuthenticatesAndRegistersUsers {
 	{
 		$this->auth->logout();
 
-		return redirect('/');
+		return redirect('/login');
 	}
 
 	/**
@@ -112,7 +112,7 @@ trait AuthenticatesAndRegistersUsers {
 			return $this->redirectPath;
 		}
 
-		return property_exists($this, 'redirectTo') ? $this->redirectTo : '/home';
+		return property_exists($this, 'redirectTo') ? $this->redirectTo : '/';
 	}
 
 	/**
@@ -122,7 +122,7 @@ trait AuthenticatesAndRegistersUsers {
 	 */
 	public function loginPath()
 	{
-		return property_exists($this, 'loginPath') ? $this->loginPath : '/auth/login';
+		return property_exists($this, 'loginPath') ? ($this->loginPath) : ('login');
 	}
 
 }

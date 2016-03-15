@@ -11,71 +11,36 @@
 |
 */
 
-Route::get('/', 'WelcomeController@index');
+// Authentication routes...
+Route::get('login', 'Auth\AuthController@getLogin');
+Route::post('login', 'Auth\AuthController@postLogin');
+Route::get('logout', 'Auth\AuthController@getLogout');
+ 
+// Registration routes...
+Route::get('auth/register', 'Auth\AuthController@getRegister');
+Route::post('auth/register', 'Auth\AuthController@postRegister');
 
-Route::get('home', 'HomeController@index');
-
-Route::controllers([
-	'auth' => 'Auth\AuthController',
-	'password' => 'Auth\PasswordController',
-]);
-Route::get('almacen', function(){
-    return view('almacen');
-});
-Route::get('rubro', function(){
-    return view('rubro');
-});
-Route::get('producto', function(){
-    return view('producto');
-});
-Route::get('usuario', function(){
-    return view('usuario');
-});
-Route::get('consultapr', function(){
-    return view('consulta/consultaporrubro');
-});
-Route::get('consultapp', function(){
-    return view('consulta/consultaporproducto');
-});
-Route::get('consultapu', function(){
-    return view('consulta/consultaporusuario');
-});
-Route::get('consultapf', function(){
-    return view('consulta/consultaporfecha');
-});
-Route::get('solicitud', function(){
-    return view('solicitud');
-});
-Route::get('respuesta', function(){
-    return view('respuesta');
-});
-Route::get('ingreso', function(){
-    return view('ingreso');
-});
-Route::get('index', function(){
-    return view('index');
-});
-Route::get('alerta', function(){
-    return view('alertas');
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/', 'IndexController@index');
+    Route::get('index', 'IndexController@index');
+    Route::get('indexcl', 'IndexController@index2');
+    Route::get('almacen', 'AlmacenController@index');
+    Route::get('alerta', 'AlertaController@index');
+    Route::get('consultapp', 'ConsultaController@index');
+    Route::get('consultapr', 'ConsultaController@index2');
+    Route::get('consultapu', 'ConsultaController@index3');
+    Route::get('consultapf', 'ConsultaController@index4');
+    Route::get('ingreso', 'IngresoController@index');
+    Route::get('producto', 'ProductoController@index');
+    Route::get('respuesta', 'RespuestaController@index');
+    Route::get('respuestacl', 'RespuestaController@indexcl');
+    Route::get('rubro', 'RubroController@index');
+    Route::get('solicitud', 'SolicitudController@index');
+    Route::get('solicitudcl', 'SolicitudController@indexcl');    
+    Route::get('solacepcl', 'SolicitudController@indexclac');  
+    Route::get('solreccl', 'SolicitudController@indexclrec');  
+    Route::get('usuario', 'UsuarioController@index');
 });
 
-Route::get('login', function(){
-    return view('login');
-});
 
-Route::get('indexcl', function(){
-    return view('cliente/index_clie');
-});
 
-Route::get('solicitudcl', function(){
-    return view('cliente/form_sol');
-});
-Route::get('respuestacl', function(){
-    return view('cliente/resp_sol');
-});
-Route::get('solacepcl', function(){
-    return view('cliente/sol_ace');
-});
-Route::get('solreccl', function(){
-    return view('cliente/sol_rec');
-});
