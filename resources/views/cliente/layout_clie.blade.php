@@ -28,7 +28,7 @@
 			<p class="tituloclie">SISTEMA DE CONTROL DE ALMACENES E INVENTARIOS</p>
 			<ul>
 				<li class="usuario" >
-					<a href="#" ><span class="icon-user-minus"></span>Usuario<span class="caret icon-arrow-down6"></span></a>
+					<a href="#" ><span class="icon-user-minus"></span><?php echo $nombre=Auth::user()->NOM_USU?><span class="caret icon-arrow-down6"></span></a>
 					<ul class="children">
 						<li><a href="#">Ver Perfil<span class="icon-dot"></span></a></li>
 						<li><a href="#">Editar Perfil<span class="icon-dot"></span></a></li>

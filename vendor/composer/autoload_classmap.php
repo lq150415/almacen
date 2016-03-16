@@ -425,5 +425,6 @@ return array(
     'Tablas' => $baseDir . '/database/migrations/2016_02_24_161907_tablas.php',
     'TestCase' => $baseDir . '/tests/TestCase.php',
     'Text_Template' => $vendorDir . '/phpunit/php-text-template/Text/Template.php',
+    'UserTableSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',
     'Usuarios' => $baseDir . '/database/migrations/2016_02_24_153436_usuarios.php',
 );

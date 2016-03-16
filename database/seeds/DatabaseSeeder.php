@@ -37,16 +37,26 @@ class UserTableSeeder extends Seeder
         DB::table('users')->delete();
 
         User::create([
-            'name' => 'Luis',
-            'email' => 'luis',
-            'password' => '123456',
+            'NOM_USU' => 'Luis',
+            'APA_USU' => 'Quisbert',
+            'AMA_USU' => 'Quispe',
+            'ARE_USU' => 'TI',
+            'CAR_USU' =>'Pasante',
+            'CI_USU' =>'7074342',
+            'NIV_USU' => '0',
+            'password' => bcrypt('123456'),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon:: now()
         ]);
  		User::create([
- 		'name' => 'felipe',
-            'email' => 'lq150415',
-            'password' => bcrypt('1234567'),
+ 		    'NOM_USU' => 'Felipe',
+            'APA_USU' => 'Quisbert',
+            'AMA_USU' => 'Quispe',
+            'ARE_USU' => 'TI',
+            'CAR_USU' =>'Pasante',
+            'CI_USU' =>'9959333',
+            'NIV_USU' => '2',
+            'password' => bcrypt('abc123'),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon:: now()
         ]);

@@ -608,3 +608,7 @@ div.formulario{
 	overflow: auto;
 
 }
+.mensaje_bienvenida{
+	color: #000;
+	font-size: 13px;
+}

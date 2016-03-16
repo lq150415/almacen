@@ -40,5 +40,13 @@
 	},
 	"config": {
 		"preferred-install": "dist"
+	},
+	
+	"require": {
+		"php": ">=5.5.9",
+		"laravel/framework": "5.1.*",
+		"bican/roles": "2.1.*"
 	}
+
+
 }

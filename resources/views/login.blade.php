@@ -30,7 +30,7 @@
     <table style="padding-top:25px;">
 						<tr style="height: 50px;">
 							<td width="100px" class="lblnombre">Usuario</td>
-							<td width="100px"><input type="text" name="email"  class="txtcampo" placeholder="NOMBRE DE USUARIO" onkeypress="return alfanumerico(event);" onpaste="return false"></td>	
+							<td width="100px"><input type="text" name="ci_usu"  class="txtcampo" placeholder="NOMBRE DE USUARIO" onkeypress="return alfanumerico(event);" onpaste="return false"></td>	
 						</tr>
 						<tr>
 							<td width="100px" class="lblnombre">Password</td>

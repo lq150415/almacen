@@ -14,19 +14,19 @@ class ConsultaController extends Controller {
 	 */
 	public function index()
 	{
-		return view('consultaporproducto');
+		return view('consulta/consultaporproducto');
 	}
 	public function index2()
 	{
-		return view('consultaporrubro');
+		return view('consulta/consultaporrubro');
 	}
 	public function index3()
 	{
-		return view('consultaporusuario');
+		return view('consulta/consultaporusuario');
 	}
 	public function index4()
 	{
-		return view('consultaporfecha');
+		return view('consulta/consultaporfecha');
 	}
 	/**
 	 * Show the form for creating a new resource.
