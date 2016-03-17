@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'AlterTabla' => $baseDir . '/database/migrations/2016_03_17_140824_alter_tabla.php',
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
     'CreateUsersTable' => $baseDir . '/database/migrations/2014_10_12_000000_create_users_table.php',
     'DatabaseSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',
@@ -422,9 +423,8 @@ return array(
     'SebastianBergmann\\RecursionContext\\InvalidArgumentException' => $vendorDir . '/sebastian/recursion-context/src/InvalidArgumentException.php',
     'SebastianBergmann\\Version' => $vendorDir . '/sebastian/version/src/Version.php',
     'SessionHandlerInterface' => $vendorDir . '/symfony/http-foundation/Symfony/Component/HttpFoundation/Resources/stubs/SessionHandlerInterface.php',
-    'Tablas' => $baseDir . '/database/migrations/2016_02_24_161907_tablas.php',
+    'Tablas' => $baseDir . '/database/migrations/2016_03_16_141415_tablas.php',
     'TestCase' => $baseDir . '/tests/TestCase.php',
     'Text_Template' => $vendorDir . '/phpunit/php-text-template/Text/Template.php',
     'UserTableSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',
-    'Usuarios' => $baseDir . '/database/migrations/2016_02_24_153436_usuarios.php',
 );

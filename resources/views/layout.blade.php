@@ -23,7 +23,9 @@
 		<script type="text/javascript" language="javascript" src="<?php echo asset('js/table/demo.js')?>"></script>
 		<script type="text/javascript" language="javascript" class="init">
 			$(document).ready(function() {
+				
 				$('#example').DataTable();
+
 			} );
 		</script>
 		<script type="text/javascript" language="javascript" class="init">

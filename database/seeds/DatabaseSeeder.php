@@ -44,6 +44,7 @@ class UserTableSeeder extends Seeder
             'CAR_USU' =>'Pasante',
             'CI_USU' =>'7074342',
             'NIV_USU' => '0',
+            'NIC_USU' =>'7074342',
             'password' => bcrypt('123456'),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon:: now()
@@ -56,6 +57,7 @@ class UserTableSeeder extends Seeder
             'CAR_USU' =>'Pasante',
             'CI_USU' =>'9959333',
             'NIV_USU' => '2',
+            'NIC_USU' =>'9959333',
             'password' => bcrypt('abc123'),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon:: now()

@@ -7,21 +7,22 @@
 		</br>
 		<fieldset class="fieldcuerpo" align="left">
 			<legend>REGISTRO DE NUEVO ALMACEN</legend>
-			<form class="formularioreg">
+		<form class="formularioreg" method="POST" action="almacen/registrar">
+			 <input type="hidden" name="_token" value="{{ csrf_token() }}">
 				<table style="margin-top: 4%;  margin-left: 10%;">
 						<tr style="height: 50px;">
 							<td width="130px" class="lblnombre">Nombre del almacen</td>
-							<td width="250px"><input type="text" name="" class="txtcampo large" placeholder="NOMBRE DEL ALMACEN" onkeypress="return sololetras(event);" onpaste="return false" ></td>
+							<td width="250px"><input type="text" name="nom_alm" class="txtcampo large" placeholder="NOMBRE DEL ALMACEN" onkeypress="return sololetras(event);" onpaste="return false" ></td>
 						</tr>
 						<tr style="height: 50px;">
 							<td width="130px" class="lblnombre">Ubicación del almacen</td>
-							<td width="250px"><input type="text" name="" class="txtcampo large" placeholder="NOMBRE DEL ALMACEN" onkeypress="return sololetras(event);" onpaste="return false" ></td>
+							<td width="250px"><input type="text" name="ubi_alm" class="txtcampo large" placeholder="NOMBRE DEL ALMACEN" onkeypress="return sololetras(event);" onpaste="return false" ></td>
 						</tr>
 					</table>
 					<table style="margin-left: 30%;">
 						<tr style="height: 50px;">
 							<td>
-								<input type="submit" name="submit_reg_arc" class="botones ico-btnsave" value="REGISTRAR">
+								<input type="submit" name="" class="botones ico-btnsave" value="REGISTRAR">
                  				<input type="reset"  onclick="document.location.reload();" class="botones ico-btnlimpiar" value="LIMPIAR DATOS">
                  			</td>
 						</tr>

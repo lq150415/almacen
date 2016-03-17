@@ -2,7 +2,7 @@
 
 use almacen\Http\Requests;
 use almacen\Http\Controllers\Controller;
-
+use almacen\Almacen;
 use Illuminate\Http\Request;
 
 class AlmacenController extends Controller {
@@ -14,7 +14,8 @@ class AlmacenController extends Controller {
 	 */
 	public function index()
 	{
-		return view('almacen');
+		$almacenes = Almacen::get();
+        return view('almacen')->with('almacenes', $usuarios);
 	}
 
 	/**
@@ -32,10 +33,18 @@ class AlmacenController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function store(Request $request)
 	{
-		//
+		$usuario = new Almacen;
+		$usuario->NOM_ALM = $request->input('nom_alm');
+        $usuario->UBI_ALM = $request->input('ubi_alm');
+        $usuario->created_at = Carbon::now();
+        $usuario->updated_at = Carbon:: now();
+		$usuario->save();
+
+        return redirect()->route('almacen.index');
 	}
+
 
 	/**
 	 * Display the specified resource.

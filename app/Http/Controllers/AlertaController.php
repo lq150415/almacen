@@ -14,7 +14,7 @@ class AlertaController extends Controller {
 	 */
 	public function index()
 	{
-		return view('alerta');
+		return view('alertas');
 	}
 
 	/**

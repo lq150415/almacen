@@ -71,10 +71,10 @@ trait AuthenticatesAndRegistersUsers {
 	public function postLogin(Request $request)
 	{   $mensaje='Usuario y/o Contraseña incorrectos';
 		$this->validate($request, [
-			'ci_usu' => 'required', 'password' => 'required',
+			'NIC_USU' => 'required', 'password' => 'required',
 		]);
 
-		$credentials = $request->only('ci_usu', 'password');
+		$credentials = $request->only('NIC_USU', 'password');
 
 		if ($this->auth->attempt($credentials, $request->has('remember')))
 		{
@@ -82,9 +82,9 @@ trait AuthenticatesAndRegistersUsers {
 		}
 
 		return redirect($this->loginPath())
-					->withInput($request->only('ci_usu', 'remember'))
+					->withInput($request->only('NIC_USU', 'remember'))
 					->withErrors([
-						'ci_usu' => 'These credentials do not match our records.',
+						'NIC_USU' => 'These credentials do not match our records.',
 					]);
 	}
 

@@ -6,39 +6,40 @@
 		</br>
 		<fieldset class="fieldcuerpo" align="left">
 			<legend>REGISTRO DE NUEVO USUARIO</legend>
-			<form class="formularioreg">
+			<form class="formularioreg" method="POST" action="usuario/registrar">
+			 <input type="hidden" name="_token" value="{{ csrf_token() }}">
 				<fieldset class="fieldcuerpo" align="left">
 				<legend>DATOS PERSONALES</legend>
 				<table >
 						<tr style="height: 30px;">
 							<td width="100px" class="lblnombre">CI</td>
-							<td width="240px" ><input type="text" name="ntm_arc" class="txtcampo" placeholder="NUMERO DE CARNET" onkeypress="return solonumeros(event);" onpaste="return false"></td>
+							<td width="240px" ><input type="text" name="ci_usu" class="txtcampo" placeholder="NUMERO DE CARNET" onkeypress="return solonumeros(event);" onpaste="return false"></td>
 							<td width="100px" class="lblnombre">Nombre</td>
-							<td width="240px" ><input type="text" name="ncj_arc" class="txtcampo" placeholder="NOMBRE" onkeypress="return solonumeros(event);" onpaste="return false"></td>
+							<td width="240px" ><input type="text" name="nom_usu" class="txtcampo" placeholder="NOMBRE" onkeypress="return solonumeros(event);" onpaste="return false"></td>
 						</tr>
 						<tr style="height: 30px;">
 							<td width="100px" class="lblnombre">Ap. Paterno</td>
-							<td width="240px"><input type="text" name="foj_arc" class="txtcampo" placeholder="APELLIDO PATERNO" onkeypress="return solonumeros(event);" onpaste="return false"></td>
+							<td width="240px"><input type="text" name="apa_usu" class="txtcampo" placeholder="APELLIDO PATERNO" onkeypress="return solonumeros(event);" onpaste="return false"></td>
 							<td width="100px" class="lblnombre">Ap. Materno</td>
-							<td width="240px" ><input type="text" name="ncj_arc" class="txtcampo" placeholder="APELLIDO MATERNO" onkeypress="return solonumeros(event);" onpaste="return false"></td>
+							<td width="240px" ><input type="text" name="ama_usu" class="txtcampo" placeholder="APELLIDO MATERNO" onkeypress="return solonumeros(event);" onpaste="return false"></td>
 						</tr>
 						<tr style="height: 30px;">
 							<td width="100px" class="lblnombre">Area</td>
 							<td width="240px">
-								<select name="cub_arc" class="txtcampo large2">
+								<select name="are_usu" class="txtcampo large2">
 									<option value="">SELECCIONE</option>
-									<option value="Carpetilla">Recursos humanos</option>
-									<option value="Carpeta de palanca">Tecnologias de Informacion</option>
+									<option value="Recursos Humanos">Recursos humanos</option>
+									<option value="Tecnologias de Informacion">Tecnologias de Informacion</option>
 									<option value="Otros">etc</option>
 								</select>
 							</td>
 							<td width="100px" class="lblnombre">Cargo</td>
 							<td width="240px">
-								<select name="cub_arc" class="txtcampo large2">
+								<select name="car_usu" class="txtcampo large2">
 									<option value="">SELECCIONE</option>
-									<option value="Carpetilla">Director</option>
-									<option value="Carpeta de palanca">etc</option>
-									<option value="Otros">etc</option>
+									<option value="Director">Director</option>
+									<option value="Otros1">etc</option>
+									<option value="Otros2">etc</option>
 								</select>
 							</td>
 						</tr>
@@ -53,18 +54,18 @@
 							<td width="240px"><input type="text" name="nic_usu" value="" class="txtcampo large" placeholder="CI / NICK DE USUARIO" onpaste="return false"></td>
 							<td width="100px" class="lblnombre">Nivel de usuario</td>
 							<td width="240px">
-								<select name="cub_arc" class="txtcampo large2">
+								<select name="niv_usu" class="txtcampo large2">
 									<option value="">SELECCIONE</option>
-									<option value="Carpetilla">Administrador</option>
-									<option value="Carpeta de palanca">Jefe de Recursos</option>
-									<option value="Otros">Solicitante</option>
+									<option value="0">Administrador</option>
+									<option value="1">Jefe de Recursos</option>
+									<option value="2">Solicitante</option>
 								</select>
 							</td>
 						</tr>
 						<tr style="height:30px;">
 							
 							<td width="100px" class="lblnombre">Password</td>
-							<td width="240px"><input type="password" name="pas_usu" value="" class="txtcampo large" placeholder="CONTRASEÑA" onpaste="return false"></td>
+							<td width="240px"><input type="password" name="password" value="" class="txtcampo large" placeholder="CONTRASEÑA" onpaste="return false"></td>
 						</tr>
 						<tr style="height:30px;">
 							<td width="100px" class="lblnombre">Repita la contraseña</td>
@@ -111,6 +112,27 @@
 			<th>ACCIONES</th>	
 		</tr>
 	</thead>
+		<tbody style="font-size:11px;">
+		<tr>
+		<?php
+
+	
+					foreach ($usuarios as $usuario):
+					?>
+						<th><?php echo $usuario->id;?></th>
+						<th><?php echo $usuario->CI_USU;?></th>
+						<th><?php echo $usuario->NOM_USU;?></th>
+            			<th><?php echo $usuario->APA_USU;?></th>
+						<th><?php echo $usuario->AMA_USU;?></th>
+						<th><?php echo $usuario->ARE_USU;?></th>
+						<th><?php echo $usuario->CAR_USU;?></th>
+						<th><?php echo $usuario->NIV_USU;?></th>
+						<th><a href="">Ver</a><a href="·"> Modificar</a></th>	
+		</tr>
+				<?php	endforeach;
+			
+			?>
+	</tbody>
 	<tfoot style="font-size:13px;color:#FFF;background-color:#444444;height:40px;">
 		<tr>
 			<th>ID</th>
@@ -124,9 +146,7 @@
 			<th>ACCIONES</th>	
 		</tr>
 	</tfoot>
-	<tbody style="font-size:11px;">
-		
-	</tbody>
+
 </table>
 </fieldset>
 
