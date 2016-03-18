@@ -98,9 +98,9 @@ $(document).ready(function() {
  
 		<nav class="vert">
 			<ul>
-				<li><a href="index"><span class="icon-house"></span>Inicio</a></li>
+				<li><a href="../index"><span class="icon-house"></span>Inicio</a></li>
 				<li class="submenu">
-					<a href="ingreso"><span class="icon-folder-upload"></span>Ingresos<span class="caret icon-arrow-down6"></span></a>
+					<a href="../ingreso"><span class="icon-folder-upload"></span>Ingresos<span class="caret icon-arrow-down6"></span></a>
 					
 				</li><li class="submenu">
 					<a href="#"><span class="icon-folder-download"></span>Salidas<span class="caret icon-arrow-down6"></span></a>
@@ -114,7 +114,7 @@ $(document).ready(function() {
 					</ul>
 				</li>
 				<li class="submenu">
-					<a href="alerta"><span class="icon-alarm"></span>Alertas<span class="caret icon-arrow-down6"></span></a>
+					<a href="../alerta"><span class="icon-alarm"></span>Alertas<span class="caret icon-arrow-down6"></span></a>
 					
 				</li>
 				<li class="usuario" >
@@ -122,7 +122,7 @@ $(document).ready(function() {
 					<ul class="children">
 						<li><a href="#">Ver Perfil<span class="icon-dot"></span></a></li>
 						<li><a href="#">Editar Perfil<span class="icon-dot"></span></a></li>
-						<li><a href="logout">Cerrar Sesión<span class="icon-dot"></span></a></li>
+						<li><a href="../logout">Cerrar Sesión<span class="icon-dot"></span></a></li>
 					</ul>
 				</li>
 			</ul>
@@ -146,16 +146,16 @@ $(document).ready(function() {
 		
 			<nav class="lateral">	
 				<ul>
-					<li> <a href="almacen">ALMACENES</a> </li>
-					<li> <a href="usuario">USUARIOS</a> </li>
-					<li> <a href="solicitud">SOLICITUDES</a> </li>
-					<li> <a href="respuesta">RESPUESTAS</a> </li>
+					<li> <a href="../almacen">ALMACENES</a> </li>
+					<li> <a href="../usuario">USUARIOS</a> </li>
+					<li> <a href="../solicitud">SOLICITUDES</a> </li>
+					<li> <a href="../respuesta">RESPUESTAS</a> </li>
 					<li> <a >CONSULTAS</a> 
 						<ul class="children">
-							<li><a href="consultapr">Por rubro<span class="icon-dot"></span></a></li>
-							<li><a href="consultapp">Por producto<span class="icon-dot"></span></a></li>
-							<li><a href="consultapu">Por usuario<span class="icon-dot"></span></a></li>
-							<li><a href="consultapf">Por fechas<span class="icon-dot"></span></a></li>
+							<li><a href="../consultapr">Por rubro<span class="icon-dot"></span></a></li>
+							<li><a href="../consultapp">Por producto<span class="icon-dot"></span></a></li>
+							<li><a href="../consultapu">Por usuario<span class="icon-dot"></span></a></li>
+							<li><a href="../consultapf">Por fechas<span class="icon-dot"></span></a></li>
 							
 						</ul>
 					</li>

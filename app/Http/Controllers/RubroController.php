@@ -2,8 +2,11 @@
 
 use almacen\Http\Requests;
 use almacen\Http\Controllers\Controller;
-
+use almacen\Almacen;
+use almacen\Rubro;
+use almacen\Producto;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class RubroController extends Controller {
 
@@ -12,9 +15,13 @@ class RubroController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function index()
-	{
-		return view('rubro');
+	public function index($id)
+	{	$rubros = new Rubro;
+		$rubros= Rubro::where('ID_ALM','=',$id)->get();
+		$almacen= new Almacen;
+		$query = Almacen::where('id','=',$id)->get();
+
+		return view('rubro')->with('rubros', $rubros)->with('id',$id)->with('query',$query);
 	}
 
 	/**
@@ -32,11 +39,18 @@ class RubroController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function store(Request $request, $id)
 	{
-		//
-	}
+		$rubro = new Rubro;
+		$rubro->NOM_RUB = $request->input('nom_rub');
+        $rubro->DES_RUB = $request->input('des_rub');
+        $rubro->ID_ALM = $id;
+        $rubro->created_at = Carbon::now();
+        $rubro->updated_at = Carbon:: now();
+		$rubro->save();
 
+        return redirect()->route('rubro',array('id'	=>$id));
+	}
 	/**
 	 * Display the specified resource.
 	 *

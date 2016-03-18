@@ -6,22 +6,29 @@
 		</br>
 		<fieldset class="fieldcuerpo" align="left">
 			<legend>REGISTRO DE NUEVO PRODUCTO</legend>
-			<form class="formularioreg">
+			<form class="formularioreg" method="POST" action="<?php echo $id;?>/registro">
+			 <input type="hidden" name="_token" value="{{ csrf_token() }}">
 				<table style="margin-top: 4%;  margin-left: 10%;">
 						<tr style="height: 50px;">
+						
+							<td width="130px" class="lblnombre">Item del producto</td>
+							<td width="250px"><input type="text" name="itm_pro" class="txtcampo large2" placeholder="NOMBRE DEL PRODUCTO" onkeypress="return sololetras(event);" onpaste="return false" ></td>
+						</tr>
+						<tr style="height: 50px;">
+
 							<td width="130px" class="lblnombre">Nombre del producto</td>
-							<td width="250px"><input type="text" name="" class="txtcampo large2" placeholder="NOMBRE DEL PRODUCTO" onkeypress="return sololetras(event);" onpaste="return false" ></td>
+							<td width="250px"><input type="text" name="nom_pro" class="txtcampo large2" placeholder="NOMBRE DEL PRODUCTO" onkeypress="return sololetras(event);" onpaste="return false" ></td>
 						</tr>
 						<tr style="height: 50px;">
 							<td width="130px" class="lblnombre">Descripcion del producto</td>
-							<td><textarea class="txtcampo textarea" placeholder="DESCRIPCION DEL PRODUCTO" cols="55" rows="5" onpaste="return false" ></textarea></td>
+							<td><textarea class="txtcampo textarea" placeholder="DESCRIPCION DEL PRODUCTO" cols="55" rows="5" onpaste="return false" name="des_pro"></textarea></td>
 						</tr>
 						<tr style="height: 50px;">
 							<td width="130px" class="lblnombre">Precio unitario </td>
-							<td width="250px"><input type="text" name="" class="txtcampo large" placeholder="P/U en Bs." onkeypress="return sololetras(event);" onpaste="return false" ></td>
+							<td width="250px"><input type="text" name="pun_pro" class="txtcampo large" placeholder="P/U en Bs." onkeypress="return sololetras(event);" onpaste="return false" ></td>
 						</tr>
 							<td width="130px" class="lblnombre">Cantidad del producto </td>
-							<td width="250px"><input type="text" name="" class="txtcampo large" placeholder="CANTIDAD DEL PRODUCTO" onkeypress="return sololetras(event);" onpaste="return false" ></td>
+							<td width="250px"><input type="text" name="can_pro" class="txtcampo large" placeholder="CANTIDAD DEL PRODUCTO" onkeypress="return sololetras(event);" onpaste="return false" ></td>
 						</tr>
 					</table>
 					<table style="margin-left: 30%;">
@@ -61,6 +68,7 @@
 	<thead style="font-size:13px;color:#FFF;background-color:#444444;height:40px;">
 		<tr>
 			<th>ID</th>
+			<th>ITEM PRODUCTO</th>
             <th>NOMBRE DEL PRODUCTO</th>
 			<th>PRECIO UNITARIO</th>
 			<th>CANTIDAD DISPONIBLE</th>
@@ -70,6 +78,7 @@
 	<tfoot style="font-size:13px;color:#FFF;background-color:#444444;height:40px;">
 		<tr>
 			<th>ID</th>
+			<th>ITEM PRODUCTO</th>
             <th>NOMBRE DEL PRODUCTO</th>
 			<th>PRECIO UNITARIO</th>
 			<th>CANTIDAD DISPONIBLE</th>
@@ -77,7 +86,20 @@
 		</tr>
 	</tfoot>
 	<tbody style="font-size:11px;">
-		
+		<tr>
+		<?php
+					foreach ($productos as $producto):
+					?>
+						<th><?php echo $producto->id;?></th>
+						<th><?php echo $producto->ITM_PRO;?></th>
+						<th><?php echo $producto->NOM_PRO;?></th>
+						<th><?php echo $producto->PUN_PRO;?></th>
+						<th><?php echo $producto->CAN_PRO;?></th>
+						<th><a href="producto/<?php echo $producto->id;?>">Ver </a><a href=""> Modificar</a></th>	
+		</tr>
+				<?php	endforeach;
+			
+			?>
 	</tbody>
 </table>
 </fieldset>

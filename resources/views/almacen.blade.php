@@ -52,6 +52,20 @@
 			<th>ACCIONES</th>	
 		</tr>
 	</thead>
+	<tbody style="font-size:11px;">
+		<tr>
+		<?php
+					foreach ($almacenes as $almacen):
+					?>
+						<th><?php echo $almacen->id;?></th>
+						<th><?php echo $almacen->NOM_ALM;?></th>
+            			<th><?php echo $almacen->UBI_ALM;?></th>
+						<th><a href="rubro/<?php echo $almacen->id;?>">Ver </a><a href=""> Modificar</a></th>	
+		</tr>
+				<?php	endforeach;
+			
+			?>
+	</tbody>
 	<tfoot style="font-size:13px;color:#FFF;background-color:#444444;height:40px;">
 		<tr>
 			<th>ID</th>
@@ -61,9 +75,8 @@
 			
 		</tr>
 	</tfoot>
-	<tbody style="font-size:11px;">
-		
-	</tbody>
+	
 </table>
+</div>
 </fieldset>
 	@stop

@@ -24,7 +24,7 @@ Route::group(['middleware' => 'auth'], function () {
     
         Route::resource('/', 'IndexController');
         Route::resource('index', 'IndexController');
-        Route::resource('almacen', 'AlmacenController');
+        Route::get('almacen', 'AlmacenController@index');
         Route::post('almacen/registrar', 'AlmacenController@store');
         Route::resource('alerta', 'AlertaController');
         Route::resource('consultapp', 'ConsultaController@index');
@@ -33,8 +33,12 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('consultapf', 'ConsultaController@index4');
         Route::resource('ingreso', 'IngresoController');
         Route::resource('producto', 'ProductoController');
+        Route::get('rubro/producto/{id}',['as'=>'producto','uses'=>'ProductoController@Index'])->where(['id' => '[0-9]+']);
+        Route::get('rubro/producto/{id}/registro','ProductoController@Store');
         Route::resource('respuesta', 'RespuestaController@index');
-        Route::resource('rubro', 'RubroController');
+        Route::get('rubro/{id}',['as'=>'rubro','uses'=>'RubroController@Index'])->where(['id' => '[0-9]+']);
+        
+        Route::post('rubro/{id}/registro','RubroController@store');
         Route::resource('solicitud', 'SolicitudController@index');
         Route::resource('usuario', 'UsuarioController');
         Route::post('usuario/registrar', 'UsuarioController@store');

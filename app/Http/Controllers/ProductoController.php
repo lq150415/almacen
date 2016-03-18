@@ -2,7 +2,9 @@
 
 use almacen\Http\Requests;
 use almacen\Http\Controllers\Controller;
-
+use almacen\Almacen;
+use almacen\Rubro;
+use almacen\Producto;
 use Illuminate\Http\Request;
 
 class ProductoController extends Controller {
@@ -12,9 +14,13 @@ class ProductoController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function index()
-	{
-		return view('producto');
+	public function index($id)
+	{	$productos = new Producto;
+		$productos= Producto::where('ID_RUB','=',$id)->get();
+		$rubros= new Rubro;
+		$query = Rubro::where('id','=',$id)->get();
+
+		return view('producto')->with('productos', $productos)->with('id',$id)->with('query',$query);
 	}
 
 	/**
@@ -32,9 +38,20 @@ class ProductoController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function store(Request $request, $id)
 	{
-		//
+		$productos = new Producto;
+		$productos->ITM_PRO = $request->input('itm_pro');
+		$productos->NOM_PRO = $request->input('nom_pro');
+        $productos->DES_PRO = $request->input('des_pro');
+        $productos->PUN_PRO = $request->input('pun_pro');
+        $productos->CAN_PRO = $request->input('can_pro');
+        $productos->ID_RUB = $id;
+        $productos->created_at = Carbon::now();
+        $productos->updated_at = Carbon:: now();
+		$productos->save();
+
+        return redirect()->route('producto',array('id'	=>$id));
 	}
 
 	/**

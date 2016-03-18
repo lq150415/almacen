@@ -1,6 +1,6 @@
 <?php
 
-use almacen\User;
+use almacen\Rubro;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
@@ -17,14 +17,14 @@ class DatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-        $this->call('UserTableSeeder');
+        $this->call('RubroTableSeeder');
         $this->command->info('User table seeded!');
 
         Model::reguard();
     }
 }
 
-class UserTableSeeder extends Seeder
+class RubroTableSeeder extends Seeder
 {
 
     /**
@@ -34,31 +34,21 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->delete();
+        DB::table('rubros')->delete();
 
-        User::create([
-            'NOM_USU' => 'Luis',
-            'APA_USU' => 'Quisbert',
-            'AMA_USU' => 'Quispe',
-            'ARE_USU' => 'TI',
-            'CAR_USU' =>'Pasante',
-            'CI_USU' =>'7074342',
-            'NIV_USU' => '0',
-            'NIC_USU' =>'7074342',
-            'password' => bcrypt('123456'),
+        Rubro::create([
+            'NOM_RUB' => 'Material de escritorio',
+            'DES_RUB' => 'Es una coleccion de material de escritorio basico',
+            'CPR_RUB' => '10',
+            'ID_ALM' => '1',
             'created_at' => Carbon::now(),
             'updated_at' => Carbon:: now()
         ]);
- 		User::create([
- 		    'NOM_USU' => 'Felipe',
-            'APA_USU' => 'Quisbert',
-            'AMA_USU' => 'Quispe',
-            'ARE_USU' => 'TI',
-            'CAR_USU' =>'Pasante',
-            'CI_USU' =>'9959333',
-            'NIV_USU' => '2',
-            'NIC_USU' =>'9959333',
-            'password' => bcrypt('abc123'),
+ 		Rubro::create([
+ 		    'NOM_RUB' => 'Material de limpieza',
+            'DES_RUB' => 'Es una coleccion de material de limpieza basico',
+            'CPR_RUB' => '15',
+            'ID_ALM' => '2',
             'created_at' => Carbon::now(),
             'updated_at' => Carbon:: now()
         ]);
