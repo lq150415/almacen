@@ -203,6 +203,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e67700', end
   background-repeat: no-repeat;
   background-position: 5px 5px;
 }
+.ico-btnplus{
+  background-image: url(../img/iconos/plus.png);
+  background-size: 12px;
+  background-repeat: no-repeat;
+  background-position: 5px 5px;
+}
 .txtcampo{
   width: 200px;
   height: 25px;

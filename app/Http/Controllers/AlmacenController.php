@@ -4,6 +4,7 @@ use almacen\Http\Controllers\Controller;
 use almacen\Almacen;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 class AlmacenController extends Controller {
 	/**
 	 * Display a listing of the resource.
@@ -12,8 +13,12 @@ class AlmacenController extends Controller {
 	 */
 	public function index()
 	{
+		if(Auth::user()->NIV_USU==0){
 		$almacenes = Almacen::get();
         return view('almacen')->with('almacenes', $almacenes);
+        }else{
+			return response('Unauthorized.', 401);
+		}
 	}
 	/**
 	 * Show the form for creating a new resource.

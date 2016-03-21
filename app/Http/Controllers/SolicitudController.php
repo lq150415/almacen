@@ -2,7 +2,7 @@
 
 use almacen\Http\Requests;
 use almacen\Http\Controllers\Controller;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class SolicitudController extends Controller {
@@ -14,12 +14,13 @@ class SolicitudController extends Controller {
 	 */
 	public function index()
 	{
-		return view('solicitud');
-	}
-	public function indexcl()
-	{
+		if(Auth::user()->NIV_USU==0){
+		return view('solicitud');}
+		else{
 		return view('cliente/form_sol');
+		}
 	}
+	
 	public function indexclac()
 	{
 		return view('cliente/sol_ace');

@@ -15,11 +15,6 @@
 							<td width="250px"><input type="text" name="itm_pro" class="txtcampo large2" placeholder="NOMBRE DEL PRODUCTO" onkeypress="return sololetras(event);" onpaste="return false" ></td>
 						</tr>
 						<tr style="height: 50px;">
-
-							<td width="130px" class="lblnombre">Nombre del producto</td>
-							<td width="250px"><input type="text" name="nom_pro" class="txtcampo large2" placeholder="NOMBRE DEL PRODUCTO" onkeypress="return sololetras(event);" onpaste="return false" ></td>
-						</tr>
-						<tr style="height: 50px;">
 							<td width="130px" class="lblnombre">Descripcion del producto</td>
 							<td><textarea class="txtcampo textarea" placeholder="DESCRIPCION DEL PRODUCTO" cols="55" rows="5" onpaste="return false" name="des_pro"></textarea></td>
 						</tr>
@@ -34,7 +29,7 @@
 					<table style="margin-left: 30%;">
 						<tr style="height: 50px;">
 							<td>
-								<input type="submit" name="submit_reg_arc" class="botones ico-btnsave" value="REGISTRAR">
+								<input type="submit" name="" class="botones ico-btnsave" value="REGISTRAR">
                  				<input type="reset"  onclick="document.location.reload();" class="botones ico-btnlimpiar" value="LIMPIAR DATOS">
                  			</td>
 						</tr>
@@ -53,13 +48,13 @@
 	  	<a href="javascript:despliegaModal('visible');">+ Nuevo producto</a>
 	  	</br>
 	  	</br>	  	
-	  	<span class="titulo">ID Rubro : </span><span  class="subtitulo"># rubro</span> 
+	  	<span class="titulo">ID Rubro : </span><span  class="subtitulo"><?php echo $query[0]->id;?></span> 
 	  	</br>	
 	  	</br>
-	  	<span class="titulo">Nombre del rubro : </span><span class="subtitulo"># rubro</span>
+	  	<span class="titulo">Nombre del rubro : </span><span class="subtitulo"><?php echo $query[0]->NOM_RUB;?></span>
 	  	</br>	
 	  	</br>
-	  	<span class="titulo">Cantidad de productos : </span><span class="subtitulo"># rubro</span>
+	  	<span class="titulo">Cantidad de productos : </span><span class="subtitulo"><?php echo $query2;?></span>
 	  	</div>	
 	  	</br>
 	  	<fieldset class="fieldcuerpo" align="left">
@@ -69,7 +64,7 @@
 		<tr>
 			<th>ID</th>
 			<th>ITEM PRODUCTO</th>
-            <th>NOMBRE DEL PRODUCTO</th>
+            <th>DESCRIPCION DEL PRODUCTO</th>
 			<th>PRECIO UNITARIO</th>
 			<th>CANTIDAD DISPONIBLE</th>
 			<th>ACCIONES</th>	
@@ -79,7 +74,7 @@
 		<tr>
 			<th>ID</th>
 			<th>ITEM PRODUCTO</th>
-            <th>NOMBRE DEL PRODUCTO</th>
+            <th>DESCRIPCION DEL PRODUCTO</th>
 			<th>PRECIO UNITARIO</th>
 			<th>CANTIDAD DISPONIBLE</th>
 			<th>ACCIONES</th>	
@@ -92,10 +87,10 @@
 					?>
 						<th><?php echo $producto->id;?></th>
 						<th><?php echo $producto->ITM_PRO;?></th>
-						<th><?php echo $producto->NOM_PRO;?></th>
+						<th><?php echo $producto->DES_PRO;?></th>
 						<th><?php echo $producto->PUN_PRO;?></th>
 						<th><?php echo $producto->CAN_PRO;?></th>
-						<th><a href="producto/<?php echo $producto->id;?>">Ver </a><a href=""> Modificar</a></th>	
+						<th><a href="producto/<?php echo $producto->id;?>">Ver &nbsp;&nbsp;&nbsp;&nbsp; </a>&nbsp;&nbsp;<a href=""> Modificar</a></th>	
 		</tr>
 				<?php	endforeach;
 			

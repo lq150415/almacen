@@ -60,7 +60,8 @@
 						<th><?php echo $almacen->id;?></th>
 						<th><?php echo $almacen->NOM_ALM;?></th>
             			<th><?php echo $almacen->UBI_ALM;?></th>
-						<th><a href="rubro/<?php echo $almacen->id;?>">Ver </a><a href=""> Modificar</a></th>	
+						<th><a href="rubro/<?php echo $almacen->id;?>">Ver &nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;</a><a href=""> Modificar</a></th>	
 		</tr>
 				<?php	endforeach;
 			

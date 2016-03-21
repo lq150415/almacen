@@ -7,6 +7,7 @@ use almacen\Rubro;
 use almacen\Producto;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class RubroController extends Controller {
 
@@ -16,12 +17,17 @@ class RubroController extends Controller {
 	 * @return Response
 	 */
 	public function index($id)
-	{	$rubros = new Rubro;
+	{	
+		if(Auth::user()->NIV_USU==0){
+		$rubros = new Rubro;
 		$rubros= Rubro::where('ID_ALM','=',$id)->get();
 		$almacen= new Almacen;
 		$query = Almacen::where('id','=',$id)->get();
 
 		return view('rubro')->with('rubros', $rubros)->with('id',$id)->with('query',$query);
+		}else{
+			return response('Unauthorized.', 401);
+		}
 	}
 
 	/**

@@ -2,6 +2,7 @@
 
 use almacen\Http\Requests;
 use almacen\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
 
@@ -14,19 +15,35 @@ class ConsultaController extends Controller {
 	 */
 	public function index()
 	{
+		if(Auth::user()->NIV_USU==0){
 		return view('consulta/consultaporproducto');
+		}else{
+			return response('Unauthorized.', 401);
+		}
 	}
 	public function index2()
 	{
+		if(Auth::user()->NIV_USU==0){
 		return view('consulta/consultaporrubro');
+		}else{
+			return response('Unauthorized.', 401);
+		}
 	}
 	public function index3()
 	{
+		if(Auth::user()->NIV_USU==0){
 		return view('consulta/consultaporusuario');
+		}else{
+			return response('Unauthorized.', 401);
+		}
 	}
 	public function index4()
 	{
+		if(Auth::user()->NIV_USU==0){
 		return view('consulta/consultaporfecha');
+		}else{
+			return response('Unauthorized.', 401);
+		}
 	}
 	/**
 	 * Show the form for creating a new resource.

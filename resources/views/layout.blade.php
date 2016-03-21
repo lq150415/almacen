@@ -87,6 +87,31 @@ $(document).ready(function() {
    $("#datepicker2").datepicker();
  });
 </script>
+<style type="text/css">
+ 
+#tabla{		width: 100%; }
+#tabla tbody tr{  }
+.fila-base{ display: none; } /* fila base oculta */
+.eliminar{ cursor: pointer; color: #000; }
+input[type="text"]{ } /* ancho a los elementos input="text" */
+ 
+</style>
+<script type="text/javascript">
+ 
+$(function(){
+	// Clona la fila oculta que tiene los campos base, y la agrega al final de la tabla
+	$("#agregar").on('click', function(){
+		$("#tabla tbody tr:eq(0)").clone().removeClass('fila-base').appendTo("#tabla tbody");
+	});
+ 
+	// Evento que selecciona la fila y la elimina 
+	$(document).on("click",".eliminar",function(){
+		var parent = $(this).parents().get(0);
+		$(parent).remove();
+	});
+});
+ 
+</script>
 </head>
 <body>
 @yield('VM')
@@ -98,9 +123,9 @@ $(document).ready(function() {
  
 		<nav class="vert">
 			<ul>
-				<li><a href="../index"><span class="icon-house"></span>Inicio</a></li>
+				<li><a href="../../index"><span class="icon-house"></span>Inicio</a></li>
 				<li class="submenu">
-					<a href="../ingreso"><span class="icon-folder-upload"></span>Ingresos<span class="caret icon-arrow-down6"></span></a>
+					<a href="../../ingreso"><span class="icon-folder-upload"></span>Ingresos<span class="caret icon-arrow-down6"></span></a>
 					
 				</li><li class="submenu">
 					<a href="#"><span class="icon-folder-download"></span>Salidas<span class="caret icon-arrow-down6"></span></a>
@@ -114,7 +139,7 @@ $(document).ready(function() {
 					</ul>
 				</li>
 				<li class="submenu">
-					<a href="../alerta"><span class="icon-alarm"></span>Alertas<span class="caret icon-arrow-down6"></span></a>
+					<a href="../../alerta"><span class="icon-alarm"></span>Alertas<span class="caret icon-arrow-down6"></span></a>
 					
 				</li>
 				<li class="usuario" >
@@ -122,7 +147,7 @@ $(document).ready(function() {
 					<ul class="children">
 						<li><a href="#">Ver Perfil<span class="icon-dot"></span></a></li>
 						<li><a href="#">Editar Perfil<span class="icon-dot"></span></a></li>
-						<li><a href="../logout">Cerrar Sesión<span class="icon-dot"></span></a></li>
+						<li><a href="../../logout">Cerrar Sesión<span class="icon-dot"></span></a></li>
 					</ul>
 				</li>
 			</ul>
@@ -146,16 +171,16 @@ $(document).ready(function() {
 		
 			<nav class="lateral">	
 				<ul>
-					<li> <a href="../almacen">ALMACENES</a> </li>
-					<li> <a href="../usuario">USUARIOS</a> </li>
-					<li> <a href="../solicitud">SOLICITUDES</a> </li>
-					<li> <a href="../respuesta">RESPUESTAS</a> </li>
+					<li> <a href="../../almacen">ALMACENES</a> </li>
+					<li> <a href="../../usuario">USUARIOS</a> </li>
+					<li> <a href="../../solicitud">SOLICITUDES</a> </li>
+					<li> <a href="../../respuesta">RESPUESTAS</a> </li>
 					<li> <a >CONSULTAS</a> 
 						<ul class="children">
-							<li><a href="../consultapr">Por rubro<span class="icon-dot"></span></a></li>
-							<li><a href="../consultapp">Por producto<span class="icon-dot"></span></a></li>
-							<li><a href="../consultapu">Por usuario<span class="icon-dot"></span></a></li>
-							<li><a href="../consultapf">Por fechas<span class="icon-dot"></span></a></li>
+							<li><a href="../../consultapr">Por rubro<span class="icon-dot"></span></a></li>
+							<li><a href="../../consultapp">Por producto<span class="icon-dot"></span></a></li>
+							<li><a href="../../consultapu">Por usuario<span class="icon-dot"></span></a></li>
+							<li><a href="../../consultapf">Por fechas<span class="icon-dot"></span></a></li>
 							
 						</ul>
 					</li>

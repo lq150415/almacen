@@ -2,7 +2,7 @@
 
 use almacen\Http\Requests;
 use almacen\Http\Controllers\Controller;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class IndexController extends Controller {
@@ -14,12 +14,13 @@ class IndexController extends Controller {
 	 */
 	public function index()
 	{
+		if(Auth::user()->NIV_USU==0){
 		return view('index');
+	}else {
+		return view('cliente/index_clie');
 	}
-	public function index2()
-	{
-		  return view('cliente/index_clie');
 	}
+	
 	/**
 	 * Show the form for creating a new resource.
 	 *

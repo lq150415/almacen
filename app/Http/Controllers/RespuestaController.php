@@ -2,7 +2,7 @@
 
 use almacen\Http\Requests;
 use almacen\Http\Controllers\Controller;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class RespuestaController extends Controller {
@@ -14,12 +14,13 @@ class RespuestaController extends Controller {
 	 */
 	public function index()
 	{
+		if(Auth::user()->NIV_USU==0){
 		return view('respuesta');
+		}else{
+			return view('cliente/resp_sol');
+		}
 	}
-	public function indexcl()
-	{
-		return view('cliente/resp_sol');
-	}
+
 	/**
 	 * Show the form for creating a new resource.
 	 *

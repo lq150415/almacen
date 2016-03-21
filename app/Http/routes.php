@@ -34,7 +34,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('ingreso', 'IngresoController');
         Route::resource('producto', 'ProductoController');
         Route::get('rubro/producto/{id}',['as'=>'producto','uses'=>'ProductoController@Index'])->where(['id' => '[0-9]+']);
-        Route::get('rubro/producto/{id}/registro','ProductoController@Store');
+        Route::post('rubro/producto/{id}/registro','ProductoController@Store');
         Route::resource('respuesta', 'RespuestaController@index');
         Route::get('rubro/{id}',['as'=>'rubro','uses'=>'RubroController@Index'])->where(['id' => '[0-9]+']);
         
@@ -42,9 +42,6 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('solicitud', 'SolicitudController@index');
         Route::resource('usuario', 'UsuarioController');
         Route::post('usuario/registrar', 'UsuarioController@store');
-        Route::resource('indexcl', 'IndexController@index2');
-        Route::resource('respuestacl', 'RespuestaController@indexcl');
-        Route::resource('solicitudcl', 'SolicitudController@indexcl');    
         Route::resource('solacepcl', 'SolicitudController@indexclac');  
         Route::resource('solreccl', 'SolicitudController@indexclrec');  
 });

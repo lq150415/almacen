@@ -87,7 +87,8 @@
 						<th><?php echo $rubro->id;?></th>
 						<th><?php echo $rubro->NOM_RUB;?></th>
             			<th><?php echo $rubro->DES_RUB;?></th>
-						<th><a href="producto/<?php echo $rubro->id;?>">Ver</a><a href="producto/<?php echo $rubro->id;?>/modificar"> Modificar</a></th>	
+						<th><a href="producto/<?php echo $rubro->id;?>">Ver&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;</a><a href="producto/<?php echo $rubro->id;?>/modificar"> Modificar</a></th>	
 		</tr>
 				<?php	endforeach;
 			

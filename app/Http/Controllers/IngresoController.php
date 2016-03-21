@@ -2,7 +2,7 @@
 
 use almacen\Http\Requests;
 use almacen\Http\Controllers\Controller;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class IngresoController extends Controller {
@@ -14,7 +14,11 @@ class IngresoController extends Controller {
 	 */
 	public function index()
 	{
+		if(Auth::user()->NIV_USU==0){
 		return view('ingreso');
+		}else{
+			return response('Unauthorized.', 401);
+		}
 	}
 
 	/**

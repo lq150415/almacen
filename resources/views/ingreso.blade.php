@@ -19,19 +19,70 @@
 						<tr style="height:40px;">	
 							<td width="100px" class="lblnombre">Procedencia</td>
 							<td width="240px"><input type="text" name="" value="" class="txtcampo large" placeholder="PROCEDENCIA" onpaste="return false"></td>
-							<td width="100px" class="lblnombre">Producto </td>
-							<td width="180px"><input type="text" name="" class="txtcampo small" placeholder="ELIJA EL PRODUCTO" onpaste="return false" disabled="on">
-							<td width="100px" class="lblnombre"><input type="button" class="botones ico-btnsearch" value="" onclick="javascript:despliegaModal2('visible');"></input></td>
 						</tr>
-					</table>	
-					<table style="margin-left: 30%;">
-						<tr style="height: 50px;">
-							<td>
-								<input type="submit" name="" class="botones ico-btnsave" value="REGISTRAR">
-                 				<input type="reset"  onclick="document.location.reload();" class="botones ico-btnlimpiar" value="LIMPIAR DATOS">
-                 			</td>
-						</tr>
+						
 					</table>
+					
+			<fieldset class="fieldcuerpo" align="left">
+			<legend>PRODUCTOS</legend>	
+			<table>
+				<tr>
+							<td width="100px" class="lblnombre">Almacen </td>
+							<td width="180px"><input type="text" name="" class="txtcampo small" placeholder="ELIJA EL PRODUCTO" onpaste="return false" disabled="on"></td>
+
+							<td width="100px" class="lblnombre">Rubro </td>
+							<td width="180px"><input type="text" name="" class="txtcampo small" placeholder="ELIJA EL PRODUCTO" onpaste="return false" disabled="on"></td>
+						</tr>	
+			</table>	
+			</br>
+					<table id="tabla">
+	<!-- Cabecera de la tabla -->
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>DES_PRO</th>
+								<th>PRECIO</th>
+								<th>CANTIDAD</th>
+								<th>&nbsp;</th>
+							</tr>
+						</thead>
+ 
+	<!-- Cuerpo de la tabla con los campos -->
+						<tbody>
+ 
+		<!-- fila base para clonar y agregar al final -->
+							<tr class="fila-base"> 
+								<td><input type="text" class="txtcampo small" style="width:80px;" disabled="on"/></td>
+								<td><input type="text" class="txtcampo small" style="width:300px;" disabled="on"/></td>
+								<td><input type="text" class="txtcampo small" style="width:60px;"/></td>
+								<td><input type="text" class="txtcampo small" style="width:60px;" /></td>
+								<td class="eliminar" style="border-radius: 100%; background:red; color:#fff; font-weight: bold;">&nbsp;&nbsp;-&nbsp;</td>								
+							</tr>
+		<!-- fin de código: fila base -->
+ 
+		<!-- Fila de ejemplo -->
+							<tr>
+								<td><input type="text" class="txtcampo small" style="width:80px;" disabled="on"/></td>
+								<td><input type="text" class="txtcampo small" style="width:300px;"disabled="on"/></td>
+								<td><input type="text" class="txtcampo small" style="width:60px;" /></td>
+								<td><input type="text" class="txtcampo small" style="width:60px;" /></td>			
+								<td class="eliminar" style="border-radius: 100%; background:red; color:#fff; font-weight: bold;">&nbsp;&nbsp;-&nbsp;</td>
+							</tr>
+		<!-- fin de código: fila de ejemplo -->
+ 
+						</tbody>
+					</table>
+<!-- Botón para agregar filas --><table>
+					<input type="button" id="agregar" value="Agregar producto" onclick="javascript:despliegaModal2('visible');" class="botones"/>	</table>
+					</fieldset>
+						<table style="margin-left: 30%;">
+							<tr style="height: 50px;">
+								<td>
+									<input type="submit" name="" class="botones ico-btnsave" value="REGISTRAR">
+                 					<input type="reset"  onclick="document.location.reload();" class="botones ico-btnlimpiar" value="LIMPIAR DATOS">
+                 				</td>
+							</tr>
+						</table>
 			</form>
 		</fieldset>
 </div>

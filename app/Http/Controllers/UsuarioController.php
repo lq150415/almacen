@@ -5,6 +5,7 @@ use almacen\Http\Controllers\Controller;
 use almacen\Usuario;	
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 class UsuarioController extends Controller {
 
 	/**
@@ -14,10 +15,12 @@ class UsuarioController extends Controller {
 	 */
 	public function index()
 	{
-		
+		if(Auth::user()->NIV_USU==0){
 		$usuarios = Usuario::get();
         return view('usuario')->with('usuarios', $usuarios);
-
+    }else{
+			return response('Unauthorized.', 401);
+		}
 		
 	}
 
