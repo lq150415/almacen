@@ -42,7 +42,7 @@ class AlmacenController extends Controller {
         $almacenes->created_at = Carbon::now();
         $almacenes->updated_at = Carbon:: now();
 		$almacenes->save();
-        return redirect()->route('almacen.index');
+        return redirect()->route('almacen');
 	}
 	/**
 	 * Display the specified resource.

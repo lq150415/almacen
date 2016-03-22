@@ -24,7 +24,7 @@ Route::group(['middleware' => 'auth'], function () {
     
         Route::resource('/', 'IndexController');
         Route::resource('index', 'IndexController');
-        Route::get('almacen', 'AlmacenController@index');
+        Route::get('almacen', ['as'=>'almacen','uses'=>'AlmacenController@Index']);
         Route::post('almacen/registrar', 'AlmacenController@store');
         Route::resource('alerta', 'AlertaController');
         Route::resource('consultapp', 'ConsultaController@index');

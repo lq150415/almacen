@@ -4,7 +4,7 @@ use almacen\Http\Requests;
 use almacen\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-
+use almacen\Almacen;
 class IngresoController extends Controller {
 
 	/**
@@ -15,7 +15,8 @@ class IngresoController extends Controller {
 	public function index()
 	{
 		if(Auth::user()->NIV_USU==0){
-		return view('ingreso');
+			$almacenes = Almacen::get();
+		return view('ingreso')->with('almacenes',$almacenes);
 		}else{
 			return response('Unauthorized.', 401);
 		}

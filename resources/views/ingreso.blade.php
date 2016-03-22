@@ -7,31 +7,31 @@
 		<fieldset class="fieldcuerpo" align="left">
 			<legend>REGISTRO DE NUEVO INGRESO</legend>
 			<form class="formularioreg">
-					<table>
-						<tr style="height:40px;">
-							
-							<td width="80px" class="lblnombre">Nro de factura</td>
-							<td width="240px"><input type="text" name="" value="" class="txtcampo large" placeholder="NUMERO DE FACTURA" onpaste="return false"></td>
-							<td width="130px" class="lblnombre">Nro de orden de Compra</td>
-							<td width="140px"><input type="text" name="" value="" class="txtcampo large" placeholder="NUMERO DE ORDEN DE COMPRA" onpaste="return false">
-							</td>
-						</tr>
-						<tr style="height:40px;">	
-							<td width="100px" class="lblnombre">Procedencia</td>
-							<td width="240px"><input type="text" name="" value="" class="txtcampo large" placeholder="PROCEDENCIA" onpaste="return false"></td>
-						</tr>
-						
-					</table>
-					
-			<fieldset class="fieldcuerpo" align="left">
-			<legend>PRODUCTOS</legend>	
+			
 			<table>
 				<tr>
 							<td width="100px" class="lblnombre">Almacen </td>
-							<td width="180px"><input type="text" name="" class="txtcampo small" placeholder="ELIJA EL PRODUCTO" onpaste="return false" disabled="on"></td>
-
+							<td width="180px">
+								<select name="" class="txtcampo small" placeholder="ELIJA EL PRODUCTO" onpaste="return false">
+									<option value="">SELECCIONE</option>
+							<?php 		
+									foreach ($almacenes as $almacen): ?>
+									<option value="<?php echo $almacen->id;?>"><?php echo $almacen->NOM_ALM?>
+									</option>
+							<?php endforeach;
+							?>
+								</select></td>
 							<td width="100px" class="lblnombre">Rubro </td>
-							<td width="180px"><input type="text" name="" class="txtcampo small" placeholder="ELIJA EL PRODUCTO" onpaste="return false" disabled="on"></td>
+							<td width="180px">
+							<select name="" class="txtcampo small" placeholder="ELIJA EL PRODUCTO" onpaste="return false">
+									<option value="">SELECCIONE</option>
+							<?php 		
+									foreach ($almacenes as $almacen): ?>
+									<option value="<?php echo $almacen->id;?>"><?php echo $almacen->NOM_ALM?>
+									</option>
+							<?php endforeach;
+							?>
+								</select></td>
 						</tr>	
 			</table>	
 			</br>
@@ -39,10 +39,11 @@
 	<!-- Cabecera de la tabla -->
 						<thead>
 							<tr>
-								<th>ID</th>
-								<th>DES_PRO</th>
-								<th>PRECIO</th>
-								<th>CANTIDAD</th>
+								<th>Nº de factura</th>
+								<th>Nº orden de compra</th>
+								<th>Producto</th>
+								<th>Precio</th>
+								<th>Cantidad</th>
 								<th>&nbsp;</th>
 							</tr>
 						</thead>
@@ -53,28 +54,24 @@
 		<!-- fila base para clonar y agregar al final -->
 							<tr class="fila-base"> 
 								<td><input type="text" class="txtcampo small" style="width:80px;" disabled="on"/></td>
-								<td><input type="text" class="txtcampo small" style="width:300px;" disabled="on"/></td>
-								<td><input type="text" class="txtcampo small" style="width:60px;"/></td>
+								<td><input type="text" class="txtcampo small" style="width:80px;" disabled="on"/></td>
+								<td><input type="text" class="txtcampo small" style="width:280px;" disabled="on"/></td>
+								<td><input type="text" class="txtcampo small" style="width:80px;" disabled="on"/></td>
+							
 								<td><input type="text" class="txtcampo small" style="width:60px;" /></td>
 								<td class="eliminar" style="border-radius: 100%; background:red; color:#fff; font-weight: bold;">&nbsp;&nbsp;-&nbsp;</td>								
 							</tr>
 		<!-- fin de código: fila base -->
  
 		<!-- Fila de ejemplo -->
-							<tr>
-								<td><input type="text" class="txtcampo small" style="width:80px;" disabled="on"/></td>
-								<td><input type="text" class="txtcampo small" style="width:300px;"disabled="on"/></td>
-								<td><input type="text" class="txtcampo small" style="width:60px;" /></td>
-								<td><input type="text" class="txtcampo small" style="width:60px;" /></td>			
-								<td class="eliminar" style="border-radius: 100%; background:red; color:#fff; font-weight: bold;">&nbsp;&nbsp;-&nbsp;</td>
-							</tr>
+							
 		<!-- fin de código: fila de ejemplo -->
  
 						</tbody>
 					</table>
 <!-- Botón para agregar filas --><table>
 					<input type="button" id="agregar" value="Agregar producto" onclick="javascript:despliegaModal2('visible');" class="botones"/>	</table>
-					</fieldset>
+				
 						<table style="margin-left: 30%;">
 							<tr style="height: 50px;">
 								<td>
@@ -92,27 +89,50 @@
 <a href="javascript:despliegaModal2('hidden');" title="Cerrar"><span class="icon-switch" style="float: right; color: #000; font-size: 15px;"></span></a>
 </br>
 		<fieldset class="fieldcuerpo" align="left">
-			<legend>LISTADO DE PRODUCTOS</legend>
+			<legend>AGREGAR PRODUCTOS</legend>
 			<div>
-	  	<a href="javascript:despliegaModal3('visible');">+ Nuevo producto</a>
-	  	</br>
-	  		</br>
+	  	
+	 
+<table>
+						<tr style="height:40px;">
+							
+							<td width="80px" class="lblnombre">Nro de factura</td>
+							<td width="240px"><input type="text" name="" value="" class="txtcampo large" placeholder="NUMERO DE FACTURA" onpaste="return false"></td>
+							<td width="130px" class="lblnombre">Nro de orden de Compra</td>
+							<td width="140px"><input type="text" name="" value="" class="txtcampo large" placeholder="NUMERO DE ORDEN DE COMPRA" onpaste="return false">
+							</td>
+						</tr>
+						<tr style="height:40px;">	
+							<td width="100px" class="lblnombre">Procedencia</td>
+							<td width="240px"><input type="text" name="" value="" class="txtcampo large" placeholder="PROCEDENCIA" onpaste="return false"></td>
+							<td width="100px" class="lblnombre">Cantidad</td>
+							<td width="240px"><input type="text" name="" value="" class="txtcampo large" placeholder="CANTIDAD " onpaste="return false"></td>
+						</tr>
+						
+					</table>
+					
 
+	  		<fieldset class="fieldcuerpo" align="left">
+			<legend>LISTADO DE PRODUCTOS</legend>
+			<a href="javascript:despliegaModal3('visible');">+ Nuevo producto</a>
+					 	</br>
+
+</br>
 			<table id="example2" class="display" cellspacing="5" width="100%" style="border-radius:4px;-moz-border-radius:4px;-webkit-border-radius:4px;border:1px #444444 solid;">
 	<thead style="font-size:13px;color:#FFF;background-color:#444444;height:40px;">
 		<tr>
 			<th>ID</th>
-            <th>FECHA DE SOLICITUD</th>
-			<th>USUARIO</th>
+            <th>DESCRIPCION DEL PRODUCTO</th>
+			<th>PRECIO UNITARIO</th>
 			<th>ACCIONES</th>	
 		</tr>
 	</thead>
 	<tfoot style="font-size:13px;color:#FFF;background-color:#444444;height:40px;">
 		<tr>
 			<th>ID</th>
-            <th>FECHA DE SOLICITUD</th>
-			<th>USUARIO</th>
-			<th>ACCIONES</th>		
+            <th>DESCRIPCION DEL PRODUCTO</th>
+			<th>PRECIO UNITARIO</th>
+			<th>ACCIONES</th>	
 		</tr>
 	</tfoot>
 	<tbody style="font-size:11px;">
@@ -132,7 +152,7 @@
 			<form class="formularioreg">
 				<table style="margin-top: 4%;  margin-left: 10%;">
 						<tr style="height: 50px;">
-							<td width="130px" class="lblnombre">Nombre del producto</td>
+							<td width="130px" class="lblnombre">Item del producto</td>
 							<td width="250px"><input type="text" name="" class="txtcampo large2" placeholder="NOMBRE DEL PRODUCTO" onkeypress="return sololetras(event);" onpaste="return false" ></td>
 						</tr>
 						<tr style="height: 50px;">
@@ -143,9 +163,7 @@
 							<td width="130px" class="lblnombre">Precio unitario </td>
 							<td width="250px"><input type="text" name="" class="txtcampo large" placeholder="P/U en Bs." onkeypress="return sololetras(event);" onpaste="return false" ></td>
 						</tr>
-							<td width="130px" class="lblnombre">Cantidad del producto </td>
-							<td width="250px"><input type="text" name="" class="txtcampo large" placeholder="CANTIDAD DEL PRODUCTO" onkeypress="return sololetras(event);" onpaste="return false" ></td>
-						</tr>
+							
 					</table>
 					<table style="margin-left: 30%;">
 						<tr style="height: 50px;">
