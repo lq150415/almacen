@@ -5,6 +5,9 @@ use almacen\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use almacen\Almacen;
+use almacen\Rubro;
+use almacen\Producto;
+
 class IngresoController extends Controller {
 
 	/**
@@ -16,7 +19,9 @@ class IngresoController extends Controller {
 	{
 		if(Auth::user()->NIV_USU==0){
 			$almacenes = Almacen::get();
-		return view('ingreso')->with('almacenes',$almacenes);
+			$rubros = Rubro::get();
+			$productos = Producto::get();
+		return view('ingreso')->with('almacenes',$almacenes)->with('rubros',$rubros)->with('productos',$productos);
 		}else{
 			return response('Unauthorized.', 401);
 		}
@@ -39,7 +44,7 @@ class IngresoController extends Controller {
 	 */
 	public function store()
 	{
-		//
+		
 	}
 
 	/**

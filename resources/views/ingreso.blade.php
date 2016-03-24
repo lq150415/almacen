@@ -6,13 +6,13 @@
 		</br>
 		<fieldset class="fieldcuerpo" align="left">
 			<legend>REGISTRO DE NUEVO INGRESO</legend>
-			<form class="formularioreg">
+			<form class="formularioreg" name="almacen_form">
 			
 			<table>
 				<tr>
 							<td width="100px" class="lblnombre">Almacen </td>
 							<td width="180px">
-								<select name="" class="txtcampo small" placeholder="ELIJA EL PRODUCTO" onpaste="return false">
+								<select id="alm" class="txtcampo small" placeholder="ELIJA EL ALMACEN" onblur="">
 									<option value="">SELECCIONE</option>
 							<?php 		
 									foreach ($almacenes as $almacen): ?>
@@ -23,11 +23,11 @@
 								</select></td>
 							<td width="100px" class="lblnombre">Rubro </td>
 							<td width="180px">
-							<select name="" class="txtcampo small" placeholder="ELIJA EL PRODUCTO" onpaste="return false">
+							<select id="rub" name="rub" class="txtcampo small" placeholder="ELIJA EL RUBRO" onpaste="return false">
 									<option value="">SELECCIONE</option>
 							<?php 		
-									foreach ($almacenes as $almacen): ?>
-									<option value="<?php echo $almacen->id;?>"><?php echo $almacen->NOM_ALM?>
+									foreach ($rubros as $rubro): ?>
+									<option value="<?php echo $rubro->id;?>"><?php echo $rubro->NOM_RUB?>
 									</option>
 							<?php endforeach;
 							?>
@@ -35,6 +35,11 @@
 						</tr>	
 			</table>	
 			</br>
+
+					<table>
+						<input type="button" id="agregar" value="Agregar producto" onclick="javascript:despliegaModal2('visible');" class="botones"/>
+					</table>
+
 					<table id="tabla">
 	<!-- Cabecera de la tabla -->
 						<thead>
@@ -69,8 +74,7 @@
  
 						</tbody>
 					</table>
-<!-- Botón para agregar filas --><table>
-					<input type="button" id="agregar" value="Agregar producto" onclick="javascript:despliegaModal2('visible');" class="botones"/>	</table>
+<!-- Botón para agregar filas -->
 				
 						<table style="margin-left: 30%;">
 							<tr style="height: 50px;">
@@ -91,8 +95,6 @@
 		<fieldset class="fieldcuerpo" align="left">
 			<legend>AGREGAR PRODUCTOS</legend>
 			<div>
-	  	
-	 
 <table>
 						<tr style="height:40px;">
 							
@@ -136,7 +138,23 @@
 		</tr>
 	</tfoot>
 	<tbody style="font-size:11px;">
-		
+		<tr>
+		<?php
+		if(isset($clave)){
+			$clave=utf8_decode($_POST['clave']);
+			$productos2 = DB::table('productos')->where('ID_RUB','=',$clave)->get();
+			foreach ($productos2 as $producto):
+		?>
+			<th><?php echo $producto->id;?></th>
+            <th><?php echo $producto->DES_PRO;?></th>
+			<th><?php echo $producto->PUN_PRO;?></th>
+			<th>ACCIONES</th>	
+		</tr>
+			<?php	
+			endforeach;}else{ echo 'nada';
+		}?>
+
+			
 	</tbody>
 	</table>
 	</div>
