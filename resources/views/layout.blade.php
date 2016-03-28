@@ -42,54 +42,10 @@ function despliegaModal( _valor ){
 </script>
 <script type="text/javascript" lang="javascript">
 function despliegaModal2( _valor ){
-	function objetoAjax(){
-	var xmlhttp=false;
-	try {
-		xmlhttp = new ActiveXObject("Msxml2.XMLHTTP");
-	} catch (e) {
-		try {
-		   xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-		} catch (E) {
-			xmlhttp = false;
-  		}
-	}
-
-	if (!xmlhttp && typeof XMLHttpRequest!='undefined') {
-		xmlhttp = new XMLHttpRequest();
-	}
-	return xmlhttp;
-}
-
-
-
-
-//_________________________________________________________________________
-function buscar(){ //esta es la funcion que envia los datos de manea asincrona
-	//div donde  mostrararemos  los datos de la consulta 
-	divResultado = document.getElementById('bgVentanaModal2');
-
-	//tomamos el valor enviado del formulario de envio
-	clave=document.almacen_form.alm.value;
-
-	//instanciamos el objetoAjax
-	ajax=objetoAjax();
-	//usamos el medoto POST
-	//archivo que realizará la operacion
-	ajax.open("POST", "IngresoController.php",true);
-	//mostramos una imagen mientras cargamos el resultado de la consulta
-	divResultado.innerHTML= '<img src="images/ajax.gif">';
-	ajax.onreadystatechange=function() {
-		if (ajax.readyState==4) {
-			//visualizamos el resultado correscpondiente
-			divResultado.innerHTML = ajax.responseText
-		}
-	}
-	ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-	//enviando los valoress
-	ajax.send("clave="+clave)
-}
 	document.getElementById("bgVentanaModal2").style.visibility=_valor;
-	var alm=document.getElementById("alm");
+	$('#alm2').val($('#alm').val());
+	$('#rub2').val($('#rub').val());
+
 	}
 
 </script>
@@ -162,6 +118,31 @@ $(function(){
 	});
 });
  
+</script>
+<script language="javascript" src="js/jquery-1.2.6.min.js"></script>
+<script language="javascript">
+$(document).ready(function(){
+   $("#alm").change(function () {
+           $("#alm option:selected").each(function () {
+            id = $(this).val();
+            $.post("datos_rub", { id: id }, function(data){
+                $("#rub").html(data);
+            });            
+        });
+   })
+});
+</script>
+<script language="javascript">
+$(document).ready(function(){
+   $("#rub").change(function () {
+           $("#rub option:selected").each(function () {
+            id = $(this).val();
+            $.post("datos_pro", { id: id }, function(data){
+                $("#tablabody").html(data);
+            });            
+        });
+   })
+});
 </script>
 </head>
 <body>

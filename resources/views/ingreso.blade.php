@@ -10,27 +10,20 @@
 			
 			<table>
 				<tr>
+				 <input type="hidden" name="_token" value="{{ csrf_token() }}">
 							<td width="100px" class="lblnombre">Almacen </td>
 							<td width="180px">
 								<select id="alm" class="txtcampo small" placeholder="ELIJA EL ALMACEN" onblur="">
 									<option value="">SELECCIONE</option>
 							<?php 		
-									foreach ($almacenes as $almacen): ?>
-									<option value="<?php echo $almacen->id;?>"><?php echo $almacen->NOM_ALM?>
-									</option>
-							<?php endforeach;
+									foreach ($almacenes as $almacen): 
+									 echo '<option value="'.$almacen->id.'">'.$almacen->NOM_ALM.'</option>';
+							endforeach;
 							?>
 								</select></td>
-							<td width="100px" class="lblnombre">Rubro </td>
+							<td width="100px" class="lblnombre">Rubro</td>
 							<td width="180px">
-							<select id="rub" name="rub" class="txtcampo small" placeholder="ELIJA EL RUBRO" onpaste="return false">
-									<option value="">SELECCIONE</option>
-							<?php 		
-									foreach ($rubros as $rubro): ?>
-									<option value="<?php echo $rubro->id;?>"><?php echo $rubro->NOM_RUB?>
-									</option>
-							<?php endforeach;
-							?>
+							<select id="rub" class="txtcampo small" placeholder="ELIJA EL RUBRO" onpaste="return false">
 								</select></td>
 						</tr>	
 			</table>	
@@ -95,9 +88,15 @@
 		<fieldset class="fieldcuerpo" align="left">
 			<legend>AGREGAR PRODUCTOS</legend>
 			<div>
-<table>
+			<table>
 						<tr style="height:40px;">
-							
+							  <td width="80px" class="lblnombre">ID Almacen: </td>
+							  <td width="240px"><input type="text" id="alm2" disabled="yes" class="txtcampo large"></td>
+							  <td width="80px" class="lblnombre">ID Rubro: </td>
+							  <td width="240px"><input type="text" id="rub2" value="19" disabled="yes" class="txtcampo large"></td>
+						</tr>
+
+						<tr style="height:40px;">
 							<td width="80px" class="lblnombre">Nro de factura</td>
 							<td width="240px"><input type="text" name="" value="" class="txtcampo large" placeholder="NUMERO DE FACTURA" onpaste="return false"></td>
 							<td width="130px" class="lblnombre">Nro de orden de Compra</td>
@@ -129,6 +128,10 @@
 			<th>ACCIONES</th>	
 		</tr>
 	</thead>
+	
+	<tbody style="font-size:11px;" id="tablabody">
+			
+	</tbody>
 	<tfoot style="font-size:13px;color:#FFF;background-color:#444444;height:40px;">
 		<tr>
 			<th>ID</th>
@@ -137,25 +140,6 @@
 			<th>ACCIONES</th>	
 		</tr>
 	</tfoot>
-	<tbody style="font-size:11px;">
-		<tr>
-		<?php
-		if(isset($clave)){
-			$clave=utf8_decode($_POST['clave']);
-			$productos2 = DB::table('productos')->where('ID_RUB','=',$clave)->get();
-			foreach ($productos2 as $producto):
-		?>
-			<th><?php echo $producto->id;?></th>
-            <th><?php echo $producto->DES_PRO;?></th>
-			<th><?php echo $producto->PUN_PRO;?></th>
-			<th>ACCIONES</th>	
-		</tr>
-			<?php	
-			endforeach;}else{ echo 'nada';
-		}?>
-
-			
-	</tbody>
 	</table>
 	</div>
 		</fieldset>

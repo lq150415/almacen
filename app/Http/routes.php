@@ -37,7 +37,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('rubro/producto/{id}/registro','ProductoController@Store');
         Route::resource('respuesta', 'RespuestaController@index');
         Route::get('rubro/{id}',['as'=>'rubro','uses'=>'RubroController@Index'])->where(['id' => '[0-9]+']);
-        
+        Route::post('datos_rub','IngresoController@datos_rub');
+        Route::post('datos_pro','IngresoController@datos_pro');
         Route::post('rubro/{id}/registro','RubroController@store');
         Route::resource('solicitud', 'SolicitudController@index');
         Route::resource('usuario', 'UsuarioController');
