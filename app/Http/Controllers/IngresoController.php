@@ -95,21 +95,29 @@ class IngresoController extends Controller {
 	{
 		$id = $_POST['id'];
 		$rubros = Rubro::where('ID_ALM','=',$id)->get();
-		foreach ($rubros as $rubro):             
-        $html = '<option value="'.$rubro->id.'">'.$rubro->NOM_RUB.'</option>';
+		$i=1;          
+		foreach ($rubros as $rubro): 
+		if($i==1){    
+        $html = '<option value="'.'">'.'SELECCIONE'.'</option>'.'<option value="'.$rubro->id.'">'.$rubro->NOM_RUB.'</option>';
+			$i++;
 			echo $html;
+		}else{
+		$html ='<option value="'.$rubro->id.'">'.$rubro->NOM_RUB.'</option>';
+		echo $html;
+		}
 		endforeach;
 	}
 	public function datos_pro()
 	{
 		$id = $_POST['id'];
 		$productos = Producto::where('ID_RUB','=',$id)->get();
-		foreach ($productos as $producto):             
-        $html = '<th>'.$producto->id.'</th>'.'<th>'.$producto->DES_PRO.'</th>'.'<th>'.$producto->PUN_PRO.'</th>'.'<th>'.$producto->PUN_PRO.'</th>';
-			echo $html;
+		foreach ($productos as $producto):          
+        $html2 = '<tr>'.'<th>'.$producto->id.'</th>'.'<th>'.$producto->DES_PRO.'</th>'.'<th>'.$producto->PUN_PRO.'</th>'.'<th>'.$producto->PUN_PRO.'</th>'.'</tr>';
+		echo $html2;
 		endforeach;
+
 	}
-	
+
 
 
 }

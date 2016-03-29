@@ -119,7 +119,7 @@ $(function(){
 });
  
 </script>
-<script language="javascript" src="js/jquery-1.2.6.min.js"></script>
+
 <script language="javascript">
 $(document).ready(function(){
    $("#alm").change(function () {
@@ -129,21 +129,18 @@ $(document).ready(function(){
                 $("#rub").html(data);
             });            
         });
-   })
-});
-</script>
-<script language="javascript">
-$(document).ready(function(){
+       });
    $("#rub").change(function () {
            $("#rub option:selected").each(function () {
             id = $(this).val();
             $.post("datos_pro", { id: id }, function(data){
-                $("#tablabody").html(data);
+                $.html(data);
             });            
-        });
+        });       
    })
 });
 </script>
+
 </head>
 <body>
 @yield('VM')

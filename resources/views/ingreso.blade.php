@@ -119,6 +119,7 @@
 					 	</br>
 
 </br>
+<div >
 			<table id="example2" class="display" cellspacing="5" width="100%" style="border-radius:4px;-moz-border-radius:4px;-webkit-border-radius:4px;border:1px #444444 solid;">
 	<thead style="font-size:13px;color:#FFF;background-color:#444444;height:40px;">
 		<tr>
@@ -130,7 +131,7 @@
 	</thead>
 	
 	<tbody style="font-size:11px;" id="tablabody">
-			
+		
 	</tbody>
 	<tfoot style="font-size:13px;color:#FFF;background-color:#444444;height:40px;">
 		<tr>
@@ -141,6 +142,7 @@
 		</tr>
 	</tfoot>
 	</table>
+</div>
 	</div>
 		</fieldset>
 </div>
