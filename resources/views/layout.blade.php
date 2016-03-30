@@ -49,6 +49,7 @@ function despliegaModal2( _valor ){
 	}
 
 </script>
+
 <script type="text/javascript">
 function despliegaModal3( _valor ){
 	document.getElementById("bgVentanaModal3").style.visibility=_valor;
@@ -105,7 +106,7 @@ input[type="text"]{ } /* ancho a los elementos input="text" */
 $(function(){
 	// Clona la fila oculta que tiene los campos base, y la agrega al final de la tabla
 	$("#agregar").on('click', function(){
-		$("#tabla tbody tr:eq(0)").clone().removeClass('fila-base').appendTo("#tabla tbody");
+		//$("#tabla tbody tr:eq(0)").clone().removeClass('fila-base').appendTo("#tabla tbody");
 		var almacen = document.getElementById("alm").value;
 		var rubro = document.getElementById("rub").value;
 
@@ -134,7 +135,8 @@ $(document).ready(function(){
            $("#rub option:selected").each(function () {
             id = $(this).val();
             $.post("datos_pro", { id: id }, function(data){
-                $.html(data);
+                $('#example2').DataTable();
+                $("#tablabody").html(data);	
             });            
         });       
    })

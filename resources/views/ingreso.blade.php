@@ -51,12 +51,12 @@
  
 		<!-- fila base para clonar y agregar al final -->
 							<tr class="fila-base"> 
-								<td><input type="text" class="txtcampo small" style="width:80px;" disabled="on"/></td>
-								<td><input type="text" class="txtcampo small" style="width:80px;" disabled="on"/></td>
-								<td><input type="text" class="txtcampo small" style="width:280px;" disabled="on"/></td>
-								<td><input type="text" class="txtcampo small" style="width:80px;" disabled="on"/></td>
+								<td><input type="text" class="txtcampo small" id="nro_fac" style="width:80px;" disabled="on"/></td>
+								<td><input type="text" class="txtcampo small" id="nro_com" style="width:80px;" disabled="on"/></td>
+								<td><input type="text" class="txtcampo small" id="producto" style="width:280px;" disabled="on"/></td>
+								<td><input type="text" class="txtcampo small" id="pre_pro" style="width:80px;" disabled="on"/></td>
 							
-								<td><input type="text" class="txtcampo small" style="width:60px;" /></td>
+								<td><input type="text" id="can_pro" class="txtcampo small" style="width:60px;" /></td>
 								<td class="eliminar" style="border-radius: 100%; background:red; color:#fff; font-weight: bold;">&nbsp;&nbsp;-&nbsp;</td>								
 							</tr>
 		<!-- fin de código: fila base -->
@@ -98,16 +98,16 @@
 
 						<tr style="height:40px;">
 							<td width="80px" class="lblnombre">Nro de factura</td>
-							<td width="240px"><input type="text" name="" value="" class="txtcampo large" placeholder="NUMERO DE FACTURA" onpaste="return false"></td>
+							<td width="240px"><input type="text" name="" id="nro_fac1" value="" class="txtcampo large" placeholder="NUMERO DE FACTURA" onpaste="return false"></td>
 							<td width="130px" class="lblnombre">Nro de orden de Compra</td>
-							<td width="140px"><input type="text" name="" value="" class="txtcampo large" placeholder="NUMERO DE ORDEN DE COMPRA" onpaste="return false">
+							<td width="140px"><input type="text" name="" id="nro_com1" value="" class="txtcampo large" placeholder="NUMERO DE ORDEN DE COMPRA" onpaste="return false">
 							</td>
 						</tr>
 						<tr style="height:40px;">	
 							<td width="100px" class="lblnombre">Procedencia</td>
 							<td width="240px"><input type="text" name="" value="" class="txtcampo large" placeholder="PROCEDENCIA" onpaste="return false"></td>
 							<td width="100px" class="lblnombre">Cantidad</td>
-							<td width="240px"><input type="text" name="" value="" class="txtcampo large" placeholder="CANTIDAD " onpaste="return false"></td>
+							<td width="240px"><input type="text" id="cant" name="" value="" class="txtcampo large" placeholder="CANTIDAD " onpaste="return false"></td>
 						</tr>
 						
 					</table>
@@ -119,29 +119,8 @@
 					 	</br>
 
 </br>
-<div >
-			<table id="example2" class="display" cellspacing="5" width="100%" style="border-radius:4px;-moz-border-radius:4px;-webkit-border-radius:4px;border:1px #444444 solid;">
-	<thead style="font-size:13px;color:#FFF;background-color:#444444;height:40px;">
-		<tr>
-			<th>ID</th>
-            <th>DESCRIPCION DEL PRODUCTO</th>
-			<th>PRECIO UNITARIO</th>
-			<th>ACCIONES</th>	
-		</tr>
-	</thead>
-	
-	<tbody style="font-size:11px;" id="tablabody">
+<div id="tablabody" style="overflow: auto;">
 		
-	</tbody>
-	<tfoot style="font-size:13px;color:#FFF;background-color:#444444;height:40px;">
-		<tr>
-			<th>ID</th>
-            <th>DESCRIPCION DEL PRODUCTO</th>
-			<th>PRECIO UNITARIO</th>
-			<th>ACCIONES</th>	
-		</tr>
-	</tfoot>
-	</table>
 </div>
 	</div>
 		</fieldset>
