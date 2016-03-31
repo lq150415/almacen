@@ -6,11 +6,10 @@
 		</br>
 		<fieldset class="fieldcuerpo" align="left">
 			<legend>REGISTRO DE NUEVO INGRESO</legend>
-			<form class="formularioreg" name="almacen_form">
-			
+			<form class="formularioreg" name="almacen_form" action="reg_ingreso" method="POST">
 			<table>
 				<tr>
-				 <input type="hidden" name="_token" value="{{ csrf_token() }}">
+				
 							<td width="100px" class="lblnombre">Almacen </td>
 							<td width="180px">
 								<select id="alm" class="txtcampo small" placeholder="ELIJA EL ALMACEN" onblur="">
@@ -25,7 +24,7 @@
 							<td width="180px">
 							<select id="rub" class="txtcampo small" placeholder="ELIJA EL RUBRO" onpaste="return false">
 								</select></td>
-						</tr>	
+				</tr>	
 			</table>	
 			</br>
 
@@ -48,15 +47,15 @@
  
 	<!-- Cuerpo de la tabla con los campos -->
 						<tbody>
- 
 		<!-- fila base para clonar y agregar al final -->
-							<tr class="fila-base"> 
-								<td><input type="text" class="txtcampo small" id="nro_fac" style="width:80px;" disabled="on"/></td>
-								<td><input type="text" class="txtcampo small" id="nro_com" style="width:80px;" disabled="on"/></td>
-								<td><input type="text" class="txtcampo small" id="producto" style="width:280px;" disabled="on"/></td>
-								<td><input type="text" class="txtcampo small" id="pre_pro" style="width:80px;" disabled="on"/></td>
+							<tr> 
+								<td><input type="text" class="txtcampo small" id="nro_fac" name="nro_fac[]" style="width:80px;" /></td>
+								<td><input type="text" class="txtcampo small" id="nro_com" name="nro_com[]"style="width:80px;" /></td>
+								<td><input type="text" class="txtcampo small" id="producto" name="producto[]" style="width:280px;" /></td>
+								<input type="hidden" class="txtcampo small" id="idproducto" name="idproducto[]" style="width:280px;" />
+								<td><input type="text" class="txtcampo small" id="pre_pro" name="pre_pro[]" style="width:80px;" /></td>
 							
-								<td><input type="text" id="can_pro" class="txtcampo small" style="width:60px;" /></td>
+								<td><input type="text" id="can_pro" class="txtcampo small" name="can_pro[]" style="width:60px;" /></td>
 								<td class="eliminar" style="border-radius: 100%; background:red; color:#fff; font-weight: bold;">&nbsp;&nbsp;-&nbsp;</td>								
 							</tr>
 		<!-- fin de código: fila base -->
@@ -83,7 +82,7 @@
 </div>
 <div id="bgVentanaModal2" class="bgventanaModal2">
 <div id="VentanaModal2" class="VentanaModal2">
-<a href="javascript:despliegaModal2('hidden');" title="Cerrar"><span class="icon-switch" style="float: right; color: #000; font-size: 15px;"></span></a>
+<a href="javascript:despliegaModal2a('hidden');" title="Cerrar"><span class="icon-switch" style="float: right; color: #000; font-size: 15px;"></span></a>
 </br>
 		<fieldset class="fieldcuerpo" align="left">
 			<legend>AGREGAR PRODUCTOS</legend>
