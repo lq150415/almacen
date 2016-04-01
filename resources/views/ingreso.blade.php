@@ -49,11 +49,12 @@
 						<tbody>
 		<!-- fila base para clonar y agregar al final -->
 							<tr> 
-								<td><input type="text" class="txtcampo small" id="nro_fac" name="nro_fac[]" style="width:80px;" /></td>
-								<td><input type="text" class="txtcampo small" id="nro_com" name="nro_com[]"style="width:80px;" /></td>
-								<td><input type="text" class="txtcampo small" id="producto" name="producto[]" style="width:280px;" /></td>
-								<input type="hidden" class="txtcampo small" id="idproducto" name="idproducto[]" style="width:280px;" />
-								<td><input type="text" class="txtcampo small" id="pre_pro" name="pre_pro[]" style="width:80px;" /></td>
+								<td><input type="text" class="txtcampo small" id="nro_fac" name="nro_fac[]" style="width:80px;" readonly="readonly"/></td>
+								<td><input type="text" class="txtcampo small" id="nro_com" name="nro_com[]"style="width:80px;" readonly="readonly"/></td>
+								<td><input type="text" class="txtcampo small" id="producto" name="producto[]" style="width:280px;" readonly="readonly"/></td>
+								<input type="hidden" class="txtcampo small" id="idproducto" name="idproducto[]" style="width:280px;" readonly="readonly"/>
+								<input type="hidden" class="txtcampo small" id="pro_pin" name="pro_pin[]" style="width:280px;" readonly="readonly"/>
+								<td><input type="text" class="txtcampo small" id="pre_pro" name="pre_pro[]" style="width:80px;" readonly="readonly"/></td>
 							
 								<td><input type="text" id="can_pro" class="txtcampo small" name="can_pro[]" style="width:60px;" /></td>
 								<td class="eliminar" style="border-radius: 100%; background:red; color:#fff; font-weight: bold;">&nbsp;&nbsp;-&nbsp;</td>								
@@ -104,7 +105,7 @@
 						</tr>
 						<tr style="height:40px;">	
 							<td width="100px" class="lblnombre">Procedencia</td>
-							<td width="240px"><input type="text" name="" value="" class="txtcampo large" placeholder="PROCEDENCIA" onpaste="return false"></td>
+							<td width="240px"><input type="text" id="pro_pin1"name="" value="" class="txtcampo large" placeholder="PROCEDENCIA" onpaste="return false"></td>
 							<td width="100px" class="lblnombre">Cantidad</td>
 							<td width="240px"><input type="text" id="cant" name="" value="" class="txtcampo large" placeholder="CANTIDAD " onpaste="return false"></td>
 						</tr>
@@ -171,22 +172,28 @@
 		<table id="example" class="display" cellspacing="5" width="100%" style="border-radius:4px;-moz-border-radius:4px;-webkit-border-radius:4px;border:1px #444444 solid;">
 	<thead style="font-size:13px;color:#FFF;background-color:#444444;height:40px;">
 		<tr>
-			<th>ID</th>
-            <th>FECHA DE SOLICITUD</th>
-			<th>USUARIO</th>
-			<th>ACCIONES</th>	
+            <th>FECHA DE INGRESO</th>
+            <th>NRO ORDEN DE COMPRA</th>
+            <th>PROCEDENCIA</th>
+			<th>PRODUCTO</th>
+			<th>CANTIDAD</th>
+			<th>PRECIO TOTAL</th>
+			<th>ID INGRESO</th>	
 		</tr>
 	</thead>
 	<tfoot style="font-size:13px;color:#FFF;background-color:#444444;height:40px;">
 		<tr>
-			<th>ID</th>
-            <th>FECHA DE SOLICITUD</th>
-			<th>USUARIO</th>
-			<th>ACCIONES</th>		
+            <th>FECHA DE INGRESO</th>
+            <th>NRO ORDEN DE COMPRA</th>
+            <th>PROCEDENCIA</th>
+			<th>PRODUCTO</th>
+			<th>CANTIDAD</th>
+			<th>PRECIO TOTAL</th>
+			<th>ID INGRESO</th>
 		</tr>
 	</tfoot>
 	<tbody style="font-size:11px;">
-		
+		<?php echo $consultas?>
 	</tbody>
 </table>
 </fieldset>

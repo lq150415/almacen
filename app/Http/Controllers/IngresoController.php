@@ -25,7 +25,12 @@ class IngresoController extends Controller {
 			$almacenes = Almacen::get();
 			$rubros = Rubro::get();
 			$productos = Producto::get();
-		return view('ingreso')->with('almacenes',$almacenes)->with('rubros',$rubros)->with('productos',$productos);
+			//$query=
+			$query = Ingresado::join('productos','productos.id','=','ingresados.ID_PRO')
+						   ->join('ingresos','ingresos.id','=','ingresados.ID_ING')
+						   ->select('FEC_ING', 'NOC_PIN', 'PRO_PIN', 'DES_PRO', 'CAN_PRO', 'PUN_PRO * CAN_PIN As TOTAL', 'ID_ING')
+                           ->get();
+		return view('ingreso')->with('almacenes',$almacenes)->with('rubros',$rubros)->with('productos',$productos)->with('consultas',$query);
 		}else{
 			return response('Unauthorized.', 401);
 		}
@@ -49,17 +54,19 @@ class IngresoController extends Controller {
 	public function store(Request $request)
 	{
 		$ingresos = new Ingreso;
-		$ingresados = new Ingresado;
+		
 		$ingresos->FEC_ING = Carbon::now();
         $ingresos->ID_USU = Auth::user()->id;
         $ingresos->created_at = Carbon::now();
         $ingresos->updated_at = Carbon:: now();
 		$ingresos->save();
 		$j=count($request->input('nro_fac'));
-		for($i=0;$i<=2;$i++){
+		for($i=1;$i<3;$i++){
+			$ingresados = new Ingresado;
 			$ingresados->NFC_PIN = $request->input('nro_fac.'.$i);
         	$ingresados->NOC_PIN = $request->input('nro_com.'.$i);
         	$ingresados->CAN_PIN = $request->input('can_pro.'.$i);
+        	$ingresados->PRO_PIN = $request->input('pro_pin.'.$i);
         	$ingresados->ID_PRO = $request->input('idproducto.'.$i);
         	$ingresados->ID_ING = 	$ingresos->id;
         	$ingresados->created_at = Carbon::now();
@@ -165,6 +172,7 @@ class IngresoController extends Controller {
 	//	echo "$('#tabla tbody tr:eq(0)').clone().removeClass('fila-base').appendTo('#tabla tbody');";
 		echo "$('#nro_fac').val($('#nro_fac1').val());";
 		echo "$('#can_pro').val($('#cant').val());";
+		echo "$('#pro_pin').val($('#pro_pin1').val());";
 		echo "$('#idproducto').val(data3);";
 		echo "$('#producto').val(data);";
 		echo "$('#pre_pro').val(data2);";

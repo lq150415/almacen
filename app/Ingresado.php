@@ -11,7 +11,7 @@ class Ingresado extends Model {
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['NFC_PIN','NOC_PIN','CAN_PIN','ID_PRO','ID_ING'];
+	protected $fillable = ['NFC_PIN','NOC_PIN','CAN_PIN','PRO_PIN','ID_PRO','ID_ING'];
 
 	/**
 	 * The attributes excluded from the model's JSON form.
