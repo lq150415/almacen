@@ -56,7 +56,7 @@
 								<input type="hidden" class="txtcampo small" id="pro_pin" name="pro_pin[]" style="width:280px;" readonly="readonly"/>
 								<td><input type="text" class="txtcampo small" id="pre_pro" name="pre_pro[]" style="width:80px;" readonly="readonly"/></td>
 							
-								<td><input type="text" id="can_pro" class="txtcampo small" name="can_pro[]" style="width:60px;" /></td>
+								<td><input type="text" id="can_pro" class="txtcampo small" name="can_pro[]" style="width:60px;" readonly="readonly"/></td>
 								<td class="eliminar" style="border-radius: 100%; background:red; color:#fff; font-weight: bold;">&nbsp;&nbsp;-&nbsp;</td>								
 							</tr>
 		<!-- fin de código: fila base -->
@@ -83,7 +83,7 @@
 </div>
 <div id="bgVentanaModal2" class="bgventanaModal2">
 <div id="VentanaModal2" class="VentanaModal2">
-<a href="javascript:despliegaModal2a('hidden');" title="Cerrar"><span class="icon-switch" style="float: right; color: #000; font-size: 15px;"></span></a>
+<table style="float: right;"><td class="eliminar" ><a href="javascript:despliegaModal2a('hidden');" title="Cerrar"><span class="icon-switch" style="float: right; color: #000; font-size: 15px;"></span></a></td></table>
 </br>
 		<fieldset class="fieldcuerpo" align="left">
 			<legend>AGREGAR PRODUCTOS</legend>
@@ -136,22 +136,23 @@
 				<table style="margin-top: 4%;  margin-left: 10%;">
 						<tr style="height: 50px;">
 							<td width="130px" class="lblnombre">Item del producto</td>
-							<td width="250px"><input type="text" name="" class="txtcampo large2" placeholder="NOMBRE DEL PRODUCTO" onkeypress="return sololetras(event);" onpaste="return false" ></td>
+							<td width="250px"><input type="text" name="" id="itm_prod" class="txtcampo large2" placeholder="NOMBRE DEL PRODUCTO" onpaste="return false" ></td>
 						</tr>
 						<tr style="height: 50px;">
 							<td width="130px" class="lblnombre">Descripcion del producto</td>
-							<td><textarea class="txtcampo textarea" placeholder="DESCRIPCION DEL PRODUCTO" cols="55" rows="5" onpaste="return false" ></textarea></td>
+							<td><textarea class="txtcampo textarea" id="des_prod" placeholder="DESCRIPCION DEL PRODUCTO" cols="55" rows="5" onpaste="return false" ></textarea></td>
 						</tr>
 						<tr style="height: 50px;">
 							<td width="130px" class="lblnombre">Precio unitario </td>
-							<td width="250px"><input type="text" name="" class="txtcampo large" placeholder="P/U en Bs." onkeypress="return sololetras(event);" onpaste="return false" ></td>
+							<td width="250px"><input type="text" name="" id="pun_prod" class="txtcampo large" placeholder="P/U en Bs." onkeypress="return sololetras(event);" onpaste="return false" ></td>
 						</tr>
+						<input type="hidden" id="can_prod" value="0"></input>
 							
 					</table>
 					<table style="margin-left: 30%;">
 						<tr style="height: 50px;">
 							<td>
-								<input type="button" name="" class="botones ico-btnsave" value="REGISTRAR">
+								<input type="button" name="" id="btn_reg" class="botones ico-btnsave" value="REGISTRAR">
                  				<input type="reset"  onclick="javascript:despliegaModal3('hidden');" class="botones ico-btnlimpiar" value="LIMPIAR DATOS">
                  			</td>
 						</tr>
@@ -177,7 +178,7 @@
             <th>PROCEDENCIA</th>
 			<th>PRODUCTO</th>
 			<th>CANTIDAD</th>
-			<th>PRECIO TOTAL</th>
+			<th>PRECIO TOTAL Bs.</th>
 			<th>ID INGRESO</th>	
 		</tr>
 	</thead>
@@ -188,12 +189,30 @@
             <th>PROCEDENCIA</th>
 			<th>PRODUCTO</th>
 			<th>CANTIDAD</th>
-			<th>PRECIO TOTAL</th>
+			<th>PRECIO TOTAL Bs.</th>
 			<th>ID INGRESO</th>
 		</tr>
 	</tfoot>
 	<tbody style="font-size:11px;">
-		<?php echo $consultas?>
+		<?php if(count($consultas)>0){?>
+		<tr>
+		<?php  
+					foreach ($consultas as $consultas):
+				         $s= ($consultas->PUN_PRO);
+				         $t=  $consultas->CAN_PIN;
+				         $u=$t*$s;
+					?>
+						<th><?php echo $consultas->FEC_ING;?></th>
+						<th><?php echo $consultas->NOC_PIN;?></th>
+						<th><?php echo $consultas->PRO_PIN;?></th>
+						<th><?php echo $consultas->DES_PRO;?></th>
+						<th><?php echo $consultas->CAN_PIN;?></th>
+						<th><?php echo $u;?></th>
+						<th><?php echo $consultas->ID_ING;?></th>	
+		</tr>
+				<?php	endforeach;}
+			
+			?>
 	</tbody>
 </table>
 </fieldset>

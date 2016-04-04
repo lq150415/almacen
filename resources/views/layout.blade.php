@@ -106,16 +106,19 @@ input[type="text"]{ } /* ancho a los elementos input="text" */
 </style>
 <script type="text/javascript">
  var ind=1;
+ var ind2=1;
 $(function(){
 	// Clona la fila oculta que tiene los campos base, y la agrega al final de la tabla
 	$("#agregar").on('click', function(){
 		
-		if(ind==1){
+		if(ind<=1){
 			var almacen = document.getElementById("alm").value;
 			var rubro = document.getElementById("rub").value;
-			ind++;
+			ind=2;
+
 		}else
 		{
+			ind2++;
 			$("#tabla tbody tr:eq(0)").clone().appendTo("#tabla tbody");
 			var almacen = document.getElementById("alm").value;
 			var rubro = document.getElementById("rub").value;
@@ -124,9 +127,23 @@ $(function(){
 	});
  
 	// Evento que selecciona la fila y la elimina 
+
 	$(document).on("click",".eliminar",function(){
+		if(ind2==1){
+			ind--;
+			
+			$('#nro_fac').val(' ');
+			$('#nro_com').val(' ');
+			$('#producto').val(' ');
+			$('#pre_pro').val(' ');
+			$('#can_pro').val(' ');
+			
+		}else{
 		var parent = $(this).parents().get(0);
 		$(parent).remove();
+		ind2--;
+		
+		}
 	});
 });
  
@@ -150,6 +167,19 @@ $(document).ready(function(){
                 $("#tablabody").html(data);	
             });            
         });       
+   });
+   $("#btn_reg").click(function () {
+   		   itm_prod=$("#itm_prod").val();
+   		   des_prod=$("#des_prod").val();
+   		   pun_prod=$("#pun_prod").val();
+   		   can_prod=$("#can_prod").val();
+           $("#rub option:selected").each(function () {
+            id = $(this).val();
+            $.post("datos_pro2", { id: id, itm:itm_prod, des:des_prod, pun:pun_prod,can:can_prod}, function(data){
+                $("#tablabody").html(data);	
+            });            
+        });   
+            document.getElementById("bgVentanaModal3").style.visibility="hidden";
    })
 });
 </script>
