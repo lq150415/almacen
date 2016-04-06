@@ -4,6 +4,9 @@ use almacen\Http\Requests;
 use almacen\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use almacen\Almacen;
+use almacen\Rubro;
+use almacen\Producto;
 
 class SolicitudController extends Controller {
 
@@ -17,7 +20,11 @@ class SolicitudController extends Controller {
 		if(Auth::user()->NIV_USU==0){
 		return view('solicitud');}
 		else{
-		return view('cliente/form_sol');
+
+		$productos= Producto::join('rubros','rubros.id','=','productos.ID_RUB')->where('ID_ALM','=','1')
+		->select('productos.id','DES_PRO','ID_ALM')
+		->get();
+		return view('cliente/form_sol')->with('productos',$productos);
 		}
 	}
 	

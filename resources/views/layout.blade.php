@@ -4,6 +4,9 @@
 	<title>Sistema de Control de Almacenes e Inventarios (SCAI)</title>
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	
+	<!--Notificaciones-->
+	
+
 	<link rel="stylesheet" href="<?php echo asset('css/menu.css')?>" type="text/css"> 
 	<link rel="stylesheet" href="<?php echo asset('css/form.css')?>" type="text/css"> 
 	<link rel="stylesheet" href="<?php echo asset('css/font/menu.css')?>" type="text/css">  
@@ -194,7 +197,7 @@ $(document).ready(function(){
 		</div>
  
 		<nav class="vert">
-			<ul>
+			<ul >
 				<li><a href="../../index"><span class="icon-house"></span>Inicio</a></li>
 				<li class="submenu">
 					<a href="../../ingreso"><span class="icon-folder-upload"></span>Ingresos<span class="caret icon-arrow-down6"></span></a>
@@ -211,7 +214,7 @@ $(document).ready(function(){
 					</ul>
 				</li>
 				<li class="submenu">
-					<a href="../../alerta"><span class="icon-alarm"></span>Alertas<span class="caret icon-arrow-down6"></span></a>
+					<a href="../../alerta"><span class="icon-alarm"></span>Alertas<div class="alerta"> 0 </div><span class="caret icon-arrow-down6"></span></a>
 					
 				</li>
 				<li class="usuario" >
@@ -245,7 +248,7 @@ $(document).ready(function(){
 				<ul>
 					<li> <a href="../../almacen">ALMACENES</a> </li>
 					<li> <a href="../../usuario">USUARIOS</a> </li>
-					<li> <a href="../../solicitud">SOLICITUDES</a> </li>
+					<li> <a href="../../solicitud">SOLICITUDES</a><div class="notificacion"> 0 </div> </li>
 					<li> <a href="../../respuesta">RESPUESTAS</a> </li>
 					<li> <a >CONSULTAS</a> 
 						<ul class="children">
