@@ -21,8 +21,6 @@ header {
 	width: 100%;
 }
 
-
-
 header nav {
 	background:#000;
 	z-index:1000;
@@ -458,6 +456,7 @@ div.formulario{
 	margin-left: -200px;
 }
 
+
 }
 @media screen and (max-width: 480px) {
 .menu_bar .bt-menu {
@@ -600,7 +599,7 @@ div.formulario{
 .ventanamodal5 {
 	background-color: #fff;
 	height: 73%;
-	width: 50%;
+	width: 55%;
 	border-radius: 8px;
 	position: absolute;
 	margin: 10% 10% 3% 25%;

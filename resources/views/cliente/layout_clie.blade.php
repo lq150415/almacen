@@ -40,23 +40,23 @@ function despliegaModal2a( _valor ){
 	document.getElementById("bgVentanaModal2").style.visibility=_valor;
 
 	}
- var ind=1;
- var ind2=1;
+</script>
+<script type="text/javascript">
+	var ind=1;
+ 	var ind2=1;
 $(function(){
 	// Clona la fila oculta que tiene los campos base, y la agrega al final de la tabla
 	$("#agregar").on('click', function(){
 		
 		if(ind<=1){
-			var almacen = document.getElementById("alm").value;
-			var rubro = document.getElementById("rub").value;
+			
 			ind=2;
 
 		}else
 		{
 			ind2++;
 			$("#tabla tbody tr:eq(0)").clone().appendTo("#tabla tbody");
-			var almacen = document.getElementById("alm").value;
-			var rubro = document.getElementById("rub").value;
+			
 		}
 
 	});
@@ -69,6 +69,8 @@ $(function(){
 			
 			$('#nro_fac').val(' ');
 			$('#nro_com').val(' ');
+			$('#idproducto').val('0');
+			$('#producto').val('0');
 			$('#producto2').val(' ');
 			$('#pre_pro').val(' ');
 			$('#can_pro').val(' ');

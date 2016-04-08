@@ -386,6 +386,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ad164b', end
  padding: 2px; 
  color: #fff;
  border-radius: 3px;
+ box-shadow: 0 0 15px 4px maroon;
 }
 .alerta{
   margin-left: 10%; 
@@ -395,7 +396,34 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ad164b', end
   display: grid; 
   float: right; 
   padding: 2px; 
+  box-shadow: 0 0 15px 5px maroon;
   border-radius: 3px;
+}
+@media screen and (max-width: 950px){
+.notificacion{
+  margin-left: 15%; 
+  margin-top: -8%; 
+  margin-right: -15%; 
+  position: fixed;
+  background-color: red; 
+  display: inline; 
+  float: right; 
+  padding: 2px; 
+  box-shadow: 0 0 15px 5px maroon;
+  border-radius: 3px;
+ 
+}
+.alerta{
+margin-top: -6%; 
+ background-color: red; 
+  position: fixed;
+ display: grid; 
+ float: right; 
+ padding: 2px; 
+ color: #fff;
+ border-radius: 3px;
+ box-shadow: 0 0 15px 4px maroon;
+}
 }
 nav.lateral ul li:hover div.notificacion{
   font-size: 18px;

@@ -3,30 +3,38 @@
 	<div class="ventanamodal5">
 	
 	<fieldset class="fieldcuerposol" align="left">
+				<script type="text/javascript">
+              $(document).ready(function() { setTimeout(function(){ $(".mensajelogin").fadeIn(1500); },0000); });
+              $(document).ready(function() { setTimeout(function(){ $(".mensajelogin").fadeOut(1500); },5000); });
+            </script>
+			<?php if(isset($mensaje)):?>
+						<div class="mensajelogin" id="mensajebien"><label><?php echo $mensaje;?></label></div>
+			<?php endif;?>
 			<legend>REGISTRO DE NUEVA SOLICITUD</legend>
-			<form class="formularioreg">
+			<form class="formularioreg" method="POST" action="reg_solicitud">
 				<fieldset class="fieldcuerpo" align="left">
 				<legend>DATOS GENERALES</legend>
 				<table >
-						<tr style="height: 30px;">
+						<tr style="height: 30px; font-weight: bold;">
 							<td width="100px" class="lblnombre">ID</td>
 							<td width="240px" class="txtcampo"><?php echo Auth::user()->id?></td>
 							<td width="100px" class="lblnombre">Nombre</td>
 							<td width="240px" class="txtcampo"><?php echo Auth::user()->NOM_USU?></td>
 						</tr>
-						<tr style="height: 30px;">
+						<tr style="height: 30px; font-weight: bold;">
 							<td width="100px" class="lblnombre">Ap. Paterno</td>
 							<td width="240px"class="txtcampo"><?php echo Auth::user()->APA_USU?></td>
 							<td width="100px" class="lblnombre">Ap. Materno</td>
 							<td width="240px" class="txtcampo"><?php echo Auth::user()->AMA_USU?></td>
 						</tr>
-						<tr style="height: 30px;">
+						<tr style="height: 30px; font-weight: bold;">
 							<td width="100px" class="lblnombre">Area</td>
 							<td width="240px"class="txtcampo"><?php echo Auth::user()->ARE_USU?>
 							</td>
 							<td width="100px" class="lblnombre">Cargo</td>
 							<td width="240px"class="txtcampo"><?php echo Auth::user()->CAR_USU?>
 							</td>
+							<input type="hidden" value="0" name="dest"></input>
 						</tr>
 						</table>
 						</fieldset>
@@ -51,11 +59,11 @@
 		<!-- fila base para clonar y agregar al final -->
 							<tr> 
 								
-								<td ><input type="text" class="txtcampo small" id="producto2" name="producto2[]" style="width:480px;" readonly disabled="on" /></td>
+								<td ><input type="text" required class="txtcampo small" id="producto2" name="producto2[]" style="width:480px; font-weight: bold;" readonly /></td>
 								<input type="hidden" class="txtcampo small" id="producto" name="producto[]" style="width:480px;" readonly/>
 								<input type="hidden" class="txtcampo small" id="idproducto" name="idproducto[]" style="width:280px;" readonly="readonly"/>
 								<input type="hidden" class="txtcampo small" id="pro_sol" name="pro_pin[]" style="width:580px;" readonly="readonly"/>
-								<td><input type="number" id="can_pro" class="txtcampo small" name="can_pro[]" style="width:60px;" /></td>
+								<td><input type="number" min="1"id="can_sol" required class="txtcampo small" name="can_sol[]" style="width:60px; font-weight: bold;" /></td>
 								<td class="eliminar" style="">Eliminar</td>								
 							</tr>
 		<!-- fin de código: fila base -->

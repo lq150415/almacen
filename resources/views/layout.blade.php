@@ -138,6 +138,7 @@ $(function(){
 			$('#nro_fac').val(' ');
 			$('#nro_com').val(' ');
 			$('#producto').val(' ');
+			$('#producto2').val(' ');
 			$('#pre_pro').val(' ');
 			$('#can_pro').val(' ');
 			
