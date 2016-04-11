@@ -1,9 +1,12 @@
 	@extends ('layout')
 	@section ('VM')
+		
+
 		<div id="bgVentanaModal" class="bgventanaModal">
 <div id="VentanaModal" class="VentanaModal">
 <a href="javascript:despliegaModal('hidden');" title="Cerrar"><span class="icon-switch" style="float: right; color: #000; font-size: 15px;"></span></a>
 </br>
+
 <center>
 	<fieldset class="fieldcuerpo" align="left">
 			<legend>REGISTRO DE NUEVA SOLICITUD</legend>
@@ -89,6 +92,7 @@
 
 	@stop
 	@section ('contenido')
+	<div id="div2"></div>
 		<fieldset class="fieldcuerpo" align="left">
 					<legend>SOLICITUDES</legend>
 	  	<div>
@@ -96,27 +100,8 @@
 	  	<a href="javascript:despliegaModal('visible');">+ Nueva solicitud</a>
 	  	<fieldset class="fieldcuerpo" align="left">
 					<legend>DETALLE</legend>
-		<table id="example" class="display" cellspacing="5" width="100%" style="border-radius:4px;-moz-border-radius:4px;-webkit-border-radius:4px;border:1px #444444 solid;">
-	<thead style="font-size:13px;color:#FFF;background-color:#444444;height:40px;">
-		<tr>
-			<th>ID</th>
-            <th>FECHA DE SOLICITUD</th>
-			<th>USUARIO</th>
-			<th>ACCIONES</th>	
-		</tr>
-	</thead>
-	<tfoot style="font-size:13px;color:#FFF;background-color:#444444;height:40px;">
-		<tr>
-			<th>ID</th>
-            <th>FECHA DE SOLICITUD</th>
-			<th>USUARIO</th>
-			<th>ACCIONES</th>		
-		</tr>
-	</tfoot>
-	<tbody style="font-size:11px;">
-		
-	</tbody>
-</table>
+		<div id="solicitud"></div>
+
 </fieldset>
 </fieldset>
 	@stop

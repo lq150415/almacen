@@ -28,12 +28,16 @@
 			$(document).ready(function() {
 				
 				$('#example').DataTable();
-
+				$('#example2').DataTable();
+				
 			} );
 		</script>
-		<script type="text/javascript" language="javascript" class="init">
+		<script type="text/javascript" language="javascript" >
+			
 			$(document).ready(function() {
-				$('#example2').DataTable();
+				
+				
+
 			} );
 		</script>
 <script type="text/javascript">
@@ -44,6 +48,7 @@ function despliegaModal( _valor ){
 
 </script>
 <script type="text/javascript" lang="javascript">
+
 function despliegaModal2( _valor ){
 	document.getElementById("bgVentanaModal2").style.visibility=_valor;
 	$('#alm2').val($('#alm').val());
@@ -71,7 +76,9 @@ function despliegaModal3( _valor ){
 <script type="text/javascript" language="javascript" src="<?php echo asset('js/jquery-ui.js')?>"></script>
 <script type="text/javascript" language="javascript" src="<?php echo asset('js/jquery-ui.min.js')?>"></script>
 <script type="text/javascript">
+
 jQuery(function($){
+	
 	$.datepicker.regional['es'] = {
 		closeText: 'Cerrar',
 		prevText: '&#x3c;Ant',
@@ -94,8 +101,10 @@ jQuery(function($){
 });    
  
 $(document).ready(function() {
+	
    $("#datepicker").datepicker();
    $("#datepicker2").datepicker();
+   
  });
 </script>
 <style type="text/css">
@@ -108,9 +117,11 @@ input[type="text"]{ } /* ancho a los elementos input="text" */
  
 </style>
 <script type="text/javascript">
+
  var ind=1;
  var ind2=1;
 $(function(){
+	
 	// Clona la fila oculta que tiene los campos base, y la agrega al final de la tabla
 	$("#agregar").on('click', function(){
 		
@@ -154,7 +165,9 @@ $(function(){
 </script>
 
 <script language="javascript">
+
 $(document).ready(function(){
+
    $("#alm").change(function () {
            $("#alm option:selected").each(function () {
             id = $(this).val();
@@ -186,6 +199,80 @@ $(document).ready(function(){
             document.getElementById("bgVentanaModal3").style.visibility="hidden";
    })
 });
+</script>
+
+<!--Parte de las notificaciones-->
+<script language="javascript">
+var timestamp = null;
+function cargar_push() 
+{  
+	$.ajax({
+	async:	true, 
+    type: "POST",
+    url: "httpush",
+    data: "&timestamp="+timestamp,
+	dataType:"html",
+    success: function(data)
+	{	
+		var json    	   = eval("(" + data + ")");
+		updated_at		   = json.updated_at;
+		DES_NOT     	   = json.DES_NOT;
+		AUT_NOT        		   = json.AUT_NOT;
+		REA_NOT      	   = json.REA_NOT;
+		TIP_NOT      	   = json.TIP_NOT;
+		ID_PSO			   = json.ID_PSO;	
+		
+		if(updated_at == null)
+		{
+		
+		}
+		else
+		{
+			$.ajax({
+			async:	true, 
+			type: "POST",
+			url: "notificaciones",
+			data: "&div="+DES_NOT,
+			dataType:"html",
+			success: function(data)
+			{	
+				$('#solicitud').html(data);
+			}
+			});	
+			$.ajax({
+			async:	true, 
+			type: "POST",
+			url: "notificacionescount",
+			data: "&div="+DES_NOT,
+			dataType:"html",
+			success: function(data2)
+			{	
+				$('#noti').html(data2);
+			}
+			});	
+			$.ajax({
+			async:	true, 
+			type: "POST",
+			url: "notificacionesalerta",
+			data: "&div="+DES_NOT,
+			dataType:"html",
+			success: function(data3)
+			{	
+				$('#notificacionesalerta').html(data3);
+			}
+			});	
+		}
+		setTimeout('cargar_push()',1000);
+		    	
+    }
+	});		
+}
+
+$(document).ready(function()
+{
+	cargar_push();
+});	 
+
 </script>
 
 </head>
@@ -249,7 +336,7 @@ $(document).ready(function(){
 				<ul>
 					<li> <a href="../../almacen">ALMACENES</a> </li>
 					<li> <a href="../../usuario">USUARIOS</a> </li>
-					<li> <a href="../../solicitud">SOLICITUDES</a><div class="notificacion"> 0 </div> </li>
+					<li> <a href="../../solicitud">SOLICITUDES</a><div class="notificacion" id="noti">  </div> </li>
 					<li> <a href="../../respuesta">RESPUESTAS</a> </li>
 					<li> <a >CONSULTAS</a> 
 						<ul class="children">
@@ -271,6 +358,6 @@ $(document).ready(function(){
 </div>
 
 </br>
-<div> FOOTER</div>
+<div id="Notificacionalerta"></div>
 </body>
 </html>

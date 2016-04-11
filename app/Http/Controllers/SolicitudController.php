@@ -96,7 +96,7 @@ class SolicitudController extends Controller {
         	$solicitados->updated_at = Carbon::now();
 			$solicitados->save();
 		}
-		$mensaje="registrado correctamente";
+		$mensaje="Solicitud enviada";
 		if(Auth::user()->NIV_USU==0){
 			return view('solicitud')->with('mensaje',$mensaje);}
 			else{
@@ -121,12 +121,104 @@ class SolicitudController extends Controller {
 		//
 	}
 
+	public function httpush()
+	{
+		set_time_limit(0); //Establece el número de segundos que se permite la ejecución de un script.
+		$fecha_ac = isset($_POST['timestamp']) ? $_POST['timestamp']:0;
+		$query2    = new Notificacion;
+		$con1= $query2->select('updated_at')->orderBy('updated_at','DESC')->first();
+		$fecha_bd = $con1->updated_at;
+
+		while( $fecha_bd <= $fecha_ac )
+			{	
+				$query3    = new Notificacion;
+				$con       =$query3->select('updated_at')->orderBy('updated_at','DESC')->first();
+				$ro        = $con->updated_at;
+		
+				usleep(100000);//anteriormente 10000
+				clearstatcache();
+				$fecha_bd  = strtotime($ro);
+			}
+
+		$query       =new Notificacion;
+		$datos_query =$query->orderBy('updated_at','DESC')->first()->get();
+		foreach ($datos_query as  $query):
+
+			$ar["updated_at"]          = strtotime($query->updated_at);	
+			$ar["DES_NOT"] 	 		  = $query->DES_NOT;	
+			$ar["AUT_NOT"] 		          = $query->AUT_NOT;	
+			$ar["REA_NOT"]           = $query->REA_NOT;	
+			$ar["TIP_NOT"]           = $query->TIP_NOT;	
+			$ar["ID_PSO"]           = $query->ID_PSO;	
+		endforeach;
+		$dato_json   = json_encode($ar);
+		echo $dato_json;
+			}
+
 	/**
 	 * Show the form for editing the specified resource.
 	 *
 	 * @param  int  $id
 	 * @return Response
 	 */
+	public function notificaciones()
+	{
+		$q = new Notificacion;
+		$q = $q->join('solicitudes', 'notificaciones.ID_PSO','=','solicitudes.id')->join('users', 'solicitudes.ID_USU','=','users.id')->where('notificaciones.DES_NOT','=',$_POST['div'])->orderBy('notificaciones.updated_at', 'DESC')->get();
+		$i=1;
+		foreach ($q as $qs ) :
+			if($i==1){  
+		$html2 ='<table id="example2" class="display" cellspacing="5" width="100%" style="border-radius:4px;-moz-border-radius:4px;-webkit-border-radius:4px;border:1px #444444 solid;">
+	<thead style="font-size:13px;color:#FFF;background-color:#444444;height:40px;">
+		<tr>
+			<th>TIPO</th>
+			<th>FECHA DE SOLICITUD</th>
+            <th>USUARIO</th>
+			<th>ACCION</th>	
+		</tr>
+	</thead><tbody style="font-size:11px;" id="tablabody">'.'<tr>'.'<th>'.$qs->TIP_NOT.'</th>'.'<th>'.$qs->updated_at.'</th>'.'<th>'.$qs->NOM_USU.' '.$qs->APA_USU.' '.$qs->AMA_USU.'</th>'.'<th><a href="">Revisar</a></th></tr>';
+		echo "<script type='text/javascript' language='javascript' class='init'>"; 
+		echo "$(document).ready(function() {"; 
+		echo "$('#example2').DataTable();";
+		echo "} );";
+		echo "</script>";  
+		
+		echo $html2; $i++; }
+		else{
+		
+			$html2 ='<tr>'.'<th>'.$qs->TIP_NOT.'</th>'.'<th>'.$qs->updated_at.'</th>'.'<th>'.$qs->NOM_USU.' '.$qs->APA_USU.' '.$qs->AMA_USU.'</th>'.'<th><a href="">Revisar</a></th></tr>';
+			echo $html2;
+		}
+		endforeach;
+		echo "<tfoot style='font-size:13px;color:#FFF;background-color:#444444;height:40px;''>
+		<tr>
+			<th>ID</th>
+			<th>FECHA DE SOLICITUD</th>
+            <th>USUARIO</th>
+			<th>ACCION</th>			
+		</tr>
+	</tfoot></table>";
+		
+
+		}
+	
+	public function notificacionescount()
+	{
+		$contar=Notificacion::where('notificaciones.REA_NOT','=',$_POST['div'])->count();
+	
+			echo $contar;
+
+	
+	}
+	public function notificacionesalerta()
+	{
+		$contar=Notificacion::where('notificaciones.REA_NOT','=',$_POST['div'])->count();
+		$alerta=34;
+			echo $contar;
+
+	
+	}
+
 	public function edit($id)
 	{
 		//
