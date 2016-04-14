@@ -11,7 +11,7 @@ class Notificacion extends Model {
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['DES_NOT','AUT_NOT','TIP_NOT','REA_NOT','ID_RUB','created_at','updated_at'];
+	protected $fillable = ['DES_NOT','AUT_NOT','TIP_NOT','REA_NOT','ALE_NOT','ID_RUB','created_at','updated_at'];
 
 	/**
 	 * The attributes excluded from the model's JSON form.

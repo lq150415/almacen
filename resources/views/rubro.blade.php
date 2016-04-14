@@ -5,7 +5,7 @@
 <a href="javascript:despliegaModal('hidden');" title="Cerrar"><span class="icon-undo2" style="float: right; color: #000; font-size: 20px;"></span></a>
 		</br>
 		<fieldset class="fieldcuerpo" align="left">
-			<legend>REGISTRO DE NUEVO RUBRO</legend>
+			<legend style="margin-bottom: 0;">REGISTRO DE NUEVO RUBRO</legend>
 			<form class="formularioreg" method="POST" action="<?php echo $id;?>/registro">
 			 <input type="hidden" name="_token" value="{{ csrf_token() }}">
 				<table style="margin-top: 4%;  margin-left: 10%;">
@@ -34,7 +34,7 @@
 	@stop
 	@section ('contenido')
 		<fieldset class="fieldcuerpo" align="left">
-					<legend>RUBROS</legend>
+					<legend style="margin-bottom: 0;">RUBROS</legend>
 	  	<div>
 
 	  	<a href="javascript:despliegaModal('visible');">+ Nuevo rubro</a>
@@ -50,7 +50,7 @@
 	  	</div>	
 	  	</br>
 	  	<fieldset class="fieldcuerpo" align="left">
-	  <legend>Productos mas solicitados</legend>  		  	
+	  <legend style="margin-bottom: 0;">Productos mas solicitados</legend>  		  	
 	  	<span class="titulo">Producto #1 : </span><span  class="subtitulo"># producto</span> 
 	  	</br>	
 	  	</br>	  		  	
@@ -60,7 +60,7 @@
 	  	<span class="titulo">Producto #3 : </span><span  class="subtitulo"># Producto</span>
 	  </fieldset> 
 	  	<fieldset class="fieldcuerpo" align="left">
-					<legend>DETALLE</legend>
+					<legend style="margin-bottom: 0;">DETALLE</legend>
 		<table id="example" class="display" cellspacing="5" width="100%" style="border-radius:4px;-moz-border-radius:4px;-webkit-border-radius:4px;border:1px #444444 solid;">
 	<thead style="font-size:13px;color:#FFF;background-color:#444444;height:40px;">
 		<tr>

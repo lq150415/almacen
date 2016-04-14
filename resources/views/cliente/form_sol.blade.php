@@ -7,13 +7,14 @@
               $(document).ready(function() { setTimeout(function(){ $(".mensajelogin").fadeIn(1500); },0000); });
               $(document).ready(function() { setTimeout(function(){ $(".mensajelogin").fadeOut(1500); },5000); });
             </script>
-			<?php if(isset($mensaje)):?>
-						<div class="mensajelogin" id="mensajebien"><label><?php echo $mensaje;?></label></div>
+			<?php if (Session::has('mensaje')):
+  				?>
+						<div class="mensajelogin" id="mensajebien"><label><?php echo Session::get('mensaje');?></label></div>
 			<?php endif;?>
-			<legend>REGISTRO DE NUEVA SOLICITUD</legend>
+			<legend style="margin-bottom: 0;">REGISTRO DE NUEVA SOLICITUD</legend>
 			<form class="formularioreg" method="POST" action="reg_solicitud">
 				<fieldset class="fieldcuerpo" align="left">
-				<legend>DATOS GENERALES</legend>
+				<legend style="margin-bottom: 0;">DATOS GENERALES</legend>
 				<table >
 						<tr style="height: 30px; font-weight: bold;">
 							<td width="100px" class="lblnombre">ID</td>
@@ -39,7 +40,7 @@
 						</table>
 						</fieldset>
 				<fieldset class="fieldcuerpo" align="left" >
-					<legend>PRODUCTOS</legend>
+					<legend style="margin-bottom: 0;">PRODUCTOS</legend>
 					<table>
 						<button type="button" id="agregar" style="background-color: #0c6; padding: 7px 5px 7px 3px;" value="Agregar producto" onclick="javascript:despliegaModal2('visible');" class="botones"><span class="icon-cart"> </span> Agregar producto</button>
 					</table>
@@ -97,7 +98,7 @@
 <table style="float: right;"><td class="eliminar" style="padding: 0; background-color: transparent;"><a href="javascript:despliegaModal2a('hidden');" title="Cerrar"><span class="icon-switch" style="float: right; color: #000; font-size: 15px;"></span></a></td></table>
 </br>
 		<fieldset class="fieldcuerpo" align="left">
-			<legend>AGREGAR PRODUCTOS</legend>
+			<legend style="margin-bottom: 0;">AGREGAR PRODUCTOS</legend>
 			<div>
 			<table id="example" class="display" cellspacing="5" width="100%" style="border-radius:4px;-moz-border-radius:4px;-webkit-border-radius:4px;border:1px #444444 solid;">
 	<thead style="font-size:13px;color:#FFF;background-color:#444444;height:40px;">

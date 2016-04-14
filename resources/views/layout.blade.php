@@ -10,6 +10,8 @@
 	<link rel="stylesheet" href="<?php echo asset('css/menu.css')?>" type="text/css"> 
 	<link rel="stylesheet" href="<?php echo asset('css/form.css')?>" type="text/css"> 
 	<link rel="stylesheet" href="<?php echo asset('css/font/menu.css')?>" type="text/css">  
+	<link rel="stylesheet" href="<?php echo asset('assets/css/bootstrap.css')?>" type="text/css">  
+	<script src="<?php echo asset('assets/js/bootstrap.js')?>"></script>
 	<script src="<?php echo asset('js/jQuery.js')?>"></script>
 	<script src="<?php echo asset('js/menu.js')?>"></script>  
 	<script src="<?php echo asset('js/grilla.js')?>"></script> 
@@ -203,14 +205,14 @@ $(document).ready(function(){
 
 <!--Parte de las notificaciones-->
 <script language="javascript">
-var timestamp = null;
+var updated_at = null;
 function cargar_push() 
 {  
 	$.ajax({
 	async:	true, 
     type: "POST",
-    url: "httpush",
-    data: "&timestamp="+timestamp,
+    url: "../../httpush",
+    data: "&timestamp="+updated_at,
 	dataType:"html",
     success: function(data)
 	{	
@@ -231,7 +233,7 @@ function cargar_push()
 			$.ajax({
 			async:	true, 
 			type: "POST",
-			url: "notificaciones",
+			url: "../../notificaciones",
 			data: "&div="+DES_NOT,
 			dataType:"html",
 			success: function(data)
@@ -242,7 +244,7 @@ function cargar_push()
 			$.ajax({
 			async:	true, 
 			type: "POST",
-			url: "notificacionescount",
+			url: "../../notificacionescount",
 			data: "&div="+DES_NOT,
 			dataType:"html",
 			success: function(data2)
@@ -253,16 +255,16 @@ function cargar_push()
 			$.ajax({
 			async:	true, 
 			type: "POST",
-			url: "notificacionesalerta",
-			data: "&div="+DES_NOT,
+			url: "../../notificacionesalerta",
+			data: "&div="+updated_at,
 			dataType:"html",
 			success: function(data3)
 			{	
-				$('#notificacionesalerta').html(data3);
+				$('#Notificacionalerta').html(data3);
 			}
 			});	
 		}
-		setTimeout('cargar_push()',1000);
+		setTimeout('cargar_push()',6000);
 		    	
     }
 	});		
@@ -276,7 +278,9 @@ $(document).ready(function()
 </script>
 
 </head>
-<body>
+<body style="background-color: #000;">
+<div id="Notificacionalerta" style="width: 300px;   bottom: 2%;margin-right: 3%;  position: fixed; right: -2%;"></div>
+</div>
 @yield('VM')
 <div>
 	<header>
@@ -288,10 +292,10 @@ $(document).ready(function()
 			<ul >
 				<li><a href="../../index"><span class="icon-house"></span>Inicio</a></li>
 				<li class="submenu">
-					<a href="../../ingreso"><span class="icon-folder-upload"></span>Ingresos<span class="caret icon-arrow-down6"></span></a>
+					<a href="../../ingreso"><span class="icon-folder-upload"></span>Ingresos</a>
 					
 				</li><li class="submenu">
-					<a href="#"><span class="icon-folder-download"></span>Salidas<span class="caret icon-arrow-down6"></span></a>
+					<a href="#"><span class="icon-folder-download"></span>Salidas</span></a>
 				</li>
 				<li class="submenu">
 					<a href="#"><span class="icon-book"></span>Reportes<span class="caret icon-arrow-down6"></span></a>
@@ -302,7 +306,7 @@ $(document).ready(function()
 					</ul>
 				</li>
 				<li class="submenu">
-					<a href="../../alerta"><span class="icon-alarm"></span>Alertas<div class="alerta"> 0 </div><span class="caret icon-arrow-down6"></span></a>
+					<a href="../../alerta"><span class="icon-alarm"></span>Alertas<div class="alerta"> 0 </div></a>
 					
 				</li>
 				<li class="usuario" >
@@ -353,11 +357,10 @@ $(document).ready(function()
 	</div>
 		<div class="formulario">
 		@yield('contenido')
-</div>
+
 </div>
 </div>
 
-</br>
-<div id="Notificacionalerta"></div>
+
 </body>
 </html>

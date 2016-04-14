@@ -5,14 +5,13 @@
 		<div id="bgVentanaModal" class="bgventanaModal">
 <div id="VentanaModal" class="VentanaModal">
 <a href="javascript:despliegaModal('hidden');" title="Cerrar"><span class="icon-switch" style="float: right; color: #000; font-size: 15px;"></span></a>
-</br>
 
 <center>
 	<fieldset class="fieldcuerpo" align="left">
-			<legend>REGISTRO DE NUEVA SOLICITUD</legend>
+			<legend  style="margin-bottom: 0;">REGISTRO DE NUEVA SOLICITUD</legend>
 			<form class="formularioreg">
 				<fieldset class="fieldcuerpo" align="left">
-				<legend>DATOS GENERALES</legend>
+				<legend style="margin-bottom: 0;">DATOS GENERALES</legend>
 				<table >
 						<tr style="height: 30px;">
 							<td width="100px" class="lblnombre">ID</td>
@@ -49,7 +48,7 @@
 						</table>
 						</fieldset>
 						<fieldset class="fieldcuerpo" align="left" >
-					<legend>PRODUCTOS</legend>
+					<legend style="margin-bottom: 0;">PRODUCTOS</legend>
 					<table>
 						<tr style="height:30px;">
 							
@@ -94,12 +93,11 @@
 	@section ('contenido')
 	<div id="div2"></div>
 		<fieldset class="fieldcuerpo" align="left">
-					<legend>SOLICITUDES</legend>
+					<legend style="margin-bottom: 0;">SOLICITUDES</legend>
 	  	<div>
-
 	  	<a href="javascript:despliegaModal('visible');">+ Nueva solicitud</a>
 	  	<fieldset class="fieldcuerpo" align="left">
-					<legend>DETALLE</legend>
+					<legend  style="margin-bottom: 0;">SOLICITUDES RECIENTES</legend>
 		<div id="solicitud"></div>
 
 </fieldset>

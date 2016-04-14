@@ -5,11 +5,11 @@
 <a href="javascript:despliegaModal('hidden');" title="Cerrar"><span class="icon-undo2" style="float: right; color: #000; font-size: 20px;"></span></a>
 		</br>
 		<fieldset class="fieldcuerpo" align="left">
-			<legend>REGISTRO DE NUEVO USUARIO</legend>
+			<legend style="margin-bottom: 0;">REGISTRO DE NUEVO USUARIO</legend>
 			<form class="formularioreg" method="POST" action="usuario/registrar">
 			 <input type="hidden" name="_token" value="{{ csrf_token() }}">
 				<fieldset class="fieldcuerpo" align="left">
-				<legend>DATOS PERSONALES</legend>
+				<legend style="margin-bottom: 0;">DATOS PERSONALES</legend>
 				<table >
 						<tr style="height: 30px;">
 							<td width="100px" class="lblnombre">CI</td>
@@ -46,7 +46,7 @@
 						</table>
 						</fieldset>
 						<fieldset class="fieldcuerpo" align="left" >
-					<legend>DATOS DE CUENTA</legend>
+					<legend style="margin-bottom: 0;">DATOS DE CUENTA</legend>
 					<table>
 						<tr style="height:30px;">
 							
@@ -89,7 +89,7 @@
 	@stop
 	@section ('contenido')
 		<fieldset class="fieldcuerpo" align="left">
-					<legend>Usuarios</legend>
+					<legend style="margin-bottom: 0;">Usuarios</legend>
 	  	<div>
 
 	  	<a href="javascript:despliegaModal('visible');">+ Nuevo usuario</a>
@@ -97,7 +97,7 @@
 	  	</br>	  	
 	  	</div>
 	  	<fieldset class="fieldcuerpo" align="left">
-					<legend>DETALLE</legend>
+					<legend style="margin-bottom: 0;">DETALLE</legend>
 		<table id="example" class="display" cellspacing="5" width="100%" style="border-radius:4px;-moz-border-radius:4px;-webkit-border-radius:4px;border:1px #444444 solid;">
 	<thead style="font-size:13px;color:#FFF;background-color:#444444;height:40px;">
 		<tr>

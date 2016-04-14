@@ -449,3 +449,29 @@ font-size: 13px;
   border-radius: 8px; 
   padding:6px;
 }
+#mensaje{
+
+  display:none; 
+  
+
+  
+  font-size:16px; 
+  color:#FFF; background: rgba(248,80,50,1);
+
+    color: #00529B;
+    background-color: #BDE5F8;
+    border: 1px solid;
+    margin: 10px 0px;
+    padding:0px 10px 15px 10px;
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    font-family:Arial, Helvetica, sans-serif;
+    font-size:13px;
+    text-align:left;
+  
+
+}
+#Notificacionalerta:hover{
+
+  cursor: pointer;
+}

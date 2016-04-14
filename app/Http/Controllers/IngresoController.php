@@ -73,7 +73,8 @@ class IngresoController extends Controller {
         	$ingresados->updated_at = Carbon::now();
 			$ingresados->save();
 		}
-        return redirect()->route('ingreso.index');
+		$mensaje="Ingreso registrado correctamente";
+        return redirect()->route('ingreso.index')->with('mensaje3',$mensaje);
 	}
 	
 	/**

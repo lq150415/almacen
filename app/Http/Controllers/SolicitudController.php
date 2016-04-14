@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use almacen\Almacen;
 use almacen\Rubro;
 use almacen\Producto;
+use almacen\User;
 use Carbon\Carbon;
 use almacen\Solicitud;
 use almacen\Solicitado;
@@ -83,6 +84,7 @@ class SolicitudController extends Controller {
     		$notificaciones->AUT_NOT = Auth::user()->id;
         	$notificaciones->TIP_NOT = "Solicitud";
         	$notificaciones->REA_NOT = 0;
+        	$notificaciones->ALE_NOT =0;
         	$notificaciones->ID_PSO = $solicitudes->id;
         	$notificaciones->created_at = Carbon::now();
         	$notificaciones->updated_at = Carbon:: now();
@@ -103,7 +105,8 @@ class SolicitudController extends Controller {
 				$productos= Producto::join('rubros','rubros.id','=','productos.ID_RUB')->where('ID_ALM','=','1')
 		->select('productos.id','DES_PRO','ID_ALM')
 		->get();
-			return view('cliente/form_sol')->with('mensaje',$mensaje)->with('productos',$productos);
+			return redirect()->route('solicitud.index')->with('mensaje',$mensaje);
+
 			}
 		}
 
@@ -167,6 +170,13 @@ class SolicitudController extends Controller {
 		$q = $q->join('solicitudes', 'notificaciones.ID_PSO','=','solicitudes.id')->join('users', 'solicitudes.ID_USU','=','users.id')->where('notificaciones.DES_NOT','=',$_POST['div'])->orderBy('notificaciones.updated_at', 'DESC')->get();
 		$i=1;
 		foreach ($q as $qs ) :
+			if($qs->REA_NOT==0){
+				$a='No leido';
+			}elseif($qs->REA_NOT==1){
+				$a='Leido';
+			}elseif($qs->REA_NOT==2){
+				$a='Enviado a revision';
+			}
 			if($i==1){  
 		$html2 ='<table id="example2" class="display" cellspacing="5" width="100%" style="border-radius:4px;-moz-border-radius:4px;-webkit-border-radius:4px;border:1px #444444 solid;">
 	<thead style="font-size:13px;color:#FFF;background-color:#444444;height:40px;">
@@ -174,9 +184,10 @@ class SolicitudController extends Controller {
 			<th>TIPO</th>
 			<th>FECHA DE SOLICITUD</th>
             <th>USUARIO</th>
+            <th>ESTADO</th>
 			<th>ACCION</th>	
 		</tr>
-	</thead><tbody style="font-size:11px;" id="tablabody">'.'<tr>'.'<th>'.$qs->TIP_NOT.'</th>'.'<th>'.$qs->updated_at.'</th>'.'<th>'.$qs->NOM_USU.' '.$qs->APA_USU.' '.$qs->AMA_USU.'</th>'.'<th><a href="">Revisar</a></th></tr>';
+	</thead><tbody style="font-size:11px;" id="tablabody">'.'<tr>'.'<th>'.$qs->TIP_NOT.'</th>'.'<th>'.$qs->updated_at.'</th>'.'<th>'.$qs->NOM_USU.' '.$qs->APA_USU.' '.$qs->AMA_USU.'</th><th>'.$a.'</th><th><a href="">Revisar</a></th></tr>';
 		echo "<script type='text/javascript' language='javascript' class='init'>"; 
 		echo "$(document).ready(function() {"; 
 		echo "$('#example2').DataTable();";
@@ -186,7 +197,7 @@ class SolicitudController extends Controller {
 		echo $html2; $i++; }
 		else{
 		
-			$html2 ='<tr>'.'<th>'.$qs->TIP_NOT.'</th>'.'<th>'.$qs->updated_at.'</th>'.'<th>'.$qs->NOM_USU.' '.$qs->APA_USU.' '.$qs->AMA_USU.'</th>'.'<th><a href="">Revisar</a></th></tr>';
+			$html2 ='<tr>'.'<th>'.$qs->TIP_NOT.'</th>'.'<th>'.$qs->updated_at.'</th>'.'<th>'.$qs->NOM_USU.' '.$qs->APA_USU.' '.$qs->AMA_USU.'</th><th>'.$a.'</th><th><a href="">Revisar</a></th></tr>';
 			echo $html2;
 		}
 		endforeach;
@@ -195,6 +206,7 @@ class SolicitudController extends Controller {
 			<th>ID</th>
 			<th>FECHA DE SOLICITUD</th>
             <th>USUARIO</th>
+            <th>ESTADO</th>
 			<th>ACCION</th>			
 		</tr>
 	</tfoot></table>";
@@ -205,17 +217,29 @@ class SolicitudController extends Controller {
 	public function notificacionescount()
 	{
 		$contar=Notificacion::where('notificaciones.REA_NOT','=',$_POST['div'])->count();
-	
+		
 			echo $contar;
 
 	
 	}
 	public function notificacionesalerta()
-	{
-		$contar=Notificacion::where('notificaciones.REA_NOT','=',$_POST['div'])->count();
-		$alerta=34;
-			echo $contar;
+	{	
+		$query2    = new Notificacion;
+		$con5= $query2->orderBy('updated_at','DESC')->first();
+		$usuario= User::where('id','=',$con5->AUT_NOT)->get();
 
+		if($con5->ALE_NOT ==0){
+
+ 		echo "<script type='text/javascript'>";
+        echo "$(document).ready(function() { setTimeout(function(){ $('.mensajelogin').fadeIn(1500); },0000); });";
+        echo "$(document).ready(function() { setTimeout(function(){ $('.mensajelogin').fadeOut(1500); },5000); });";
+        echo "</script>";
+       
+
+			echo "<div class='mensajelogin' id='mensaje'> <h1>Mensaje nuevo</h1>Tiene una nueva solicitud del usuario </br> ".$usuario[0]->NOM_USU.' '.$usuario[0]->APA_USU.' '.$usuario[0]->AMA_USU."</div>";
+			$con5->ALE_NOT =1;
+			$con5->save();
+		}else{}
 	
 	}
 

@@ -6,7 +6,7 @@
 		<a href="javascript:despliegaModal('hidden');" title="Cerrar"><span class="icon-undo2" style="float: right; color: #000; font-size: 20px;"></span></a>
 		</br>
 		<fieldset class="fieldcuerpo" align="left">
-			<legend>REGISTRO DE NUEVO ALMACEN</legend>
+			<legend style="margin-bottom: 0;">REGISTRO DE NUEVO ALMACEN</legend>
 		<form class="formularioreg" method="POST" action="almacen/registrar">
 			 <input type="hidden" name="_token" value="{{ csrf_token() }}">
 				<table style="margin-top: 4%;  margin-left: 10%;">
@@ -37,7 +37,7 @@
 	@section ('contenido')
 
 		<fieldset class="fieldcuerpo" align="left">
-					<legend>ALMACENES</legend>
+					<legend style="margin-bottom: 0;">ALMACENES</legend>
 			  	<div>
 
 	  	<a href="javascript:despliegaModal('visible');">+ Nuevo almacen</a>

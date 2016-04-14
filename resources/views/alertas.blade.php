@@ -1,7 +1,7 @@
 	@extends ('layout')
 	@section ('contenido')
 		<fieldset class="fieldcuerpo" align="left">
-					<legend>ALERTAS</legend>
+					<legend style="margin-bottom: 0;">ALERTAS</legend>
 	  	<div>
 	  
 		<table id="example" class="display" cellspacing="5" width="100%" style="border-radius:4px;-moz-border-radius:4px;-webkit-border-radius:4px;border:1px #444444 solid;">
