@@ -1,51 +1,24 @@
 	@extends ('layout')
-	@section ('VM')
-		<div id="bgVentanaModal" class="bgventanaModal">
-<div id="VentanaModal" class="VentanaModal">
-<a href="javascript:despliegaModal('hidden');" title="Cerrar"><span class="icon-undo2" style="float: right; color: #000; font-size: 20px;"></span></a>
-		</br>
-		<fieldset class="fieldcuerpo" align="left">
-			<legend style="margin-bottom: 0;">REGISTRO DE NUEVO PRODUCTO</legend>
-			<form class="formularioreg" method="POST" action="<?php echo $id;?>/registro">
-			 <input type="hidden" name="_token" value="{{ csrf_token() }}">
-				<table style="margin-top: 4%;  margin-left: 10%;">
-						<tr style="height: 50px;">
-						
-							<td width="130px" class="lblnombre">Item del producto</td>
-							<td width="250px"><input type="text" name="itm_pro" class="txtcampo large2" placeholder="NOMBRE DEL PRODUCTO" onkeypress="return sololetras(event);" onpaste="return false" ></td>
-						</tr>
-						<tr style="height: 50px;">
-							<td width="130px" class="lblnombre">Descripcion del producto</td>
-							<td><textarea class="txtcampo textarea" placeholder="DESCRIPCION DEL PRODUCTO" cols="55" rows="5" onpaste="return false" name="des_pro"></textarea></td>
-						</tr>
-						<tr style="height: 50px;">
-							<td width="130px" class="lblnombre">Precio unitario </td>
-							<td width="250px"><input type="text" name="pun_pro" class="txtcampo large" placeholder="P/U en Bs." onkeypress="return sololetras(event);" onpaste="return false" ></td>
-						</tr>
-							<td width="130px" class="lblnombre">Cantidad del producto </td>
-							<td width="250px"><input type="text" name="can_pro" class="txtcampo large" placeholder="CANTIDAD DEL PRODUCTO" onkeypress="return sololetras(event);" onpaste="return false" ></td>
-						</tr>
-					</table>
-					<table style="margin-left: 30%;">
-						<tr style="height: 50px;">
-							<td>
-								<input type="submit" name="" class="botones ico-btnsave" value="REGISTRAR">
-                 				<input type="reset"  onclick="document.location.reload();" class="botones ico-btnlimpiar" value="LIMPIAR DATOS">
-                 			</td>
-						</tr>
-					</table>
-			</form>
-		</fieldset>
-</div>
-</div>
 
-	@stop
 	@section ('contenido')
 		<fieldset class="fieldcuerpo" align="left">
 					<legend style="margin-bottom: 0;">PRODUCTOS</legend>
 	  	<div>
+<script type="text/javascript">
+              $(document).ready(function() { setTimeout(function(){ $(".mensajewarning").fadeIn(2500); },0000); });
+              $(document).ready(function() { setTimeout(function(){ $(".mensajewarning").fadeOut(2500); },5000); });
+            </script>
+         <?php if (Session::has('mensaje')):
+            ?>
+                  <div class="mensajewarning" style="margin-bottom: 10px;"id="mensajewarning"><label><?php echo Session::get('mensaje');?></label></div>
 
-	  	<a href="javascript:despliegaModal('visible');">+ Nuevo producto</a>
+         <?php endif;?>
+         <?php if (Session::has('mensaje2')):
+            ?>
+                  <div class="mensajewarning" id="mensajebien" style="margin-bottom: 10px;"><label><?php echo Session::get('mensaje2');?></label></div>
+         <?php endif;?>
+          
+	  	<button data-toggle = "modal" data-target = "#myModal3" href="" class="btn btn-success btn-sm"> <span class="glyphicon glyphicon-plus"> </span> Nuevo producto </button> 
 	  	</br>
 	  	</br>	  	
 	  	<span class="titulo">ID Rubro : </span><span  class="subtitulo"><?php echo $query[0]->id;?></span> 
@@ -63,40 +36,218 @@
 	<thead style="font-size:13px;color:#FFF;background-color:#444444;height:40px;">
 		<tr>
 			<th>ID</th>
-			<th>ITEM PRODUCTO</th>
+			<th>ITEM</th>
             <th>DESCRIPCION DEL PRODUCTO</th>
-			<th>PRECIO UNITARIO</th>
-			<th>CANTIDAD DISPONIBLE</th>
-			<th>ACCIONES</th>	
+			<th>PRECIO</th>
+			<th>STOCK</th>
+			<th data-orderable="false">ACCIONES</th>	
 		</tr>
 	</thead>
 	<tfoot style="font-size:13px;color:#FFF;background-color:#444444;height:40px;">
 		<tr>
 			<th>ID</th>
-			<th>ITEM PRODUCTO</th>
+			<th>ITEM</th>
             <th>DESCRIPCION DEL PRODUCTO</th>
-			<th>PRECIO UNITARIO</th>
-			<th>CANTIDAD DISPONIBLE</th>
+			<th>PRECIO</th>
+			<th>STOCK</th>
 			<th>ACCIONES</th>	
 		</tr>
 	</tfoot>
 	<tbody style="font-size:11px;">
+		<?php if(count($productos)>0){?>
 		<tr>
-		<?php
+		<?php  
 					foreach ($productos as $producto):
 					?>
 						<th><?php echo $producto->id;?></th>
 						<th><?php echo $producto->ITM_PRO;?></th>
 						<th><?php echo $producto->DES_PRO;?></th>
-						<th><?php echo $producto->PUN_PRO;?></th>
-						<th><?php echo $producto->CAN_PRO;?></th>
-						<th><a href="producto/<?php echo $producto->id;?>">Ver &nbsp;&nbsp;&nbsp;&nbsp; </a>&nbsp;&nbsp;<a href=""> Modificar</a></th>	
+						<th><?php echo $producto->PUN_PRO." Bs/u";?></th>
+						<th><?php echo $producto->CAN_PRO." en stock";?></th>
+						<th><button data-toggle = "modal" data-target = "#myModal4" href="" class="btn btn-success"> <span class="glyphicon glyphicon-search"> </span> </button> <button data-toggle = "modal" data-target = "#myModal2" href="" class="btn btn-primary"> <span class="glyphicon glyphicon-pencil"> </span> </button> <button onclick="javascript:idenvio(<?php echo $producto->id;?>);" data-toggle = "modal" data-target = "#myModal" href="" class="btn btn-danger"><span class="glyphicon glyphicon-trash"> </span> </button></th>	
 		</tr>
-				<?php	endforeach;
+				<?php	endforeach; }
 			
 			?>
 	</tbody>
 </table>
 </fieldset>
 </fieldset>
+
+<div class = "modal fade" id = "myModal" tabindex = "-1" role = "dialog" 
+   aria-labelledby = "myModalLabel" aria-hidden = "true">
+   
+   <div class = "modal-dialog">
+      <div class = "modal-content">
+         
+         <div class = "modal-header">
+            <button type = "button" class = "close" data-dismiss = "modal" aria-hidden = "true">
+                  &times;
+            </button>
+            <h4 class = "modal-title" id = "myModalLabel">
+               Confirmar eliminacion
+            </h4>
+         </div>
+         <form action="<?php echo $id;?>/elirubro" method="POST">
+         <div class = "modal-body">
+         <input type="hidden" id="id" name="id">
+            <div class=" ">Desea eliminar el elemento?</div>
+         
+         <div class = "modal-footer" style="border-top: none;">
+            <button type = "button" class = "btn btn-danger" data-dismiss = "modal"><span class="glyphicon glyphicon-remove" style="font-size: 10px; "></span>
+               Cancelar
+            </button>
+            
+            <button type = "submit" class = "btn btn-primary"><span style="font-size: 10px; " class="glyphicon glyphicon-plus"></span>
+               Aceptar
+            </button>
+         </div>
+         </div>
+         </form>
+      </div><!-- /.modal-content -->
+   </div><!-- /.modal-dialog -->
+  
+</div><!-- /.modal -->
+</div>
+<div class = "modal fade" id = "myModal4" tabindex = "-1" role = "dialog" 
+   aria-labelledby = "myModalLabel" aria-hidden = "true">
+   
+   <div class = "modal-dialog">
+      <div class = "modal-content">
+         
+         <div class = "modal-header">
+            <button type = "button" class = "close" data-dismiss = "modal" aria-hidden = "true">
+                  &times;
+            </button>
+            <h4 class = "modal-title" id = "myModalLabel">
+               Producto 
+            </h4>
+         </div>
+         <form action="<?php echo $id;?>/elirubro" method="POST">
+         <div class = "modal-body">
+         <input type="hidden" id="id" name="id">
+            <div class=" ">Descripcion del producto</div>
+         
+         <div class = "modal-footer" style="border-top: none;">
+            <button type = "button" class = "btn btn-success" data-dismiss = "modal"><span class="glyphicon glyphicon-ok" style="font-size: 10px; "></span>
+               Aceptar
+            </button>
+            
+         </div>
+         </div>
+         </form>
+      </div><!-- /.modal-content -->
+   </div><!-- /.modal-dialog -->
+  
+</div><!-- /.modal -->
+</div>
+ <div class = "modal fade" id = "myModal3" tabindex = "-1" role = "dialog" 
+   aria-labelledby = "myModalLabel3" aria-hidden = "true">
+   
+   <div class = "modal-dialog">
+      <div class = "modal-content">
+         
+         <div class = "modal-header">
+            <button type = "button" class = "close" data-dismiss = "modal" aria-hidden = "true">
+                  &times;
+            </button>
+            
+            <h4 class = "modal-title" id = "myModalLabel">
+               Registrar nuevo Producto
+            </h4>
+         </div>
+         <div class = "modal-body">
+         		<form class="form-horizontal" method="POST" action="<?php echo $id;?>/registro">
+			 <input type="hidden" name="_token" value="{{ csrf_token() }}">
+				 <div class="form-group">
+            	<label class="col-lg-3 control-label">Nro de item :</label>
+         		<div class="col-md-8">
+           		 <input placeholder="ITEM DEL PRODUCTO" class="form-control" name="itm_pro">
+        		</div>
+         		</div>
+         <div class="form-group">
+            <label class="col-lg-3 control-label">Descripcion :</label>
+         <div class="col-md-8">
+            <textarea class="form-control" name="des_rub" placeholder="DESCRIPCION DEL PRODUCTO" ></textarea>
+         </div>
+         </div>
+         		<div class="form-group">
+            	<label class="col-lg-3 control-label">Precio unitario:</label>
+         		<div class="col-md-3">
+           		 <input type="number" placeholder="P/U Bs." min="0.001" class="form-control" name="nom_rub">
+        		</div>
+         		<div class="form-group">
+            	<label class="col-sm-2 control-label">Cantidad:</label>
+         		<div class="col-md-3">
+           		 <input type="number" placeholder="Unidad" min="1"class="form-control" name="nom_rub">
+        		</div>
+         		</div>
+        
+         <input type="hidden" id="idalm">
+         <div class = "modal-footer" style="border-top: 0;">
+            <button type = "button" class = "btn btn-danger" data-dismiss = "modal"><span class="glyphicon glyphicon-remove" style="font-size: 10px;"></span>
+               Cancelar
+            </button>
+            
+            <button type = "submit" class = "btn btn-primary"><span style="font-size: 10px;" class="glyphicon glyphicon-plus"></span>
+               Registrar
+            </button>
+         </div>
+         </form>
+      </div><!-- /.modal-content -->
+   </div><!-- /.modal-dialog -->
+  
+</div><!-- /.modal -->
+</div>
+ 
+ <div class = "modal fade" id = "myModal2" tabindex = "-1" role = "dialog" 
+   aria-labelledby = "myModalLabel" aria-hidden = "true">
+   
+   <div class = "modal-dialog">
+      <div class = "modal-content">
+         
+         <div class = "modal-header">
+            <button type = "button" class = "close" data-dismiss = "modal" aria-hidden = "true">
+                  &times;
+            </button>
+            
+            <h4 class = "modal-title" id = "myModalLabel">
+               Modificar Almacen
+            </h4>
+         </div>
+         <div class = "modal-body">
+         <form class="form-horizontal" action="actualizarcomp" method="POST">	
+         <div class="form-group">
+            <label class="col-lg-3 control-label">Nombre :</label>
+         <div class="col-md-8">
+            <input class="form-control" id="nomcomp">
+         </div>
+         </div>
+                  <div class="form-group">
+            <label class="col-lg-3 control-label">Descripcion :</label>
+         <div class="col-md-8">
+            <input class="form-control" id="descomp">
+         </div>
+         </div>
+       
+
+        
+         <input type="hidden" id="idalm">
+         <div class = "modal-footer" style="border-top: 0;">
+            <button type = "button" class = "btn btn-danger" data-dismiss = "modal"><span class="glyphicon glyphicon-remove" style="font-size: 10px;"></span>
+               Cancelar
+            </button>
+            
+            <button type = "submit" class = "btn btn-primary"><span style="font-size: 10px;" class="glyphicon glyphicon-plus"></span>
+               Modificar
+            </button>
+         </div>
+         </form>
+      </div><!-- /.modal-content -->
+   </div><!-- /.modal-dialog -->
+  
+</div><!-- /.modal -->
+
+ 	
+
 	@stop

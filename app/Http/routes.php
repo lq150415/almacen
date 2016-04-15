@@ -1,6 +1,6 @@
 <?php
 
-/*
+/* 
 |--------------------------------------------------------------------------
 | Application Routes
 |--------------------------------------------------------------------------
@@ -24,7 +24,9 @@ Route::group(['middleware' => 'auth'], function () {
     
         Route::resource('/', 'IndexController');
         Route::resource('index', 'IndexController');
+        Route::resource('almacen', 'AlmacenController');
         Route::get('almacen', ['as'=>'almacen','uses'=>'AlmacenController@Index']);
+        Route::post('elialmacen','AlmacenController@elialmacen');
         Route::post('almacen/registrar', 'AlmacenController@store');
         Route::resource('alerta', 'AlertaController');
         Route::resource('consultapp', 'ConsultaController@index');
@@ -43,6 +45,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('datos_pro','IngresoController@datos_pro');
         Route::post('datos_pro2','IngresoController@datos_pro2'); 
         Route::post('rubro/{id}/registro','RubroController@store');
+        Route::post('rubro/{id}/elirubro','RubroController@elirubro');
         Route::resource('solicitud', 'SolicitudController@index');
         Route::post('httpush', 'SolicitudController@httpush');
         Route::post('notificaciones','SolicitudController@notificaciones');

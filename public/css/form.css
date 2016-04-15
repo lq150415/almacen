@@ -449,6 +449,14 @@ font-size: 13px;
   border-radius: 8px; 
   padding:6px;
 }
+#mensajewarning{
+  display:none; 
+  font-size:16px; 
+  color:#FFF; 
+  background: rgba(255, 0, 0, 1);
+  border-radius: 8px; 
+  padding:6px;
+}
 #mensaje{
 
   display:none; 

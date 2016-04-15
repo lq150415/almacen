@@ -54,8 +54,15 @@ class RubroController extends Controller {
         $rubro->created_at = Carbon::now();
         $rubro->updated_at = Carbon:: now();
 		$rubro->save();
+		$mensaje2="El rubro fue creado correctamente";
+        return redirect()->route('rubro',array('id'	=>$id))->with('mensaje2',$mensaje2);
+	}
+	public function elirubro(Request $request, $id){
 
-        return redirect()->route('rubro',array('id'	=>$id));
+		Rubro::where('id','=',$request->input('id'))->delete();
+		$mensaje="Rubro eliminado";
+			  return redirect()->route('rubro',array('id'=>$id))->with('mensaje',$mensaje);
+
 	}
 	/**
 	 * Display the specified resource.

@@ -4,12 +4,39 @@
 	<title>Sistema de Control de Almacenes e Inventarios (SCAI)</title>
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	
-	<!--Notificaciones-->
-	
+	<!--modificar eliminar-->
+	<script type="text/javascript">
+				function idenvio(data1){
+					$('#id').val(data1);
+				}
+
+				function camposenvio(data1,data2,data3,data4,data5,data6){
+					$(document).ready(function(){
+					 $("#tabcomp").change(function () {
+          				 $("#tabcomp option:selected").each(function () {
+           			 	    id = $(this).val();
+          					  $.post("datos_tabla", { id: id }, function(data){
+                			$("#camcomp").html(data);
+                			$('#camcomp option[value="'+data4+'"]').prop('selected','selected').change();
+            			}); 
+                    
+        			});
+   					});
+					 });
+					$('#nomcomp').val(data1);
+					$('#descomp').val(data2);
+					$('#tabcomp option[value="'+data3+'"]').prop('selected','selected').change();
+
+					$('#opecomp option[value="'+data5+'"]').prop('selected','selected').change();
+					$('#idcomp').val(data6);
+					
+				}
+				</script>
 
 	<link rel="stylesheet" href="<?php echo asset('css/menu.css')?>" type="text/css"> 
 	<link rel="stylesheet" href="<?php echo asset('css/form.css')?>" type="text/css"> 
 	<link rel="stylesheet" href="<?php echo asset('css/font/menu.css')?>" type="text/css">  
+	<script src="<?php echo asset('assets/js/ajax.js')?>"></script>
 	<link rel="stylesheet" href="<?php echo asset('assets/css/bootstrap.css')?>" type="text/css">  
 	<script src="<?php echo asset('assets/js/bootstrap.js')?>"></script>
 	<script src="<?php echo asset('js/jQuery.js')?>"></script>

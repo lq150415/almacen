@@ -36,13 +36,14 @@ class AlmacenController extends Controller {
 	 */
 	public function store(Request $request)
 	{
+		$mensaje2="Almacen creado correctamente";
 		$almacenes = new Almacen;
 		$almacenes->NOM_ALM = $request->input('nom_alm');
         $almacenes->UBI_ALM = $request->input('ubi_alm');
         $almacenes->created_at = Carbon::now();
         $almacenes->updated_at = Carbon:: now();
 		$almacenes->save();
-        return redirect()->route('almacen');
+        return redirect()->route('almacen')->with('mensaje2',$mensaje2);
 	}
 	/**
 	 * Display the specified resource.
@@ -53,6 +54,13 @@ class AlmacenController extends Controller {
 	public function show($id)
 	{
 		//
+	}
+
+	public function elialmacen(Request $request)
+	{
+		Almacen::where('id','=',$request->input('id'))->delete();
+		$mensaje="Almacen eliminado";
+			  return redirect()->route('almacen.index')->with('mensaje',$mensaje);
 	}
 	/**
 	 * Show the form for editing the specified resource.
