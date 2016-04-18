@@ -1,103 +1,40 @@
 	@extends ('layout')
-	@section ('VM')
-		<div id="bgVentanaModal" class="bgventanaModal">
-<div id="VentanaModal" class="VentanaModal">
-<a href="javascript:despliegaModal('hidden');" title="Cerrar"><span class="icon-undo2" style="float: right; color: #000; font-size: 20px;"></span></a>
-		</br>
-		<fieldset class="fieldcuerpo" align="left">
-			<legend style="margin-bottom: 0;">REGISTRO DE NUEVO USUARIO</legend>
-			<form class="formularioreg" method="POST" action="usuario/registrar">
-			 <input type="hidden" name="_token" value="{{ csrf_token() }}">
-				<fieldset class="fieldcuerpo" align="left">
-				<legend style="margin-bottom: 0;">DATOS PERSONALES</legend>
-				<table >
-						<tr style="height: 30px;">
-							<td width="100px" class="lblnombre">CI</td>
-							<td width="240px" ><input type="text" name="ci_usu" class="txtcampo" placeholder="NUMERO DE CARNET" onkeypress="return solonumeros(event);" onpaste="return false"></td>
-							<td width="100px" class="lblnombre">Nombre</td>
-							<td width="240px" ><input type="text" name="nom_usu" class="txtcampo" placeholder="NOMBRE" onkeypress="return solonumeros(event);" onpaste="return false"></td>
-						</tr>
-						<tr style="height: 30px;">
-							<td width="100px" class="lblnombre">Ap. Paterno</td>
-							<td width="240px"><input type="text" name="apa_usu" class="txtcampo" placeholder="APELLIDO PATERNO" onkeypress="return solonumeros(event);" onpaste="return false"></td>
-							<td width="100px" class="lblnombre">Ap. Materno</td>
-							<td width="240px" ><input type="text" name="ama_usu" class="txtcampo" placeholder="APELLIDO MATERNO" onkeypress="return solonumeros(event);" onpaste="return false"></td>
-						</tr>
-						<tr style="height: 30px;">
-							<td width="100px" class="lblnombre">Area</td>
-							<td width="240px">
-								<select name="are_usu" class="txtcampo large2">
-									<option value="">SELECCIONE</option>
-									<option value="Recursos Humanos">Recursos humanos</option>
-									<option value="Tecnologias de Informacion">Tecnologias de Informacion</option>
-									<option value="Otros">etc</option>
-								</select>
-							</td>
-							<td width="100px" class="lblnombre">Cargo</td>
-							<td width="240px">
-								<select name="car_usu" class="txtcampo large2">
-									<option value="">SELECCIONE</option>
-									<option value="Director">Director</option>
-									<option value="Otros1">etc</option>
-									<option value="Otros2">etc</option>
-								</select>
-							</td>
-						</tr>
-						</table>
-						</fieldset>
-						<fieldset class="fieldcuerpo" align="left" >
-					<legend style="margin-bottom: 0;">DATOS DE CUENTA</legend>
-					<table>
-						<tr style="height:30px;">
-							
-							<td width="100px" class="lblnombre">Usuario</td>
-							<td width="240px"><input type="text" name="nic_usu" value="" class="txtcampo large" placeholder="CI / NICK DE USUARIO" onpaste="return false"></td>
-							<td width="100px" class="lblnombre">Nivel de usuario</td>
-							<td width="240px">
-								<select name="niv_usu" class="txtcampo large2">
-									<option value="">SELECCIONE</option>
-									<option value="0">Administrador</option>
-									<option value="1">Jefe de Recursos</option>
-									<option value="2">Solicitante</option>
-								</select>
-							</td>
-						</tr>
-						<tr style="height:30px;">
-							
-							<td width="100px" class="lblnombre">Password</td>
-							<td width="240px"><input type="password" name="password" value="" class="txtcampo large" placeholder="CONTRASEÑA" onpaste="return false"></td>
-						</tr>
-						<tr style="height:30px;">
-							<td width="100px" class="lblnombre">Repita la contraseña</td>
-							<td width="240px"><input type="password" name="conf_pas" class="txtcampo large" placeholder="REPITA CONTRASEÑA"  onpaste="return false"></td>
-						</tr>
-					</table>	
-				</fieldset>
-					<table style="margin-left: 30%;">
-						<tr style="height: 50px;">
-							<td>
-								<input type="submit" name="submit_reg_arc" class="botones ico-btnsave" value="REGISTRAR">
-                 				<input type="reset"  onclick="document.location.reload();" class="botones ico-btnlimpiar" value="LIMPIAR DATOS">
-                 			</td>
-						</tr>
-					</table>
-			</form>
-		</fieldset>
-</div>
-</div>
-
-	@stop
 	@section ('contenido')
-		<fieldset class="fieldcuerpo" align="left">
-					<legend style="margin-bottom: 0;">Usuarios</legend>
-	  	<div>
+	<script type="text/javascript">
 
-	  	<a href="javascript:despliegaModal('visible');">+ Nuevo usuario</a>
+	
+		function compara() { 
+		if (document.form1.password.value != document.form1.conf_pas.value) {
+		$(document).ready(function() { setTimeout(function(){ $(".mensajevalidacion").fadeIn(2500); },0500); });
+    	$(document).ready(function() { setTimeout(function(){ $(".mensajevalidacion").fadeOut(2500); },5000); });
+			document.getElementById('mensajevalidacion').innerHTML = '<div class="alert alert-danger mensaje2"> Las contraseñas no coinciden </div>';
+		return false; } 
+		else {
+		return true;
+}
+}
+	</script>
+		<fieldset class="fieldcuerpo" align="left">
+				<legend style="margin-bottom: 0;">USUARIOS</legend>
+	  	<div>
+<script type="text/javascript">
+              $(document).ready(function() { setTimeout(function(){ $(".mensajewarning").fadeIn(2500); },0000); });
+              $(document).ready(function() { setTimeout(function(){ $(".mensajewarning").fadeOut(2500); },5000); });
+            </script>
+         <?php if (Session::has('mensaje')):
+            ?>
+                  <div class="mensajewarning alert alert-danger" style="margin-bottom: 10px;"><label><?php echo Session::get('mensaje');?></label></div>
+
+         <?php endif;?>
+         <?php if (Session::has('mensaje2')):
+            ?>
+                  <div class="mensajewarning alert alert-success"  style="margin-bottom: 10px;"><label><?php echo Session::get('mensaje2');?></label></div>
+         <?php endif;?>
+          
+	  	<button data-toggle = "modal" data-target = "#myModal3" href="" class="btn btn-success btn-sm"> <span class="glyphicon glyphicon-plus">  </span> Nuevo usuario </button> 
 	  	</br>
-	  	</br>	  	
-	  	</div>
-	  	<fieldset class="fieldcuerpo" align="left">
-					<legend style="margin-bottom: 0;">DETALLE</legend>
+	  	</br>	 
+	  	
 		<table id="example" class="display" cellspacing="5" width="100%" style="border-radius:4px;-moz-border-radius:4px;-webkit-border-radius:4px;border:1px #444444 solid;">
 	<thead style="font-size:13px;color:#FFF;background-color:#444444;height:40px;">
 		<tr>
@@ -148,6 +85,132 @@
 	</tfoot>
 
 </table>
-</fieldset>
 
+<div class = "modal fade" id = "myModal3" tabindex = "-1" role = "dialog" 
+   aria-labelledby = "myModalLabel3" aria-hidden = "true">
+   
+   <div class = "modal-dialog">
+      <div class = "modal-content">
+         
+         <div class = "modal-header">
+            <button type = "button" class = "close" data-dismiss = "modal" aria-hidden = "true">
+                  &times;
+            </button>
+            
+            <h4 class = "modal-title" id = "myModalLabel">
+               Registrar nuevo usuario
+            </h4>
+         </div><form class="form-horizontal" method="POST" action="usuario/registrar" name="form1">
+         <div class = "modal-body">
+         	<fieldset class="fieldcuerpo solacep">
+         	<legend style="margin-bottom: 0;">
+         	<h5 class = "modal-title" id = "myModalLabel">
+               Datos personales
+            </h5>
+            </legend>
+            	
+			 <input type="hidden" name="_token" value="{{ csrf_token() }}">
+				 <div class="form-group">
+            	<label class="col-lg-3 control-label">CI :</label>
+         		<div class="col-md-8">
+           		 <input placeholder="CARNET DE IDENTIDAD" class="form-control" type="number" step="1" min="0" name="ci_usu">
+        		</div>
+         		</div>
+         		<div class="form-group">
+            	<label class="col-lg-3 control-label">Nombre :</label>
+         		<div class="col-md-8">
+           		 <input placeholder="NOMBRE DEL USUARIO" class="form-control" name="nom_usu">
+        		</div>
+         		</div>
+         		 <div class="form-group">
+            	<label class="col-lg-3 control-label">Apellido Paterno :</label>
+         		<div class="col-md-8">
+           		 <input placeholder="APELLIDO PATERNO" class="form-control" name="apa_usu">
+        		</div>
+         		</div>
+         		 <div class="form-group">
+            	<label class="col-lg-3 control-label">Apellido Materno :</label>
+         		<div class="col-md-8">
+           		 <input placeholder="APELLIDO MATERNO" class="form-control" name="ama_usu">
+        		</div>
+         		</div>
+         		 <div class="form-group">
+            	<label class="col-lg-3 control-label">Area :</label>
+         		<div class="col-md-8">
+           		 <select class="form-control" name="are_usu">
+           		 	<option value="">SELECCIONE</option>
+					<option value="Recursos Humanos">Recursos humanos</option>
+					<option value="Tecnologias de Informacion">Tecnologias de Informacion</option>
+					<option value="Otros">Otros</option>
+           		 </select>
+        		</div>
+         		</div>
+         		 <div class="form-group">
+            	<label class="col-lg-3 control-label">Cargo :</label>
+         		<div class="col-md-8">
+           		 <select class="form-control" name="car_usu">
+									<option value="">SELECCIONE</option>
+									<option value="Director">Director</option>
+									<option value="Otros1">etc</option>
+									<option value="Otros2">etc</option>
+								</select>
+           		 </select>
+        		</div>
+         		</div>
+         </fieldset>
+         <fieldset class="fieldcuerpo solacep">
+         	<legend style="margin-bottom: 0;">
+         	<h5 class = "modal-title">
+               Datos de cuenta
+            </h5>
+            </legend>
+            <div id="mensajevalidacion" class="mensajevalidacion"></div>
+				 <div class="form-group">
+            	<label class="col-lg-3 control-label">Usuario :</label>
+         		<div class="col-md-8">
+           		 <input placeholder="CI/ NICK DE USUARIO" class="form-control" name="nic_usu">
+        		</div>
+         		</div>
+         		 <div class="form-group">
+            	<label class="col-lg-3 control-label">Nivel de usuario :</label>
+         		<div class="col-md-8">
+           		<select class="form-control" name="niv_usu">
+					<option value="">SELECCIONE</option>
+					<option value="0">Administrador</option>
+					<option value="1">Jefe de Recursos</option>
+					<option value="2">Solicitante</option>
+				</select>
+           		 </select>
+        		</div>
+         		</div>
+         		 <div class="form-group">
+            	<label class="col-lg-3 control-label">Password :</label>
+         		<div class="col-md-8">
+           		 <input placeholder="CONTRASEÑA" type="password" class="form-control" name="password">
+        		</div>
+         		</div>
+         		 <div class="form-group">
+            	<label class="col-lg-3 control-label">Repita password :</label>
+         		<div class="col-md-8">
+           		 <input placeholder="REPITA CONTRASEÑA" type="password" class="form-control" name="conf_pas">
+        		</div>
+         		</div>
+         </fieldset>
+        		</div>
+         <input type="hidden" id="idalm">
+         <div class = "modal-footer" style="border-top: 0;">
+            <button type = "button" class = "btn btn-danger" data-dismiss = "modal"><span class="glyphicon glyphicon-remove" style="font-size: 10px;"></span>
+               Cancelar
+            </button>
+            
+            <button type = "submit" class = "btn btn-primary" onClick="return compara();"><span style="font-size: 10px;" class="glyphicon glyphicon-plus"></span>
+               Registrar
+            </button>
+         </div>
+         </form>
+         </div>
+      </div><!-- /.modal-content -->
+   </div><!-- /.modal-dialog -->
+  
+</div><!-- /.modal -->
 	@stop

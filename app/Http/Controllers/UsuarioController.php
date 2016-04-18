@@ -55,7 +55,8 @@ class UsuarioController extends Controller {
         $usuario->updated_at = Carbon:: now();
 		$usuario->save();
 
-        return redirect()->route('usuario.index');
+		$mensaje2="El usuario fue creado correctamente";
+        return redirect()->route('usuario.index')->with('mensaje2',$mensaje2);
 	}
 
 	/**

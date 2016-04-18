@@ -35,12 +35,12 @@
 		<table id="example" class="display" cellspacing="5" width="100%" style="border-radius:4px;-moz-border-radius:4px;-webkit-border-radius:4px;border:1px #444444 solid;">
 	<thead style="font-size:13px;color:#FFF;background-color:#444444;height:40px;">
 		<tr>
-			<th>ID</th>
-			<th>ITEM</th>
-            <th>DESCRIPCION DEL PRODUCTO</th>
-			<th>PRECIO</th>
-			<th>STOCK</th>
-			<th data-orderable="false">ACCIONES</th>	
+			<th width="8%">ID</th>
+			<th width="10%">ITEM</th>
+            <th data-orderable="false"  width="37%;">DESCRIPCION DEL PRODUCTO</th>
+			<th data-orderable="false"  width="10%">PRECIO</th>
+			<th data-orderable="false"  width="15%">STOCK</th>
+			<th data-orderable="false" width="20%;;">ACCIONES</th>	
 		</tr>
 	</thead>
 	<tfoot style="font-size:13px;color:#FFF;background-color:#444444;height:40px;">
@@ -60,11 +60,16 @@
 					foreach ($productos as $producto):
 					?>
 						<th><?php echo $producto->id;?></th>
-						<th><?php echo $producto->ITM_PRO;?></th>
+						<th>
+						<?php if($producto->ITM_PRO>9999)
+						{
+						echo "0".$producto->ITM_PRO;
+						}else{
+						echo "00".$producto->ITM_PRO;}?></th>	
 						<th><?php echo $producto->DES_PRO;?></th>
 						<th><?php echo $producto->PUN_PRO." Bs/u";?></th>
 						<th><?php echo $producto->CAN_PRO." en stock";?></th>
-						<th><button data-toggle = "modal" data-target = "#myModal4" href="" class="btn btn-success"> <span class="glyphicon glyphicon-search"> </span> </button> <button data-toggle = "modal" data-target = "#myModal2" href="" class="btn btn-primary"> <span class="glyphicon glyphicon-pencil"> </span> </button> <button onclick="javascript:idenvio(<?php echo $producto->id;?>);" data-toggle = "modal" data-target = "#myModal" href="" class="btn btn-danger"><span class="glyphicon glyphicon-trash"> </span> </button></th>	
+						<th><button data-toggle = "modal" data-target = "#myModal4" href="" class="btn btn-success" title="Ver"> <span class="glyphicon glyphicon-search"> </span> </button> <button data-toggle = "modal" title="Modificar Producto" data-target = "#myModal2" href="" class="btn btn-primary"> <span class="glyphicon glyphicon-pencil"> </span> </button> <button title="Eliminar Producto" onclick="javascript:idenvio(<?php echo $producto->id;?>);" data-toggle = "modal" data-target = "#myModal" href="" class="btn btn-danger"><span class="glyphicon glyphicon-trash"> </span> </button></th>	
 		</tr>
 				<?php	endforeach; }
 			
@@ -88,7 +93,7 @@
                Confirmar eliminacion
             </h4>
          </div>
-         <form action="<?php echo $id;?>/elirubro" method="POST">
+         <form action="<?php echo $id;?>/eliproducto" method="POST">
          <div class = "modal-body">
          <input type="hidden" id="id" name="id">
             <div class=" ">Desea eliminar el elemento?</div>
@@ -108,7 +113,7 @@
    </div><!-- /.modal-dialog -->
   
 </div><!-- /.modal -->
-</div>
+
 <div class = "modal fade" id = "myModal4" tabindex = "-1" role = "dialog" 
    aria-labelledby = "myModalLabel" aria-hidden = "true">
    
@@ -140,7 +145,7 @@
    </div><!-- /.modal-dialog -->
   
 </div><!-- /.modal -->
-</div>
+
  <div class = "modal fade" id = "myModal3" tabindex = "-1" role = "dialog" 
    aria-labelledby = "myModalLabel3" aria-hidden = "true">
    
@@ -162,27 +167,28 @@
 				 <div class="form-group">
             	<label class="col-lg-3 control-label">Nro de item :</label>
          		<div class="col-md-8">
-           		 <input placeholder="ITEM DEL PRODUCTO" class="form-control" name="itm_pro">
+           		 <input placeholder="ITEM DEL PRODUCTO" class="form-control" type="number" step="1" min="0" name="itm_pro">
         		</div>
          		</div>
          <div class="form-group">
             <label class="col-lg-3 control-label">Descripcion :</label>
          <div class="col-md-8">
-            <textarea class="form-control" name="des_rub" placeholder="DESCRIPCION DEL PRODUCTO" ></textarea>
+            <textarea class="form-control" name="des_pro" placeholder="DESCRIPCION DEL PRODUCTO" ></textarea>
          </div>
          </div>
          		<div class="form-group">
             	<label class="col-lg-3 control-label">Precio unitario:</label>
          		<div class="col-md-3">
-           		 <input type="number" placeholder="P/U Bs." min="0.001" class="form-control" name="nom_rub">
+           		 <input type="number" placeholder="P/U Bs." min="0" step="any" class="form-control" name="pun_pro">
         		</div>
+        		
          		<div class="form-group">
             	<label class="col-sm-2 control-label">Cantidad:</label>
          		<div class="col-md-3">
-           		 <input type="number" placeholder="Unidad" min="1"class="form-control" name="nom_rub">
+           		 <input type="number" placeholder="Unidad" min="1"class="form-control" name="can_pro">
         		</div>
          		</div>
-        
+        		</div>
          <input type="hidden" id="idalm">
          <div class = "modal-footer" style="border-top: 0;">
             <button type = "button" class = "btn btn-danger" data-dismiss = "modal"><span class="glyphicon glyphicon-remove" style="font-size: 10px;"></span>
@@ -194,14 +200,13 @@
             </button>
          </div>
          </form>
+         </div>
       </div><!-- /.modal-content -->
    </div><!-- /.modal-dialog -->
   
 </div><!-- /.modal -->
-</div>
- 
  <div class = "modal fade" id = "myModal2" tabindex = "-1" role = "dialog" 
-   aria-labelledby = "myModalLabel" aria-hidden = "true">
+   aria-labelledby = "myModalLabel2" aria-hidden = "true">
    
    <div class = "modal-dialog">
       <div class = "modal-content">
@@ -212,13 +217,13 @@
             </button>
             
             <h4 class = "modal-title" id = "myModalLabel">
-               Modificar Almacen
+               Modificar producto
             </h4>
          </div>
          <div class = "modal-body">
          <form class="form-horizontal" action="actualizarcomp" method="POST">	
          <div class="form-group">
-            <label class="col-lg-3 control-label">Nombre :</label>
+            <label class="col-lg-3 control-label">Item :</label>
          <div class="col-md-8">
             <input class="form-control" id="nomcomp">
          </div>
@@ -248,6 +253,6 @@
   
 </div><!-- /.modal -->
 
- 	
+ 	</div>
 
 	@stop

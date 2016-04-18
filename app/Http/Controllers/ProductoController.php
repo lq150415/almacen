@@ -55,10 +55,20 @@ class ProductoController extends Controller {
         $productos->created_at = Carbon::now();
         $productos->updated_at = Carbon:: now();
 		$productos->save();
-
-        return redirect()->route('producto',array('id'=>$id));
+		$mensaje2="El producto fue creado correctamente";
+        return redirect()->route('producto',array('id'=>$id))->with('mensaje2',$mensaje2);
 	}
 
+	public function eliproducto(Request $request, $id){
+
+		Producto::where('id','=',$request->input('id'))->delete();
+		$mensaje="Producto eliminado";
+			  return redirect()->route('producto',array('id'=>$id))->with('mensaje',$mensaje);
+
+	}
+	public function modificacion(){
+
+	}
 	/**
 	 * Display the specified resource.
 	 *

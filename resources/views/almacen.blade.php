@@ -38,7 +38,7 @@
 						<th><?php echo $almacen->id;?></th>
 						<th><?php echo $almacen->NOM_ALM;?></th>
             			<th><?php echo $almacen->UBI_ALM;?></th>
-						<th><a class="btn btn-success"  href="rubro/<?php echo $almacen->id;?>"> <span class="glyphicon glyphicon-search"> </span> </a> <button data-toggle = "modal" data-target = "#myModal2" href="" class="btn btn-primary"> <span class="glyphicon glyphicon-pencil"> </span> </button> <button onclick="javascript:idenvio(<?php echo $almacen->id;?>);" <?php if($almacen->id==1){ echo "disabled";} ?> data-toggle = "modal" data-target = "#myModal" href="" class="btn btn-danger"><span class="glyphicon glyphicon-trash"> </span> </button></th>	
+						<th><a class="btn btn-success"  href="rubro/<?php echo $almacen->id;?>" title="Ver rubros"> <span class="glyphicon glyphicon-search"> </span> </a> <button data-toggle = "modal" data-target = "#myModal2" href="" class="btn btn-primary" title="Modificar almacen"> <span class="glyphicon glyphicon-pencil"> </span> </button> <button onclick="javascript:idenvio(<?php echo $almacen->id;?>);" <?php if($almacen->id==1){ echo "disabled";} ?> data-toggle = "modal" data-target = "#myModal" title="Eliminar almacen" class="btn btn-danger"><span class="glyphicon glyphicon-trash"> </span> </button></th>	
 		</tr>
 				<?php	endforeach; }
 			

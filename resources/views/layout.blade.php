@@ -42,7 +42,7 @@
 	<script src="<?php echo asset('js/jQuery.js')?>"></script>
 	<script src="<?php echo asset('js/menu.js')?>"></script>  
 	<script src="<?php echo asset('js/grilla.js')?>"></script> 
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+	
 
 		<link rel="stylesheet" type="text/css" href="<?php echo asset('css/table/jquery.dataTables.css')?>">
 		<link rel="stylesheet" type="text/css" href="<?php echo asset('css/table/shCore.css')?>">

@@ -70,7 +70,7 @@
 						<th><?php echo $rubro->id;?></th>
 						<th><?php echo $rubro->NOM_RUB;?></th>
             			<th><?php echo $rubro->DES_RUB;?></th>
-						<th><a class="btn btn-success"  href="producto/<?php echo $rubro->id;?>"><span class="glyphicon glyphicon-search"> </span> </a> <button data-toggle = "modal" data-target = "#myModal2" href="" class="btn btn-primary"> <span class="glyphicon glyphicon-pencil"> </span> </button> <button onclick="javascript:idenvio(<?php echo $rubro->id;?>);" data-toggle = "modal" data-target = "#myModal" href="" class="btn btn-danger"><span class="glyphicon glyphicon-trash"> </span> </button></th>	
+						<th><a class="btn btn-success" title="Ver productos" href="producto/<?php echo $rubro->id;?>"><span class="glyphicon glyphicon-search"> </span> </a> <button data-toggle = "modal" title="Modificar rubro" data-target = "#myModal2" href="" class="btn btn-primary"> <span class="glyphicon glyphicon-pencil"> </span> </button> <button onclick="javascript:idenvio(<?php echo $rubro->id;?>);" data-toggle = "modal" title="Eliminar rubro" data-target = "#myModal" href="" class="btn btn-danger"><span class="glyphicon glyphicon-trash"> </span> </button></th>	
 		</tr>
 				<?php	endforeach;}
 			

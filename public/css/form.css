@@ -1,4 +1,5 @@
-.fieldcuerpo legend{
+
+fieldset.fieldcuerpo legend{
   border-radius: 4px;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
@@ -11,7 +12,7 @@
   color: #fff; 
   white-space: normal;
 }
-.fieldcuerpo{
+fieldset.fieldcuerpo{
   width: auto;
   padding: 10px;
   border:1px solid #999;
@@ -27,7 +28,7 @@
   white-space: normal;
   font-weight: inherit;
 }
-.fieldcuerpo.solacep legend{
+fieldset.fieldcuerpo.solacep legend{
    background: rgba(12,133,50,1);
 background: -moz-linear-gradient(left, rgba(12,133,50,1) 0%, rgba(20,153,66,0.71) 100%);
 background: -webkit-gradient(left top, right top, color-stop(0%, rgba(12,133,50,1)), color-stop(100%, rgba(20,153,66,0.71)));
@@ -37,7 +38,7 @@ background: -ms-linear-gradient(left, rgba(12,133,50,1) 0%, rgba(20,153,66,0.71)
 background: linear-gradient(to right, rgba(12,133,50,1) 0%, rgba(20,153,66,0.71) 100%);
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0c8532', endColorstr='#149942', GradientType=1 );
 }
-.fieldcuerpo.solrec legend{
+fieldset.fieldcuerpo.solrec legend{
  background: rgba(173,22,75,1);
 background: -moz-linear-gradient(left, rgba(173,22,75,1) 0%, rgba(199,10,64,0.71) 100%);
 background: -webkit-gradient(left top, right top, color-stop(0%, rgba(173,22,75,1)), color-stop(100%, rgba(199,10,64,0.71)));
@@ -47,7 +48,7 @@ background: -ms-linear-gradient(left, rgba(173,22,75,1) 0%, rgba(199,10,64,0.71)
 background: linear-gradient(to right, rgba(173,22,75,1) 0%, rgba(199,10,64,0.71) 100%);
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ad164b', endColorstr='#c70a40', GradientType=1 );
 }
-.fieldcuerposol legend{
+fieldset.fieldcuerposol legend{
   border-radius: 4px;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
@@ -67,7 +68,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e318f', end
   color: #fff; 
   white-space: normal;
 }
-.fieldcuerpores legend{
+fieldset.fieldcuerpores legend{
   border-radius: 4px;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
@@ -87,7 +88,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e67700', end
   color: #fff; 
   white-space: normal;
 }
-.fieldcuerpores legend{
+fieldset.fieldcuerpores legend{
   border-radius: 4px;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
@@ -107,7 +108,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e67700', end
   color: #fff; 
   white-space: normal;
 }
-.fieldcuerposol{
+fieldset.fieldcuerposol{
    width: auto;
   padding: 10px;
   border:1px solid #999;
@@ -457,6 +458,10 @@ font-size: 13px;
   border-radius: 8px; 
   padding:6px;
 }
+.mensaje2{
+  font-size:13px; 
+ 
+}
 #mensaje{
 
   display:none; 
@@ -483,3 +488,12 @@ font-size: 13px;
 
   cursor: pointer;
 }
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+@import "../bootstrap/less/scaffolding.less";
+@link-hover-color: #fff;
