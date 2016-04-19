@@ -7,11 +7,11 @@
             </script>
          <?php if (Session::has('mensaje')):
             ?>
-                  <div class="mensajewarning" id="mensajewarning"><label><?php echo Session::get('mensaje');?></label></div>
+                  <div class="mensajewarning alert alert-danger" ><label><?php echo Session::get('mensaje');?></label></div>
          <?php endif;?>
          <?php if (Session::has('mensaje2')):
             ?>
-                  <div class="mensajewarning" id="mensajebien"><label><?php echo Session::get('mensaje2');?></label></div>
+                  <div class="mensajewarning alert alert-success"><label><?php echo Session::get('mensaje2');?></label></div>
          <?php endif;?>
 		<fieldset class="fieldcuerpo" align="left">
 					<legend style="margin-bottom: 0;">ALMACENES</legend>

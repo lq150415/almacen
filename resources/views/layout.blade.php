@@ -54,6 +54,7 @@
 		<script type="text/javascript" language="javascript" src="<?php echo asset('js/table/shCore.js')?>"></script>
 		<script type="text/javascript" language="javascript" src="<?php echo asset('js/table/demo.js')?>"></script>
 		<script type="text/javascript" language="javascript" class="init">
+
 			$(document).ready(function() {
 				
 				$('#example').DataTable();
@@ -77,9 +78,11 @@ function despliegaModal( _valor ){
 
 </script>
 <script type="text/javascript" lang="javascript">
-
-function despliegaModal2( _valor ){
-	document.getElementById("bgVentanaModal2").style.visibility=_valor;
+function cierramodal(){
+	$("#myModal4").modal("hide");
+}
+function pasadatos(){
+	
 	$('#alm2').val($('#alm').val());
 	$('#rub2').val($('#rub').val());
 
@@ -141,7 +144,7 @@ $(document).ready(function() {
 #tabla{		width: 100%; }
 #tabla tbody tr{  }
 .fila-base{ display: none; } /* fila base oculta */
-.eliminar{ cursor: pointer; color: #000; }
+.eliminar{ cursor: pointer; color: #fff; }
 input[type="text"]{ } /* ancho a los elementos input="text" */
  
 </style>

@@ -3,6 +3,9 @@
 <head>
 	<title>Sistema de Control de Almacenes e Inventarios (SCAI)</title>
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<script src="<?php echo asset('assets/js/ajax.js')?>"></script>
+	<link rel="stylesheet" href="<?php echo asset('assets/css/bootstrap.css')?>" type="text/css">  
+	<script src="<?php echo asset('assets/js/bootstrap.js')?>"></script>
 	<link rel="stylesheet" href="<?php echo asset('css/menu.css')?>" type="text/css"/> 
 	<link rel="stylesheet" href="<?php echo asset('css/form.css')?>" type="text/css"/> 
 	<link rel="stylesheet" href="<?php echo asset('css/font/menu.css')?>" type="text/css"/>  

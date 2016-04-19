@@ -34,6 +34,12 @@ class UsuarioController extends Controller {
 
 	}
 
+	public function eliusuario(Request $request)
+	{
+		Usuario::where('id','=',$request->input('id'))->delete();
+		$mensaje="Usuario eliminado";
+			  return redirect()->route('usuario.index')->with('mensaje',$mensaje);
+	}
 	/**
 	 * Store a newly created resource in storage.
 	 *

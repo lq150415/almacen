@@ -48,6 +48,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('datos_pro2','IngresoController@datos_pro2'); 
         Route::post('rubro/{id}/registro','RubroController@store');
         Route::post('rubro/{id}/elirubro','RubroController@elirubro');
+        Route::post('verificausuario','UsuarioController@verificausuario');
         Route::resource('solicitud', 'SolicitudController@index');
         Route::post('httpush', 'SolicitudController@httpush');
         Route::post('notificaciones','SolicitudController@notificaciones');
@@ -55,6 +56,7 @@ Route::group(['middleware' => 'auth'], function () {
           Route::post('notificacionesalerta','SolicitudController@notificacionesalerta');
         Route::resource('usuario', 'UsuarioController');
         Route::post('usuario/registrar', 'UsuarioController@store');
+        Route::post('eliusuario', 'UsuarioController@eliusuario');
         Route::resource('solacepcl', 'SolicitudController@indexclac');  
         Route::resource('solreccl', 'SolicitudController@indexclrec');  
 });

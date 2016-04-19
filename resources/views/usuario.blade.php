@@ -2,6 +2,30 @@
 	@section ('contenido')
 	<script type="text/javascript">
 
+	function verifica(){
+		$(document).ready(function() {    
+   		if($('#nic_usu').val()!= ""){
+        $('#Info').html('<img src="img/loader.gif" alt="" />').fadeOut(1000);
+        var username = $(this).val();        
+        var dataString = 'username='+username;
+        $.ajax({
+            type: "POST",
+            url: "verificausuario",
+            data: dataString,
+            success: function (data) {
+            	if(data == "0")	
+            {   $('div#mensajevalidacion').html("<div style='color:red;'><img height='16' src='images/error.png'> Nombre de Usuario no disponible</div>");
+				$('#usuario').val ("");
+				return false;
+			}else{
+              return true;
+			}
+            }
+        		});
+    		}
+    		});              
+		
+		}    
 	
 		function compara() { 
 		if (document.form1.password.value != document.form1.conf_pas.value) {
@@ -11,8 +35,13 @@
 		return false; } 
 		else {
 		return true;
-}
-}
+		}
+		}
+
+		function valida(){
+			
+			verifica();
+		}
 	</script>
 		<fieldset class="fieldcuerpo" align="left">
 				<legend style="margin-bottom: 0;">USUARIOS</legend>
@@ -38,15 +67,13 @@
 		<table id="example" class="display" cellspacing="5" width="100%" style="border-radius:4px;-moz-border-radius:4px;-webkit-border-radius:4px;border:1px #444444 solid;">
 	<thead style="font-size:13px;color:#FFF;background-color:#444444;height:40px;">
 		<tr>
-			<th>ID</th>
-			<th>C.I.</th>
-            <th>NOMBRE</th>
-			<th>APELLIDO PATERNO</th>
-			<th>APELLIDO MATERNO</th>
-			<th>AREA</th>
-			<th>CARGO</th>
-			<th>NIVEL</th>
-			<th>ACCIONES</th>	
+			<th width="5%">ID</th>
+			<th width="5%">C.I.</th>
+            <th width="20%">NOMBRE COMPLETO</th>
+			<th width="5%">AREA</th>
+			<th width="5%">CARGO</th>
+			<th width="5%">NIVEL</th>
+			<th width="15%">ACCIONES</th>	
 		</tr>
 	</thead>
 		<tbody style="font-size:11px;">
@@ -58,13 +85,11 @@
 					?>
 						<th><?php echo $usuario->id;?></th>
 						<th><?php echo $usuario->CI_USU;?></th>
-						<th><?php echo $usuario->NOM_USU;?></th>
-            			<th><?php echo $usuario->APA_USU;?></th>
-						<th><?php echo $usuario->AMA_USU;?></th>
+						<th><?php echo $usuario->NOM_USU.' '.$usuario->APA_USU.' '.$usuario->AMA_USU;?></th>
 						<th><?php echo $usuario->ARE_USU;?></th>
 						<th><?php echo $usuario->CAR_USU;?></th>
 						<th><?php echo $usuario->NIV_USU;?></th>
-						<th><a href="">Ver</a><a href="·"> Modificar</a></th>	
+						<th><button data-toggle = "modal" data-target = "#myModal4" href="" class="btn btn-success" title="Ver"> <span class="glyphicon glyphicon-search"> </span> </button> <button data-toggle = "modal" title="Modificar usuario" data-target = "#myModal2" href="" class="btn btn-primary"> <span class="glyphicon glyphicon-pencil"> </span> </button> <button title="Eliminar Producto" onclick="javascript:idenvio(<?php echo $usuario->id;?>);" data-toggle = "modal" data-target = "#myModal" href="" class="btn btn-danger"><span class="glyphicon glyphicon-trash"> </span> </button></th>	
 		</tr>
 				<?php	endforeach;
 			
@@ -75,8 +100,6 @@
 			<th>ID</th>
 			<th>C.I.</th>
             <th>NOMBRE</th>
-			<th>APELLIDO PATERNO</th>
-			<th>APELLIDO MATERNO</th>
 			<th>AREA</th>
 			<th>CARGO</th>
 			<th>NIVEL</th>
@@ -108,12 +131,12 @@
                Datos personales
             </h5>
             </legend>
-            	
+            	<div id="Info" style=" float: right;"></div>
 			 <input type="hidden" name="_token" value="{{ csrf_token() }}">
 				 <div class="form-group">
             	<label class="col-lg-3 control-label">CI :</label>
          		<div class="col-md-8">
-           		 <input placeholder="CARNET DE IDENTIDAD" class="form-control" type="number" step="1" min="0" name="ci_usu">
+           		 <input placeholder="CARNET DE IDENTIDAD" class="form-control" type="number" step="1" min="0" name="ci_usu" id="ci_usu">
         		</div>
          		</div>
          		<div class="form-group">
@@ -203,7 +226,7 @@
                Cancelar
             </button>
             
-            <button type = "submit" class = "btn btn-primary" onClick="return compara();"><span style="font-size: 10px;" class="glyphicon glyphicon-plus"></span>
+            <button type = "submit" class = "btn btn-primary" onClick="return verifica();"><span style="font-size: 10px;" class="glyphicon glyphicon-plus"></span>
                Registrar
             </button>
          </div>
@@ -213,4 +236,70 @@
    </div><!-- /.modal-dialog -->
   
 </div><!-- /.modal -->
+<div class = "modal fade" id = "myModal" tabindex = "-1" role = "dialog" 
+   aria-labelledby = "myModalLabel" aria-hidden = "true">
+   
+   <div class = "modal-dialog">
+      <div class = "modal-content">
+         
+         <div class = "modal-header">
+            <button type = "button" class = "close" data-dismiss = "modal" aria-hidden = "true">
+                  &times;
+            </button>
+            <h4 class = "modal-title" id = "myModalLabel">
+               Confirmar eliminacion
+            </h4>
+         </div>
+         <form action="eliusuario" method="POST">
+         <div class = "modal-body">
+         <input type="hidden" id="id" name="id">
+            <div class=" ">Desea eliminar el elemento?</div>
+         
+         <div class = "modal-footer" style="border-top: none;">
+            <button type = "button" class = "btn btn-danger" data-dismiss = "modal"><span class="glyphicon glyphicon-remove" style="font-size: 10px; "></span>
+               Cancelar
+            </button>
+            
+            <button type = "submit" class = "btn btn-primary"><span style="font-size: 10px; " class="glyphicon glyphicon-plus"></span>
+               Aceptar
+            </button>
+         </div>
+         </div>
+         </form>
+      </div><!-- /.modal-content -->
+   </div><!-- /.modal-dialog -->
+  
+</div><!-- /.modal -->
+<div class = "modal fade" id = "myModal4" tabindex = "-1" role = "dialog" 
+   aria-labelledby = "myModalLabel" aria-hidden = "true">
+   
+   <div class = "modal-dialog">
+      <div class = "modal-content">
+         
+         <div class = "modal-header">
+            <button type = "button" class = "close" data-dismiss = "modal" aria-hidden = "true">
+                  &times;
+            </button>
+            <h4 class = "modal-title" id = "myModalLabel">
+               Usuario -  
+            </h4>
+         </div>
+         <form action="" method="POST">
+         <div class = "modal-body">
+         <input type="hidden" id="id" name="id">
+            <div class=" ">Perfil de usuario</div>
+         
+         <div class = "modal-footer" style="border-top: none;">
+            <button type = "button" class = "btn btn-success" data-dismiss = "modal"><span class="glyphicon glyphicon-ok" style="font-size: 10px; "></span>
+               Aceptar
+            </button>
+            
+         </div>
+         </div>
+         </form>
+      </div><!-- /.modal-content -->
+   </div><!-- /.modal-dialog -->
+  
+</div><!-- /.modal -->
+
 	@stop

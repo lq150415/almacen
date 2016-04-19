@@ -10,12 +10,12 @@
             </script>
          <?php if (Session::has('mensaje')):
             ?>
-                  <div class="mensajewarning" style="margin-bottom: 10px;"id="mensajewarning"><label><?php echo Session::get('mensaje');?></label></div>
+                  <div class="mensajewarning alert alert-danger" style="margin-bottom: 10px;"><label><?php echo Session::get('mensaje');?></label></div>
 
          <?php endif;?>
          <?php if (Session::has('mensaje2')):
             ?>
-                  <div class="mensajewarning" id="mensajebien" style="margin-bottom: 10px;"><label><?php echo Session::get('mensaje2');?></label></div>
+                  <div class="mensajewarning alert alert-success" style="margin-bottom: 10px;"><label><?php echo Session::get('mensaje2');?></label></div>
          <?php endif;?>
           
 	  	<button data-toggle = "modal" data-target = "#myModal3" href="" class="btn btn-success btn-sm"> <span class="glyphicon glyphicon-plus"> </span> Nuevo producto </button> 
