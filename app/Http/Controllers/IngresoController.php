@@ -151,17 +151,17 @@ class IngresoController extends Controller {
 			$f="'$e'";    
 			$h="'hidden'"; 
 		if($i==1){  
-        $html2 ='<table id="example2" class="display" cellspacing="5" width="100%" style="border-radius:4px;-moz-border-radius:4px;-webkit-border-radius:4px;border:1px #444444 solid;">
-	<thead style="font-size:13px;color:#FFF;background-color:#444444;height:40px;">
-		<tr>
-			<th>ID</th>
-			<th>ITEM </th>
-            <th>DESCRIPCION DEL PRODUCTO</th>
-			<th>PRECIO UNITARIO</th>
-			<th>ACCION</th>	
-			<th>NUEVO PRECIO</th>	
+        $html2 ='<table id="example2" class="display table table-hover" width="100%" >
+	<thead>
+		<tr class="info">
+			<th>Id</th>
+			<th>Item </th>
+            <th>Descripcion del producto</th>
+			<th>Precio</th>
+			<th>Agregar</th>	
+			<th>Precio unitario</th>	
 		</tr>
-	</thead><tbody style="font-size:11px;" id="tablabody">'.'<tr>'.'<th>'.$producto->id.'</th>'.'<th>'.$producto->ITM_PRO.'</th>'.'<th>'.$producto->DES_PRO.'</th>'.'<th>'.$producto->PUN_PRO.'</th>'.'<th><a href="javascript:agregavalor('.$h.','.$b.','.$d.','.$f.');">Agregar</a></th><th><a href=""> Nuevo Precio</th>'.'</tr>';
+	</thead><tbody id="tablabody">'.'<tr>'.'<th>'.$producto->id.'</th>'.'<th>'.$producto->ITM_PRO.'</th>'.'<th>'.$producto->DES_PRO.'</th>'.'<th>'.$producto->PUN_PRO.'</th>'.'<th><a href="javascript:agregavalor('.$h.','.$b.','.$d.','.$f.');" class="btn btn-info"><span class="glyphicon glyphicon-shopping-cart"></span></a></th><th><a href=""> Nuevo Precio</th>'.'</tr>';
 		echo "<script type='text/javascript' language='javascript' class='init'>"; 
 		echo "$(document).ready(function() {"; 
 		echo "$('#example2').DataTable();";
@@ -184,20 +184,11 @@ class IngresoController extends Controller {
 		echo $html2; $i++; }
 		else{
 		
-			$html2 = '<tr>'.'<th>'.$producto->id.'</th>'.'</th>'.'<th>'.$producto->ITM_PRO.'<th>'.$producto->DES_PRO.'</th>'.'<th>'.$producto->PUN_PRO.'</th>'.'<th>'.'<a href="javascript:agregavalor('.$h.','.$b.','.$d.','.$f.');">Agregar</a></th><th><a href=""> Nuevo Precio</a>'.'</th>'.'</tr>';
+			$html2 = '<tr>'.'<th>'.$producto->id.'</th>'.'</th>'.'<th>'.$producto->ITM_PRO.'<th>'.$producto->DES_PRO.'</th>'.'<th>'.$producto->PUN_PRO.'</th>'.'<th>'.'<a href="javascript:agregavalor('.$h.','.$b.','.$d.','.$f.');" class="btn btn-info"><span class="glyphicon glyphicon-shopping-cart"></span></a></th><th><a href=""> Nuevo Precio</a>'.'</th>'.'</tr>';
 			echo $html2;
 		}
 		endforeach;
-		echo "<tfoot style='font-size:13px;color:#FFF;background-color:#444444;height:40px;''>
-		<tr>
-			<th>ID</th>
-			<th>ITEM</th>			
-            <th>DESCRIPCION DEL PRODUCTO</th>
-			<th>PRECIO UNITARIO</th>
-			<th>ACCION</th>	
-			<th>NUEVO PRECIO</th>			
-		</tr>
-	</tfoot></table>";
+		
 	}
 
 public function datos_pro2()

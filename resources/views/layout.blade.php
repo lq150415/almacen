@@ -75,23 +75,14 @@ function despliegaModal( _valor ){
 
 	document.getElementById("bgVentanaModal").style.visibility=_valor;
 	}
+function despliegaModal2( _valor ){
 
-</script>
-<script type="text/javascript" lang="javascript">
-function cierramodal(){
-	$("#myModal4").modal("hide");
-}
-function pasadatos(){
-	
-	$('#alm2').val($('#alm').val());
-	$('#rub2').val($('#rub').val());
-
-	}
-function despliegaModal2a( _valor ){
 	document.getElementById("bgVentanaModal2").style.visibility=_valor;
-
+		$('#alm2').val($('#alm').val());
+	$('#rub2').val($('#rub').val());
 	}
 </script>
+
 
 <script type="text/javascript">
 function despliegaModal3( _valor ){
@@ -195,7 +186,21 @@ $(function(){
 });
  
 </script>
+<script type="text/javascript" lang="javascript">
+function cierramodal(){
+	$("#myModal4").modal("hide");
+}
+function pasadatos(){
+	
+	$('#alm2').val($('#alm').val());
+	$('#rub2').val($('#rub').val());
 
+	}
+function despliegaModal2a( _valor ){
+	document.getElementById("bgVentanaModal2").style.visibility=_valor;
+
+	}
+</script>
 <script language="javascript">
 
 $(document).ready(function(){
