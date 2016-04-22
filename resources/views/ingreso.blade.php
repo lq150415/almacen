@@ -110,13 +110,13 @@
          <div class="form-group">
             	<label class="col-lg-3 control-label">Nro de factura :</label>
          		<div class="col-md-8">
-           		 <input type="number" name="" id="nro_fac1" value="" class="form-control" placeholder="NUMERO DE FACTURA" onpaste="return false">
+           		 <input type="number" min="0" name="" id="nro_fac1" value="" class="form-control" placeholder="NUMERO DE FACTURA" onpaste="return false">
         		</div>
          		</div>
         <div class="form-group">
             	<label class="col-lg-3 control-label">Nro de orden de compra :</label>
          		<div class="col-md-8">
-           		 <input type="number" name="" id="nro_com1" value="" class="form-control" placeholder="NUMERO DE ORDEN DE COMPRA" onpaste="return false">
+           		 <input type="number" name="" min="0" id="nro_com1" value="" class="form-control" placeholder="NUMERO DE ORDEN DE COMPRA" onpaste="return false">
         		</div>
          		</div>
 		 <div class="form-group">
@@ -128,14 +128,11 @@
          <div class="form-group">
             	<label class="col-lg-3 control-label">Cantidad :</label>
          		<div class="col-md-8">
-           		 <input type="number" id="cant" name="" value="" class="form-control" placeholder="CANTIDAD " onpaste="return false">
+           		 <input type="number" id="cant" min="0" name="" value="" class="form-control" placeholder="CANTIDAD " onpaste="return false">
         		</div>
          		</div>
 	</form>
-			<a class="btn btn-primary" href="javascript:despliegaModal3('visible');">+ Nuevo producto</a>
-					 	</br>
-
-</br>
+			
 <div id="tablabody" style="overflow: auto;">
 		
 </div>
@@ -146,50 +143,72 @@
 </form>
 </div>
 <div id="bgVentanaModal3" class="bgventanaModal3">
-<div id="VentanaModal3" class="VentanaModal3">
-<a href="javascript:despliegaModal3('hidden');" title="Cerrar"><span class="icon-switch" style="float: right; color: #000; font-size: 20px;"></span></a>
-		</br>
-		<fieldset class="fieldcuerpo" align="left">
-			<legend>REGISTRO DE NUEVO PRODUCTO</legend>
-			<form class="formularioreg">
-				<table style="margin-top: 4%;  margin-left: 10%;">
-						<tr style="height: 50px;">
-							<td width="130px" class="lblnombre">Item del producto</td>
-							<td width="250px"><input type="text" name="" id="itm_prod" class="txtcampo large2" placeholder="NOMBRE DEL PRODUCTO" onpaste="return false" ></td>
-						</tr>
-						<tr style="height: 50px;">
-							<td width="130px" class="lblnombre">Descripcion del producto</td>
-							<td><textarea class="txtcampo textarea" id="des_prod" placeholder="DESCRIPCION DEL PRODUCTO" cols="55" rows="5" onpaste="return false" ></textarea></td>
-						</tr>
-						<tr style="height: 50px;">
-							<td width="130px" class="lblnombre">Precio unitario </td>
-							<td width="250px"><input type="text" name="" id="pun_prod" class="txtcampo large" placeholder="P/U en Bs." onkeypress="return sololetras(event);" onpaste="return false" ></td>
-						</tr>
-						<input type="hidden" id="can_prod" value="0"></input>
-							
-					</table>
-					<table style="margin-left: 30%;">
-						<tr style="height: 50px;">
-							<td>
-								<input type="button" name="" id="btn_reg" class="botones ico-btnsave" value="REGISTRAR">
-                 				<input type="reset"  onclick="javascript:despliegaModal3('hidden');" class="botones ico-btnlimpiar" value="LIMPIAR DATOS">
-                 			</td>
-						</tr>
-					</table>
+<div id="" class="modal-dialog">
+<div class="modal-content">
+ <div class = "modal-header">
+<table style="float: right;"><td class="eliminar" style="background-color: transparent;"><a href="javascript:despliegaModal3('hidden');" title="Cerrar" class="close">&times;</a></td></table>
+<h4 class = "modal-title" id = "myModalLabel">
+               Registro de nuevo producto
+            </h4>
+</div>
+	 <div class = "modal-body">
+	<form class="form-horizontal">
+				<div class="form-group">
+            	<label class="col-lg-3 control-label">Item del producto :</label>
+         		<div class="col-md-8">
+           		<input type="number" min="0" name="" id="itm_prod" value="" class="form-control" placeholder="NUMERO DE ITEM" onpaste="return false">
+        		</div>
+         		</div>
+				<div class="form-group">
+            	<label class="col-lg-3 control-label">Descripcion del producto :</label>
+         		<div class="col-md-8">
+           		<textarea class="form-control" id="des_prod" placeholder="DESCRIPCION DEL PRODUCTO" cols="55" rows="5" onpaste="return false" ></textarea>
+        		</div>
+         		</div>		
+				<div class="form-group">
+            	<label class="col-lg-3 control-label">Precio unitario :</label>
+         		<div class="col-md-8">
+           		<input type="number" step="any" name="" id="pun_prod" class="form-control" placeholder="P/U en Bs." onpaste="return false" >
+        		</div>
+         		</div>				
+					
+				<div class = "modal-footer" style="border-top: 0;">
+            	<button type = "button" class = "btn btn-danger" onclick="javascript:despliegaModal3('hidden');"><span class="glyphicon glyphicon-remove" style="font-size: 10px;"></span>
+               Cancelar
+            	</button>
+            
+            	<button type="button" name="" id="btn_reg"  class = "btn btn-primary"><span style="font-size: 10px;" class="glyphicon glyphicon-plus"></span>
+               Registrar
+           		</button>
+         		</div>		
+					
 			</form>
-		</fieldset>
+	</div>
+		</div>
 </div>
 </div>
 	@stop
 	@section ('contenido')
 		<fieldset class="fieldcuerpo"  align="left">
 					<legend style="margin-bottom: 0;">Ingresos</legend>
-	  	<div>
+	  	<div>	
+	  	<script type="text/javascript">
+              $(document).ready(function() { setTimeout(function(){ $(".mensajewarning").fadeIn(2500); },0000); });
+              $(document).ready(function() { setTimeout(function(){ $(".mensajewarning").fadeOut(2500); },5000); });
+            </script>
+         <?php if (Session::has('mensaje')):
+            ?>
+                  <div class="mensajewarning alert alert-danger" style="margin-bottom: 10px;"><label><?php echo Session::get('mensaje');?></label></div>
+         <?php endif;?>
+         <?php if (Session::has('mensaje3')):
+            ?>
+                  <div class="mensajewarning alert alert-success"  style="margin-bottom: 10px;"><label><?php echo Session::get('mensaje3');?></label></div>
+         <?php endif;?>
 
 	  	<a class="btn btn-success" href="javascript:despliegaModal('visible');"><span class="glyphicon glyphicon-plus"></span> Nuevo ingreso</a>
 	  	<fieldset class="fieldcuerpo" align="left">
 					<legend>DETALLE</legend>
-		<table id="example" class="display" cellspacing="5" width="100%" style="border-radius:4px;-moz-border-radius:4px;-webkit-border-radius:4px;border:1px #444444 solid;">
+		<table id="example4" class="display" cellspacing="5" width="100%" style="border-radius:4px;-moz-border-radius:4px;-webkit-border-radius:4px;border:1px #444444 solid;">
 	<thead style="font-size:13px;color:#FFF;background-color:#444444;height:40px;">
 		<tr>
             <th>FECHA DE INGRESO</th>

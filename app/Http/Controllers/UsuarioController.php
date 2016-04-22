@@ -33,7 +33,14 @@ class UsuarioController extends Controller {
 	{
 
 	}
-
+	public function verificausuario(){
+		$usuario= Usuario::where('NIC_USU','=',$_POST['datos'])->get();
+		if(count($usuario)==1){
+			echo 0;
+		}else{
+			echo 1;
+		}
+	}
 	public function eliusuario(Request $request)
 	{
 		Usuario::where('id','=',$request->input('id'))->delete();

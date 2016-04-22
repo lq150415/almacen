@@ -3,28 +3,32 @@
 	<script type="text/javascript">
 
 	function verifica(){
-		$(document).ready(function() {    
+		$(document).ready(function() {   
+		$(document).ready(function() { setTimeout(function(){ $(".mensajevalidacion").fadeIn(2500); },0500); });
+    			$(document).ready(function() { setTimeout(function(){ $(".mensajevalidacion").fadeOut(2500); },5000); }); 
    		if($('#nic_usu').val()!= ""){
-        $('#Info').html('<img src="img/loader.gif" alt="" />').fadeOut(1000);
-        var username = $(this).val();        
-        var dataString = 'username='+username;
+        var datos = $('#nic_usu').val();
         $.ajax({
             type: "POST",
+            async: false,  
             url: "verificausuario",
-            data: dataString,
+            data: "&datos="+datos,
+            dataType: "html",
             success: function (data) {
-            	if(data == "0")	
-            {   $('div#mensajevalidacion').html("<div style='color:red;'><img height='16' src='images/error.png'> Nombre de Usuario no disponible</div>");
-				$('#usuario').val ("");
-				return false;
+           	if(data=="0"){
+            	document.getElementById('mensajevalidacion').innerHTML ='<div class="alert alert-danger mensaje2">Usuario existente </div>';
+				
+				result='false';
 			}else{
-              return true;
-			}
+			result='true';
+            }
             }
         		});
+    	
     		}
-    		});              
-		
+
+    		}); 
+    		return result;             
 		}    
 	
 		function compara() { 
@@ -41,6 +45,7 @@
 		function valida(){
 			
 			verifica();
+			compara();
 		}
 	</script>
 		<fieldset class="fieldcuerpo" align="left">
@@ -73,7 +78,7 @@
 			<th width="5%">AREA</th>
 			<th width="5%">CARGO</th>
 			<th width="5%">NIVEL</th>
-			<th width="15%">ACCIONES</th>	
+			<th width="15%" data-orderable="false">ACCIONES</th>	
 		</tr>
 	</thead>
 		<tbody style="font-size:11px;">
@@ -191,7 +196,7 @@
 				 <div class="form-group">
             	<label class="col-lg-3 control-label">Usuario :</label>
          		<div class="col-md-8">
-           		 <input placeholder="CI/ NICK DE USUARIO" class="form-control" name="nic_usu">
+           		 <input placeholder="CI/ NICK DE USUARIO" class="form-control" name="nic_usu" id="nic_usu">
         		</div>
          		</div>
          		 <div class="form-group">
@@ -226,7 +231,7 @@
                Cancelar
             </button>
             
-            <button type = "submit" class = "btn btn-primary" onClick="return verifica();"><span style="font-size: 10px;" class="glyphicon glyphicon-plus"></span>
+            <button type = "button" class = "btn btn-primary" onClick="return verifica();"><span style="font-size: 10px;" class="glyphicon glyphicon-plus"></span>
                Registrar
             </button>
          </div>

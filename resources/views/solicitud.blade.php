@@ -96,7 +96,7 @@
 					<legend style="margin-bottom: 0;">SOLICITUDES</legend>
 	  	<div>
 	  	<a href="javascript:despliegaModal('visible');">+ Nueva solicitud</a>
-	  	<fieldset class="fieldcuerpo" align="left">
+	  	<fieldset class="fieldcuerpo solacep" align="left">
 					<legend  style="margin-bottom: 0;">SOLICITUDES RECIENTES</legend>
 		<div id="solicitud"></div>
 

@@ -167,7 +167,7 @@ class SolicitudController extends Controller {
 	public function notificaciones()
 	{
 		$q = new Notificacion;
-		$q = $q->join('solicitudes', 'notificaciones.ID_PSO','=','solicitudes.id')->join('users', 'solicitudes.ID_USU','=','users.id')->where('notificaciones.DES_NOT','=',$_POST['div'])->orderBy('notificaciones.updated_at', 'DESC')->get();
+		$q = $q->join('solicitudes', 'notificaciones.ID_PSO','=','solicitudes.id')->join('users', 'solicitudes.ID_USU','=','users.id')->where('notificaciones.DES_NOT','=',$_POST['div'])->orderBy('notificaciones.updated_at', 'DESC')->paginate(5);
 		$i=1;
 		foreach ($q as $qs ) :
 			if($qs->REA_NOT==0){
@@ -178,9 +178,9 @@ class SolicitudController extends Controller {
 				$a='Enviado a revision';
 			}
 			if($i==1){  
-		$html2 ='<table id="example2" class="display" cellspacing="5" width="100%" style="border-radius:4px;-moz-border-radius:4px;-webkit-border-radius:4px;border:1px #444444 solid;">
-	<thead style="font-size:13px;color:#FFF;background-color:#444444;height:40px;">
-		<tr>
+		$html2 ='<table id="example2" class="table" cellspacing="5" width="100%" >
+	<thead >
+		<tr class="success">
 			<th>TIPO</th>
 			<th>FECHA DE SOLICITUD</th>
             <th>USUARIO</th>
@@ -189,8 +189,17 @@ class SolicitudController extends Controller {
 		</tr>
 	</thead><tbody style="font-size:11px;" id="tablabody">'.'<tr>'.'<th>'.$qs->TIP_NOT.'</th>'.'<th>'.$qs->updated_at.'</th>'.'<th>'.$qs->NOM_USU.' '.$qs->APA_USU.' '.$qs->AMA_USU.'</th><th>'.$a.'</th><th><a href="">Revisar</a></th></tr>';
 		echo "<script type='text/javascript' language='javascript' class='init'>"; 
+		$ar='"bPaginate"';
+		$ap='"bFilter"';
+		$sd='"bInfo"';
+		$sp='"bSort"';
 		echo "$(document).ready(function() {"; 
-		echo "$('#example2').DataTable();";
+		echo "$('#example2').DataTable( {
+        ".$ar.": false,
+        ".$ap.": false,
+        ".$sp.": false,
+        ".$sd.": false
+                 } );";
 		echo "} );";
 		echo "</script>";  
 		
@@ -201,15 +210,7 @@ class SolicitudController extends Controller {
 			echo $html2;
 		}
 		endforeach;
-		echo "<tfoot style='font-size:13px;color:#FFF;background-color:#444444;height:40px;''>
-		<tr>
-			<th>ID</th>
-			<th>FECHA DE SOLICITUD</th>
-            <th>USUARIO</th>
-            <th>ESTADO</th>
-			<th>ACCION</th>			
-		</tr>
-	</tfoot></table>";
+		
 		
 
 		}

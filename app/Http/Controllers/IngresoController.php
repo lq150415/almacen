@@ -72,6 +72,12 @@ class IngresoController extends Controller {
         	$ingresados->created_at = Carbon::now();
         	$ingresados->updated_at = Carbon::now();
 			$ingresados->save();
+
+			$cantidades = new Producto;
+			$id = $request->input('idproducto.'.$i);
+			$cantidades= $cantidades->find($id);
+			$cantidades->CAN_PRO += $request->input('can_pro.'.$i);
+			$cantidades->save();
 		}
 		$mensaje="Ingreso registrado correctamente";
         return redirect()->route('ingreso.index')->with('mensaje3',$mensaje);
@@ -151,7 +157,12 @@ class IngresoController extends Controller {
 			$f="'$e'";    
 			$h="'hidden'"; 
 		if($i==1){  
-        $html2 ='<table id="example2" class="display table table-hover" width="100%" >
+		$ab ="'visible'";
+        $html2 ='<a class="btn btn-primary" href="javascript:despliegaModal3('.$ab.');">+ Nuevo producto</a>
+					 	</br>
+
+</br>
+        <table id="example2" class="display table table-hover" width="100%" >
 	<thead>
 		<tr class="info">
 			<th>Id</th>
@@ -159,9 +170,89 @@ class IngresoController extends Controller {
             <th>Descripcion del producto</th>
 			<th>Precio</th>
 			<th>Agregar</th>	
-			<th>Precio unitario</th>	
+			<th>Nuevo precio</th>	
+		</tr>
+	</thead><tbody id="tablabody">'.'<tr>'.'<th>'.$producto->id.'</th>'.'<th>'.$producto->ITM_PRO.'</th>'.'<th>'.$producto->DES_PRO.'</th>'.'<th>'.$producto->PUN_PRO.'</th>'.'<th><a href="javascript:agregavalor('.$h.','.$b.','.$d.','.$f.');" class="btn btn-info"><span class="glyphicon glyphicon-shopping-cart"></span></a></th><th><a class="btn btn-success"><span class="glyphicon glyphicon-usd"></span></a></th>'.'</tr>';
+		echo "<script type='text/javascript'>";
+		echo "function despliegaModal3(_valor){";
+		echo "document.getElementById('bgVentanaModal3').style.visibility=_valor;";
+		echo "}";
+		echo "</script>";
+		echo "<script type='text/javascript' language='javascript' class='init'>"; 
+		echo "$(document).ready(function() {"; 
+		echo "$('#example2').DataTable();";
+		echo "} );";
+		echo "</script>";  
+		echo "<script type='text/javascript' lang='javascript'>";
+		echo "function agregavalor(_value, data, data2,data3){";
+		echo "document.getElementById('bgVentanaModal2').style.visibility = _value;";
+	//	echo "$('#tabla tbody tr:eq(0)').clone().removeClass('fila-base').appendTo('#tabla tbody');";
+		echo "$('#nro_fac').val($('#nro_fac1').val());";
+		echo "$('#can_pro').val($('#cant').val());";
+		echo "$('#pro_pin').val($('#pro_pin1').val());";
+		echo "$('#idproducto').val(data3);";
+		echo "$('#producto').val(data);";
+		echo "$('#pre_pro').val(data2);";
+		echo "$('#nro_com').val($('#nro_com1').val());}";
+		echo "</script>";
+
+		
+		echo $html2; $i++; }
+		else{
+		
+			$html2 = '<tr>'.'<th>'.$producto->id.'</th>'.'</th>'.'<th>'.$producto->ITM_PRO.'<th>'.$producto->DES_PRO.'</th>'.'<th>'.$producto->PUN_PRO.'</th>'.'<th>'.'<a href="javascript:agregavalor('.$h.','.$b.','.$d.','.$f.');" class="btn btn-info"><span class="glyphicon glyphicon-shopping-cart"></span></a></th><th><a class="btn btn-success"> <span class="glyphicon glyphicon-usd"></span></a>'.'</th>'.'</tr>';
+			echo $html2;
+		}
+		endforeach;
+		
+	}
+
+public function datos_pro2()
+	{
+		$productos2 = new Producto;
+		
+		$productos2->ITM_PRO = $_POST['itm'];
+        $productos2->DES_PRO = $_POST['des'];
+        $productos2->PUN_PRO = $_POST['pun'];
+        $productos2->CAN_PRO = 0;
+        $productos2->ID_RUB = $_POST['id'];
+        $productos2->created_at = Carbon::now();
+        $productos2->updated_at = Carbon:: now();
+		$productos2->save();
+
+		$id = $_POST['id'];
+		$productos = Producto::where('ID_RUB','=',$id)->get();
+		$i=1;
+		foreach ($productos as $producto):   
+			$a=$producto->DES_PRO;
+			$b="'$a'";
+			$c=$producto->PUN_PRO;
+			$d="'$c'"; 
+			$e=$producto->id;
+			$f="'$e'";    
+			$h="'hidden'"; 
+		if($i==1){  
+     $ab ="'visible'";
+        $html2 ='<a class="btn btn-primary" href="javascript:despliegaModal3('.$ab.');">+ Nuevo producto</a>
+					 	</br>
+
+</br>
+        <table id="example2" class="display table table-hover" width="100%" >
+	<thead>
+		<tr class="info">
+			<th>Id</th>
+			<th>Item </th>
+            <th>Descripcion del producto</th>
+			<th>Precio</th>
+			<th>Agregar</th>	
+			<th>Nuevo Precio</th>	
 		</tr>
 	</thead><tbody id="tablabody">'.'<tr>'.'<th>'.$producto->id.'</th>'.'<th>'.$producto->ITM_PRO.'</th>'.'<th>'.$producto->DES_PRO.'</th>'.'<th>'.$producto->PUN_PRO.'</th>'.'<th><a href="javascript:agregavalor('.$h.','.$b.','.$d.','.$f.');" class="btn btn-info"><span class="glyphicon glyphicon-shopping-cart"></span></a></th><th><a href=""> Nuevo Precio</th>'.'</tr>';
+		echo "<script type='text/javascript'>";
+		echo "function despliegaModal3(_valor){";
+		echo "document.getElementById('bgVentanaModal3').style.visibility=_valor;";
+		echo "}";
+		echo "</script>";
 		echo "<script type='text/javascript' language='javascript' class='init'>"; 
 		echo "$(document).ready(function() {"; 
 		echo "$('#example2').DataTable();";
@@ -188,84 +279,7 @@ class IngresoController extends Controller {
 			echo $html2;
 		}
 		endforeach;
-		
-	}
-
-public function datos_pro2()
-	{
-		$productos2 = new Producto;
-		
-		$productos2->ITM_PRO = $_POST['itm'];
-        $productos2->DES_PRO = $_POST['des'];
-        $productos2->PUN_PRO = $_POST['pun'];
-        $productos2->CAN_PRO = $_POST['can'];
-        $productos2->ID_RUB = $_POST['id'];
-        $productos2->created_at = Carbon::now();
-        $productos2->updated_at = Carbon:: now();
-		$productos2->save();
-
-		$id = $_POST['id'];
-		$productos = Producto::where('ID_RUB','=',$id)->get();
-		$i=1;
-		foreach ($productos as $producto):   
-			$a=$producto->DES_PRO;
-			$b="'$a'";
-			$c=$producto->PUN_PRO;
-			$d="'$c'"; 
-			$e=$producto->id;
-			$f="'$e'";    
-			$h="'hidden'"; 
-		if($i==1){  
-        $html2 ='<table id="example2" class="display" cellspacing="5" width="100%" style="border-radius:4px;-moz-border-radius:4px;-webkit-border-radius:4px;border:1px #444444 solid;">
-	<thead style="font-size:13px;color:#FFF;background-color:#444444;height:40px;">
-		<tr>
-			<th>ID</th>
-			<th>ITEM </th>
-            <th>DESCRIPCION DEL PRODUCTO</th>
-			<th>PRECIO UNITARIO</th>
-			<th>ACCION</th>	
-			<th>NUEVO PRECIO</th>	
-		</tr>
-	</thead><tbody style="font-size:11px;" id="tablabody">'.'<tr>'.'<th>'.$producto->id.'</th>'.'<th>'.$producto->ITM_PRO.'</th>'.'<th>'.$producto->DES_PRO.'</th>'.'<th>'.$producto->PUN_PRO.'</th>'.'<th><a href="javascript:agregavalor('.$h.','.$b.','.$d.','.$f.');">Agregar</a></th><th><a href=""> Nuevo Precio</th>'.'</tr>';
-		echo "<script type='text/javascript' language='javascript' class='init'>"; 
-		echo "$(document).ready(function() {"; 
-		echo "$('#example2').DataTable();";
-		echo "} );";
-		echo "</script>";  
-		echo "<script type='text/javascript' lang='javascript'>";
-		echo "function agregavalor(_value, data, data2,data3){";
-		echo "document.getElementById('bgVentanaModal2').style.visibility = _value;";
-	//	echo "$('#tabla tbody tr:eq(0)').clone().removeClass('fila-base').appendTo('#tabla tbody');";
-		echo "$('#nro_fac').val($('#nro_fac1').val());";
-		echo "$('#can_pro').val($('#cant').val());";
-		echo "$('#pro_pin').val($('#pro_pin1').val());";
-		echo "$('#idproducto').val(data3);";
-		echo "$('#producto').val(data);";
-		echo "$('#pre_pro').val(data2);";
-		echo "$('#nro_com').val($('#nro_com1').val());}";
-		echo "</script>";
-
-		
-		echo $html2; $i++; }
-		else{
-		
-			$html2 = '<tr>'.'<th>'.$producto->id.'</th>'.'</th>'.'<th>'.$producto->ITM_PRO.'<th>'.$producto->DES_PRO.'</th>'.'<th>'.$producto->PUN_PRO.'</th>'.'<th>'.'<a href="javascript:agregavalor('.$h.','.$b.','.$d.','.$f.');">Agregar</a></th><th><a href=""> Nuevo Precio</a>'.'</th>'.'</tr>';
-			echo $html2;
-		}
-		endforeach;
-		echo "<tfoot style='font-size:13px;color:#FFF;background-color:#444444;height:40px;''>
-		<tr>
-			<th>ID</th>
-			<th>ITEM</th>			
-            <th>DESCRIPCION DEL PRODUCTO</th>
-			<th>PRECIO UNITARIO</th>
-			<th>ACCION</th>	
-			<th>NUEVO PRECIO</th>			
-		</tr>
-	</tfoot></table>";
-	}
 
 
-
-
+}
 }

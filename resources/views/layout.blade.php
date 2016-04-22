@@ -59,7 +59,9 @@
 				
 				$('#example').DataTable();
 				$('#example2').DataTable();
-				
+				$('#example4').DataTable( {
+       				 "order": [[ 6, "desc" ]]
+   				 } );
 			} );
 		</script>
 		<script type="text/javascript" language="javascript" >
@@ -84,12 +86,7 @@ function despliegaModal2( _valor ){
 </script>
 
 
-<script type="text/javascript">
-function despliegaModal3( _valor ){
-	document.getElementById("bgVentanaModal3").style.visibility=_valor;
-	}
 
-</script>
 <!--Esto es para el datepicker-->
 
 <link rel="stylesheet" type="text/css" href="<?php echo asset('css/jquery-ui.theme.css')?>">
