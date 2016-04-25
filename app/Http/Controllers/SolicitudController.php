@@ -167,9 +167,28 @@ class SolicitudController extends Controller {
 	public function notificaciones()
 	{
 		$q = new Notificacion;
-		$q = $q->join('solicitudes', 'notificaciones.ID_PSO','=','solicitudes.id')->join('users', 'solicitudes.ID_USU','=','users.id')->where('notificaciones.DES_NOT','=',$_POST['div'])->orderBy('notificaciones.updated_at', 'DESC')->paginate(5);
+		$q = $q->join('solicitudes', 'notificaciones.ID_PSO','=','solicitudes.id')->join('users', 'solicitudes.ID_USU','=','users.id')->where('notificaciones.DES_NOT','=',$_POST['div'])->where('notificaciones.REA_NOT','=',0)->orderBy('notificaciones.updated_at', 'DESC')->paginate(5);
 		$i=1;
 		foreach ($q as $qs ) :
+		echo "<script type='text/javascript' language='javascript' class='init'>"; 
+		echo "function revisar(data1, data2, data3){";
+		echo "$('#fec_sol').val(data1);";
+		echo "$('#usu_sol').val(data2);";
+		echo "var id=data3;";
+		echo "$.post('prod_sol', {id:id}, function(data){";
+        echo "$('#prod_sol').html(data);";
+        echo "});";  
+		echo "}";
+		echo "</script>"; 
+
+		echo "<script type='text/javascript' language='javascript' class='init'>"; 
+		echo "$(document).on('click','.eliminar',function(){";
+		echo "var parent = $(this).parents().get(0);";
+		echo "$(parent).remove();";
+		echo "ind2--;";
+		
+		echo "});";
+		echo "</script>"; 
 			if($qs->REA_NOT==0){
 				$a='No leido';
 			}elseif($qs->REA_NOT==1){
@@ -178,16 +197,20 @@ class SolicitudController extends Controller {
 				$a='Enviado a revision';
 			}
 			if($i==1){  
-		$html2 ='<table id="example2" class="table" cellspacing="5" width="100%" >
-	<thead >
-		<tr class="success">
+		$fechas=$qs->updated_at->format('d/m/Y');
+		$nombres=$qs->NOM_USU.' '.$qs->APA_USU.' '.$qs->AMA_USU;
+		$fecha= "'".$fechas."'";
+		$nombre= "'".$nombres."'";
+		$html2 ='<table id="example2" class="table table-hover" cellspacing="5" width="100%" >
+	<thead>
+		<tr class="default">
 			<th>TIPO</th>
 			<th>FECHA DE SOLICITUD</th>
             <th>USUARIO</th>
             <th>ESTADO</th>
 			<th>ACCION</th>	
 		</tr>
-	</thead><tbody style="font-size:11px;" id="tablabody">'.'<tr>'.'<th>'.$qs->TIP_NOT.'</th>'.'<th>'.$qs->updated_at.'</th>'.'<th>'.$qs->NOM_USU.' '.$qs->APA_USU.' '.$qs->AMA_USU.'</th><th>'.$a.'</th><th><a href="">Revisar</a></th></tr>';
+	</thead><tbody style="font-size:11px;" id="tablabody">'.'<tr>'.'<th>'.$qs->TIP_NOT.'</th>'.'<th>'.$qs->updated_at.'</th>'.'<th>'.$qs->NOM_USU.' '.$qs->APA_USU.' '.$qs->AMA_USU.'</th><th>'.$a.'</th><th><button data-toggle = "modal" title="Revisar solicitud" onclick="revisar('.$fecha.','.$nombre.','.$qs->ID_PSO.');" data-target = "#myModal"  class="btn btn-danger"> <span class="glyphicon glyphicon-exclamation-sign" ></span> Revisar</button></th></tr>';
 		echo "<script type='text/javascript' language='javascript' class='init'>"; 
 		$ar='"bPaginate"';
 		$ap='"bFilter"';
@@ -205,8 +228,11 @@ class SolicitudController extends Controller {
 		
 		echo $html2; $i++; }
 		else{
-		
-			$html2 ='<tr>'.'<th>'.$qs->TIP_NOT.'</th>'.'<th>'.$qs->updated_at.'</th>'.'<th>'.$qs->NOM_USU.' '.$qs->APA_USU.' '.$qs->AMA_USU.'</th><th>'.$a.'</th><th><a href="">Revisar</a></th></tr>';
+		$fechas=$qs->updated_at->format('d/m/Y');
+		$nombres=$qs->NOM_USU.' '.$qs->APA_USU.' '.$qs->AMA_USU;
+		$fecha= "'".$fechas."'";
+		$nombre= "'".$nombres."'";
+			$html2 ='<tr>'.'<th>'.$qs->TIP_NOT.'</th>'.'<th>'.$qs->updated_at.'</th>'.'<th>'.$qs->NOM_USU.' '.$qs->APA_USU.' '.$qs->AMA_USU.'</th><th>'.$a.'</th><th><button onclick="revisar('.$fecha.','.$nombre.','.$qs->ID_PSO.');" data-toggle = "modal" title="Revisar solicitud" data-target = "#myModal"  class="btn btn-danger"> <span class="glyphicon glyphicon-exclamation-sign"> </span> Revisar</button></th></tr>';
 			echo $html2;
 		}
 		endforeach;
@@ -215,9 +241,40 @@ class SolicitudController extends Controller {
 
 		}
 	
+	public function prod_sol(){
+		$productos= Solicitado::where('ID_SOL','=',$_POST['id'])->join('productos','productos.id','=','solicitados.ID_PRO')->get();
+		echo"<table id='tabla' class='table table-responsive table-hover'>
+			<thead>
+			<tr>
+				<th width='48%'>Producto</th>
+				<th width='9%'>Cantidad</th>
+				<th width='10%'>&nbsp;</th>
+			</tr>
+			</thead>
+			<tbody>";
+		foreach ($productos as $producto):
+			echo "<tr> 				
+				<td><input type='text' class='form-control' id='producto' name='producto[]' readonly='readonly' value='".$producto->DES_PRO."'/></td>
+					<input type='hidden' class='form-control' id='idproducto' name='idproducto[]' readonly='readonly'/>
+					<input type='hidden' class='form-control' id='pro_pin' name='pro_pin[]'  readonly='readonly'/>
+							
+					<td><input type='number' value='".$producto->CAN_SOL."'' id='can_pro' class='form-control' name='can_pro[]'/></td>
+								<td class='btn btn-danger eliminar'><span class='glyphicon glyphicon-remove'></span> Eliminar</td>								
+							</tr>";
+		endforeach;
+	}
+
 	public function notificacionescount()
 	{
 		$contar=Notificacion::where('notificaciones.REA_NOT','=',$_POST['div'])->count();
+		
+			echo $contar;
+
+	
+	}
+	public function notificacionesleidas()
+	{
+		$contar=Notificacion::where('notificaciones.REA_NOT','<=','1')->count();
 		
 			echo $contar;
 

@@ -95,11 +95,65 @@
 		<fieldset class="fieldcuerpo" align="left">
 					<legend style="margin-bottom: 0;">SOLICITUDES</legend>
 	  	<div>
-	  	<a href="javascript:despliegaModal('visible');">+ Nueva solicitud</a>
-	  	<fieldset class="fieldcuerpo solacep" align="left">
-					<legend  style="margin-bottom: 0;">SOLICITUDES RECIENTES</legend>
+	  	<button onClick="javascript:despliegaModal('visible');" class="btn btn-success" style="float: left;"><span class="glyphicon glyphicon-plus"> </span> Nueva solicitud</button>
+	  	<button onClick="javascript:despliegaModal('visible');" class="btn btn-info" style="float: right;"><span class="glyphicon glyphicon-search"> </span> Ver todas las solicitudes <span class="btn btn-danger" style="padding: 2px;"id="leidas"></span></button>
+	  	</br>
+	  	</br>
+	  	 <div class = "modal-header alert-success">
+            <h4 class = "modal-title" id = "myModalLabel">
+               Recientes 
+            </h4>
+         </div>
 		<div id="solicitud"></div>
 
 </fieldset>
 </fieldset>
+
+<div class = "modal fade" id = "myModal" tabindex = "-1" role = "dialog" 
+   aria-labelledby = "myModalLabel" aria-hidden = "true">
+   
+   <div class = "modal-dialog">
+      <div class = "modal-content">
+         
+         <div class = "modal-header">
+            <button type = "button" class = "close" data-dismiss = "modal" aria-hidden = "true">
+                  &times;
+            </button>
+            <h4 class = "modal-title" id = "myModalLabel">
+               Revisar solicitud 
+            </h4>
+         </div>
+       <form class="form-horizontal" name="almacen_form" action="" method="POST">
+         <div class = "modal-body">
+         <input type="hidden" id="id" name="id">
+            <div class="form-group">
+            	<label class="col-lg-3 control-label">Fecha de solicitud:</label>
+         		<div class="col-md-8">
+           		 <input type="text" min="0" name="" id="fec_sol" class="form-control" readonly="readonly">
+        		</div>
+         		</div>
+         	<div class="form-group">
+            	<label class="col-lg-3 control-label">Solicitante:</label>
+         		<div class="col-md-8">
+           		 <input type="text" name="usu_sol" id="usu_sol" value="" class="form-control" readonly="readonly">
+        		</div>
+         		</div>
+         	<div class="table-responsive" id="prod_sol">
+					
+				</div>
+         <div class = "modal-footer" style="border-top: none;">
+            <button type = "button" class = "btn btn-danger" data-dismiss = "modal"><span class="glyphicon glyphicon-remove" style="font-size: 10px; "></span>
+               Cancelar
+            </button>
+            
+            <button type = "submit" class = "btn btn-success"><span style="font-size: 10px; " class="glyphicon glyphicon-check"></span>
+               Enviar a aprobacion
+            </button>
+         </div>
+         </div>
+         </form>
+      </div><!-- /.modal-content -->
+   </div><!-- /.modal-dialog -->
+  
+</div><!-- /.modal -->
 	@stop

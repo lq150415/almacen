@@ -206,8 +206,8 @@
          <?php endif;?>
 
 	  	<a class="btn btn-success" href="javascript:despliegaModal('visible');"><span class="glyphicon glyphicon-plus"></span> Nuevo ingreso</a>
-	  	<fieldset class="fieldcuerpo" align="left">
-					<legend>DETALLE</legend>
+	  </br>
+	  	  </br>
 		<table id="example4" class="display" cellspacing="5" width="100%" style="border-radius:4px;-moz-border-radius:4px;-webkit-border-radius:4px;border:1px #444444 solid;">
 	<thead style="font-size:13px;color:#FFF;background-color:#444444;height:40px;">
 		<tr>
@@ -253,6 +253,6 @@
 			?>
 	</tbody>
 </table>
-</fieldset>
+
 </fieldset>
 	@stop

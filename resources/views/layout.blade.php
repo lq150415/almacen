@@ -197,6 +197,7 @@ function despliegaModal2a( _valor ){
 	document.getElementById("bgVentanaModal2").style.visibility=_valor;
 
 	}
+
 </script>
 <script language="javascript">
 
@@ -271,6 +272,18 @@ function cargar_push()
 			success: function(data)
 			{	
 				$('#solicitud').html(data);
+			}
+			});	
+
+			$.ajax({
+			async:	true, 
+			type: "POST",
+			url: "../../notificacionesleidas",
+			data: "&div="+DES_NOT,
+			dataType:"html",
+			success: function(data)
+			{	
+				$('#leidas').html(data);
 			}
 			});	
 			$.ajax({

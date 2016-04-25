@@ -231,7 +231,7 @@
                Cancelar
             </button>
             
-            <button type = "button" class = "btn btn-primary" onClick="return verifica();"><span style="font-size: 10px;" class="glyphicon glyphicon-plus"></span>
+            <button type = "submit" class = "btn btn-primary" onClick="return verifica();"><span style="font-size: 10px;" class="glyphicon glyphicon-plus"></span>
                Registrar
             </button>
          </div>

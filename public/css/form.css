@@ -1,4 +1,9 @@
-
+a:hover{
+  color: #fff;
+}
+header nav ul li a:hover,header nav ul li .children li a:hover {
+  color: #fff;
+}
 fieldset.fieldcuerpo legend{
   border-radius: 4px;
   -webkit-border-radius: 4px;
@@ -432,16 +437,8 @@ nav.lateral ul li:hover div.notificacion{
 nav.vert ul li:hover a div.alerta{
   font-size: 18px;
 }
-.eliminar{
-border-radius: 10px; 
-background:#e52325; 
-color:#fff; 
-padding: 8px; 
-font-size: 13px;
-}
-.eliminar:hover{
-  background-color: #c00;
-}
+
+
 #mensajebien{
   display:none; 
   font-size:16px; 

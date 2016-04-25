@@ -598,7 +598,7 @@ div.formulario{
 }
 .ventanamodal5 {
 	background-color: #fff;
-	height: 73%;
+	height: auto;
 	width: 55%;
 	border-radius: 8px;
 	position: absolute;
