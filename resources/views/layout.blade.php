@@ -83,6 +83,13 @@ function despliegaModal2( _valor ){
 		$('#alm2').val($('#alm').val());
 	$('#rub2').val($('#rub').val());
 	}
+
+function despliegaModal2b( _valor ){
+
+	document.getElementById("bgVentanaModal2").style.visibility=_valor;
+		$('#alm3').val($('#alm2').val());
+	$('#rub3').val($('#rub2').val());
+	}
 </script>
 
 
@@ -146,16 +153,16 @@ $(function(){
 	$("#agregar").on('click', function(){
 		
 		if(ind<=1){
-			var almacen = document.getElementById("alm").value;
-			var rubro = document.getElementById("rub").value;
+			var almacen = document.getElementById("alm2").value;
+			var rubro = document.getElementById("rub2").value;
 			ind=2;
 
 		}else
 		{
 			ind2++;
 			$("#tabla tbody tr:eq(0)").clone().appendTo("#tabla tbody");
-			var almacen = document.getElementById("alm").value;
-			var rubro = document.getElementById("rub").value;
+			var almacen = document.getElementById("alm2").value;
+			var rubro = document.getElementById("rub2").value;
 		}
 
 	});
@@ -233,6 +240,31 @@ $(document).ready(function(){
         });   
             document.getElementById("bgVentanaModal3").style.visibility="hidden";
    })
+});
+</script>
+
+<script language="javascript">
+
+$(document).ready(function(){
+
+   $("#alm2").change(function () {
+           $("#alm2 option:selected").each(function () {
+            id = $(this).val();
+            $.post("datos_rub", { id: id }, function(data){
+                $("#rub2").html(data);
+            });            
+        });
+       });
+   $("#rub2").change(function () {
+           $("#rub2 option:selected").each(function () {
+            id = $(this).val();
+            $.post("datos_prosal", { id: id }, function(data){
+                $('#example2').DataTable();
+                $("#tablabody").html(data);	
+            });            
+        });       
+   });
+  
 });
 </script>
 
@@ -340,7 +372,7 @@ $(document).ready(function()
 					<a href="../../ingreso"><span class="icon-folder-upload"></span>Ingresos</a>
 					
 				</li><li class="submenu">
-					<a href="#"><span class="icon-folder-download"></span>Salidas</span></a>
+					<a href="../../salida"><span class="icon-folder-download"></span>Salidas</span></a>
 				</li>
 				<li class="submenu">
 					<a href="#"><span class="icon-book"></span>Reportes<span class="caret icon-arrow-down6"></span></a>

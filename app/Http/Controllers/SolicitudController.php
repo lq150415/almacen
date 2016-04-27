@@ -32,7 +32,20 @@ class SolicitudController extends Controller {
 		return view('cliente/form_sol')->with('productos',$productos);
 		}
 	}
-	
+	public function index2()
+	{
+		if(Auth::user()->NIV_USU==0){
+			$q = new Notificacion;
+			$q = $q->join('solicitudes', 'notificaciones.ID_PSO','=','solicitudes.id')->join('users', 'solicitudes.ID_USU','=','users.id')->where('notificaciones.DES_NOT','=',0)->orderBy('notificaciones.updated_at', 'DESC')->get();
+		return view('solicitudes')->with('query',$q);}
+		else{
+
+		$productos= Producto::join('rubros','rubros.id','=','productos.ID_RUB')->where('ID_ALM','=','1')
+		->select('productos.id','DES_PRO','ID_ALM')
+		->get();
+		return view('cliente/form_sol')->with('productos',$productos);
+		}
+	}
 	public function indexclac()
 	{
 		return view('cliente/sol_ace');
@@ -242,26 +255,64 @@ class SolicitudController extends Controller {
 		}
 	
 	public function prod_sol(){
-		$productos= Solicitado::where('ID_SOL','=',$_POST['id'])->join('productos','productos.id','=','solicitados.ID_PRO')->get();
+		$productos= Solicitado::where('ID_SOL','=',$_POST['id'])->join('productos','productos.id','=','solicitados.ID_PRO')->join('notificaciones','notificaciones.ID_PSO','=','solicitados.ID_SOL')->get();
+
+		echo "<script type='text/javascript' language='javascript' class='init'>"; 
+		echo "$(document).on('click','.eliminar',function(){";
+		echo "var parent = $(this).parents().get(0);";
+		echo "$(parent).remove();";
+		echo "ind2--;";
+		
+		echo "});";
+		echo "</script>"; 
 		echo"<table id='tabla' class='table table-responsive table-hover'>
 			<thead>
 			<tr>
 				<th width='48%'>Producto</th>
 				<th width='9%'>Cantidad</th>
-				<th width='10%'>&nbsp;</th>
-			</tr>
+				<th width='9%'>Disponible</th>";
+		if($productos[0]->REA_NOT < 2){
+		echo "<th width='10%'>&nbsp;</th>";}
+		echo"</tr>
 			</thead>
 			<tbody>";
 		foreach ($productos as $producto):
 			echo "<tr> 				
 				<td><input type='text' class='form-control' id='producto' name='producto[]' readonly='readonly' value='".$producto->DES_PRO."'/></td>
+					<input type='hidden' class='form-control' id='estado' name='estado[]' value='".$producto->REA_NOT."'' readonly='readonly'/>
 					<input type='hidden' class='form-control' id='idproducto' name='idproducto[]' readonly='readonly'/>
 					<input type='hidden' class='form-control' id='pro_pin' name='pro_pin[]'  readonly='readonly'/>
 							
-					<td><input type='number' value='".$producto->CAN_SOL."'' id='can_pro' class='form-control' name='can_pro[]'/></td>
-								<td class='btn btn-danger eliminar'><span class='glyphicon glyphicon-remove'></span> Eliminar</td>								
-							</tr>";
+					<td><input type='number' value='".$producto->CAN_SOL."'' id='can_pro'"; 
+					if($producto->REA_NOT == 2){
+						echo " readonly ='readonly' ";
+					}
+					echo "class='form-control' name='can_pro[]'/></td>
+					<td><input type='text' value='".$producto->CAN_PRO."'' id='can_prod'  readonly='readonly' class='form-control' name='can_pro[]'/></td>";
+					if($producto->REA_NOT < 2){
+				echo "<td class='btn btn-danger eliminar'><span class='glyphicon glyphicon-remove'></span> Eliminar</td>";
+											
+				echo "</tr>";}
 		endforeach;
+		if($producto->REA_NOT < 2){
+			echo "</tbody></table><div class = 'modal-footer' style='border-top: none;'>
+            <button type = 'button' class = 'btn btn-danger' data-dismiss = 'modal'><span class='glyphicon glyphicon-remove' style='font-size: 10px; '></span>
+               Cancelar
+            </button>
+            
+            <button type = 'submit' class = 'btn btn-success'><span style='font-size: 10px; ' class='glyphicon glyphicon-check'></span>
+               Enviar a aprobacion
+            </button>
+         </div>";}
+         else{
+         	echo "</tbody></table><div class = 'modal-footer' style='border-top: none;'>
+            <button type = 'button' class = 'btn btn-success' data-dismiss = 'modal'><span class='glyphicon glyphicon-check' style='font-size: 10px; '></span>
+               Aceptar
+            </button>
+            
+         </div>";
+         }
+							
 	}
 
 	public function notificacionescount()

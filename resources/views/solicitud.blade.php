@@ -96,7 +96,7 @@
 					<legend style="margin-bottom: 0;">SOLICITUDES</legend>
 	  	<div>
 	  	<button onClick="javascript:despliegaModal('visible');" class="btn btn-success" style="float: left;"><span class="glyphicon glyphicon-plus"> </span> Nueva solicitud</button>
-	  	<button onClick="javascript:despliegaModal('visible');" class="btn btn-info" style="float: right;"><span class="glyphicon glyphicon-search"> </span> Ver todas las solicitudes <span class="btn btn-danger" style="padding: 2px;"id="leidas"></span></button>
+	  	<a href="solicitudes" class="btn btn-info" style="float: right;"><span class="glyphicon glyphicon-search"> </span> Ver todas las solicitudes <span class="btn btn-danger" style="padding: 2px;"id="leidas"></span></a>
 	  	</br>
 	  	</br>
 	  	 <div class = "modal-header alert-success">
