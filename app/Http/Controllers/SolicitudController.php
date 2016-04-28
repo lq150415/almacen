@@ -36,7 +36,7 @@ class SolicitudController extends Controller {
 	{
 		if(Auth::user()->NIV_USU==0){
 			$q = new Notificacion;
-			$q = $q->join('solicitudes', 'notificaciones.ID_PSO','=','solicitudes.id')->join('users', 'solicitudes.ID_USU','=','users.id')->where('notificaciones.DES_NOT','=',0)->orderBy('notificaciones.updated_at', 'DESC')->get();
+			$q = $q->join('solicitudes', 'notificaciones.ID_PSO','=','solicitudes.id')->join('users', 'solicitudes.ID_USU','=','users.id')->where('notificaciones.DES_NOT','=',0)->orwhere('notificaciones.DES_NOT','=',1)->orderBy('notificaciones.updated_at', 'DESC')->get();
 		return view('solicitudes')->with('query',$q);}
 		else{
 
@@ -100,7 +100,7 @@ class SolicitudController extends Controller {
         	$notificaciones->ALE_NOT =0;
         	$notificaciones->ID_PSO = $solicitudes->id;
         	$notificaciones->created_at = Carbon::now();
-        	$notificaciones->updated_at = Carbon:: now();
+        	$notificaciones->updated_at = Carbon::now();
 			$notificaciones->save();
 		for($i=0; $i < count($request->input('idproducto')) ;$i++){
 			$solicitados = new Solicitado;
@@ -180,13 +180,14 @@ class SolicitudController extends Controller {
 	public function notificaciones()
 	{
 		$q = new Notificacion;
-		$q = $q->join('solicitudes', 'notificaciones.ID_PSO','=','solicitudes.id')->join('users', 'solicitudes.ID_USU','=','users.id')->where('notificaciones.DES_NOT','=',$_POST['div'])->where('notificaciones.REA_NOT','=',0)->orderBy('notificaciones.updated_at', 'DESC')->paginate(5);
+		$q = $q->join('solicitudes', 'notificaciones.ID_PSO','=','solicitudes.id')->join('users', 'solicitudes.ID_USU','=','users.id')->where('notificaciones.DES_NOT','=',0)->where('notificaciones.REA_NOT','=',0)->orderBy('notificaciones.updated_at', 'DESC')->paginate(5);
 		$i=1;
 		foreach ($q as $qs ) :
 		echo "<script type='text/javascript' language='javascript' class='init'>"; 
 		echo "function revisar(data1, data2, data3){";
 		echo "$('#fec_sol').val(data1);";
 		echo "$('#usu_sol').val(data2);";
+		echo "$('#id_sol').val(data3);";
 		echo "var id=data3;";
 		echo "$.post('prod_sol', {id:id}, function(data){";
         echo "$('#prod_sol').html(data);";
@@ -256,7 +257,13 @@ class SolicitudController extends Controller {
 	
 	public function prod_sol(){
 		$productos= Solicitado::where('ID_SOL','=',$_POST['id'])->join('productos','productos.id','=','solicitados.ID_PRO')->join('notificaciones','notificaciones.ID_PSO','=','solicitados.ID_SOL')->get();
-
+		$notificacion= Notificacion::where('ID_PSO','=',$_POST['id'])->select('id')->get();
+		$noti = new Notificacion;
+		$noti = $noti->find($notificacion[0]->id);
+		if($noti->REA_NOT==0):
+		$noti->REA_NOT= 1;
+		$noti->save();
+		endif;
 		echo "<script type='text/javascript' language='javascript' class='init'>"; 
 		echo "$(document).on('click','.eliminar',function(){";
 		echo "var parent = $(this).parents().get(0);";
@@ -280,10 +287,10 @@ class SolicitudController extends Controller {
 			echo "<tr> 				
 				<td><input type='text' class='form-control' id='producto' name='producto[]' readonly='readonly' value='".$producto->DES_PRO."'/></td>
 					<input type='hidden' class='form-control' id='estado' name='estado[]' value='".$producto->REA_NOT."'' readonly='readonly'/>
-					<input type='hidden' class='form-control' id='idproducto' name='idproducto[]' readonly='readonly'/>
+					<input type='hidden' class='form-control' id='idproducto' name='idproducto[]' value='".$producto->ID_PRO." readonly='readonly'/>
 					<input type='hidden' class='form-control' id='pro_pin' name='pro_pin[]'  readonly='readonly'/>
 							
-					<td><input type='number' value='".$producto->CAN_SOL."'' id='can_pro'"; 
+					<td><input type='number' value='".$producto->CAN_SOL."'' id='can_pro' name='can_sol[]'"; 
 					if($producto->REA_NOT == 2){
 						echo " readonly ='readonly' ";
 					}
@@ -303,7 +310,7 @@ class SolicitudController extends Controller {
             <button type = 'submit' class = 'btn btn-success'><span style='font-size: 10px; ' class='glyphicon glyphicon-check'></span>
                Enviar a aprobacion
             </button>
-         </div>";}
+         </div></form>";}
          else{
          	echo "</tbody></table><div class = 'modal-footer' style='border-top: none;'>
             <button type = 'button' class = 'btn btn-success' data-dismiss = 'modal'><span class='glyphicon glyphicon-check' style='font-size: 10px; '></span>
@@ -315,9 +322,30 @@ class SolicitudController extends Controller {
 							
 	}
 
+	public function enviarevision(Request $request){
+		$notificaciones = Notificacion::where('ID_PSO','=', $request->input('id_sol'))->select('id')->get();
+		$notif = Notificacion::find($notificaciones[0]->id);
+		$notif->REA_NOT = 2;
+		$notif->DES_NOT = 1;
+		$notif->save();
+
+		$size= count($request->input('idproducto'));
+		for($i=0; $i < $size ;$i++){
+			$revisados = new Solicitado;
+			$revisados= $revisados->where('ID_PRO','=',$request->input('idproducto.'.$i))->where('ID_SOL','=',$request->input('id_sol'))->select('id')->get();
+			$cant = new Solicitado;
+			$cant = Solicitado::find($revisados[0]->id);
+			$cant->CAN_SOL = $request->input('can_sol.'.$i);
+			$cant->save();
+		}
+		$mensaje="Solicitud enviada a aprobacion";
+        return redirect()->route('solicitudes.index')->with('mensaje3',$mensaje);
+
+	}
+
 	public function notificacionescount()
 	{
-		$contar=Notificacion::where('notificaciones.REA_NOT','=',$_POST['div'])->count();
+		$contar=Notificacion::where('notificaciones.REA_NOT','=',0)->count();
 		
 			echo $contar;
 

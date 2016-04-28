@@ -82,7 +82,7 @@
                Revisar solicitud 
             </h4>
          </div>
-       <form class="form-horizontal" name="almacen_form" action="" method="POST">
+       <form class="form-horizontal" name="" action="enviarevision" method="POST">
          <div class = "modal-body">
          <input type="hidden" id="id_sol" name="id_sol">
             <div class="form-group">

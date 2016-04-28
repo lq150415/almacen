@@ -53,6 +53,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('rubro/{id}/elirubro','RubroController@elirubro');
         Route::post('verificausuario','UsuarioController@verificausuario');
         Route::resource('solicitud', 'SolicitudController');
+        Route::resource('solicitudes', 'SolicitudController');
         Route::get('solicitudes', 'SolicitudController@index2');
         Route::get('solicitud', 'SolicitudController@index');
         Route::post('httpush', 'SolicitudController@httpush');
@@ -66,6 +67,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('eliusuario', 'UsuarioController@eliusuario');
         Route::resource('solacepcl', 'SolicitudController@indexclac');  
         Route::resource('solreccl', 'SolicitudController@indexclrec');  
+        Route::post('enviarevision','SolicitudController@enviarevision');
 });
 
 

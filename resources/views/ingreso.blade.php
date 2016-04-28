@@ -90,7 +90,7 @@
 <div id="" class="modal-dialog modal-lg">
 <div class="modal-content">
   <div class = "modal-header">
-<table style="float: right;"><td class="eliminar" style="background-color: transparent;"><a href="javascript:despliegaModal2a('hidden');" title="Cerrar" class="close">&times;</a></td></table>
+<table style="float: right;"><tr><td class="eliminar" style="background-color: transparent;"><a href="javascript:despliegaModal2a('hidden');" title="Cerrar" class="close eliminar">&times;</a></td></tr></table>
 <h4 class = "modal-title" id = "myModalLabel">
                Agregar productos
             </h4>
@@ -163,6 +163,51 @@
             	<label class="col-lg-3 control-label">Descripcion del producto :</label>
          		<div class="col-md-8">
            		<textarea class="form-control" id="des_prod" placeholder="DESCRIPCION DEL PRODUCTO" cols="55" rows="5" onpaste="return false" ></textarea>
+        		</div>
+         		</div>		
+				<div class="form-group">
+            	<label class="col-lg-3 control-label">Precio unitario :</label>
+         		<div class="col-md-8">
+           		<input type="number" step="any" name="" id="pun_prod" class="form-control" placeholder="P/U en Bs." onpaste="return false" >
+        		</div>
+         		</div>				
+					
+				<div class = "modal-footer" style="border-top: 0;">
+            	<button type = "button" class = "btn btn-danger" onclick="javascript:despliegaModal3('hidden');"><span class="glyphicon glyphicon-remove" style="font-size: 10px;"></span>
+               Cancelar
+            	</button>
+            
+            	<button type="button" name="" id="btn_reg"  class = "btn btn-primary"><span style="font-size: 10px;" class="glyphicon glyphicon-plus"></span>
+               Registrar
+           		</button>
+         		</div>		
+					
+			</form>
+	</div>
+		</div>
+</div>
+</div>
+<div id="bgVentanaModal4" class="bgventanaModal4">
+<div id="" class="modal-dialog">
+<div class="modal-content">
+ <div class = "modal-header">
+<table style="float: right;"><td class="eliminar" style="background-color: transparent;"><a href="javascript:despliegaModal4('hidden');" title="Cerrar" class="close">&times;</a></td></table>
+<h4 class = "modal-title" id = "myModalLabel">
+               Registro de nuevo producto
+            </h4>
+</div>
+	 <div class = "modal-body">
+	<form class="form-horizontal">
+				<div class="form-group">
+            	<label class="col-lg-3 control-label">Item del producto :</label>
+         		<div class="col-md-8">
+           		<input type="number" min="0" name="" id="itm_prod" value="" class="form-control" readonly="readonly" placeholder="NUMERO DE ITEM" onpaste="return false">
+        		</div>
+         		</div>
+				<div class="form-group">
+            	<label class="col-lg-3 control-label">Descripcion del producto :</label>
+         		<div class="col-md-8">
+           		<textarea class="form-control" readonly="readonly" id="des_prod" placeholder="DESCRIPCION DEL PRODUCTO" cols="55" rows="5" onpaste="return false" ></textarea>
         		</div>
          		</div>		
 				<div class="form-group">

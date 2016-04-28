@@ -127,6 +127,10 @@ class IngresoController extends Controller {
 
 
 	}
+	public function actualizaprecio()
+	{
+
+	}
 	public function datos_rub()
 	{
 		$id = $_POST['id'];
@@ -172,7 +176,7 @@ class IngresoController extends Controller {
 			<th>Agregar</th>	
 			<th>Nuevo precio</th>	
 		</tr>
-	</thead><tbody id="tablabody">'.'<tr>'.'<th>'.$producto->id.'</th>'.'<th>'.$producto->ITM_PRO.'</th>'.'<th>'.$producto->DES_PRO.'</th>'.'<th>'.$producto->PUN_PRO.'</th>'.'<th><a href="javascript:agregavalor('.$h.','.$b.','.$d.','.$f.');" class="btn btn-info"><span class="glyphicon glyphicon-shopping-cart"></span></a></th><th><a class="btn btn-success"><span class="glyphicon glyphicon-usd"></span></a></th>'.'</tr>';
+	</thead><tbody id="tablabody">'.'<tr>'.'<th>'.$producto->id.'</th>'.'<th>'.$producto->ITM_PRO.'</th>'.'<th>'.$producto->DES_PRO.'</th>'.'<th>'.$producto->PUN_PRO.'</th>'.'<th><a href="javascript:agregavalor('.$h.','.$b.','.$d.','.$f.');" class="btn btn-info"><span class="glyphicon glyphicon-shopping-cart"></span></a></th><th><a class="btn btn-success" href="javascript:agregavalor2('.$ab.','.$b.','.$d.','.$f.');"><span class="glyphicon glyphicon-usd"></span></a></th>'.'</tr>';
 		echo "<script type='text/javascript'>";
 		echo "function despliegaModal3(_valor){";
 		echo "document.getElementById('bgVentanaModal3').style.visibility=_valor;";
@@ -186,7 +190,6 @@ class IngresoController extends Controller {
 		echo "<script type='text/javascript' lang='javascript'>";
 		echo "function agregavalor(_value, data, data2,data3){";
 		echo "document.getElementById('bgVentanaModal2').style.visibility = _value;";
-	//	echo "$('#tabla tbody tr:eq(0)').clone().removeClass('fila-base').appendTo('#tabla tbody');";
 		echo "$('#nro_fac').val($('#nro_fac1').val());";
 		echo "$('#can_pro').val($('#cant').val());";
 		echo "$('#pro_pin').val($('#pro_pin1').val());";
@@ -194,6 +197,11 @@ class IngresoController extends Controller {
 		echo "$('#producto').val(data);";
 		echo "$('#pre_pro').val(data2);";
 		echo "$('#nro_com').val($('#nro_com1').val());}";
+		echo "</script>";
+		echo "<script type='text/javascript'>";
+		echo "function agregavalor2(_valor, data1,data2,data3){";
+		echo "document.getElementById('bgVentanaModal4').style.visibility=_valor;}";
+		
 		echo "</script>";
 
 		

@@ -548,6 +548,32 @@ div.formulario{
 	overflow: auto;
 
 }
+#bgVentanaModal4 {
+	background-image: url(../img/bg-modal.png);
+	position: fixed;
+	z-index: 1;
+	height: 100%;
+	width: 100%;
+	left: 0px;
+	top: 0px;
+	visibility: hidden;
+	overflow: auto;
+
+}
+#VentanaModal4 {
+	background-color: #CCC;
+	height: auto;
+	width: 50%;
+	border-radius: 8px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin-top: -15%;
+	margin-left: -25%;
+	padding: 10px;
+	overflow: auto;
+
+}
 #Ventanalogin {
 	background-color: #000;
 	height: 300px;

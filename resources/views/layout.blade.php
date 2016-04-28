@@ -204,7 +204,10 @@ function despliegaModal2a( _valor ){
 	document.getElementById("bgVentanaModal2").style.visibility=_valor;
 
 	}
+function despliegaModal4( _valor ){
+	document.getElementById("bgVentanaModal4").style.visibility=_valor;
 
+	}
 </script>
 <script language="javascript">
 

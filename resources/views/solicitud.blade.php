@@ -123,9 +123,9 @@
                Revisar solicitud 
             </h4>
          </div>
-       <form class="form-horizontal" name="almacen_form" action="" method="POST">
+       <form class="form-horizontal" name="almacen_form" action="enviarevision" method="POST">
          <div class = "modal-body">
-         <input type="hidden" id="id" name="id">
+         <input type="hidden" id="id_sol" name="id_sol">
             <div class="form-group">
             	<label class="col-lg-3 control-label">Fecha de solicitud:</label>
          		<div class="col-md-8">
@@ -141,15 +141,7 @@
          	<div class="table-responsive" id="prod_sol">
 					
 				</div>
-         <div class = "modal-footer" style="border-top: none;">
-            <button type = "button" class = "btn btn-danger" data-dismiss = "modal"><span class="glyphicon glyphicon-remove" style="font-size: 10px; "></span>
-               Cancelar
-            </button>
-            
-            <button type = "submit" class = "btn btn-success"><span style="font-size: 10px; " class="glyphicon glyphicon-check"></span>
-               Enviar a aprobacion
-            </button>
-         </div>
+         
          </div>
          </form>
       </div><!-- /.modal-content -->
