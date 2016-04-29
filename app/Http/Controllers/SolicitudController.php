@@ -203,6 +203,9 @@ class SolicitudController extends Controller {
 		
 		echo "});";
 		echo "</script>"; 
+
+
+
 			if($qs->REA_NOT==0){
 				$a='No leido';
 			}elseif($qs->REA_NOT==1){
@@ -215,6 +218,7 @@ class SolicitudController extends Controller {
 		$nombres=$qs->NOM_USU.' '.$qs->APA_USU.' '.$qs->AMA_USU;
 		$fecha= "'".$fechas."'";
 		$nombre= "'".$nombres."'";
+		$cr= "created_at";
 		$html2 ='<table id="example2" class="table table-hover" cellspacing="5" width="100%" >
 	<thead>
 		<tr class="default">
@@ -224,7 +228,7 @@ class SolicitudController extends Controller {
             <th>ESTADO</th>
 			<th>ACCION</th>	
 		</tr>
-	</thead><tbody style="font-size:11px;" id="tablabody">'.'<tr>'.'<th>'.$qs->TIP_NOT.'</th>'.'<th>'.$qs->updated_at.'</th>'.'<th>'.$qs->NOM_USU.' '.$qs->APA_USU.' '.$qs->AMA_USU.'</th><th>'.$a.'</th><th><button data-toggle = "modal" title="Revisar solicitud" onclick="revisar('.$fecha.','.$nombre.','.$qs->ID_PSO.');" data-target = "#myModal"  class="btn btn-danger"> <span class="glyphicon glyphicon-exclamation-sign" ></span> Revisar</button></th></tr>';
+	</thead><tbody style="font-size:11px;" id="tablabody">'.'<tr>'.'<th>'.$qs->TIP_NOT.'</th>'.'<th>'.$qs->notificaciones[$cr].'</th>'.'<th>'.$qs->NOM_USU.' '.$qs->APA_USU.' '.$qs->AMA_USU.'</th><th>'.$a.'</th><th><button data-toggle = "modal" title="Revisar solicitud" onclick="revisar('.$fecha.','.$nombre.','.$qs->ID_PSO.');" data-target = "#myModal"  class="btn btn-danger"> <span class="glyphicon glyphicon-exclamation-sign" ></span> Revisar</button></th></tr>';
 		echo "<script type='text/javascript' language='javascript' class='init'>"; 
 		$ar='"bPaginate"';
 		$ap='"bFilter"';

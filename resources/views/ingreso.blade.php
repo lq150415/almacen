@@ -90,7 +90,7 @@
 <div id="" class="modal-dialog modal-lg">
 <div class="modal-content">
   <div class = "modal-header">
-<table style="float: right;"><tr><td class="eliminar" style="background-color: transparent;"><a href="javascript:despliegaModal2a('hidden');" title="Cerrar" class="close eliminar">&times;</a></td></tr></table>
+<td class="eliminar" style="background-color: transparent;"><a href="javascript:despliegaModal2a('hidden');" title="Cerrar" class="close">&times;</a></td>
 <h4 class = "modal-title" id = "myModalLabel">
                Agregar productos
             </h4>
