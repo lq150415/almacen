@@ -5,7 +5,6 @@
 <div class="modal-dialog modal-lg" style="box-shadow: 0px 0px 1px #000;"> <div class="modal-content">
  <div class = "modal-header">
             <button onClick="javascript:despliegaModal('hidden');" title="Cerrar" class="close"><span style="float: right; color: #000; font-size: 19px;">&times;</span></button>
-            
             <h4 class = "modal-title" id = "myModalLabel">
                REGISTRO DE NUEVO INGRESO
             </h4>
@@ -30,17 +29,34 @@
 								</select>
         		</div>
          		</div>
+         	
+         <div class="form-group">
+            	<label class="col-lg-3 control-label">Nro de factura :</label>
+         		<div class="col-md-8">
+           		 <input type="number" min="0" name="nro_fac" required="yes" id="nro_fac1" class="form-control" placeholder="NUMERO DE FACTURA" onpaste="return false">
+        		</div>
+         		</div>
+         <div class="form-group">
+            	<label class="col-lg-3 control-label">Nro de orden de compra :</label>
+         		<div class="col-md-8">
+           		 <input type="number" name="nro_com" min="0" id="nro_com1" required="yes" value="" class="form-control" placeholder="NUMERO DE ORDEN DE COMPRA" onpaste="return false">
+        		</div>
+         		</div>
+		 <div class="form-group">
+            	<label class="col-lg-3 control-label">Procedencia :</label>
+         		<div class="col-md-8">
+           		 <input type="text" required="yes" id="pro_pin1" name="pro_pin" value="" class="form-control" placeholder="PROCEDENCIA" onpaste="return false">
+        		</div>
+         		</div>	
 					<table class="table-responsive">
 						<button type="button" id="agregar" onclick="javascript:despliegaModal2('visible');" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Agregar Producto</button>
 					</table>
 </br>
 <div class="table-responsive">
-					<table id="tabla" class="table table-responsive table-hover">
+				<table id="tabla" class="table table-responsive table-hover">
 	<!-- Cabecera de la tabla -->
 						<thead>
 							<tr>
-								<th width="12%">Nº de factura</th>
-								<th width="12%">Nº orden de compra</th>
 								<th width="48%">Producto</th>
 								<th width="9%">Precio</th>
 								<th width="9%">Cantidad</th>
@@ -52,14 +68,12 @@
 						<tbody>
 		<!-- fila base para clonar y agregar al final -->
 							<tr> 
-								<td><input type="text" class="form-control" id="nro_fac" name="nro_fac[]" readonly="readonly"/></td>
-								<td><input type="text" class="form-control" id="nro_com" name="nro_com[]"readonly="readonly"/></td>
-								<td><input type="text" class="form-control" id="producto" name="producto[]" readonly="readonly"/></td>
-								<input type="hidden" class="form-control" id="idproducto" name="idproducto[]" readonly="readonly"/>
+								<td><input type="text" class="form-control" required="yes" id="producto" name="producto[]" readonly="readonly"/></td>
+								<input type="hidden" class="form-control" id="idproducto" name="idproducto[]" required="yes" />
 								<input type="hidden" class="form-control" id="pro_pin" name="pro_pin[]"  readonly="readonly"/>
-								<td><input type="text" class="form-control" id="pre_pro" name="pre_pro[]" readonly="readonly"/></td>
+								<td><input type="text" required="required" class="form-control" id="pre_pro" name="pre_pro[]" readonly="readonly"/></td>
 							
-								<td><input type="text" id="can_pro" class="form-control" name="can_pro[]"readonly="readonly"/></td>
+								<td><input type="number" step="1" min="0" id="can_pro" class="form-control" name="can_pro[]"/></td>
 								<td class="btn btn-danger eliminar"><span class="glyphicon glyphicon-remove"></span> Eliminar</td>								
 							</tr>
 		<!-- fin de código: fila base -->
@@ -70,6 +84,7 @@
  
 						</tbody>
 					</table>
+					<div id="demo" class="alert alert-danger"></div>
 					</div>
 <!-- Botón para agregar filas -->
 				 <div class = "modal-footer" style="border-top: 0;">
@@ -90,54 +105,21 @@
 <div id="" class="modal-dialog modal-lg">
 <div class="modal-content">
   <div class = "modal-header">
-<td class="eliminar" style="background-color: transparent;"><a href="javascript:despliegaModal2a('hidden');" title="Cerrar" class="close">&times;</a></td>
+<td class="eliminar2" style="background-color: transparent;"><a href="javascript:despliegaModal2a('hidden');" title="Cerrar" class="eliminar2 close">&times;</a></td>
 <h4 class = "modal-title" id = "myModalLabel">
                Agregar productos
             </h4>
 </div>
 <form class="form-horizontal">
 	<div class="modal-body">
-		<div class="form-group">
-            <label class="col-md-4 control-label">Id almacen :</label>
-        <div class="col-md-2">
-           	<input type="text" id="alm2" readonly="readonly" class="form-control">
-        </div>
-        	<label class="col-md-2 control-label">Id rubro :</label>
-         <div class="col-md-2">
-           <input type="text" id="rub2" value="19" readonly="readonly" class="form-control">
-        		</div>
-         </div>
-         <div class="form-group">
-            	<label class="col-lg-3 control-label">Nro de factura :</label>
-         		<div class="col-md-8">
-           		 <input type="number" min="0" name="" id="nro_fac1" value="" class="form-control" placeholder="NUMERO DE FACTURA" onpaste="return false">
-        		</div>
-         		</div>
-        <div class="form-group">
-            	<label class="col-lg-3 control-label">Nro de orden de compra :</label>
-         		<div class="col-md-8">
-           		 <input type="number" name="" min="0" id="nro_com1" value="" class="form-control" placeholder="NUMERO DE ORDEN DE COMPRA" onpaste="return false">
-        		</div>
-         		</div>
-		 <div class="form-group">
-            	<label class="col-lg-3 control-label">Procedencia :</label>
-         		<div class="col-md-8">
-           		 <input type="text" id="pro_pin1"name="" value="" class="form-control" placeholder="PROCEDENCIA" onpaste="return false">
-        		</div>
-         		</div>	
-         <div class="form-group">
-            	<label class="col-lg-3 control-label">Cantidad :</label>
-         		<div class="col-md-8">
-           		 <input type="number" id="cant" min="0" name="" value="" class="form-control" placeholder="CANTIDAD " onpaste="return false">
-        		</div>
-         		</div>
-	</form>
+		
 			
 <div id="tablabody" style="overflow: auto;">
 		
 </div>
 	</div>
 	</div>
+
 		</fieldset>
 </div>
 </form>

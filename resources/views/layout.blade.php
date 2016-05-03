@@ -77,11 +77,11 @@ function despliegaModal( _valor ){
 
 	document.getElementById("bgVentanaModal").style.visibility=_valor;
 	}
+   
 function despliegaModal2( _valor ){
-
+    
 	document.getElementById("bgVentanaModal2").style.visibility=_valor;
-		$('#alm2').val($('#alm').val());
-	$('#rub2').val($('#rub').val());
+	
 	}
 
 function despliegaModal2b( _valor ){
@@ -153,16 +153,13 @@ $(function(){
 	$("#agregar").on('click', function(){
 		
 		if(ind<=1){
-			var almacen = document.getElementById("alm2").value;
-			var rubro = document.getElementById("rub2").value;
 			ind=2;
 
 		}else
 		{
 			ind2++;
-			$("#tabla tbody tr:eq(0)").clone().appendTo("#tabla tbody");
-			var almacen = document.getElementById("alm2").value;
-			var rubro = document.getElementById("rub2").value;
+			$("#tabla tbody tr:eq(0)").clone().prependTo("#tabla tbody");
+			
 		}
 
 	});
@@ -173,12 +170,11 @@ $(function(){
 		if(ind2==1){
 			ind--;
 			
-			$('#nro_fac').val(' ');
-			$('#nro_com').val(' ');
+			
 			$('#producto').val(' ');
 			$('#producto2').val(' ');
 			$('#pre_pro').val(' ');
-			$('#can_pro').val(' ');
+	
 			
 		}else{
 		var parent = $(this).parents().get(0);
@@ -187,8 +183,23 @@ $(function(){
 		
 		}
 	});
-});
  
+	$(document).on("click",".eliminar2",function(){
+		if(ind2==1){
+			ind--;
+	
+			$('#producto').val(' ');
+			$('#producto2').val(' ');
+			$('#pre_pro').val(' ');
+			
+			
+		}else{
+  document.getElementById("tabla").deleteRow(1);
+		ind2--;
+		}
+	});
+});
+
 </script>
 <script type="text/javascript" lang="javascript">
 function cierramodal(){

@@ -36,7 +36,7 @@ class SolicitudController extends Controller {
 	{
 		if(Auth::user()->NIV_USU==0){
 			$q = new Notificacion;
-			$q = $q->join('solicitudes', 'notificaciones.ID_PSO','=','solicitudes.id')->join('users', 'solicitudes.ID_USU','=','users.id')->where('notificaciones.DES_NOT','=',0)->orwhere('notificaciones.DES_NOT','=',1)->orderBy('notificaciones.updated_at', 'DESC')->get();
+			$q = $q->join('solicitudes', 'notificaciones.ID_PSO','=','solicitudes.id')->join('users', 'solicitudes.ID_USU','=','users.id')->where('notificaciones.DES_NOT','=',0)->orwhere('notificaciones.DES_NOT','=',1)->orderBy('notificaciones.updated_at', 'DESC')->select('REA_NOT','NOM_USU', 'APA_USU','AMA_USU','notificaciones.updated_at', 'notificaciones.created_at','TIP_NOT','ID_PSO')->get();
 		return view('solicitudes')->with('query',$q);}
 		else{
 
@@ -180,7 +180,7 @@ class SolicitudController extends Controller {
 	public function notificaciones()
 	{
 		$q = new Notificacion;
-		$q = $q->join('solicitudes', 'notificaciones.ID_PSO','=','solicitudes.id')->join('users', 'solicitudes.ID_USU','=','users.id')->where('notificaciones.DES_NOT','=',0)->where('notificaciones.REA_NOT','=',0)->orderBy('notificaciones.updated_at', 'DESC')->paginate(5);
+		$q = $q->join('solicitudes', 'notificaciones.ID_PSO','=','solicitudes.id')->join('users', 'solicitudes.ID_USU','=','users.id')->where('notificaciones.DES_NOT','=',0)->where('notificaciones.REA_NOT','=',0)->orderBy('notificaciones.updated_at', 'DESC')->select('REA_NOT','NOM_USU', 'APA_USU','AMA_USU','notificaciones.updated_at', 'notificaciones.created_at','TIP_NOT','ID_PSO')->paginate(5);
 		$i=1;
 		foreach ($q as $qs ) :
 		echo "<script type='text/javascript' language='javascript' class='init'>"; 
@@ -218,7 +218,7 @@ class SolicitudController extends Controller {
 		$nombres=$qs->NOM_USU.' '.$qs->APA_USU.' '.$qs->AMA_USU;
 		$fecha= "'".$fechas."'";
 		$nombre= "'".$nombres."'";
-		$cr= "created_at";
+		$cr= "'created_at'";
 		$html2 ='<table id="example2" class="table table-hover" cellspacing="5" width="100%" >
 	<thead>
 		<tr class="default">
@@ -228,7 +228,7 @@ class SolicitudController extends Controller {
             <th>ESTADO</th>
 			<th>ACCION</th>	
 		</tr>
-	</thead><tbody style="font-size:11px;" id="tablabody">'.'<tr>'.'<th>'.$qs->TIP_NOT.'</th>'.'<th>'.$qs->notificaciones[$cr].'</th>'.'<th>'.$qs->NOM_USU.' '.$qs->APA_USU.' '.$qs->AMA_USU.'</th><th>'.$a.'</th><th><button data-toggle = "modal" title="Revisar solicitud" onclick="revisar('.$fecha.','.$nombre.','.$qs->ID_PSO.');" data-target = "#myModal"  class="btn btn-danger"> <span class="glyphicon glyphicon-exclamation-sign" ></span> Revisar</button></th></tr>';
+	</thead><tbody style="font-size:11px;" id="tablabody">'.'<tr>'.'<th>'.$qs->TIP_NOT.'</th>'.'<th>'.$qs->created_at->format('d - m - Y').'</th>'.'<th>'.$qs->NOM_USU.' '.$qs->APA_USU.' '.$qs->AMA_USU.'</th><th>'.$a.'</th><th><button data-toggle = "modal" title="Revisar solicitud" onclick="revisar('.$fecha.','.$nombre.','.$qs->ID_PSO.');" data-target = "#myModal"  class="btn btn-danger"> <span class="glyphicon glyphicon-exclamation-sign" ></span> Revisar</button></th></tr>';
 		echo "<script type='text/javascript' language='javascript' class='init'>"; 
 		$ar='"bPaginate"';
 		$ap='"bFilter"';

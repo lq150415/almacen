@@ -60,13 +60,14 @@ class IngresoController extends Controller {
         $ingresos->created_at = Carbon::now();
         $ingresos->updated_at = Carbon:: now();
 		$ingresos->save();
-		$j=count($request->input('nro_fac'));
-		for($i=0; $i < count($request->input('nro_fac')) ;$i++){
+		$a =0;
+		$j=count($request->input('idproducto'));
+		for($i=0; $i < count($request->input('idproducto')) ;$i++){
 			$ingresados = new Ingresado;
-			$ingresados->NFC_PIN = $request->input('nro_fac.'.$i);
-        	$ingresados->NOC_PIN = $request->input('nro_com.'.$i);
+			$ingresados->NFC_PIN = $request->input('nro_fac');
+        	$ingresados->NOC_PIN = $request->input('nro_com');
         	$ingresados->CAN_PIN = $request->input('can_pro.'.$i);
-        	$ingresados->PRO_PIN = $request->input('pro_pin.'.$i);
+        	$ingresados->PRO_PIN = $request->input('pro_pin.'.$a);
         	$ingresados->ID_PRO = $request->input('idproducto.'.$i);
         	$ingresados->ID_ING = 	$ingresos->id;
         	$ingresados->created_at = Carbon::now();
@@ -188,6 +189,7 @@ class IngresoController extends Controller {
 		echo "} );";
 		echo "</script>";  
 		echo "<script type='text/javascript' lang='javascript'>";
+		echo "var name = 'pre_pro[]';";
 		echo "function agregavalor(_value, data, data2,data3){";
 		echo "document.getElementById('bgVentanaModal2').style.visibility = _value;";
 		echo "$('#nro_fac').val($('#nro_fac1').val());";
@@ -197,9 +199,25 @@ class IngresoController extends Controller {
 		echo "$('#producto').val(data);";
 		echo "$('#pre_pro').val(data2);";
 		echo "$('#nro_com').val($('#nro_com1').val());}";
+		 echo "var total=0;";
+
+	echo "document.getElementById('bgVentanaModal2').style.visibility=_valor;";
+	echo "var yea=document.getElementById('tabla').rows.length;";
+	echo "yea--;";
+    echo "var campo=document.getElementsByName(name);";
+	echo "for (i = 0; i < yea; i++) { ";
+	echo "	total = total + parseFloat(campo[i].value);";
+	echo "}";
+	$abc='"TOTAL ------------------<input class=';
+	$abc2="'form-control' type='text' readonly='readonly' value='";
+	$abc3='"+total+"';
+	$abc4="' >";
+	$abc5='";';
+	echo "	document.getElementById('demo').innerHTML = ".$abc.$abc2.$abc3.$abc4.$abc5;
+	
 		echo "</script>";
 		echo "<script type='text/javascript'>";
-		echo "function agregavalor2(_valor, data1,data2,data3){";
+		echo "function agregavalor2(_valor, data1, data2,data3){";
 		echo "document.getElementById('bgVentanaModal4').style.visibility=_valor;}";
 		
 		echo "</script>";
