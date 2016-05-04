@@ -174,7 +174,9 @@ $(function(){
 			$('#producto').val(' ');
 			$('#producto2').val(' ');
 			$('#pre_pro').val(' ');
-	
+			$('#sub_pro').val(' ');
+			$('#can_pro').val(' ');
+			$('#total').val('0');
 			
 		}else{
 		var parent = $(this).parents().get(0);
@@ -191,7 +193,9 @@ $(function(){
 			$('#producto').val(' ');
 			$('#producto2').val(' ');
 			$('#pre_pro').val(' ');
-			
+			$('#sub_pro').val(' ');
+			$('#can_pro').val(' ');
+			$('#total').val('0');
 			
 		}else{
   document.getElementById("tabla").deleteRow(1);
@@ -431,7 +435,7 @@ $(document).ready(function()
 				<ul>
 					<li> <a href="../../almacen">ALMACENES</a> </li>
 					<li> <a href="../../usuario">USUARIOS</a> </li>
-					<li> <a href="../../solicitud">SOLICITUDES</a><div class="notificacion" id="noti">  </div> </li>
+					<li> <a href="../../solicitud">SOLICITUDES</a><div  id="noti">  </div> </li>
 					<li> <a href="../../respuesta">RESPUESTAS</a> </li>
 					<li> <a >CONSULTAS</a> 
 						<ul class="children">

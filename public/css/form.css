@@ -386,19 +386,45 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ad164b', end
 }
 .notificacion{
  margin-top: -30%; 
- background-color: red; 
+ background-color: #e52325; 
  display: grid; 
  float: right; 
+ margin-right: 4px; 
  padding: 2px; 
  color: #fff;
  border-radius: 3px;
  box-shadow: 0 0 15px 4px maroon;
 }
+.notificacionclie{
+ margin-top: -35%; 
+ background-color: #e52325; 
+ display: grid; 
+ float: right; 
+ margin-right: -20%; 
+ padding: 2px; 
+ color: #fff;
+ border-radius: 3px;
+ box-shadow: 0 0 15px 4px maroon;
+}
+div a:hover div.notificacionclie{
+  font-size: 22px;
+}
+.notificacion2{
+ margin-top: -30%; 
+ background-color: #fbdb65; 
+ display: grid; 
+ float: right; 
+ padding: 2px;
+ margin-right: 4px; 
+ color: #000;
+ border-radius: 3px;
+ box-shadow: 0 0 15px 4px #b3bc20;
+}
 .alerta{
   margin-left: 10%; 
   margin-top: -20px; 
   margin-right: -15%; 
-  background-color: red; 
+  background-color: #e52325; 
   display: grid; 
   float: right; 
   padding: 2px; 
@@ -432,6 +458,9 @@ margin-top: -6%;
 }
 }
 nav.lateral ul li:hover div.notificacion{
+  font-size: 18px;
+}
+nav.lateral ul li:hover div.notificacion2{
   font-size: 18px;
 }
 nav.vert ul li:hover a div.alerta{

@@ -58,8 +58,9 @@
 						<thead>
 							<tr>
 								<th width="48%">Producto</th>
-								<th width="9%">Precio</th>
+								<th width="11%">Precio</th>
 								<th width="9%">Cantidad</th>
+								<th width="9%" class="info">Subtotal</th> 
 								<th width="10%">&nbsp;</th>
 							</tr>
 						</thead>
@@ -72,8 +73,8 @@
 								<input type="hidden" class="form-control" id="idproducto" name="idproducto[]" required="yes" />
 								<input type="hidden" class="form-control" id="pro_pin" name="pro_pin[]"  readonly="readonly"/>
 								<td><input type="text" required="required" class="form-control" id="pre_pro" name="pre_pro[]" readonly="readonly"/></td>
-							
-								<td><input type="number" step="1" min="0" id="can_pro" class="form-control" name="can_pro[]"/></td>
+								<td><input type="number" step="1" min="0" id="can_pro" value="0" class="form-control" name="can_pro[]" /></td>
+								<td class="info"><input type="text" class="form-control" id="sub_pro" name="sub_pro[]" readonly="readonly"/></td>
 								<td class="btn btn-danger eliminar"><span class="glyphicon glyphicon-remove"></span> Eliminar</td>								
 							</tr>
 		<!-- fin de código: fila base -->
@@ -84,7 +85,7 @@
  
 						</tbody>
 					</table>
-					<div id="demo" class="alert alert-danger"></div>
+					<div id="demo" class="alert alert-danger" style="height: auto;"></div>
 					</div>
 <!-- Botón para agregar filas -->
 				 <div class = "modal-footer" style="border-top: 0;">
@@ -127,8 +128,8 @@
 <div id="bgVentanaModal3" class="bgventanaModal3">
 <div id="" class="modal-dialog">
 <div class="modal-content">
- <div class = "modal-header">
-<table style="float: right;"><td class="eliminar" style="background-color: transparent;"><a href="javascript:despliegaModal3('hidden');" title="Cerrar" class="close">&times;</a></td></table>
+<div class = "modal-header">
+<a href="javascript:despliegaModal3('hidden');" title="Cerrar" class="close">&times;</a>
 <h4 class = "modal-title" id = "myModalLabel">
                Registro de nuevo producto
             </h4>
@@ -173,7 +174,7 @@
 <div id="" class="modal-dialog">
 <div class="modal-content">
  <div class = "modal-header">
-<table style="float: right;"><td class="eliminar" style="background-color: transparent;"><a href="javascript:despliegaModal4('hidden');" title="Cerrar" class="close">&times;</a></td></table>
+<a href="javascript:despliegaModal4('hidden');" title="Cerrar" class="close">&times;</a>
 <h4 class = "modal-title" id = "myModalLabel">
                Registro de nuevo producto
             </h4>
@@ -183,19 +184,19 @@
 				<div class="form-group">
             	<label class="col-lg-3 control-label">Item del producto :</label>
          		<div class="col-md-8">
-           		<input type="number" min="0" name="" id="itm_prod" value="" class="form-control" readonly="readonly" placeholder="NUMERO DE ITEM" onpaste="return false">
+           		<input type="number" min="0" name="" id="itm_prod2" value="" class="form-control" readonly="readonly" placeholder="NUMERO DE ITEM" onpaste="return false">
         		</div>
          		</div>
 				<div class="form-group">
             	<label class="col-lg-3 control-label">Descripcion del producto :</label>
          		<div class="col-md-8">
-           		<textarea class="form-control" readonly="readonly" id="des_prod" placeholder="DESCRIPCION DEL PRODUCTO" cols="55" rows="5" onpaste="return false" ></textarea>
+           		<textarea class="form-control" readonly="readonly" id="des_prod2" placeholder="DESCRIPCION DEL PRODUCTO" cols="55" rows="5" onpaste="return false" ></textarea>
         		</div>
          		</div>		
 				<div class="form-group">
             	<label class="col-lg-3 control-label">Precio unitario :</label>
          		<div class="col-md-8">
-           		<input type="number" step="any" name="" id="pun_prod" class="form-control" placeholder="P/U en Bs." onpaste="return false" >
+           		<input type="number" step="any" name="" id="pun_prod2" class="form-control" placeholder="P/U en Bs." onpaste="return false" >
         		</div>
          		</div>				
 					

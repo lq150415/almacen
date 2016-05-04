@@ -183,38 +183,51 @@ class IngresoController extends Controller {
 		echo "document.getElementById('bgVentanaModal3').style.visibility=_valor;";
 		echo "}";
 		echo "</script>";
-		echo "<script type='text/javascript' language='javascript' class='init'>"; 
+		echo "<script type='text/javascript' language='javascript' class='init'>";
+
 		echo "$(document).ready(function() {"; 
 		echo "$('#example2').DataTable();";
 		echo "} );";
 		echo "</script>";  
 		echo "<script type='text/javascript' lang='javascript'>";
 		echo "var name = 'pre_pro[]';";
+		echo "var name2 = 'can_pro[]';";
+		echo "var name3 = 'sub_pro[]';";
 		echo "function agregavalor(_value, data, data2,data3){";
 		echo "document.getElementById('bgVentanaModal2').style.visibility = _value;";
-		echo "$('#nro_fac').val($('#nro_fac1').val());";
 		echo "$('#can_pro').val($('#cant').val());";
 		echo "$('#pro_pin').val($('#pro_pin1').val());";
 		echo "$('#idproducto').val(data3);";
 		echo "$('#producto').val(data);";
 		echo "$('#pre_pro').val(data2);";
-		echo "$('#nro_com').val($('#nro_com1').val());}";
-		 echo "var total=0;";
-
-	echo "document.getElementById('bgVentanaModal2').style.visibility=_valor;";
+		
 	echo "var yea=document.getElementById('tabla').rows.length;";
 	echo "yea--;";
-    echo "var campo=document.getElementsByName(name);";
+	echo "var total=0;"; 
+    echo "var campo=document.getElementsByName(name3);";
+     echo "var precio=document.getElementsByName(name);";
+    echo "var cantidad=document.getElementsByName(name2);";
+    echo "$('#can_pro').change(function(){";
+	echo "for (i = 0; i < yea; i++) { ";
+	echo "campo[i].value = parseFloat(cantidad[i].value) * parseFloat(precio[i].value);";
+	echo "}";
+	echo"});";
+
+	echo "$('#can_pro').change(function(){";
+		echo "var total=0;"; 
 	echo "for (i = 0; i < yea; i++) { ";
 	echo "	total = total + parseFloat(campo[i].value);";
 	echo "}";
-	$abc='"TOTAL ------------------<input class=';
-	$abc2="'form-control' type='text' readonly='readonly' value='";
+	
+	$abc='"<div class=';
+	$abc2="'form-group'><label class='col-lg-4 control-label'>TOTAL</label><div class='col-lg-4'><input class='form-control col-lg-2' margin-top:0; float:right;' type='text' readonly='readonly' id='total' value='";
 	$abc3='"+total+"';
-	$abc4="' >";
+	$abc4="' ></div><label class='col-sm-1 control-label'>---BS</label></div>";
 	$abc5='";';
 	echo "	document.getElementById('demo').innerHTML = ".$abc.$abc2.$abc3.$abc4.$abc5;
-	
+	echo"});";
+	echo "}";
+
 		echo "</script>";
 		echo "<script type='text/javascript'>";
 		echo "function agregavalor2(_valor, data1, data2,data3){";
@@ -226,7 +239,7 @@ class IngresoController extends Controller {
 		echo $html2; $i++; }
 		else{
 		
-			$html2 = '<tr>'.'<th>'.$producto->id.'</th>'.'</th>'.'<th>'.$producto->ITM_PRO.'<th>'.$producto->DES_PRO.'</th>'.'<th>'.$producto->PUN_PRO.'</th>'.'<th>'.'<a href="javascript:agregavalor('.$h.','.$b.','.$d.','.$f.');" class="btn btn-info"><span class="glyphicon glyphicon-shopping-cart"></span></a></th><th><a class="btn btn-success"> <span class="glyphicon glyphicon-usd"></span></a>'.'</th>'.'</tr>';
+			$html2 = '<tr>'.'<th>'.$producto->id.'</th>'.'</th>'.'<th>'.$producto->ITM_PRO.'<th>'.$producto->DES_PRO.'</th>'.'<th>'.$producto->PUN_PRO.'</th>'.'<th>'.'<a href="javascript:agregavalor('.$h.','.$b.','.$d.','.$f.');" class="btn btn-info"><span class="glyphicon glyphicon-shopping-cart"></span></a></th><th><a class="btn btn-success" href="javascript:agregavalor2('.$ab.','.$b.','.$d.','.$f.');"> <span class="glyphicon glyphicon-usd"></span></a>'.'</th>'.'</tr>';
 			echo $html2;
 		}
 		endforeach;
@@ -273,7 +286,7 @@ public function datos_pro2()
 			<th>Agregar</th>	
 			<th>Nuevo Precio</th>	
 		</tr>
-	</thead><tbody id="tablabody">'.'<tr>'.'<th>'.$producto->id.'</th>'.'<th>'.$producto->ITM_PRO.'</th>'.'<th>'.$producto->DES_PRO.'</th>'.'<th>'.$producto->PUN_PRO.'</th>'.'<th><a href="javascript:agregavalor('.$h.','.$b.','.$d.','.$f.');" class="btn btn-info"><span class="glyphicon glyphicon-shopping-cart"></span></a></th><th><a href=""> Nuevo Precio</th>'.'</tr>';
+	</thead><tbody id="tablabody">'.'<tr>'.'<th>'.$producto->id.'</th>'.'<th>'.$producto->ITM_PRO.'</th>'.'<th>'.$producto->DES_PRO.'</th>'.'<th>'.$producto->PUN_PRO.'</th>'.'<th><a href="javascript:agregavalor('.$h.','.$b.','.$d.','.$f.');" class="btn btn-info"><span class="glyphicon glyphicon-shopping-cart"></span></a></th><th><a class="btn btn-success" href="javascript:agregavalor2('.$ab.','.$b.','.$d.','.$f.');"><span class="glyphicon glyphicon-usd"></span></a></th>'.'</tr>';
 		echo "<script type='text/javascript'>";
 		echo "function despliegaModal3(_valor){";
 		echo "document.getElementById('bgVentanaModal3').style.visibility=_valor;";
@@ -285,23 +298,50 @@ public function datos_pro2()
 		echo "} );";
 		echo "</script>";  
 		echo "<script type='text/javascript' lang='javascript'>";
+		echo "var name = 'pre_pro[]';";
+		echo "var name2 = 'can_pro[]';";
+		echo "var name3 = 'sub_pro[]';";
 		echo "function agregavalor(_value, data, data2,data3){";
 		echo "document.getElementById('bgVentanaModal2').style.visibility = _value;";
-	//	echo "$('#tabla tbody tr:eq(0)').clone().removeClass('fila-base').appendTo('#tabla tbody');";
-		echo "$('#nro_fac').val($('#nro_fac1').val());";
 		echo "$('#can_pro').val($('#cant').val());";
 		echo "$('#pro_pin').val($('#pro_pin1').val());";
 		echo "$('#idproducto').val(data3);";
 		echo "$('#producto').val(data);";
 		echo "$('#pre_pro').val(data2);";
-		echo "$('#nro_com').val($('#nro_com1').val());}";
+		
+	echo "var yea=document.getElementById('tabla').rows.length;";
+	echo "yea--;";
+	echo "var total=0;"; 
+    echo "var campo=document.getElementsByName(name3);";
+     echo "var precio=document.getElementsByName(name);";
+    echo "var cantidad=document.getElementsByName(name2);";
+    echo "$('#can_pro').change(function(){";
+	echo "for (i = 0; i < yea; i++) { ";
+	echo "campo[i].value = parseFloat(cantidad[i].value) * parseFloat(precio[i].value);";
+	echo "}";
+	echo"});";
+
+	echo "$('#can_pro').change(function(){";
+		echo "var total=0;"; 
+	echo "for (i = 0; i < yea; i++) { ";
+	echo "	total = total + parseFloat(campo[i].value);";
+	echo "}";
+	
+	$abc='"<div class=';
+	$abc2="'form-group'><label class='col-lg-4 control-label'>TOTAL</label><div class='col-lg-4'><input class='form-control col-lg-4' style='width:50%;  margin-top:0; float:right;' type='text' readonly='readonly' id='total' value='";
+	$abc3='"+total+"';
+	$abc4="' >------ BS</div></div>";
+	$abc5='";';
+	echo "	document.getElementById('demo').innerHTML = ".$abc.$abc2.$abc3.$abc4.$abc5;
+	echo"});";
+	echo "}";
 		echo "</script>";
 
 		
 		echo $html2; $i++; }
 		else{
 		
-			$html2 = '<tr>'.'<th>'.$producto->id.'</th>'.'</th>'.'<th>'.$producto->ITM_PRO.'<th>'.$producto->DES_PRO.'</th>'.'<th>'.$producto->PUN_PRO.'</th>'.'<th>'.'<a href="javascript:agregavalor('.$h.','.$b.','.$d.','.$f.');" class="btn btn-info"><span class="glyphicon glyphicon-shopping-cart"></span></a></th><th><a href=""> Nuevo Precio</a>'.'</th>'.'</tr>';
+		$html2 = '<tr>'.'<th>'.$producto->id.'</th>'.'</th>'.'<th>'.$producto->ITM_PRO.'<th>'.$producto->DES_PRO.'</th>'.'<th>'.$producto->PUN_PRO.'</th>'.'<th>'.'<a href="javascript:agregavalor('.$h.','.$b.','.$d.','.$f.');" class="btn btn-info"><span class="glyphicon glyphicon-shopping-cart"></span></a></th><th><a class="btn btn-success" href="javascript:agregavalor2('.$ab.','.$b.','.$d.','.$f.');"> <span class="glyphicon glyphicon-usd" ></span></a>'.'</th>'.'</tr>';
 			echo $html2;
 		}
 		endforeach;

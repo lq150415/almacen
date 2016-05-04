@@ -171,6 +171,40 @@ class SolicitudController extends Controller {
 		echo $dato_json;
 			}
 
+	public function httpush2()
+	{
+		set_time_limit(0); //Establece el número de segundos que se permite la ejecución de un script.
+		$fecha_ac = isset($_POST['timestamp']) ? $_POST['timestamp']:0;
+		$query2    = new Notificacion;
+		$con1= $query2->select('updated_at')->orderBy('updated_at','DESC')->first();
+		$fecha_bd = $con1->updated_at;
+
+		while( $fecha_bd <= $fecha_ac )
+			{	
+				$query3    = new Notificacion;
+				$con       =$query3->select('updated_at')->orderBy('updated_at','DESC')->first();
+				$ro        = $con->updated_at;
+		
+				usleep(100000);//anteriormente 10000
+				clearstatcache();
+				$fecha_bd  = strtotime($ro);
+			}
+
+		$query       =new Notificacion;
+		$datos_query =$query->orderBy('updated_at','DESC')->first()->get();
+		foreach ($datos_query as  $query):
+
+			$ar["updated_at"]          = strtotime($query->updated_at);	
+			$ar["DES_NOT"] 	 		  = $query->DES_NOT;	
+			$ar["AUT_NOT"] 		          = $query->AUT_NOT;	
+			$ar["REA_NOT"]           = $query->REA_NOT;	
+			$ar["TIP_NOT"]           = $query->TIP_NOT;	
+			$ar["ID_PSO"]           = $query->ID_PSO;	
+		endforeach;
+		$dato_json   = json_encode($ar);
+		echo $dato_json;
+			}
+
 	/**
 	 * Show the form for editing the specified resource.
 	 *
@@ -250,7 +284,7 @@ class SolicitudController extends Controller {
 		$nombres=$qs->NOM_USU.' '.$qs->APA_USU.' '.$qs->AMA_USU;
 		$fecha= "'".$fechas."'";
 		$nombre= "'".$nombres."'";
-			$html2 ='<tr>'.'<th>'.$qs->TIP_NOT.'</th>'.'<th>'.$qs->updated_at.'</th>'.'<th>'.$qs->NOM_USU.' '.$qs->APA_USU.' '.$qs->AMA_USU.'</th><th>'.$a.'</th><th><button onclick="revisar('.$fecha.','.$nombre.','.$qs->ID_PSO.');" data-toggle = "modal" title="Revisar solicitud" data-target = "#myModal"  class="btn btn-danger"> <span class="glyphicon glyphicon-exclamation-sign"> </span> Revisar</button></th></tr>';
+			$html2 ='<tr>'.'<th>'.$qs->TIP_NOT.'</th>'.'<th>'.$qs->created_at->format('d - m - Y').'</th>'.'<th>'.$qs->NOM_USU.' '.$qs->APA_USU.' '.$qs->AMA_USU.'</th><th>'.$a.'</th><th><button onclick="revisar('.$fecha.','.$nombre.','.$qs->ID_PSO.');" data-toggle = "modal" title="Revisar solicitud" data-target = "#myModal"  class="btn btn-danger"> <span class="glyphicon glyphicon-exclamation-sign"> </span> Revisar</button></th></tr>';
 			echo $html2;
 		}
 		endforeach;
@@ -350,11 +384,22 @@ class SolicitudController extends Controller {
 	public function notificacionescount()
 	{
 		$contar=Notificacion::where('notificaciones.REA_NOT','=',0)->count();
-		
-			echo $contar;
-
-	
+		if($contar==0){
+		$contar=Notificacion::where('notificaciones.REA_NOT','<=','1')->count();
+		echo "<div class='notificacion2'>".$contar."</div>";
+		}
+		else
+		{
+			echo "<div class='notificacion'>".$contar."</div>";
+		}
 	}
+
+	public function notificacionescountjrh()
+	{
+		$contar=Notificacion::where('notificaciones.REA_NOT','=',2)->where('notificaciones.DES_NOT','=',1)->count();
+			echo $contar;
+	}
+	
 	public function notificacionesleidas()
 	{
 		$contar=Notificacion::where('notificaciones.REA_NOT','<=','1')->count();

@@ -88,7 +88,90 @@ $(function(){
 });
  
 </script>
+<script language="javascript">
+var updated_at = null;
+function cargar_push() 
+{  
+	$.ajax({
+	async:	true, 
+    type: "POST",
+    url: "../../httpush2",
+    data: "&timestamp="+updated_at,
+	dataType:"html",
+    success: function(data)
+	{	
+		var json    	   = eval("(" + data + ")");
+		updated_at		   = json.updated_at;
+		DES_NOT     	   = json.DES_NOT;
+		AUT_NOT        		   = json.AUT_NOT;
+		REA_NOT      	   = json.REA_NOT;
+		TIP_NOT      	   = json.TIP_NOT;
+		ID_PSO			   = json.ID_PSO;	
+		
+		if(updated_at == null)
+		{
+		
+		}
+		else
+		{
+			$.ajax({
+			async:	true, 
+			type: "POST",
+			url: "../../notificaciones7",
+			data: "&div="+DES_NOT,
+			dataType:"html",
+			success: function(data7)
+			{	
+				$('#solicitud7').html(data7);
+			}
+			});	
 
+			$.ajax({
+			async:	true, 
+			type: "POST",
+			url: "../../notificacionesleidas8",
+			data: "&div="+DES_NOT,
+			dataType:"html",
+			success: function(data7)
+			{	
+				$('#leidas7').html(data7);
+			}
+			});	
+			$.ajax({
+			async:	true, 
+			type: "POST",
+			url: "notificacionescountjrh",
+			data: "&div="+DES_NOT,
+			dataType:"html",
+			success: function(data6)
+			{	
+				$('#noti2').html(data6);
+			}
+			});	
+			$.ajax({
+			async:	true, 
+			type: "POST",
+			url: "../../notificacionesalerta8",
+			data: "&div="+updated_at,
+			dataType:"html",
+			success: function(data37)
+			{	
+				$('#Notificacionalerta7').html(data3);
+			}
+			});	
+		}
+		setTimeout('cargar_push()',6000);
+		    	
+    }
+	});		
+}
+
+$(document).ready(function()
+{
+	cargar_push();
+});	 
+
+</script>
 <script type='text/javascript' lang='javascript'>
 		function agregavalor(_value, data, data2)
 		{
