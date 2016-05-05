@@ -1,0 +1,60 @@
+-- MySQL dump 10.13  Distrib 5.6.24, for Win32 (x86)
+--
+-- Host: 127.0.0.1    Database: bd_almacen
+-- ------------------------------------------------------
+-- Server version	5.5.5-10.1.9-MariaDB
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `notificaciones`
+--
+
+DROP TABLE IF EXISTS `notificaciones`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `notificaciones` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `DES_NOT` int(11) NOT NULL,
+  `AUT_NOT` int(11) NOT NULL,
+  `TIP_NOT` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `REA_NOT` int(11) NOT NULL,
+  `ALE_NOT` int(11) DEFAULT NULL,
+  `ID_PSO` int(10) unsigned NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  KEY `notificaciones_id_pso_foreign` (`ID_PSO`),
+  CONSTRAINT `notificaciones_id_pso_foreign` FOREIGN KEY (`ID_PSO`) REFERENCES `solicitudes` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `notificaciones`
+--
+
+LOCK TABLES `notificaciones` WRITE;
+/*!40000 ALTER TABLE `notificaciones` DISABLE KEYS */;
+INSERT INTO `notificaciones` VALUES (1,0,4,'Solicitud',1,1,89,'2016-04-14 18:07:20','2016-04-14 18:07:29'),(2,0,4,'Solicitud',1,1,90,'2016-04-14 18:39:04','2016-04-14 18:39:09'),(3,0,4,'Solicitud',1,0,91,'2016-04-14 18:49:02','2016-04-14 18:49:02'),(4,1,4,'Solicitud',2,1,92,'2016-04-14 18:50:26','2016-04-28 15:27:38'),(5,1,4,'Solicitud',2,1,93,'2016-04-14 18:51:57','2016-04-28 15:30:27'),(6,1,4,'Solicitud',2,1,94,'2016-04-14 18:52:13','2016-04-28 14:43:38'),(7,1,4,'Solicitud',2,1,95,'2016-04-14 18:52:21','2016-04-28 14:44:29'),(8,1,4,'Solicitud',2,1,96,'2016-04-14 18:52:31','2016-04-28 15:17:43'),(9,1,4,'Solicitud',2,1,97,'2016-04-14 18:53:33','2016-04-28 14:44:03'),(10,1,4,'Solicitud',2,1,98,'2016-04-14 18:54:03','2016-04-28 15:18:55'),(11,1,4,'Solicitud',2,1,99,'2016-04-14 19:02:13','2016-04-28 15:19:53'),(12,1,4,'Solicitud',2,1,100,'2016-04-14 19:04:45','2016-04-28 15:28:05'),(13,1,4,'Solicitud',2,1,101,'2016-04-14 19:04:55','2016-04-28 15:22:27'),(14,1,4,'Solicitud',2,1,102,'2016-04-14 19:05:26','2016-04-28 15:26:51'),(15,1,4,'Solicitud',2,1,103,'2016-04-14 19:07:12','2016-04-28 15:20:34'),(16,1,4,'Solicitud',2,1,104,'2016-04-14 20:01:21','2016-04-28 15:43:51'),(17,0,10,'Solicitud',1,1,105,'2016-04-22 18:49:11','2016-04-28 13:11:11'),(18,1,17,'Solicitud',2,1,106,'2016-04-25 14:57:04','2016-04-28 15:26:05'),(19,0,17,'Solicitud',1,1,107,'2016-04-25 14:58:37','2016-04-25 14:58:43'),(20,0,17,'Solicitud',1,1,108,'2016-04-25 15:36:52','2016-04-25 15:36:55'),(21,1,17,'Solicitud',2,1,109,'2016-04-25 15:47:37','2016-05-03 12:49:15'),(22,1,17,'Solicitud',2,1,110,'2016-04-25 15:50:29','2016-04-28 15:28:33'),(23,0,17,'Solicitud',2,1,111,'2016-04-25 16:45:37','2016-04-28 13:27:00'),(24,0,10,'Solicitud',2,1,112,'2016-04-28 13:30:24','2016-04-28 14:24:01'),(25,1,10,'Solicitud',2,1,113,'2016-04-28 14:12:25','2016-04-28 15:31:01'),(26,1,10,'Solicitud',2,1,114,'2016-04-28 15:33:56','2016-04-28 15:34:25'),(27,1,10,'Solicitud',2,1,115,'2016-04-28 15:41:08','2016-04-28 15:41:33'),(28,1,10,'Solicitud',2,1,116,'2016-04-28 15:41:48','2016-04-28 15:43:25'),(29,1,10,'Solicitud',2,1,117,'2016-04-28 15:42:06','2016-04-28 15:43:13'),(30,1,10,'Solicitud',2,1,118,'2016-04-28 15:42:22','2016-04-28 15:43:03'),(31,1,4,'Solicitud',2,1,119,'2016-04-28 16:27:28','2016-04-28 16:28:46'),(32,1,4,'Solicitud',2,1,120,'2016-04-29 13:00:41','2016-04-29 13:00:54'),(33,1,4,'Solicitud',2,1,121,'2016-04-29 13:09:48','2016-04-29 15:04:12'),(34,1,4,'Solicitud',2,1,122,'2016-04-29 15:39:04','2016-04-29 15:39:49'),(35,1,4,'Solicitud',2,1,123,'2016-04-29 16:12:27','2016-04-29 16:12:39'),(36,1,4,'Solicitud',2,1,124,'2016-04-29 16:37:21','2016-05-04 15:05:05'),(37,1,4,'Solicitud',2,1,125,'2016-05-04 15:06:09','2016-05-04 15:07:02'),(38,0,4,'Solicitud',0,1,126,'2016-05-04 15:12:15','2016-05-04 15:12:19'),(39,1,4,'Solicitud',2,1,127,'2016-05-04 15:13:02','2016-05-04 15:13:14'),(40,0,10,'Solicitud',0,0,128,'2016-05-04 15:27:40','2016-05-04 15:27:40'),(41,1,4,'Solicitud',2,1,129,'2016-05-04 15:27:41','2016-05-04 15:57:42'),(42,0,10,'Solicitud',0,1,130,'2016-05-04 16:16:47','2016-05-04 16:16:49');
+/*!40000 ALTER TABLE `notificaciones` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2016-05-05 10:26:05

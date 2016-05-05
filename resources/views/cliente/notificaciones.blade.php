@@ -50,8 +50,9 @@
          		<div class="col-md-3">
            		 <input type="text" value="<?php echo Auth::user()->CAR_USU?>" name="" id="fec_sol" class="form-control" readonly="readonly">
         		</div>
+        		<input type="button" name="imprimir" value="Imprimir"  onClick="window.print();"/>
          		</div>
 				<input type="hidden" value="0" name="dest"></input>
 		</div>
-			
+			</div></form>
 @stop

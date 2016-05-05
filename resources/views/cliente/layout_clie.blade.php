@@ -98,9 +98,9 @@ function cargar_push()
     url: "../../httpush2",
     data: "&timestamp="+updated_at,
 	dataType:"html",
-    success: function(data)
+    success: function(data10)
 	{	
-		var json    	   = eval("(" + data + ")");
+		var json    	   = eval("(" + data10 + ")");
 		updated_at		   = json.updated_at;
 		DES_NOT     	   = json.DES_NOT;
 		AUT_NOT        		   = json.AUT_NOT;
@@ -132,9 +132,9 @@ function cargar_push()
 			url: "../../notificacionesleidas8",
 			data: "&div="+DES_NOT,
 			dataType:"html",
-			success: function(data7)
+			success: function(data8)
 			{	
-				$('#leidas7').html(data7);
+				$('#leidas7').html(data8);
 			}
 			});	
 			$.ajax({
@@ -156,7 +156,7 @@ function cargar_push()
 			dataType:"html",
 			success: function(data37)
 			{	
-				$('#Notificacionalerta7').html(data3);
+				$('#Notificacionalerta7').html(data37);
 			}
 			});	
 		}

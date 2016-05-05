@@ -15,7 +15,7 @@
 			<a href="solacepcl" class="link_boton"><div class="botonescliedownl"><span class="icon-user-check" style=""></span>
 			 SOLICITUDES ACEPTADAS
 			<?php }elseif(Auth::user()->NIV_USU ==1){?>
-			<a href="notificaciones" class="link_boton"><div class="botonescliedownl"><span class="icon-user-check" style=""></span>
+			<a href="notificacionescl" class="link_boton"><div class="botonescliedownl"><span class="icon-user-check" style=""></span>
 			
 			NOTIFICACIONES DE SOLICITUDES <div class="notificacionclie"><div id="noti2"></div></div>
 			<?php }?>

@@ -17,7 +17,7 @@ class NotificacionController extends Controller {
 	public function index()
 	{
 		if(Auth::user()->NIV_USU==1){
-		$notificaciones = Notificacion::where('DES_NOT','=',1)->get();
+		$notificaciones = Notificacion::where('DES_NOT','=',1)->where('TIP_NOT','=','Solicitud')->get();
         return view('cliente/notificaciones')->with('notificaciones', $notificaciones);
     }else{
 			return response('Unauthorized.', 401);

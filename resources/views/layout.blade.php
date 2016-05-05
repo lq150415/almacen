@@ -353,9 +353,9 @@ function cargar_push()
 			url: "../../notificacionesalerta",
 			data: "&div="+updated_at,
 			dataType:"html",
-			success: function(data3)
+			success: function(data16)
 			{	
-				$('#Notificacionalerta').html(data3);
+				$('#Notificacionalerta').html(data16);
 			}
 			});	
 		}
