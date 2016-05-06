@@ -64,6 +64,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('notificacionesleidas','SolicitudController@notificacionesleidas');
         Route::post('notificacionesalerta','SolicitudController@notificacionesalerta');
         Route::post('prod_sol','SolicitudController@prod_sol');
+        Route::post('prod_sol2','NotificacionController@prod_sol2');
         Route::resource('usuario', 'UsuarioController');
         Route::post('usuario/registrar', 'UsuarioController@store');
         Route::post('eliusuario', 'UsuarioController@eliusuario');
