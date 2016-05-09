@@ -45,7 +45,7 @@
 		 <div class="form-group">
             	<label class="col-lg-3 control-label">Procedencia :</label>
          		<div class="col-md-8">
-           		 <input type="text" required="yes" id="pro_pin1" name="pro_pin" value="" class="form-control" placeholder="PROCEDENCIA" onpaste="return false">
+           		 <input type="text" required="yes" id="pro_pin1" name="pro_pin1" value="" class="form-control" placeholder="PROCEDENCIA" onpaste="return false">
         		</div>
          		</div>	
 					<table class="table-responsive">
@@ -71,7 +71,6 @@
 							<tr> 
 								<td><input type="text" class="form-control" required="yes" id="producto" name="producto[]" readonly="readonly"/></td>
 								<input type="hidden" class="form-control" id="idproducto" name="idproducto[]" required="yes" />
-								<input type="hidden" class="form-control" id="pro_pin" name="pro_pin[]"  readonly="readonly"/>
 								<td><input type="text" required="required" class="form-control" id="pre_pro" name="pre_pro[]" readonly="readonly"/></td>
 								<td><input type="number" step="1" min="0" id="can_pro" value="0" class="form-control" name="can_pro[]" /></td>
 								<td class="info"><input type="text" class="form-control" id="sub_pro" name="sub_pro[]" readonly="readonly"/></td>
@@ -180,7 +179,8 @@
             </h4>
 </div>
 	 <div class = "modal-body">
-	<form class="form-horizontal">
+	<form class="form-horizontal" method="POST" action="nuevoprecio">
+	<input type="hidden" id="idprod2"></input>
 				<div class="form-group">
             	<label class="col-lg-3 control-label">Item del producto :</label>
          		<div class="col-md-8">
@@ -205,7 +205,7 @@
                Cancelar
             	</button>
             
-            	<button type="button" name="" id="btn_reg"  class = "btn btn-primary"><span style="font-size: 10px;" class="glyphicon glyphicon-plus"></span>
+            	<button type="button" name="" id="btn_reg2"  class = "btn btn-primary"><span style="font-size: 10px;" class="glyphicon glyphicon-plus"></span>
                Registrar
            		</button>
          		</div>		

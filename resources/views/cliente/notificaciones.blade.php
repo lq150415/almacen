@@ -20,6 +20,10 @@
   				?>
 			<div class="mensajelogin alert alert-success"><label><?php echo Session::get('mensaje');?></label></div>
 			<?php endif;?>
+			<?php if (Session::has('mensaje2')):
+  				?>
+			<div class="mensajelogin alert alert-danger"><label><?php echo Session::get('mensaje2');?></label></div>
+			<?php endif;?>
 			<div class = "modal-content">
          			<div class = "modal-header alert-success">
          			<h4 class = "modal-title" id = "myModalLabel">
@@ -83,7 +87,7 @@
                Revisar solicitud 
             </h4>
          </div>
-       <form class="form-horizontal" name="" action="" method="POST">
+       <form class="form-horizontal" name=""  method="POST">
          <div class = "modal-body">
          <input type="hidden" id="id_sol" name="id_sol">
             <div class="form-group">

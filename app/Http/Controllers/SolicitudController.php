@@ -367,7 +367,7 @@ class SolicitudController extends Controller {
 		$notif->DES_NOT = 1;
 		$notif->save();
 
-		$size= count($request->input('idproducto'));
+		$size= count($request->input('producto'));
 		for($i=0; $i < $size ;$i++){
 			$revisados = new Solicitado;
 			$revisados= $revisados->where('ID_PRO','=',$request->input('idproducto.'.$i))->where('ID_SOL','=',$request->input('id_sol'))->select('id')->get();
@@ -396,10 +396,14 @@ class SolicitudController extends Controller {
 
 	public function notificacionescountjrh()
 	{
-		$contar=Notificacion::where('notificaciones.REA_NOT','=',2)->where('notificaciones.DES_NOT','=',1)->count();
+		$contar=Notificacion::where('notificaciones.REA_NOT','=',2)->where('notificaciones.DES_NOT','=',1)->where('TIP_NOT','=','Solicitud')->count();
 			echo $contar;
 	}
-	
+	public function respuestascount()
+	{
+		$contar=Notificacion::where('notificaciones.REA_NOT','=',2)->where('notificaciones.DES_NOT','=',2)->where('TIP_NOT','=','Respuesta')->count();
+			echo $contar;
+	}
 	public function notificacionesleidas()
 	{
 		$contar=Notificacion::where('notificaciones.REA_NOT','<=','1')->count();

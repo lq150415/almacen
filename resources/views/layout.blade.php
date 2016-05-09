@@ -257,6 +257,17 @@ $(document).ready(function(){
             });            
         });   
             document.getElementById("bgVentanaModal3").style.visibility="hidden";
+   });
+    $("#btn_reg2").click(function () {
+   		   pun_prod2=$("#pun_prod2").val();
+   		   id_prod2=$("#idprod2").val();
+           $("#rub option:selected").each(function () {
+            id = $(this).val();
+            $.post("nuevoprecio", { id: id, pun:pun_prod2, idpro:id_prod2}, function(data){
+                $("#tablabody").html(data);	
+            });            
+        });   
+            document.getElementById("bgVentanaModal4").style.visibility="hidden";
    })
 });
 </script>

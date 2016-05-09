@@ -73,6 +73,10 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('notificacionescl', 'NotificacionController@index');
         Route::resource('solreccl', 'SolicitudController@indexclrec');  
         Route::post('enviarevision','SolicitudController@enviarevision');
+        Route::post('nuevoprecio','IngresoController@nuevoprecio');
+        Route::post('aprobarsolicitud','NotificacionController@aprobar');
+        Route::post('rechazarsolicitud','NotificacionController@rechazar');
+        Route::post('respuestascount','SolicitudController@respuestascount');
 });
 
 

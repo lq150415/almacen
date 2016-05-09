@@ -10,7 +10,7 @@
 		<div class="VentanaModal4">
 		<center>
 			<a href="solicitud" class="link_boton"><div class="botonesclieupl"><span class="icon-folder-plus" style=""></span> REGISTRAR NUEVA SOLICITUD</div></a>
-			<a href="respuesta" class="link_boton"><div class="botonesclieupr"><span class="icon-history" style=""></span> RESPUESTAS DE SOLICITUDES</span></div></a>
+			<a href="respuesta" class="link_boton"><div class="botonesclieupr"><span class="icon-history" style=""></span> RESPUESTAS DE SOLICITUDES</span><div class="notificacionclie"><div id="noti3"></div></div></div></a>
 			<?php if(Auth::user()->NIV_USU == 2){?>
 			<a href="solacepcl" class="link_boton"><div class="botonescliedownl"><span class="icon-user-check" style=""></span>
 			 SOLICITUDES ACEPTADAS

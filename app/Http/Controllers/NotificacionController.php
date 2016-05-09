@@ -4,6 +4,7 @@ use almacen\Http\Requests;
 use almacen\Http\Controllers\Controller;
 use almacen\Notificacion;	
 use almacen\Solicitado;	
+use almacen\Solicitud;	
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -90,6 +91,38 @@ class NotificacionController extends Controller {
             </button>
          </div>";
      
+	}
+
+	public function aprobar(Request $request)
+	{	
+		$solicitudresp=Solicitud::find($request->input('id_sol'));
+		$solicitudresp->EST_SOL=1;
+		$solicitudresp->save();
+		$solicitud=Notificacion::where('ID_PSO','=',$request->input('id_sol'))->select('id')->get();
+		$respuesta= Notificacion::find($solicitud[0]->id);
+		$respuesta->TIP_NOT="Respuesta";
+		$respuesta->DES_NOT=2;
+		$respuesta->ALE_NOT=1;
+		$respuesta->save();
+
+		$mensaje="Solicitud aprobada";
+		return redirect()->route('notificacionescl.index')->with('mensaje',$mensaje);
+	}
+
+	public function rechazar(Request $request)
+	{	
+		$solicitudresp=Solicitud::find($request->input('id_sol'));
+		$solicitudresp->EST_SOL=2;
+		$solicitudresp->save();
+		$solicitud=Notificacion::where('ID_PSO','=',$request->input('id_sol'))->select('id')->get();
+		$respuesta= Notificacion::find($solicitud[0]->id);
+		$respuesta->TIP_NOT="Respuesta";
+		$respuesta->DES_NOT=2;
+		$respuesta->ALE_NOT=2;
+		$respuesta->save();
+
+		$mensaje2="Solicitud rechazada";
+		return redirect()->route('notificacionescl.index')->with('mensaje2',$mensaje2);
 	}
 
 	public function create()

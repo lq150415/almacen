@@ -48,17 +48,17 @@ function despliegaModal2a( _valor ){
 	var ind=1;
  	var ind2=1;
 $(function(){
+	
 	// Clona la fila oculta que tiene los campos base, y la agrega al final de la tabla
 	$("#agregar").on('click', function(){
 		
 		if(ind<=1){
-			
 			ind=2;
 
 		}else
 		{
 			ind2++;
-			$("#tabla tbody tr:eq(0)").clone().appendTo("#tabla tbody");
+			$("#tabla tbody tr:eq(0)").clone().prependTo("#tabla tbody");
 			
 		}
 
@@ -70,13 +70,13 @@ $(function(){
 		if(ind2==1){
 			ind--;
 			
-			$('#nro_fac').val(' ');
-			$('#nro_com').val(' ');
-			$('#idproducto').val('0');
-			$('#producto').val('0');
+			
+			$('#producto').val(' ');
 			$('#producto2').val(' ');
 			$('#pre_pro').val(' ');
+			$('#sub_pro').val(' ');
 			$('#can_pro').val(' ');
+			$('#total').val('0');
 			
 		}else{
 		var parent = $(this).parents().get(0);
@@ -85,8 +85,25 @@ $(function(){
 		
 		}
 	});
-});
  
+	$(document).on("click",".eliminar2",function(){
+		if(ind2==1){
+			ind--;
+	
+			$('#producto').val(' ');
+			$('#producto2').val(' ');
+			$('#pre_pro').val(' ');
+			$('#sub_pro').val(' ');
+			$('#can_pro').val(' ');
+			$('#total').val('0');
+			
+		}else{
+  document.getElementById("tabla").deleteRow(1);
+		ind2--;
+		}
+	});
+});
+
 </script>
 <script language="javascript">
 var updated_at = null;
@@ -151,12 +168,12 @@ function cargar_push()
 			$.ajax({
 			async:	true, 
 			type: "POST",
-			url: "../../notificacionesalerta8",
-			data: "&div="+updated_at,
+			url: "respuestascount",
+			data: "&div="+DES_NOT,
 			dataType:"html",
-			success: function(data37)
+			success: function(data6)
 			{	
-				$('#Notificacionalerta7').html(data37);
+				$('#noti3').html(data6);
 			}
 			});	
 		}
