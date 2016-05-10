@@ -100,6 +100,7 @@ class NotificacionController extends Controller {
 		$solicitudresp->save();
 		$solicitud=Notificacion::where('ID_PSO','=',$request->input('id_sol'))->select('id')->get();
 		$respuesta= Notificacion::find($solicitud[0]->id);
+		$respuesta->REA_NOT=3;
 		$respuesta->TIP_NOT="Respuesta";
 		$respuesta->DES_NOT=2;
 		$respuesta->ALE_NOT=1;
@@ -116,6 +117,7 @@ class NotificacionController extends Controller {
 		$solicitudresp->save();
 		$solicitud=Notificacion::where('ID_PSO','=',$request->input('id_sol'))->select('id')->get();
 		$respuesta= Notificacion::find($solicitud[0]->id);
+		$respuesta->REA_NOT=3;
 		$respuesta->TIP_NOT="Respuesta";
 		$respuesta->DES_NOT=2;
 		$respuesta->ALE_NOT=2;

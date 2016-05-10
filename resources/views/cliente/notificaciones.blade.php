@@ -32,7 +32,7 @@
            			</div>
            			 <div class = "modal-body">
 			<div class="table-responsive">
-  <table id="example" class="table table-hover" cellspacing="5" width="100%">
+  <table id="example5" class="table table-hover" cellspacing="5" width="100%">
   <thead>
     <tr class="info">
             <th>TIPO</th>
@@ -71,7 +71,9 @@
       ?>
   </tbody>
   </table>
-
+</div>
+</div>
+</div>
 </div>
 <div class = "modal fade" id = "myModal" tabindex = "-1" role = "dialog" 
    aria-labelledby = "myModalLabel" aria-hidden = "true">

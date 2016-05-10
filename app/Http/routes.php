@@ -77,6 +77,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('aprobarsolicitud','NotificacionController@aprobar');
         Route::post('rechazarsolicitud','NotificacionController@rechazar');
         Route::post('respuestascount','SolicitudController@respuestascount');
+        Route::post('respuestascount2','SolicitudController@respuestascount2');
 });
 
 

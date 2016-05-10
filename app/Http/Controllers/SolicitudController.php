@@ -36,7 +36,7 @@ class SolicitudController extends Controller {
 	{
 		if(Auth::user()->NIV_USU==0){
 			$q = new Notificacion;
-			$q = $q->join('solicitudes', 'notificaciones.ID_PSO','=','solicitudes.id')->join('users', 'solicitudes.ID_USU','=','users.id')->where('notificaciones.DES_NOT','=',0)->orwhere('notificaciones.DES_NOT','=',1)->orderBy('notificaciones.updated_at', 'DESC')->select('REA_NOT','NOM_USU', 'APA_USU','AMA_USU','notificaciones.updated_at', 'notificaciones.created_at','TIP_NOT','ID_PSO')->get();
+			$q = $q->join('solicitudes', 'notificaciones.ID_PSO','=','solicitudes.id')->join('users', 'solicitudes.ID_USU','=','users.id')->where('TIP_NOT','=','Solicitud')->where('notificaciones.DES_NOT','<=',1)->orderBy('notificaciones.updated_at', 'DESC')->select('REA_NOT','NOM_USU', 'APA_USU','AMA_USU','notificaciones.updated_at', 'notificaciones.created_at','TIP_NOT','ID_PSO')->get();
 		return view('solicitudes')->with('query',$q);}
 		else{
 
@@ -329,7 +329,7 @@ class SolicitudController extends Controller {
 					<input type='hidden' class='form-control' id='pro_pin' name='pro_pin[]'  readonly='readonly'/>
 							
 					<td><input type='number' value='".$producto->CAN_SOL."'' id='can_pro' name='can_sol[]'"; 
-					if($producto->REA_NOT == 2){
+					if($producto->REA_NOT >= 2){
 						echo " readonly ='readonly' ";
 					}
 					echo "class='form-control' name='can_pro[]'/></td>
@@ -399,10 +399,24 @@ class SolicitudController extends Controller {
 		$contar=Notificacion::where('notificaciones.REA_NOT','=',2)->where('notificaciones.DES_NOT','=',1)->where('TIP_NOT','=','Solicitud')->count();
 			echo $contar;
 	}
+	
 	public function respuestascount()
 	{
-		$contar=Notificacion::where('notificaciones.REA_NOT','=',2)->where('notificaciones.DES_NOT','=',2)->where('TIP_NOT','=','Respuesta')->count();
+		$contar=Notificacion::where('notificaciones.REA_NOT','=',3)->where('notificaciones.DES_NOT','=',2)->where('TIP_NOT','=','Respuesta')->where('AUT_NOT','=',Auth::user()->id)->count();
 			echo $contar;
+	}
+
+	public function respuestascount2()
+	{
+		$contar=Notificacion::where('notificaciones.REA_NOT','=',3)->where('notificaciones.DES_NOT','=',2)->where('TIP_NOT','=','Respuesta')->count();
+				if($contar==0){
+		$contar=Notificacion::where('notificaciones.REA_NOT','<=','3')->where('notificaciones.DES_NOT','=',2)->where('TIP_NOT','=','Respuesta')->count();
+		echo "<div class='notificacion2'>".$contar."</div>";
+		}
+		else
+		{
+			echo "<div class='notificacion'>".$contar."</div>";
+		}
 	}
 	public function notificacionesleidas()
 	{

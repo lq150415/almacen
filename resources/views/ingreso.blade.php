@@ -236,27 +236,28 @@
 	  	<a class="btn btn-success" href="javascript:despliegaModal('visible');"><span class="glyphicon glyphicon-plus"></span> Nuevo ingreso</a>
 	  </br>
 	  	  </br>
-		<table id="example4" class="display" cellspacing="5" width="100%" style="border-radius:4px;-moz-border-radius:4px;-webkit-border-radius:4px;border:1px #444444 solid;">
-	<thead style="font-size:13px;color:#FFF;background-color:#444444;height:40px;">
-		<tr>
-            <th>FECHA DE INGRESO</th>
-            <th>NRO ORDEN DE COMPRA</th>
-            <th>PROCEDENCIA</th>
-			<th>PRODUCTO</th>
-			<th>CANTIDAD</th>
-			<th>PRECIO TOTAL Bs.</th>
-			<th>ID INGRESO</th>	
+	  <div class="table-responsive">
+		<table id="example4" class="table table-hover" cellspacing="5" width="100%" >
+	<thead class="warning">
+		<tr class="info">
+            <th style="font-size: 9px;">FECHA DE INGRESO</th>
+            <th style="font-size: 9px;">NRO ORDEN DE COMPRA</th>
+            <th style="font-size: 12px;">PROCEDENCIA</th>
+			<th style="font-size: 12px;">PRODUCTO</th>
+			<th style="font-size: 12px;">CANTIDAD</th>
+			<th style="font-size: 9px;">PRECIO TOTAL Bs.</th>
+			<th style="font-size: 12px;">ID INGRESO</th>	
 		</tr>
 	</thead>
-	<tfoot style="font-size:13px;color:#FFF;background-color:#444444;height:40px;">
-		<tr>
-            <th>FECHA DE INGRESO</th>
-            <th>NRO ORDEN DE COMPRA</th>
-            <th>PROCEDENCIA</th>
-			<th>PRODUCTO</th>
-			<th>CANTIDAD</th>
-			<th>PRECIO TOTAL Bs.</th>
-			<th>ID INGRESO</th>
+	<tfoot >
+		<tr class="info">
+            <th style="font-size: 9px;">FECHA DE INGRESO</th>
+            <th style="font-size: 9px;">NRO ORDEN DE COMPRA</th>
+            <th style="font-size: 12px;">PROCEDENCIA</th>
+			<th style="font-size: 12px;">PRODUCTO</th>
+			<th style="font-size: 12px;">CANTIDAD</th>
+			<th style="font-size: 9px;">PRECIO TOTAL Bs.</th>
+			<th style="font-size: 12px;">ID INGRESO</th>
 		</tr>
 	</tfoot>
 	<tbody style="font-size:11px;">
@@ -281,6 +282,6 @@
 			?>
 	</tbody>
 </table>
-
+</div>
 </fieldset>
 	@stop

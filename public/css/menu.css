@@ -270,16 +270,8 @@ div.formulario{
  	right: 0;
  }
 }
-@media screen and (max-width: 800px) {
- .formularioreg {
- 	zoom:0.8;
- }
-}
-@media screen and (max-width: 731px) {
- .formularioreg {
- 	zoom:0.6;
- }
-}
+
+
 @media screen and (max-width: 950px) {
 	body {
 		padding-top:80px;

@@ -24,7 +24,7 @@
 	  	</br>
 	  	</br>
 <div class="table-responsive">
-  <table id="example" class="table table-hover" cellspacing="5" width="100%">
+  <table id="example6" class="table table-hover" cellspacing="5" width="100%">
   <thead>
     <tr class="info">
             <th>TIPO</th>

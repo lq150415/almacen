@@ -21,6 +21,8 @@
 		<script type="text/javascript" language="javascript" class="init">
 			$(document).ready(function() {
 				$('#example').DataTable();
+				$('#example4').DataTable();
+				$('#example5').DataTable();
 			} );
 		</script>
 		<style type="text/css">

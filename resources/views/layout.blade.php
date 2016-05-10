@@ -62,6 +62,12 @@
 				$('#example4').DataTable( {
        				 "order": [[ 6, "desc" ]]
    				 } );
+				$('#example6').DataTable( {
+       				 "order": [[ 0, "asc" ]]
+   				 } );
+				$('#example8').DataTable( {
+       				 "order": [[ 0, "desc" ]]
+   				 } );
 			} );
 		</script>
 		<script type="text/javascript" language="javascript" >
@@ -335,7 +341,17 @@ function cargar_push()
 				$('#solicitud').html(data);
 			}
 			});	
-
+			$.ajax({
+			async:	true, 
+			type: "POST",
+			url: "respuestascount2",
+			data: "&div="+DES_NOT,
+			dataType:"html",
+			success: function(data11)
+			{	
+				$('#noti2').html(data11);
+			}
+			});	
 			$.ajax({
 			async:	true, 
 			type: "POST",
@@ -446,8 +462,8 @@ $(document).ready(function()
 				<ul>
 					<li> <a href="../../almacen">ALMACENES</a> </li>
 					<li> <a href="../../usuario">USUARIOS</a> </li>
-					<li> <a href="../../solicitud">SOLICITUDES</a><div  id="noti">  </div> </li>
-					<li> <a href="../../respuesta">RESPUESTAS</a> </li>
+					<li> <a href="../../solicitud">SOLICITUDES</a><div id="noti">  </div> </li>
+					<li> <a href="../../respuesta">RESPUESTAS</a><div id="noti2"></div>  </li>
 					<li> <a >CONSULTAS</a> 
 						<ul class="children">
 							<li><a href="../../consultapr">Por rubro<span class="icon-dot"></span></a></li>

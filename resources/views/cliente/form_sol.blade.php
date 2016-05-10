@@ -105,6 +105,9 @@
 						
 			</form>
 	</div>
+</div>
+</form>
+</div>
 
 		
 <div id="bgVentanaModal2" class="bgventanaModal2">
