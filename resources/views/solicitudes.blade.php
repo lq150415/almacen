@@ -53,7 +53,7 @@
         $nombre= "'".$nombres."'";
           ?>
             <th><?php echo $query->TIP_NOT;?></th>
-            <th><?php echo $query->updated_at->format('d/m/Y');?></th>
+            <th><?php echo $query->updated_at->format('Y/m/d');?></th>
             <th><?php echo $query->NOM_USU.' '.$query->APA_USU.' '.$query->AMA_USU;?></th>
             <th><?php echo $a;?></th>
             <th><button data-toggle = "modal" title="Revisar solicitud" onClick="revisar(<?php echo $fecha.','.$nombre.','.$query->ID_PSO?>);" data-target = "#myModal"  class="btn btn-danger"> <span class="glyphicon glyphicon-exclamation-sign" ></span> Revisar</button></th>

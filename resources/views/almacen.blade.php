@@ -113,13 +113,13 @@
 				 <div class="form-group">
             	<label class="col-lg-3 control-label">Nombre :</label>
          		<div class="col-md-8">
-           		 <input placeholder="NOMBRE DEL ALMACEN" class="form-control" name="nom_alm">
+           		 <input placeholder="NOMBRE DEL ALMACEN" required class="form-control" name="nom_alm">
         		</div>
          		</div>
          <div class="form-group">
             <label class="col-lg-3 control-label">Ubicacion :</label>
          <div class="col-md-8">
-            <input class="form-control" name="ubi_alm" placeholder="UBICACION DEL ALMACEN" id="descomp">
+            <input class="form-control" name="ubi_alm" required placeholder="UBICACION DEL ALMACEN" id="descomp">
          </div>
          </div>
         

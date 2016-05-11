@@ -46,13 +46,13 @@
 						}else{
 							$a='Rechazado';
 						}
-						 $fechas=$respuesta->created_at->format('d/m/Y');
+						 $fechas=$respuesta->created_at->format('Y/m/d');
         				 $nombres=$respuesta->NOM_USU.' '.$respuesta->APA_USU.' '.$respuesta->AMA_USU;
         				 $fecha= "'".$fechas."'";
         				 $nombre= "'".$nombres."'";
 					?>
 						<th><?php echo $respuesta->id?></th>
-						<th><?php echo $respuesta->created_at->format('d - m - Y');?></th>
+						<th><?php echo $respuesta->created_at->format('Y- m-d');?></th>
 						<th><?php echo $respuesta->NOM_USU.' '.$respuesta->APA_USU.' '.$respuesta->AMA_USU;?></th>
 						<?php if ($respuesta->ALE_NOT==2){echo '<th class="danger">'.$a;}else{echo '<th class="success">'.$a;}?></th>
 						<?php if ($respuesta->REA_NOT==3){echo '<th class="danger">No';}else{echo '<th class="success">Si';}?></th>

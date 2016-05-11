@@ -26,7 +26,7 @@ class SalidaController extends Controller {
 			//$query=
 			$query = Salidaproducto::join('productos','productos.id','=','salidaproductos.ID_PRO')
 						   ->join('salidas','salidas.id','=','salidaproductos.ID_SAL')
-						   ->select('FEC_SAL', 'DGA_SPR', 'DES_SPR','DES_PRO', 'CAN_PRO', 'PUN_PRO', 'CAN_SPR', 'ID_SAL')
+						   ->select('FEC_SAL', 'DGA_SPR', 'DES_SPR','DES_PRO', 'CAN_PRO', 'PUN_PRO', 'CAN_SPR', 'ID_SAL','salidas.created_at')->orderBy('salidas.created_at','DESC')
                            ->get();
 		return view('salida')->with('almacenes',$almacenes)->with('rubros',$rubros)->with('productos',$productos)->with('consultas',$query);
 		}else{
@@ -61,9 +61,9 @@ class SalidaController extends Controller {
 		$j=count($request->input('nro_com'));
 		for($i=0; $i < count($request->input('nro_com')) ;$i++){
 			$salidaproductos = new Salidaproducto;
-			$salidaproductos->DGA_SPR = $request->input('nro_com.'.$i);
+			$salidaproductos->DGA_SPR = $request->input('nro_com');
         	$salidaproductos->CAN_SPR = $request->input('can_pro.'.$i);
-        	$salidaproductos->DES_SPR = $request->input('pro_pin.'.$i);
+        	$salidaproductos->DES_SPR = $request->input('des_psr');
         	$salidaproductos->ID_PRO = $request->input('idproducto.'.$i);
         	$salidaproductos->ID_SAL = 	$salidas->id;
         	$salidaproductos->created_at = Carbon::now();
@@ -118,16 +118,13 @@ class SalidaController extends Controller {
 		echo "} );";
 		echo "</script>";  
 		echo "<script type='text/javascript' lang='javascript'>";
-		echo "function agregavalor(_value, data, data2,data3){";
+		echo "function agregavalor(_value, data, data2, data3){";
 		echo "document.getElementById('bgVentanaModal2').style.visibility = _value;";
 	//	echo "$('#tabla tbody tr:eq(0)').clone().removeClass('fila-base').appendTo('#tabla tbody');";
-		echo "$('#nro_fac').val($('#nro_fac1').val());";
-		echo "$('#can_pro').val($('#cant').val());";
-		echo "$('#pro_pin').val($('#pro_pin1').val());";
 		echo "$('#idproducto').val(data3);";
-		echo "$('#producto').val(data);";
-		echo "$('#pre_pro').val(data2);";
-		echo "$('#nro_com').val($('#nro_com1').val());}";
+		echo "$('#producto').val(data);}";
+		
+		
 		echo "</script>";
 
 		
