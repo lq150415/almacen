@@ -136,6 +136,7 @@ return [
 		'Illuminate\Translation\TranslationServiceProvider',
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
+		'Elibyy\TCPDF\ServiceProvider',
 
 		/*
 		 * Application Service Providers...
@@ -181,6 +182,7 @@ return [
 		'Log'       => 'Illuminate\Support\Facades\Log',
 		'Mail'      => 'Illuminate\Support\Facades\Mail',
 		'Password'  => 'Illuminate\Support\Facades\Password',
+		'PDF' => Elibyy\TCPDF\Facades\TCPDF::class,
 		'Queue'     => 'Illuminate\Support\Facades\Queue',
 		'Redirect'  => 'Illuminate\Support\Facades\Redirect',
 		'Redis'     => 'Illuminate\Support\Facades\Redis',
