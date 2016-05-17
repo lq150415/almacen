@@ -58,7 +58,7 @@
 						<?php if ($respuesta->REA_NOT==3){echo '<th class="danger">No';}else{echo '<th class="success">Si';}?></th>
 						<?php if ($respuesta->ALE_NOT==2){?>
 						<th><button data-toggle = "modal" data-target = "#myModal" onClick="revisar(<?php echo $fecha.','.$nombre.','.$respuesta->ID_PSO?>);"  href="" class="btn btn-success" title="Detalle"> <span class="glyphicon glyphicon-search"> </span> </button></th><?php }else{?>
-						<th><button data-toggle = "modal" data-target = "#myModal" onClick="revisar(<?php echo $fecha.','.$nombre.','.$respuesta->ID_PSO?>);"  href="pdf" class="btn btn-success" title="Detalle"> <span class="glyphicon glyphicon-search"> </span> </button> <a  title="Imprimir formulario"  href="pdf" class="btn btn-primary"> <span class="glyphicon glyphicon-print"> </span> </a> </th>	<?php }?>
+						<th><button data-toggle = "modal" data-target = "#myModal" onClick="revisar(<?php echo $fecha.','.$nombre.','.$respuesta->ID_PSO?>);"  href="pdf" class="btn btn-success" title="Detalle"> <span class="glyphicon glyphicon-search"> </span> </button> <a  title="Imprimir formulario" target="_blank" href="" class="btn btn-primary"> <span class="glyphicon glyphicon-print"> </span> </a> </th>	<?php }?>
 		</tr>
 				<?php	endforeach;}
 			

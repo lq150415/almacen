@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html> 
 <head>
 	<title>Sistema de Control de Almacenes e Inventarios (SCAI)</title>
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -424,7 +424,7 @@ $(document).ready(function()
 					<ul class="children">
 						<li><a href="#">Reporte de Saldos<span class="icon-dot"></span></a></li>
 						<li><a href="#">Reporte de Ingresos<span class="icon-dot"></span></a></li>
-						<li><a href="#">Reporte de Movimientos (Kardex)<span class="icon-dot"></span></a></li>
+						<li><a href="kardexpdf/33" target="_blank">Reporte de Movimientos (Kardex)<span class="icon-dot"></span></a></li>
 					</ul>
 				</li>
 				<li class="submenu">

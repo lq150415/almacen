@@ -56,17 +56,7 @@ class SolicitudController extends Controller {
 		return view('cliente/sol_rec');
 	}
 
-	 public function pdf(){
-
-
-		PDF::SetTitle('Formulario DGAA');
-
-		PDF::AddPage();
-
-		PDF::Write(0, 'Imprimiendo parte del formulario');
-
-		PDF::Output('hello_world.pdf');
-    }
+	 
 
 
 	/**

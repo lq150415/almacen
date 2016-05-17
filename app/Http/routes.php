@@ -2,7 +2,7 @@
 
 /* 
 |--------------------------------------------------------------------------
-| Application Routes
+| Application Routes 
 |--------------------------------------------------------------------------
 |
 | Here is where you can register all of the routes for an application.
@@ -78,7 +78,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('rechazarsolicitud','NotificacionController@rechazar');
         Route::post('respuestascount','SolicitudController@respuestascount');
         Route::post('respuestascount2','SolicitudController@respuestascount2');
-        Route::get('pdf','SolicitudController@pdf');
+        Route::get('kardexpdf/{id}','ReporteController@kardexpdf');
 });
 
 
