@@ -422,7 +422,7 @@ $(document).ready(function()
 				<li class="submenu">
 					<a href="#"><span class="icon-book"></span>Reportes<span class="caret icon-arrow-down6"></span></a>
 					<ul class="children">
-						<li><a href="#">Reporte de Saldos<span class="icon-dot"></span></a></li>
+						<li><a href="saldospdf" target="_blank">Reporte de Saldos<span class="icon-dot"></span></a></li>
 						<li><a href="#">Reporte de Ingresos<span class="icon-dot"></span></a></li>
 						<li><a href="kardex" >Reporte de Movimientos (Kardex)<span class="icon-dot"></span></a></li>
 					</ul>

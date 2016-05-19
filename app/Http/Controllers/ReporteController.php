@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use PDF;
 use DB;
+use Carbon\Carbon;
 use almacen\Producto;
 use almacen\Ingresado;
 use almacen\Almacen;
@@ -140,7 +141,8 @@ $pdf->SetXY(10,190);
         $pdf->SetTitle('Reporte de saldos');  
         $pdf->setPrintHeader(false);
         $pdf->setPrintFooter(false);
-        $pdf->SetAutoPageBreak(TRUE, 0);
+        $pdf->SetAutoPageBreak(TRUE, 10);
+        $pdf->SetMargins(15, 15, 10);
         $pdf->AddPage();
         $pdf->Image('images/banner_opt.jpg', 13, 1, 40, 38, 'JPG', '', '', true, 250, '', false, false, false, false, false, false);
         $pdf->Line ( 53, 25,205,25,array('width' => 0.3,'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => array(0, 0, 0)));
@@ -148,50 +150,347 @@ $pdf->SetXY(10,190);
         $pdf->SetXY(150, 20);
         $pdf->Write(0,'REPORTE DE SALDOS','','',false);
         $pdf->SetXY(135, 25);
-        $pdf->Write(0,'Procuradoria General del Estado','','',false); 
+        $usuario = 'Nombre: '.Auth::user()->NOM_USU.' '.Auth::user()->APA_USU.' '.Auth::user()->AMA_USU.' CARGO: '.Auth::user()->CAR_USU.' AREA: '.Auth::user()->ARE_USU.' FECHA: '.Carbon::now();
+        $pdf->Write(0,'Procuradoria General del estado','','',false); 
+        $pdf->SetXY(70,30);
+        $pdf->SetFont('','','12');
+        $pdf->write2DBarcode ( $usuario, 'QRCODE,M', 185, 35, 15, 15, '','','');
+        $html='<style>
+    h1 {
+        color: navy;
+        font-family: times;
+        font-size: 24pt;
+        text-decoration: underline;
+    }
+    p.first {
+        color: #003300;
+        font-family: helvetica;
+        font-size: 12pt;
+    }
+    p.first span {
+        color: #006600;
+        font-style: italic;
+    }
+    p#second {
+        color: rgb(00,63,127);
+        font-family: times;
+        font-size: 12pt;
+        text-align: justify;
+    }
+    p#second > span {
+        background-color: #FFFFAA;
+    }
+    th.first {
+        color: #003300;
+        font-family: helvetica;
+        font-size: 8pt;
+        
+        background-color: #ccffcc;
+    }
+    th.first-danger {
+        color: maroon;
+        font-family: helvetica;
+        font-size: 8pt;
+        font-strecht: bold;
+        background-color: #ff6066;
+    }
+    th.second {
+        color: #6c3300;
+        font-family: helvetica;
+        font-size: 8pt;
+        
+        background-color: #fbdb65;
+    }
+    tr.title{
+        background-color: #bab3b2;
+    }
+    td {
+        border: 2px solid blue;
+        background-color: #ffffee;
+    }
+    td.second {
+        border: 2px dashed green;
+    }
+    div.test {
+        color: #CC0000;
+        background-color: #FFFF66;
+        font-family: helvetica;
+        font-size: 10pt;
+        border-style: solid solid solid solid;
+        border-width: 2px 2px 2px 2px;
+        border-color: green #FF00FF blue red;
+        text-align: center;
+    }
+    .lowercase {
+        text-transform: lowercase;
+    }
+    .uppercase {
+        text-transform: uppercase;
+    }
+    .capitalize {
+        text-transform: capitalize;
+    }
+</style>';    $sum=0;
         foreach ($almacen as $almacenes) {
-            $html='<br/><br/><br/><br/><font size="10"><label>ALMACEN:'.$almacenes->NOM_ALM.'</label><br/>';
+            $html=$html.'
+            <br/><br/><font size="10"><label><b>ALMACEN: </b>'.$almacenes->NOM_ALM.'</label></font><br/>';
             $idalm=$almacenes->id;
 
             $rubro= Rubro::where('ID_ALM','=',$idalm)->get();
             foreach ($rubro as $rubros) {
-                $html=$html.'<br/><label style="padding-left:400px;">RUBRO:'.$rubros->NOM_RUB.'</label><br/>';
+                $html=$html.'<br/><font size="10"><label ><b>RUBRO: </b>'.$rubros->NOM_RUB.'</label></font><br/>';
                 $idrub=$rubros->id;
-                $producto= Producto::where('ID_RUB','=',$idrub);
+                $producto= Producto::where('ID_RUB','=',$idrub)->get();
                 $i=1;
+            
                 foreach ($producto as $productos) {
-                if($i==1){$html = 
-     '<font size="6"> <br/><br/><br/><br/><table border="1" cellspacing="0" cellpadding="2">
-    <tr >
-    <th  align="center" width="10%"><b>ITEM <br/>PRODUCTO </b></th>
-    <th  align="center" width="12%"><b>DESCRIPCION<br/>OPRODUCTO</b></th>
-    <th  align="center" width="13%"><b>PRECIO<br/>UNITARIO </b></th>
-    <th  align="center" width="10%"><b>CANTIDAD EN<br/>STOCK</b></th>
-    </tr>
-    <tr>
-        <th>'.$productos->ITM_PRO.'</th>
-        <th>'.$productos->DES_PRO.'</th>
-        <th>'.$productos->PUN_PRO.'</th>
-        <th>'.$productos->CAN_PRO.'</th>
-    </tr>';
-    $i++;
+                    $sum=$sum+($productos->CAN_PRO * $productos->PUN_PRO);
+                if($i==1)
+                    {
+                        if($productos->CAN_PRO <= 10)
+                        {
+                            $ab='first-danger';
+                        }else
+                        {
+                            $ab='first' ;   
+                        }
 
-}else{
-    $html=$html.'<tr>
-        <th>'.$productos->ITM_PRO.'</th>
-        <th>'.$productos->DES_PRO.'</th>
-        <th>'.$productos->PUN_PRO.'</th>
-        <th>'.$productos->CAN_PRO.'</th>
-    </tr>';
-}
-}
- $html=$html.'</table></font>';
+                        $html =$html. 
+                        '<font size="8"> <br/><table border="1" cellspacing="0" cellpadding="6" class="">
+                        <tr class="title" >
+                            <th width="10%"><b>ITEM </b></th>
+                            <th width="60%"><b>DESCRIPCION DEL PRODUCTO</b></th>
+                            <th width="10%"><b>PRECIO </b></th>
+                            <th width="8%" class="first"><b>STOCK</b></th>
+                            <th width="12%" class="second"><b>IMPORTE BS.</b></th>
+                        </tr>
+                        <tr>
+                            <th>'.$productos->ITM_PRO.'</th>
+                            <th>'.$productos->DES_PRO.'</th>
+                            <th>'.$productos->PUN_PRO.'</th>
+                            <th class="'.$ab.'">'.$productos->CAN_PRO.'</th>
+                            <th class="second">'.($productos->CAN_PRO*$productos->PUN_PRO).'</th>
+                        </tr>';
+                        $i++;
+
+                    }else
+                    {
+                        if($productos->CAN_PRO <= 10)
+                        {
+                            $ab='first-danger';
+                        }else
+                        {
+                            $ab='first' ;   
+                        }
+                        $html=$html.'<tr>
+                                        <th>'.$productos->ITM_PRO.'</th>
+                                        <th>'.$productos->DES_PRO.'</th>
+                                        <th>'.$productos->PUN_PRO.'</th>
+                                        <th class="'.$ab.'">'.$productos->CAN_PRO.'</th>
+                                        <th class="second">'.($productos->CAN_PRO*$productos->PUN_PRO).'</th>
+                                    </tr>';
+                    }
+                    }
+                        $html=$html.'</table></font>';
+
             }
       
-        $pdf->writeHTML($html, true, false, true, false, '');
 
         }
+        $html2='<style>
+    h1 {
+        color: navy;
+        font-family: times;
+        font-size: 24pt;
+        text-decoration: underline;
+    }
+    p.first {
+        color: #003300;
+        font-family: helvetica;
+        font-size: 12pt;
+    }
+    p.first span {
+        color: #006600;
+        font-style: italic;
+    }
+    p#second {
+        color: rgb(00,63,127);
+        font-family: times;
+        font-size: 12pt;
+        text-align: justify;
+    }
+    p#second > span {
+        background-color: #FFFFAA;
+    }
+    th.first {
+        color: #003300;
+        font-family: helvetica;
+        font-size: 8pt;
+        
+        background-color: #ccffcc;
+    }
+    th.first-danger {
+        color: maroon;
+        font-family: helvetica;
+        font-size: 8pt;
+        font-strecht: bold;
+        background-color: #ff6066;
+    }
+    th.second {
+        color: #6c3300;
+        font-family: helvetica;
+        font-size: 8pt;
+        
+        background-color: #fbdb65;
+    }
+    tr.title{
+        background-color: #bab3b2;
+    }
+    td {
+        border: 2px solid blue;
+        background-color: #ffffee;
+    }
+    td.second {
+        border: 2px dashed green;
+    }
+    th.total{
+        border-top: 1px solid #000;
+        border-bottom: 1px solid #000;
+        border-right: 1px solid #000;
+         border-left: none;
+           border-style:hidden;
+         color: maroon;
+        font-family: helvetica;
+        font-size: 8pt;
+        font-strecht: bold;
+        background-color: #ff6066;
+    }
+    
+    th.total2{
+         border-top: 1px solid #000;
+         border-left: 1px solid #000;
+         border-bottom: 1px solid #000;
+         border-right: none;
+         border-style:hidden;
+       color: maroon;
+        font-family: helvetica;
+        font-size: 8pt;
+        font-strecht: bold;
+        background-color: #ff6066;
+    }
+    div.test {
+        color: #CC0000;
+        background-color: #FFFF66;
+        font-family: helvetica;
+        font-size: 10pt;
+        border-style: solid solid solid solid;
+        border-width: 2px 2px 2px 2px;
+        border-color: green #FF00FF blue red;
+        text-align: center;
+    }
+    .lowercase {
+        text-transform: lowercase;
+    }
+    .uppercase {
+        text-transform: uppercase;
+    }
+    .capitalize {
+        text-transform: capitalize;
+    }
+</style>';
+        $j=1;
+        foreach($almacen as $almacenes)
+        {   
+            $idalm=$almacenes->id;
+            $rubro= Rubro::where('ID_ALM','=',$idalm)->get();
+            if($j==1)
+            {
+                $html2=$html2.'
+                <font size="8"><table  border="1" cellspacing="0" cellpadding="6">
+                    <tr class="title" >
+                        <th><b>ALMACEN</b></th>
+                        <th><b>RUBRO</b></th>
+                        <th><b>CANTIDAD DE PRODUCTOS</b></th>
+                        <th class="first"><b>IMPORTE</b></th>  
+                    </tr>
+                    <tr><th align="center" rowspan="'.count($rubro).'">'.$almacenes->NOM_ALM.'</th>';
+                    $k=1;
+                    foreach ($rubro as $rubros) {
+                        $idrub=$rubros->id;
+                        $producto2= Producto::where('ID_RUB','=',$idrub)->get();
+                        $producto= DB::select("
+                                SELECT sum(CAN_PRO*PUN_PRO) as TOTAL
+                                from productos
+                                where id_rub=$idrub
+                                having sum(CAN_PRO*PUN_PRO)");
+                        if($k==1)
+                        {                           
+                            $html2=$html2.'
+                            <th>'.$rubros->NOM_RUB.'</th>
+                            <th align="right" >'.count($producto2).'</th>
+                            <th align="right" class="first">'.$producto[0]->TOTAL.'</th></tr>';
+                            $k++;
+                        }
+                        else
+                        {
+                            $html2=$html2.'
+                            <tr>
+                                <th>'.$rubros->NOM_RUB.'</th>
+                                <th align="right" >'.count($producto2).'</th>
+                                <th align="right" class="first">'.$producto[0]->TOTAL.'</th>
+                            </tr>';
+                        }
+                    }
+                $j++;
+            }
+            else
+            {
+                $html2=$html2.'
+                    <tr><th align="center" class="spaneado" rowspan="'.count($rubro).'">'.$almacenes->NOM_ALM.'</th>';
+                    $k=1;
+                    foreach ($rubro as $rubros) {
+                        $idrub=$rubros->id;
+                        $producto2= Producto::where('ID_RUB','=',$idrub)->get();
+                        $producto= DB::select("
+                                SELECT sum(CAN_PRO*PUN_PRO) as TOTAL
+                                from productos
+                                where id_rub=$idrub
+                                having sum(CAN_PRO*PUN_PRO)");
+                        if($k==1)
+                        {                           
+                            $html2=$html2.'
+                            <th>'.$rubros->NOM_RUB.'</th>
+                            <th align="right" >'.count($producto2).'</th>
+                            <th align="right" class="first">'.$producto[0]->TOTAL.'</th></tr>';
+                            $k++;
+                        }
+                        else
+                        {
+                            $html2=$html2.'
+                            <tr>
+                                <th>'.$rubros->NOM_RUB.'</th>
+                                <th align="right" >'.count($producto2).'</th>
+                                <th align="right" class="first">'.$producto[0]->TOTAL.'</th>
+                            </tr>';
+                        }
+                    }
+                
+            }
+        }
+            $html2=$html2.'
+            <tr>
+                <th colspan="3" class="total2 "><b>IMPORTE TOTAL</b></th>
+                <th align="right" class="total ">'.$sum.'</th>
 
+            </tr>';
+        $html2=$html2.'</table></font>';
+//dd($html2);
+        $pdf->writeHTML($html, true, false, true, false, '');
+        $pdf->SetFont('','B','10');
+        $pdf->SetXY(15, 200);
+        $pdf->Write(0,'RESUMEN GENERAL','','',false);
+        $pdf->SetXY(15, 207);
+        $pdf->writeHTML($html2, true, false, true, false, '');
         $pdf->Output('reportekardex.pdf');
     }
     public function create()
