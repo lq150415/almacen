@@ -119,7 +119,7 @@ class SolicitudController extends Controller {
 				$productos= Producto::join('rubros','rubros.id','=','productos.ID_RUB')->where('ID_ALM','=','1')
 		->select('productos.id','DES_PRO','ID_ALM')
 		->get();
-			return redirect()->route('solicitud.index')->with('mensaje',$mensaje);
+			return redirect()->route('solicitud')->with('mensaje',$mensaje);
 
 			}
 		}
@@ -361,6 +361,108 @@ class SolicitudController extends Controller {
 							
 	}
 
+	public function prod_sol3(){
+		$productos= Solicitado::where('ID_SOL','=',$_POST['id'])->join('productos','productos.id','=','solicitados.ID_PRO')->join('notificaciones','notificaciones.ID_PSO','=','solicitados.ID_SOL')->get();
+		$notificacion= Notificacion::where('ID_PSO','=',$_POST['id'])->select('id')->get();
+		$noti = new Notificacion;
+		$noti = $noti->find($notificacion[0]->id);
+		if($noti->REA_NOT==0):
+		$noti->REA_NOT= 1;
+		$noti->save();
+		endif;
+		echo "<script type='text/javascript' language='javascript' class='init'>"; 
+		echo "$(document).on('click','.eliminar',function(){";
+		echo "var parent = $(this).parents().get(0);";
+		echo "$(parent).remove();";
+		echo "ind2--;";
+		
+		echo "});";
+		echo "</script>"; 
+		echo '<script language="JavaScript">';
+		echo "function muestra_oculta(id){";
+		echo"if(document.getElementById){";
+		echo"var el = document.getElementById(id);";
+		echo"el.style.display = (el.style.display == 'none') ? 'block' : 'block';";
+		echo"document.getElementById('despliega').style.display = (document.getElementById('despliega').style.display == 'none') ? 'none' : 'none';";
+		echo"document.getElementById('botones').style.display = (document.getElementById('botones').style.display == 'none') ? 'block' : 'block';";
+		echo"}";
+		echo"}";
+		echo "window.onload = function(){";
+		echo "muestra_oculta('contenido_a_mostrar');";
+		echo "}";
+		echo "</script>";
+		if ($noti->ALE_NOT==2){
+			
+     	}else {
+			echo "
+            <button id='despliega' onclick=".'"muestra_oculta('."'contenido_a_mostrar'".')" title=""'." type = 'button' class = 'btn btn-success'><span style='font-size: 10px; ' class='glyphicon glyphicon-check'></span>
+               Proceder salida de productos
+            </button>
+         ";
+  
+     }
+		echo '
+<div id="contenido_a_mostrar" style="display:none;">
+		<div class="form-group">
+			<label class="col-lg-3 control-label">Formulario DGAA</label>
+         		<div class="col-md-8">
+           		 <input type="number" min="0" name="" id="fec_sol" class="form-control">
+        		</div>
+			</div>
+		<div class="form-group">
+			<label class="col-lg-3 control-label">Destino:</label>
+         		<div class="col-md-8">
+           		 	<input type="text" min="0" name="" id="fec_sol" class="form-control">
+        		</div>
+        </div>
+</div>';
+
+		echo"<table id='tabla' class='table table-responsive table-hover'>
+			<thead>
+			<tr>
+				<th width='48%'>Producto</th>
+				<th width='9%'>Cantidad</th>
+				<th width='9%'>Disponible</th>";
+		if($productos[0]->REA_NOT < 2){
+		echo "<th width='10%'>&nbsp;</th>";}
+		echo"</tr>
+			</thead>
+			<tbody>";
+		foreach ($productos as $producto):
+			echo "<tr> 				
+				<td><input type='text' class='form-control' id='producto' name='producto[]' readonly='readonly' value='".$producto->DES_PRO."'/></td>
+					<input type='hidden' class='form-control' id='estado' name='estado[]' value='".$producto->REA_NOT."'' readonly='readonly'/>
+					<input type='hidden' class='form-control' id='idproducto' name='idproducto[]' value='".$producto->ID_PRO." readonly='readonly'/>
+					<input type='hidden' class='form-control' id='pro_pin' name='pro_pin[]'  readonly='readonly'/>
+							
+					<td><input type='number' value='".$producto->CAN_SOL."'' id='can_pro' name='can_sol[]'"; 
+					if($producto->REA_NOT >= 2){
+						echo " readonly ='readonly' ";
+					}
+					echo "class='form-control' name='can_pro[]'/></td>
+					<td><input type='text' value='".$producto->CAN_PRO."'' id='can_prod'  readonly='readonly' class='form-control' name='can_pro[]'/></td>";
+					
+		endforeach;
+		if ($noti->ALE_NOT==2){
+			echo "</tr></tbody></table><div class = 'modal-footer' style='border-top: none;'>
+            <button data-dismiss = 'modal'".')" title=""'." type = 'button' class = 'btn btn-success'><span style='font-size: 10px; ' class='glyphicon glyphicon-check'></span>
+               Aceptar
+            </button></div></form>
+         ";
+     	}else {
+			echo "</tr></tbody></table><div class = 'modal-footer' style='border-top: none;'>
+			<div style='display:none;' id='botones'><button type = 'button' class = 'btn btn-danger' data-dismiss = 'modal'><span class='glyphicon glyphicon-remove' style='font-size: 10px; '></span>
+               Cancelar
+            </button>
+            <button  onclick=".'"muestra_oculta('."'contenido_a_mostrar'".')" title=""'." type = 'button' class = 'btn btn-success'><span style='font-size: 10px; ' class='glyphicon glyphicon-check'></span>
+               Registrar salida
+            </button></div></div></form>
+         ";
+  
+     }
+							
+	}
+
 	public function enviarevision(Request $request){
 		$notificaciones = Notificacion::where('ID_PSO','=', $request->input('id_sol'))->select('id')->get();
 		$notif = Notificacion::find($notificaciones[0]->id);
@@ -378,7 +480,7 @@ class SolicitudController extends Controller {
 			$cant->save();
 		}
 		$mensaje="Solicitud enviada a aprobacion";
-        return redirect()->route('solicitudes.index')->with('mensaje3',$mensaje);
+        return redirect()->route('solicitudes')->with('mensaje3',$mensaje);
 
 	}
 

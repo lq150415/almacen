@@ -73,6 +73,83 @@ where salidaproductos.ID_PRO=$id ORDER BY 1
         $pdf->Write(0,$producto[0]->DES_PRO,'','','',true);
         $i=1;
         $saldos=0;
+    $html='<style>
+    h1 {
+        color: navy;
+        font-family: times;
+        font-size: 24pt;
+        text-decoration: underline;
+    }
+    p.first {
+        color: #003300;
+        font-family: helvetica;
+        font-size: 12pt;
+    }
+    p.first span {
+        color: #006600;
+        font-style: italic;
+    }
+    p#second {
+        color: rgb(00,63,127);
+        font-family: times;
+        font-size: 12pt;
+        text-align: justify;
+    }
+    p#second > span {
+        background-color: #FFFFAA;
+    }
+    th.first {
+        color: #003300;
+        font-family: helvetica;
+        font-size: 8pt;
+        
+        background-color: #ccffcc;
+    }
+    th.first-danger {
+        color: maroon;
+        font-family: helvetica;
+        font-size: 8pt;
+        font-strecht: bold;
+        background-color: #ff6066;
+    }
+    th.second {
+        color: #6c3300;
+        font-family: helvetica;
+        font-size: 8pt;
+        
+        background-color: #fbdb65;
+    }
+    tr.title{
+        background-color: #bab3b2;
+    }
+    td {
+        border: 2px solid blue;
+        background-color: #ffffee;
+    }
+    td.second {
+        border: 2px dashed green;
+    }
+    div.test {
+        color: #000;
+        background-color: #bab3b2;
+        font-family: helvetica;
+        font-size: 10pt;
+        border-style: solid solid solid solid;
+        border-width: 1px 1px 1px 1px;
+        margin-top: 100pt;
+        text-align: center;
+    }
+    .lowercase {
+        text-transform: lowercase;
+    }
+    .uppercase {
+        text-transform: uppercase;
+    }
+    .capitalize {
+        text-transform: capitalize;
+    }
+</style>';
+    if(count($query)>0){
         foreach ($query as $q ) {
             $saldos= $saldos + $q->Entradas - $q->Salidas;
     if ($i==1){
@@ -116,8 +193,10 @@ where salidaproductos.ID_PRO=$id ORDER BY 1
 }
 }
  $html=$html.'</table></font>';
-
-// output the HTML content
+}else{
+    $pdf->SetXY(10,70);
+$html=$html.'<div class="test">NO HAY MOVIMIENTOS DE ESTE PRODUCTO</div>';
+}// output the HTML content
 $pdf->writeHTML($html, true, false, true, false, '');
 $pdf->SetXY(10,190);
         $pdf->Write(0,'OBSERVACIONES : ..............................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................','','',false);

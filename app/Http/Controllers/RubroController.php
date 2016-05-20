@@ -3,8 +3,10 @@
 use almacen\Http\Requests;
 use almacen\Http\Controllers\Controller;
 use almacen\Almacen;
+use DB;
 use almacen\Rubro;
 use almacen\Producto;
+use almacen\Solicitado;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -23,8 +25,9 @@ class RubroController extends Controller {
 		$rubros= Rubro::where('ID_ALM','=',$id)->get();
 		$almacen= new Almacen;
 		$query = Almacen::where('id','=',$id)->get();
+		$query2 = Solicitado::join('productos','productos.id','=','ID_PRO')->select(DB::raw('count(ID_PRO) as solicitado, DES_PRO'))->groupBy('ID_PRO')->orderBy('solicitado','DESC')->get();
 
-		return view('rubro')->with('rubros', $rubros)->with('id',$id)->with('query',$query);
+		return view('rubro')->with('rubros', $rubros)->with('id',$id)->with('query',$query)->with('query2',$query2);
 		}else{
 			return response('Unauthorized.', 401);
 		}

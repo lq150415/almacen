@@ -42,7 +42,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('rubro/producto/{id}/modificacion','ProductoController@modificacion');
         Route::post('reg_ingreso','IngresoController@Store');
         Route::post('reg_salida','SalidaController@Store');
-        Route::post('reg_solicitud','SolicitudController@Store');
+        Route::post('reg_solicitud',['as'=>'reg_solicitud','uses'=>'SolicitudController@store']);
         Route::resource('respuesta', 'RespuestaController@index');
         Route::get('rubro/{id}',['as'=>'rubro','uses'=>'RubroController@Index'])->where(['id' => '[0-9]+']);
         Route::post('datos_rub','IngresoController@datos_rub');
@@ -54,8 +54,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('verificausuario','UsuarioController@verificausuario');
         Route::resource('solicitud', 'SolicitudController');
         Route::resource('solicitudes', 'SolicitudController');
-        Route::get('solicitudes', 'SolicitudController@index2');
-        Route::get('solicitud', 'SolicitudController@index');
+        Route::get('solicitudes', ['as'=>'solicitudes','uses'=>'SolicitudController@index2']);
+        Route::get('solicitud', ['as'=>'solicitud','uses'=>'SolicitudController@index']);
         Route::post('httpush', 'SolicitudController@httpush');
         Route::post('httpush2', 'SolicitudController@httpush2');
         Route::post('notificaciones','SolicitudController@notificaciones');
@@ -64,13 +64,14 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('notificacionesleidas','SolicitudController@notificacionesleidas');
         Route::post('notificacionesalerta','SolicitudController@notificacionesalerta');
         Route::post('prod_sol','SolicitudController@prod_sol');
+        Route::post('prod_sol3','SolicitudController@prod_sol3');
         Route::post('prod_sol2','NotificacionController@prod_sol2');
         Route::resource('usuario', 'UsuarioController');
         Route::post('usuario/registrar', 'UsuarioController@store');
         Route::post('eliusuario', 'UsuarioController@eliusuario');
         Route::resource('solacepcl', 'SolicitudController@indexclac');
         Route::resource('notificacionescl', 'NotificacionController');
-        Route::get('notificacionescl', 'NotificacionController@index');
+        Route::get('notificacionescl', ['as'=>'notificacionescl','uses'=>'NotificacionController@index']);
         Route::resource('solreccl', 'SolicitudController@indexclrec');  
         Route::post('enviarevision','SolicitudController@enviarevision');
         Route::post('nuevoprecio','IngresoController@nuevoprecio');

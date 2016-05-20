@@ -6,11 +6,13 @@
     $('#usu_sol').val(data2);
     $('#id_sol').val(data3);
     var id=data3;
-    $.post('prod_sol', {id:id}, function(data){
+    $.post('prod_sol3', {id:id}, function(data){
         $('#prod_sol').html(data);
         });  
     }
     </script>
+	
+
 		<fieldset class="fieldcuerpo" align="left">
 					<legend style="margin-bottom: 0;">RESPUESTAS</legend>
 	  	<div>
@@ -58,7 +60,7 @@
 						<?php if ($respuesta->REA_NOT==3){echo '<th class="danger">No';}else{echo '<th class="success">Si';}?></th>
 						<?php if ($respuesta->ALE_NOT==2){?>
 						<th><button data-toggle = "modal" data-target = "#myModal" onClick="revisar(<?php echo $fecha.','.$nombre.','.$respuesta->ID_PSO?>);"  href="" class="btn btn-success" title="Detalle"> <span class="glyphicon glyphicon-search"> </span> </button></th><?php }else{?>
-						<th><button data-toggle = "modal" data-target = "#myModal" onClick="revisar(<?php echo $fecha.','.$nombre.','.$respuesta->ID_PSO?>);"  href="pdf" class="btn btn-success" title="Detalle"> <span class="glyphicon glyphicon-search"> </span> </button> <a  title="Imprimir formulario" target="_blank" href="" class="btn btn-primary"> <span class="glyphicon glyphicon-print"> </span> </a> </th>	<?php }?>
+						<th><button data-toggle = "modal" data-target = "#myModal" onClick="revisar(<?php echo $fecha.','.$nombre.','.$respuesta->ID_PSO?>);" class="btn btn-success" title="Detalle"> <span class="glyphicon glyphicon-search"> </span> </button> <a  title="Imprimir formulario" target="_blank" href="" class="btn btn-primary"> <span class="glyphicon glyphicon-print"> </span> </a> </th>	<?php }?>
 		</tr>
 				<?php	endforeach;}
 			
@@ -81,7 +83,7 @@
                Detalle de la solicitud 
             </h4>
          </div>
-       <form class="form-horizontal" name="" action="enviarevision" method="POST">
+       <form class="form-horizontal" name="" action="" method="POST">
          <div class = "modal-body">
          <input type="hidden" id="id_sol" name="id_sol">
             <div class="form-group">
@@ -99,7 +101,7 @@
          	<div class="table-responsive" id="prod_sol">
 				
          
-         </div>
+         	</div>
          </form>
       </div><!-- /.modal-content -->
    </div><!-- /.modal-dialog -->

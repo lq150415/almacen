@@ -107,7 +107,7 @@ class NotificacionController extends Controller {
 		$respuesta->save();
 
 		$mensaje="Solicitud aprobada";
-		return redirect()->route('notificacionescl.index')->with('mensaje',$mensaje);
+		return redirect()->route('notificacionescl')->with('mensaje',$mensaje);
 	}
 
 	public function rechazar(Request $request)
@@ -124,7 +124,7 @@ class NotificacionController extends Controller {
 		$respuesta->save();
 
 		$mensaje2="Solicitud rechazada";
-		return redirect()->route('notificacionescl.index')->with('mensaje2',$mensaje2);
+		return redirect()->route('notificacionescl')->with('mensaje2',$mensaje2);
 	}
 
 	public function create()

@@ -33,13 +33,13 @@
 	  	</br>
 	  	<fieldset class="fieldcuerpo" align="left">
 	  <legend style="margin-bottom: 0;">Productos mas solicitados</legend>  		  	
-	  	<span class="titulo">Producto #1 : </span><span  class="subtitulo"># producto</span> 
+	  	<span class="titulo">Producto #1 : </span><span  class="subtitulo"><?php echo $query2[0]->DES_PRO.' - CANTIDAD   '.$query2[0]->solicitado;?></span> 
 	  	</br>	
 	  	</br>	  		  	
-	  	<span class="titulo">Producto #2 : </span><span  class="subtitulo"># Producto</span>
+	  	<span class="titulo">Producto #2 : </span><span  class="subtitulo"><?php echo $query2[1]->DES_PRO.' - CANTIDAD   '.$query2[1]->solicitado;?></span>
 	  	</br>	
 	  	</br>	  		  	
-	  	<span class="titulo">Producto #3 : </span><span  class="subtitulo"># Producto</span>
+	  	<span class="titulo">Producto #3 : </span><span  class="subtitulo"><?php echo $query2[2]->DES_PRO.' - CANTIDAD   '.$query2[2]->solicitado;?></span>
 	  </fieldset> 
 	  	<fieldset class="fieldcuerpo" align="left">
 					<legend style="margin-bottom: 0;">DETALLE</legend>

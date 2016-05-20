@@ -13,11 +13,17 @@
     }
     </script>
 
-  
-
 	<div id="div2"></div>
 		<fieldset class="fieldcuerpo" align="left">
 					<legend style="margin-bottom: 0;">TODAS LAS SOLICITUDES</legend>
+          <script type="text/javascript">
+              $(document).ready(function() { setTimeout(function(){ $(".mensajewarning").fadeIn(2500); },0000); });
+              $(document).ready(function() { setTimeout(function(){ $(".mensajewarning").fadeOut(2500); },5000); });
+            </script>
+         <?php if (Session::has('mensaje3')):
+            ?>
+                  <div class="mensajewarning alert alert-success" style="margin-bottom: 10px;"><label><?php echo Session::get('mensaje3');?></label></div>
+         <?php endif;?>
 	  	<div>
 	  	<button onClick="javascript:despliegaModal('visible');" class="btn btn-success" style="float: left;"><span class="glyphicon glyphicon-plus"> </span> Nueva solicitud</button>
 	  	</br>

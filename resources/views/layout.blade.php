@@ -311,7 +311,7 @@ function cargar_push()
 	$.ajax({
 	async:	true, 
     type: "POST",
-    url: "../../httpush",
+    url: "{{ url('httpush')}}",
     data: "&timestamp="+updated_at,
 	dataType:"html",
     success: function(data)
@@ -333,7 +333,7 @@ function cargar_push()
 			$.ajax({
 			async:	true, 
 			type: "POST",
-			url: "../../notificaciones",
+			url: "{{ url('notificaciones')}}",
 			data: "&div="+DES_NOT,
 			dataType:"html",
 			success: function(data)
@@ -344,7 +344,7 @@ function cargar_push()
 			$.ajax({
 			async:	true, 
 			type: "POST",
-			url: "respuestascount2",
+			url: "{{ url('respuestascount2')}}",
 			data: "&div="+DES_NOT,
 			dataType:"html",
 			success: function(data11)
@@ -355,7 +355,7 @@ function cargar_push()
 			$.ajax({
 			async:	true, 
 			type: "POST",
-			url: "../../notificacionesleidas",
+			url: "{{ url('notificacionesleidas')}}",
 			data: "&div="+DES_NOT,
 			dataType:"html",
 			success: function(data)
@@ -366,7 +366,7 @@ function cargar_push()
 			$.ajax({
 			async:	true, 
 			type: "POST",
-			url: "../../notificacionescount",
+			url: "{{ url('notificacionescount')}}",
 			data: "&div="+DES_NOT,
 			dataType:"html",
 			success: function(data2)
@@ -377,7 +377,7 @@ function cargar_push()
 			$.ajax({
 			async:	true, 
 			type: "POST",
-			url: "../../notificacionesalerta",
+			url: "{{ url('notificacionesalerta')}}",
 			data: "&div="+updated_at,
 			dataType:"html",
 			success: function(data16)
@@ -412,23 +412,23 @@ $(document).ready(function()
  
 		<nav class="vert">
 			<ul >
-				<li><a href="../../index"><span class="icon-house"></span>Inicio</a></li>
+				<li><a href="{{ url('index')}}"><span class="icon-house"></span>Inicio</a></li>
 				<li class="submenu">
-					<a href="../../ingreso"><span class="icon-folder-upload"></span>Ingresos</a>
+					<a href="{{ url('ingreso')}}"><span class="icon-folder-upload"></span>Ingresos</a>
 					
 				</li><li class="submenu">
-					<a href="../../salida"><span class="icon-folder-download"></span>Salidas</span></a>
+					<a href="{{ url('salida')}}"><span class="icon-folder-download"></span>Salidas</span></a>
 				</li>
 				<li class="submenu">
 					<a href="#"><span class="icon-book"></span>Reportes<span class="caret icon-arrow-down6"></span></a>
 					<ul class="children">
-						<li><a href="saldospdf" target="_blank">Reporte de Saldos<span class="icon-dot"></span></a></li>
+						<li><a href="{{ url('saldospdf')}}" target="_blank">Reporte de Saldos<span class="icon-dot"></span></a></li>
 						<li><a href="#">Reporte de Ingresos<span class="icon-dot"></span></a></li>
-						<li><a href="kardex" >Reporte de Movimientos (Kardex)<span class="icon-dot"></span></a></li>
+						<li><a href="{{ url('kardex')}}" >Reporte de Movimientos (Kardex)<span class="icon-dot"></span></a></li>
 					</ul>
 				</li>
 				<li class="submenu">
-					<a href="../../alerta"><span class="icon-alarm"></span>Alertas<div class="alerta"> 0 </div></a>
+					<a href="{{ url('alerta')}}"><span class="icon-alarm"></span>Alertas<div class="alerta"> 0 </div></a>
 					
 				</li>
 				<li class="usuario" >
@@ -436,7 +436,7 @@ $(document).ready(function()
 					<ul class="children">
 						<li><a href="#">Ver Perfil<span class="icon-dot"></span></a></li>
 						<li><a href="#">Editar Perfil<span class="icon-dot"></span></a></li>
-						<li><a href="../../logout">Cerrar Sesión<span class="icon-dot"></span></a></li>
+						<li><a href="{{ url('logout')}}">Cerrar Sesión<span class="icon-dot"></span></a></li>
 					</ul>
 				</li>
 			</ul>
@@ -460,16 +460,16 @@ $(document).ready(function()
 		
 			<nav class="lateral">	
 				<ul>
-					<li> <a href="../../almacen">ALMACENES</a> </li>
-					<li> <a href="../../usuario">USUARIOS</a> </li>
-					<li> <a href="../../solicitud">SOLICITUDES</a><div id="noti">  </div> </li>
-					<li> <a href="../../respuesta">RESPUESTAS</a><div id="noti2"></div>  </li>
+					<li> <a href="{{ url('almacen')}}">ALMACENES</a> </li>
+					<li> <a href="{{ url('usuario')}}">USUARIOS</a> </li>
+					<li> <a href="{{ url('solicitud')}}">SOLICITUDES</a><div id="noti">  </div> </li>
+					<li> <a href="{{ url('respuesta')}}">RESPUESTAS</a><div id="noti2"></div>  </li>
 					<li> <a >CONSULTAS</a> 
 						<ul class="children">
-							<li><a href="../../consultapr">Por rubro<span class="icon-dot"></span></a></li>
-							<li><a href="../../consultapp">Por producto<span class="icon-dot"></span></a></li>
-							<li><a href="../../consultapu">Por usuario<span class="icon-dot"></span></a></li>
-							<li><a href="../../consultapf">Por fechas<span class="icon-dot"></span></a></li>
+							<li><a href="{{ url('consultapr')}}">Por rubro<span class="icon-dot"></span></a></li>
+							<li><a href="{{ url('consultapp')}}">Por producto<span class="icon-dot"></span></a></li>
+							<li><a href="{{ url('consultapu')}}">Por usuario<span class="icon-dot"></span></a></li>
+							<li><a href="{{ url('consultapf')}}">Por fechas<span class="icon-dot"></span></a></li>
 							
 						</ul>
 					</li>
