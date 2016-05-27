@@ -233,7 +233,7 @@ function despliegaModal4( _valor ){
 <script language="javascript">
 
 $(document).ready(function(){
-
+  
    $("#alm").change(function () {
            $("#alm option:selected").each(function () {
             id = $(this).val();
@@ -423,7 +423,7 @@ $(document).ready(function()
 					<a href="#"><span class="icon-book"></span>Reportes<span class="caret icon-arrow-down6"></span></a>
 					<ul class="children">
 						<li><a href="{{ url('saldospdf')}}" target="_blank">Reporte de Saldos<span class="icon-dot"></span></a></li>
-						<li><a href="#">Reporte de Ingresos<span class="icon-dot"></span></a></li>
+						<li><a href="{{ url('ingresospdf')}}" target="_blank">Reporte de Ingresos<span class="icon-dot"></span></a></li>
 						<li><a href="{{ url('kardex')}}" >Reporte de Movimientos (Kardex)<span class="icon-dot"></span></a></li>
 					</ul>
 				</li>

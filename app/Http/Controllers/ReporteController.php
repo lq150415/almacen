@@ -9,6 +9,7 @@ use DB;
 use Carbon\Carbon;
 use almacen\Producto;
 use almacen\Ingresado;
+use almacen\Ingreso;
 use almacen\Almacen;
 use almacen\Rubro;
 use almacen\Salidaproducto;
@@ -319,7 +320,7 @@ $pdf->SetXY(10,190);
             foreach ($rubro as $rubros) {
                 $html=$html.'<br/><font size="10"><label ><b>RUBRO: </b>'.$rubros->NOM_RUB.'</label></font><br/>';
                 $idrub=$rubros->id;
-                $producto= Producto::where('ID_RUB','=',$idrub)->get();
+                $producto= Producto::where('ID_RUB','=',$idrub)->orderBy('ITM_PRO' )->get();
                 $i=1;
             
                 foreach ($producto as $productos) {
@@ -496,7 +497,7 @@ $pdf->SetXY(10,190);
                     $k=1;
                     foreach ($rubro as $rubros) {
                         $idrub=$rubros->id;
-                        $producto2= Producto::where('ID_RUB','=',$idrub)->get();
+                        $producto2= Producto::where('ID_RUB','=',$idrub)->orderBy('ITM_PRO' )->get();
                         $producto= DB::select("
                                 SELECT sum(CAN_PRO*PUN_PRO) as TOTAL
                                 from productos
@@ -529,7 +530,7 @@ $pdf->SetXY(10,190);
                     $k=1;
                     foreach ($rubro as $rubros) {
                         $idrub=$rubros->id;
-                        $producto2= Producto::where('ID_RUB','=',$idrub)->get();
+                        $producto2= Producto::where('ID_RUB','=',$idrub)->orderBy('ITM_PRO' )->get();
                         $producto= DB::select("
                                 SELECT sum(CAN_PRO*PUN_PRO) as TOTAL
                                 from productos
@@ -570,6 +571,184 @@ $pdf->SetXY(10,190);
         $pdf->Write(0,'RESUMEN GENERAL','','',false);
         $pdf->SetXY(15, 207);
         $pdf->writeHTML($html2, true, false, true, false, '');
+        $pdf->Output('reportekardex.pdf');
+    }
+
+    public function ingresospdf ()
+    {   $ingresos= Ingreso::get();
+      
+        $producto= Producto::get();
+         
+        $pdf = new TCPDF('P','mm','LETTER', true, 'UTF-8', false);
+
+        $pdf->SetTitle('Reporte de ingresos');  
+        $pdf->setPrintHeader(false);
+        $pdf->setPrintFooter(false);
+        $pdf->SetAutoPageBreak(TRUE, 10);
+        $pdf->SetMargins(15, 15, 10);
+        $pdf->AddPage();
+        $pdf->Image('images/banner_opt.jpg', 13, 1, 40, 38, 'JPG', '', '', true, 250, '', false, false, false, false, false, false);
+        $pdf->Line ( 53, 25,205,25,array('width' => 0.3,'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => array(0, 0, 0)));
+        $pdf->SetFont('','B','12');
+        $pdf->SetXY(150, 20);
+        $pdf->Write(0,'REPORTE DE INGRESOS','','',false);
+        $pdf->SetXY(135, 25);
+        $usuario = 'Nombre: '.Auth::user()->NOM_USU.' '.Auth::user()->APA_USU.' '.Auth::user()->AMA_USU.' CARGO: '.Auth::user()->CAR_USU.' AREA: '.Auth::user()->ARE_USU.' FECHA: '.Carbon::now();
+        $pdf->Write(0,'Procuradoria General del estado','','',false); 
+        $pdf->SetXY(70,30);
+        $pdf->SetFont('','','12');
+        $pdf->write2DBarcode ( $usuario, 'QRCODE,M', 187, 32, 15, 15, '','','');
+        $html='<style>
+    h1 {
+        color: navy;
+        font-family: times;
+        font-size: 24pt;
+        text-decoration: underline;
+    }
+    p.first {
+        color: #003300;
+        font-family: helvetica;
+        font-size: 12pt;
+    }
+    p.first span {
+        color: #006600;
+        font-style: italic;
+    }
+    p#second {
+        color: rgb(00,63,127);
+        font-family: times;
+        font-size: 12pt;
+        text-align: justify;
+    }
+    p#second > span {
+        background-color: #FFFFAA;
+    }
+    th.first {
+        color: #003300;
+        font-family: helvetica;
+        font-size: 8pt;
+        
+        background-color: #ccffcc;
+    }
+    th.first-danger {
+        color: maroon;
+        font-family: helvetica;
+        font-size: 8pt;
+        font-strecht: bold;
+        background-color: #ff6066;
+    }
+    th.second {
+        color: #6c3300;
+        font-family: helvetica;
+        font-size: 8pt;
+        
+        background-color: #fbdb65;
+    }
+    tr.title{
+        background-color: #bab3b2;
+    }
+    td {
+        border: 2px solid blue;
+        background-color: #ffffee;
+    }
+    td.second {
+        border: 2px dashed green;
+    }
+    div.test {
+        color: #CC0000;
+        background-color: #FFFF66;
+        font-family: helvetica;
+        font-size: 10pt;
+        border-style: solid solid solid solid;
+        border-width: 2px 2px 2px 2px;
+        border-color: green #FF00FF blue red;
+        text-align: center;
+    }
+    .lowercase {
+        text-transform: lowercase;
+    }
+    .uppercase {
+        text-transform: uppercase;
+    }
+    .capitalize {
+        text-transform: capitalize;
+    }
+    div.informacion{
+        float: left;
+        width: 50px;
+        border: #000 1px solid;
+        padding: 22px;
+    }
+    th.productos{
+        border-style:hidden;
+        border-left: none;
+        
+    }
+    th.izquierda{
+        border-right: none;
+        border-style:hidden;
+    }
+
+</style><br/>';    
+        foreach ($ingresos as $ingreso) {
+            $iding=$ingreso->id;
+            $ingresado3= Ingresado::where('ID_ING','=',$iding)->get();
+            if(count($ingresado3)==0){
+                $nfc=0;
+                $noc=0;
+                $pro=0;
+            }else{
+                $nfc=$ingresado3[0]->NFC_PIN;
+                $noc=$ingresado3[0]->NOC_PIN;
+                $pro=$ingresado3[0]->PRO_PIN;
+            }//dd(count($ingresado3));
+            $html=$html.'
+            <font size="8">
+            <table border="1" cellspacing="0" cellpadding="4">
+                <tr>
+                    <th class="izquierda"><br/>
+                        <b>FECHA DE INGRESO: </b>'.$ingreso->FEC_ING.'<br/>
+                        <b>NUMERO DE FACTURA: </b>'.$nfc.'<br/>
+                        <b>NUMERO DE ORDEN DE COMPRA: </b>'.$noc.'<br/>
+                        <b>PROCEDENCIA: </b>'.$pro.'<br/>
+                        <b>CANTIDAD DE PRODUCTOS: </b>'.count($ingresado3).'
+                    </th>
+                    <th class="productos ">
+                        <font size="6"><table cellpadding="2" border="1">
+                            <tr class="title">
+                                <th width="60%">
+                                <b>DESCRIPCION </b>
+                                </th>
+                                <th width="20%">
+                                <b>PRECIO Bs.</b>
+                                </th>
+                                <th width="20%">
+                                <b>CANTIDAD </b>
+                                </th>
+                            </tr>';
+                             $ingresados2= Ingresado::where('ID_ING','=',$ingreso->id)->get();
+                            foreach ($ingresados2 as $ingresado) {
+                                $productoing=Producto::where('id','=',$ingresado->ID_PRO)->get();
+                                $html=$html.'
+                                <tr>
+                                    <th>'.$productoing[0]->DES_PRO.'</th>
+                                    <th>'.$productoing[0]->PUN_PRO.'</th>
+                                    <th>'.$ingresado->CAN_PIN.'</th>
+                                </tr>';
+                            }
+                        $html= $html.'</table></font>
+                    </th>
+                </tr>
+            </table>
+            </font><br/>';
+            
+        }
+
+        
+//dd($html2);
+        $pdf->SetXY(70,50);
+        $pdf->writeHTML($html, true, false, true, false, '');
+        $pdf->SetFont('','B','10');
         $pdf->Output('reportekardex.pdf');
     }
     public function create()

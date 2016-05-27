@@ -81,7 +81,9 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('respuestascount2','SolicitudController@respuestascount2');
         Route::get('kardexpdf/{id}','ReporteController@kardexpdf');
         Route::get('saldospdf','ReporteController@salidaspdf');
+        Route::get('ingresospdf','ReporteController@ingresospdf');
         Route::resource('kardex','ReporteController');
+        Route::post('disponible','SolicitudController@disponible');
         Route::get('kardex','ReporteController@index');
 });
 

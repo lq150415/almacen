@@ -310,6 +310,7 @@ class SolicitudController extends Controller {
 		echo "ind2--;";
 		
 		echo "});";
+		
 		echo "</script>"; 
 		echo"<table id='tabla' class='table table-responsive table-hover'>
 			<thead>
@@ -322,7 +323,55 @@ class SolicitudController extends Controller {
 		echo"</tr>
 			</thead>
 			<tbody>";
-		foreach ($productos as $producto):
+		if($productos[0]->REA_NOT <2){
+		foreach ($productos as $key=>$producto):
+		echo "<script type='text/javascript' language='javascript' >"; 
+		echo '$("#productosol'.$key.' option:selected").each(function () {';
+        echo "id = $(this).val();";
+        echo "$('#idproducto".$key."').val($('#productosol".$key."').val());";
+        echo '$.post("disponible", { id: id }, function(data){';
+        echo '$("div[name='."'can_pro_dis[".$key."]'".']").html(data);';
+		echo "});";
+		echo "});";
+		echo '$("#productosol'.$key.'").change(function () {';
+        echo '$("#productosol'.$key.' option:selected").each(function () {';
+        echo "id = $(this).val();";
+        echo "$('#idproducto').val($(this).val());";
+        echo '$.post("disponible", { id: id }, function(data){';
+        echo '$("div[name='."'can_pro_dis[".$key."]'".']").html(data);';
+		echo "});";
+		echo "});";
+		echo "});";
+		echo "</script>"; 
+			echo "<tr> 				
+				<td><select class='form-control' id='productosol".$key."' name='producto[]'>
+					";
+			
+					$consultas=Producto::where('ITM_PRO','=',$producto->ITM_PRO)->get();
+					$con=count($consultas);
+		
+					foreach ($consultas as $consulta) {
+						echo '<option value="'.$consulta->id.'">'.$consulta->DES_PRO.' -------------- PRECIO - '.$consulta->PUN_PRO.' Bs.'.'</option>';
+					}
+					echo "'</select></td>
+					<input type='hidden' class='form-control' id='idproducto".$key."' name='idproducto[]' readonly='readonly'/>
+					<input type='hidden' class='form-control' id='estado' name='estado[]' value='".$producto->REA_NOT."'' readonly='readonly'/>
+					<input type='hidden' class='form-control' id='pro_pin' name='pro_pin[]'  readonly='readonly'/>
+							
+					<td><input type='number' value='".$producto->CAN_SOL."'' id='can_pro' min='1' name='can_sol[]'"; 
+					if($producto->REA_NOT >= 2){
+						echo " readonly ='readonly' ";
+					}
+					echo "class='form-control' name='can_pro[]'/></td>
+					<td><div name='can_pro_dis[".$key."]'></div></td>";
+					if($producto->REA_NOT < 2){
+				echo "<td class='btn btn-danger eliminar'><span class='glyphicon glyphicon-remove'></span> Eliminar</td>";
+											
+				echo "</tr>";}
+		endforeach;
+		}else
+		{
+			foreach ($productos as $producto):
 			echo "<tr> 				
 				<td><input type='text' class='form-control' id='producto' name='producto[]' readonly='readonly' value='".$producto->DES_PRO."'/></td>
 					<input type='hidden' class='form-control' id='estado' name='estado[]' value='".$producto->REA_NOT."'' readonly='readonly'/>
@@ -340,6 +389,7 @@ class SolicitudController extends Controller {
 											
 				echo "</tr>";}
 		endforeach;
+		}
 		if($producto->REA_NOT < 2){
 			echo "</tbody></table><div class = 'modal-footer' style='border-top: none;'>
             <button type = 'button' class = 'btn btn-danger' data-dismiss = 'modal'><span class='glyphicon glyphicon-remove' style='font-size: 10px; '></span>
@@ -361,6 +411,39 @@ class SolicitudController extends Controller {
 							
 	}
 
+	public function enviarevision(Request $request){
+		$notificaciones = Notificacion::where('ID_PSO','=', $request->input('id_sol'))->select('id')->get();
+		$notif = Notificacion::find($notificaciones[0]->id);
+		$notif->REA_NOT = 2;
+		$notif->DES_NOT = 1;
+		$notif->save();
+
+		$cantidad= Solicitado::where('ID_SOL','=',$request->input('id_sol'))->get();
+		$size0= count($cantidad);
+		for($i=0; $i < $size0 ;$i++){
+			$revisado=Solicitado::where('ID_SOL','=',$request->input('id_sol'))->select('id')->get();
+			$abc = $revisado[0]->id;
+			
+			Solicitado::where('id','=',$abc)->delete();
+		}
+		$size= count($request->input('idproducto'));
+		for($i=0; $i < $size ;$i++){
+			$cant = new Solicitado;
+			$cant->ID_PRO = $request->input('idproducto.'.$i);
+			$cant->CAN_SOL = $request->input('can_sol.'.$i);
+			$cant->ID_SOL =$request->input('id_sol');
+			$cant->save();
+		}
+		$mensaje="Solicitud enviada a aprobacion";
+        return redirect()->route('solicitudes')->with('mensaje3',$mensaje);
+
+	}
+
+	public function disponible()
+	{
+		$productos = Producto::where('id','=',$_POST['id'])->first();
+		echo "<input type='text' value='".$productos->CAN_PRO."'' id='can_prod'  readonly='readonly' class='form-control' name='can_pro[]'/>";
+	}
 	public function prod_sol3(){
 		$productos= Solicitado::where('ID_SOL','=',$_POST['id'])->join('productos','productos.id','=','solicitados.ID_PRO')->join('notificaciones','notificaciones.ID_PSO','=','solicitados.ID_SOL')->get();
 		$notificacion= Notificacion::where('ID_PSO','=',$_POST['id'])->select('id')->get();
@@ -463,26 +546,7 @@ class SolicitudController extends Controller {
 							
 	}
 
-	public function enviarevision(Request $request){
-		$notificaciones = Notificacion::where('ID_PSO','=', $request->input('id_sol'))->select('id')->get();
-		$notif = Notificacion::find($notificaciones[0]->id);
-		$notif->REA_NOT = 2;
-		$notif->DES_NOT = 1;
-		$notif->save();
-
-		$size= count($request->input('producto'));
-		for($i=0; $i < $size ;$i++){
-			$revisados = new Solicitado;
-			$revisados= $revisados->where('ID_PRO','=',$request->input('idproducto.'.$i))->where('ID_SOL','=',$request->input('id_sol'))->select('id')->get();
-			$cant = new Solicitado;
-			$cant = Solicitado::find($revisados[0]->id);
-			$cant->CAN_SOL = $request->input('can_sol.'.$i);
-			$cant->save();
-		}
-		$mensaje="Solicitud enviada a aprobacion";
-        return redirect()->route('solicitudes')->with('mensaje3',$mensaje);
-
-	}
+	
 
 	public function notificacionescount()
 	{
