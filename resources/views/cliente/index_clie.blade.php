@@ -25,7 +25,7 @@
 			 <a href="solreccl" class="link_boton"><div class="botonescliedownr"><span class="icon-lock" style=""></span>
 			 SOLICITUDES RECHAZADAS
 			<?php }elseif(Auth::user()->NIV_USU ==1){?>
-			<a href="#" class="link_boton"><div class="botonescliedownr"><span class="icon-lock" style=""></span>
+			<a href="historial" class="link_boton"><div class="botonescliedownr"><span class="icon-lock" style=""></span>
 			HISTORIAL DE SOLICITUDES
 			<?php }?>
 			</span></div></a>

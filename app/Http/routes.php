@@ -63,6 +63,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('notificacionescountjrh','SolicitudController@notificacionescountjrh');
         Route::post('notificacionesleidas','SolicitudController@notificacionesleidas');
         Route::post('notificacionesalerta','SolicitudController@notificacionesalerta');
+        Route::post('notificacionesalerta3','SolicitudController@notificacionesalerta3');
         Route::post('prod_sol','SolicitudController@prod_sol');
         Route::post('prod_sol3','SolicitudController@prod_sol3');
         Route::post('prod_sol2','NotificacionController@prod_sol2');
@@ -70,6 +71,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('usuario/registrar', 'UsuarioController@store');
         Route::post('eliusuario', 'UsuarioController@eliusuario');
         Route::resource('solacepcl', 'SolicitudController@indexclac');
+        Route::resource('historial', 'SolicitudController@indexclhist');
         Route::resource('notificacionescl', 'NotificacionController');
         Route::get('notificacionescl', ['as'=>'notificacionescl','uses'=>'NotificacionController@index']);
         Route::resource('solreccl', 'SolicitudController@indexclrec');  
@@ -85,6 +87,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('kardex','ReporteController');
         Route::post('disponible','SolicitudController@disponible');
         Route::get('kardex','ReporteController@index');
+        Route::post('sal_prod','SolicitudController@sal_prod');
+        Route::post('cambiarest','SolicitudController@cambio');
 });
 
 

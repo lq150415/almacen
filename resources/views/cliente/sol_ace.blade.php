@@ -5,25 +5,25 @@
 					<legend style="margin-bottom: 0;">SOLICITUDES ACEPTADAS</legend>
 	  	<div>
 
-		<table id="example" class="display" cellspacing="5" width="100%" style="border-radius:4px;-moz-border-radius:4px;-webkit-border-radius:4px;border:1px #444444 solid;">
-	<thead style="font-size:13px;color:#FFF;background:rgba(12,133,50,1);height:40px;">
-		<tr>
-			<th>ID</th>
+		<table id="example" class="table table-hover">
+	<thead>
+		<tr class="warning">
             <th>FECHA DE SOLICITUD</th>
-			<th>USUARIO</th>
-			<th>ACCIONES</th>	
+			<th>ESTADO</th>
 		</tr>
 	</thead>
-	<tfoot style="font-size:13px;color:#FFF;background:rgba(12,133,50,1);height:40px;">
+	<tbody>
+		<?php if(count($query)>0){?>
 		<tr>
-			<th>ID</th>
-            <th>FECHA DE SOLICITUD</th>
-			<th>USUARIO</th>
-			<th>ACCIONES</th>		
+		<?php  
+					foreach ($query as $query):
+					?>
+						<th><?php echo \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $query->FEC_SOL)->format('d/m/Y')?></th>
+						<th class="success">APROBADO</th>
 		</tr>
-	</tfoot>
-	<tbody style="font-size:11px;">
-		
+				<?php	endforeach;}
+			
+			?>
 	</tbody>
 </table>
 </fieldset>

@@ -35,20 +35,18 @@
 		 	<?php if(count($respuestas)>0){?>
 		 	<tr>
 		<?php
-
-	
 					foreach ($respuestas as $respuesta):
 						if($respuesta->ALE_NOT==1){
 							$a='Aprobado';
 						}else{
 							$a='Rechazado';
 						}
-						 $fechas=$respuesta->created_at->format('d/m/Y');
+						 $fechas=$respuesta->created_at->format('Y/m/D');
         				 $nombres=$respuesta->NOM_USU.' '.$respuesta->APA_USU.' '.$respuesta->AMA_USU;
         				 $fecha= "'".$fechas."'";
         				 $nombre= "'".$nombres."'";
 					?>
-						<th><?php echo $respuesta->created_at->format('d - m - Y');?></th>
+						<th><?php echo $respuesta->created_at->format('Y - m - d');?></th>
 						<?php if ($respuesta->ALE_NOT==2){echo '<th class="danger">'.$a;}else{echo '<th class="success">'.$a;}?></th>
 						<?php if ($respuesta->ALE_NOT==2){?>
 						<th><button data-toggle = "modal" data-target = "#myModal" onClick="revisar(<?php echo $fecha.','.$nombre.','.$respuesta->ID_PSO?>);" href="" class="btn btn-success" title="Ver"> <span class="glyphicon glyphicon-search"> </span> </button></th><?php }else{?>
@@ -76,7 +74,7 @@
                Detalle de la solicitud 
             </h4>
          </div>
-       <form class="form-horizontal" name="" action="enviarevision" method="POST">
+       <form class="form-horizontal" name="" action="cambiarest" method="POST">
          <div class = "modal-body">
          <input type="hidden" id="id_sol" name="id_sol">
             <div class="form-group">

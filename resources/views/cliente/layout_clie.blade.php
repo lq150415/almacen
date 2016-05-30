@@ -133,27 +133,17 @@ function cargar_push()
 		}
 		else
 		{
-			$.ajax({
-			async:	true, 
-			type: "POST",
-			url: "../../notificaciones7",
-			data: "&div="+DES_NOT,
-			dataType:"html",
-			success: function(data7)
-			{	
-				$('#solicitud7').html(data7);
-			}
-			});	
+			
 
 			$.ajax({
 			async:	true, 
 			type: "POST",
-			url: "../../notificacionesleidas8",
-			data: "&div="+DES_NOT,
+			url: "{{ url('notificacionesalerta')}}",
+			data: "&div="+updated_at,
 			dataType:"html",
-			success: function(data8)
+			success: function(data16)
 			{	
-				$('#leidas7').html(data8);
+				$('#Notificacionalerta3').html(data16);
 			}
 			});	
 			$.ajax({
@@ -204,6 +194,8 @@ $(document).ready(function()
 
 </head>
 <body style="padding: 0; overflow: auto;">
+<div id="Notificacionalerta" style="width: 300px;   bottom: 2%;margin-right: 3%;  position: fixed; right: -2%;"></div>
+</div>
 	<header class="clie">
 		<nav style="">
 			<a class="tituloclie" href="index" title="Inicio">SISTEMA DE CONTROL DE ALMACENES E INVENTARIOS</a>

@@ -9,7 +9,9 @@ use almacen\Almacen;
 use almacen\Rubro;
 use almacen\Producto;
 use almacen\User;
+use almacen\Salida;
 use Carbon\Carbon;
+use almacen\Salidaproducto;
 use almacen\Solicitud;
 use almacen\Solicitado;
 use almacen\Notificacion;
@@ -49,13 +51,43 @@ class SolicitudController extends Controller {
 	}
 	public function indexclac()
 	{
-		return view('cliente/sol_ace');
+		if(Auth::user()->NIV_USU==0)
+		{
+			return response('Unauthorized.', 401);
+		}
+		else
+		{
+			$query= Notificacion::join('solicitudes','notificaciones.ID_PSO','=','solicitudes.id')->where('REA_NOT','=',4)->where('ALE_NOT','=',1)->where('AUT_NOT','=',Auth::user()->id)->get();
+
+			return view('cliente/sol_ace')->with('query',$query);
+		}
+	}
+	public function indexclhist()
+	{
+		if(Auth::user()->NIV_USU==0)
+		{
+			return response('Unauthorized.', 401);
+		}
+		else
+		{
+			$query= Notificacion::join('solicitudes','notificaciones.ID_PSO','=','solicitudes.id')->where('REA_NOT','=',4)->where('AUT_NOT','=',Auth::user()->id)->get();
+
+			return view('cliente/historial')->with('query',$query);
+		}
 	}
 	public function indexclrec()
 	{
-		return view('cliente/sol_rec');
-	}
+		if(Auth::user()->NIV_USU==0)
+		{
+			return response('Unauthorized.', 401);
+		}
+		else
+		{
+			$query= Notificacion::join('solicitudes','notificaciones.ID_PSO','=','solicitudes.id')->where('REA_NOT','=',4)->where('ALE_NOT','=',2)->where('AUT_NOT','=',Auth::user()->id)->get();
 
+		return view('cliente/sol_rec')->with('query',$query);
+		}
+	}
 	 
 
 
@@ -375,7 +407,7 @@ class SolicitudController extends Controller {
 			echo "<tr> 				
 				<td><input type='text' class='form-control' id='producto' name='producto[]' readonly='readonly' value='".$producto->DES_PRO."'/></td>
 					<input type='hidden' class='form-control' id='estado' name='estado[]' value='".$producto->REA_NOT."'' readonly='readonly'/>
-					<input type='hidden' class='form-control' id='idproducto' name='idproducto[]' value='".$producto->ID_PRO." readonly='readonly'/>
+					<input type='hidden' class='form-control' id='idproducto' name='idproducto[]' value='".$producto->ID_PRO."' readonly='readonly'/>
 					<input type='hidden' class='form-control' id='pro_pin' name='pro_pin[]'  readonly='readonly'/>
 							
 					<td><input type='number' value='".$producto->CAN_SOL."'' id='can_pro' name='can_sol[]'"; 
@@ -400,17 +432,32 @@ class SolicitudController extends Controller {
                Enviar a aprobacion
             </button>
          </div></form>";}
-         else{
+         elseif($producto->REA_NOT==3 && $producto->ALE_NOT==2){
+         	echo "</tbody></table><div class = 'modal-footer' style='border-top: none;'>
+            <button type = 'submit' class = 'btn btn-success' ><span class='glyphicon glyphicon-check' style='font-size: 10px; '></span>
+               Aceptar
+            </button>
+            </form>
+         </div>";
+         }else{
          	echo "</tbody></table><div class = 'modal-footer' style='border-top: none;'>
             <button type = 'button' class = 'btn btn-success' data-dismiss = 'modal'><span class='glyphicon glyphicon-check' style='font-size: 10px; '></span>
                Aceptar
             </button>
-            
+            </form>
          </div>";
          }
 							
 	}
 
+	public function cambio(Request $request){
+		$find= Notificacion::where('ID_PSO','=',$request->input('id_sol'))->first();
+		$uno=$find->id;
+		$modif=Notificacion::find($uno);
+		$modif->REA_NOT=4;
+		$modif->save();
+        return redirect()->route('respuesta.index');
+	}
 	public function enviarevision(Request $request){
 		$notificaciones = Notificacion::where('ID_PSO','=', $request->input('id_sol'))->select('id')->get();
 		$notif = Notificacion::find($notificaciones[0]->id);
@@ -474,7 +521,7 @@ class SolicitudController extends Controller {
 		echo "muestra_oculta('contenido_a_mostrar');";
 		echo "}";
 		echo "</script>";
-		if ($noti->ALE_NOT==2){
+		if ($noti->ALE_NOT==2 || $noti->REA_NOT==4){
 			
      	}else {
 			echo "
@@ -489,13 +536,13 @@ class SolicitudController extends Controller {
 		<div class="form-group">
 			<label class="col-lg-3 control-label">Formulario DGAA</label>
          		<div class="col-md-8">
-           		 <input type="number" min="0" name="" id="fec_sol" class="form-control">
+           		 <input type="number" min="0" name="dga_sol" id="" class="form-control" required="yes">
         		</div>
 			</div>
 		<div class="form-group">
 			<label class="col-lg-3 control-label">Destino:</label>
          		<div class="col-md-8">
-           		 	<input type="text" min="0" name="" id="fec_sol" class="form-control">
+           		 	<input required="yes" type="text" min="0" name="des_sol" id="fec_sol" class="form-control">
         		</div>
         </div>
 </div>';
@@ -514,8 +561,7 @@ class SolicitudController extends Controller {
 		foreach ($productos as $producto):
 			echo "<tr> 				
 				<td><input type='text' class='form-control' id='producto' name='producto[]' readonly='readonly' value='".$producto->DES_PRO."'/></td>
-					<input type='hidden' class='form-control' id='estado' name='estado[]' value='".$producto->REA_NOT."'' readonly='readonly'/>
-					<input type='hidden' class='form-control' id='idproducto' name='idproducto[]' value='".$producto->ID_PRO." readonly='readonly'/>
+					<input type='hidden' class='form-control' id='idproducto' name='idproducto[]' value='".$producto->ID_PRO."' readonly='readonly'/>
 					<input type='hidden' class='form-control' id='pro_pin' name='pro_pin[]'  readonly='readonly'/>
 							
 					<td><input type='number' value='".$producto->CAN_SOL."'' id='can_pro' name='can_sol[]'"; 
@@ -526,7 +572,7 @@ class SolicitudController extends Controller {
 					<td><input type='text' value='".$producto->CAN_PRO."'' id='can_prod'  readonly='readonly' class='form-control' name='can_pro[]'/></td>";
 					
 		endforeach;
-		if ($noti->ALE_NOT==2){
+		if ($noti->ALE_NOT==2 || $noti->REA_NOT==4){
 			echo "</tr></tbody></table><div class = 'modal-footer' style='border-top: none;'>
             <button data-dismiss = 'modal'".')" title=""'." type = 'button' class = 'btn btn-success'><span style='font-size: 10px; ' class='glyphicon glyphicon-check'></span>
                Aceptar
@@ -537,7 +583,7 @@ class SolicitudController extends Controller {
 			<div style='display:none;' id='botones'><button type = 'button' class = 'btn btn-danger' data-dismiss = 'modal'><span class='glyphicon glyphicon-remove' style='font-size: 10px; '></span>
                Cancelar
             </button>
-            <button  onclick=".'"muestra_oculta('."'contenido_a_mostrar'".')" title=""'." type = 'button' class = 'btn btn-success'><span style='font-size: 10px; ' class='glyphicon glyphicon-check'></span>
+            <button type = 'submit' class = 'btn btn-success'><span style='font-size: 10px; ' class='glyphicon glyphicon-check'></span>
                Registrar salida
             </button></div></div></form>
          ";
@@ -546,7 +592,41 @@ class SolicitudController extends Controller {
 							
 	}
 
-	
+	public function sal_prod(Request $request)
+	{
+		$id=$request->input('id_sol');
+		$idnoti= Notificacion::where('ID_PSO','=',$id)->first();
+		$notificacion= Notificacion::find($idnoti->id);
+		$notificacion->REA_NOT =4;
+		$notificacion->save();
+		$salidas = new Salida;
+		
+		$salidas->FEC_SAL = Carbon::now();
+        $salidas->ID_USU = Auth::user()->id;
+        $salidas->created_at = Carbon::now();
+        $salidas->updated_at = Carbon:: now();
+		$salidas->save();
+		$j=count($request->input('can_sol'));
+		for($i=0; $i < count($request->input('can_sol')) ;$i++){
+			$salidaproductos = new Salidaproducto;
+			$salidaproductos->DGA_SPR = $request->input('dga_sol');
+        	$salidaproductos->CAN_SPR = $request->input('can_sol.'.$i);
+        	$salidaproductos->DES_SPR = $request->input('des_sol');
+        	$salidaproductos->ID_PRO = $request->input('idproducto.'.$i);
+        	$salidaproductos->ID_SAL = 	$salidas->id;
+        	$salidaproductos->created_at = Carbon::now();
+        	$salidaproductos->updated_at = Carbon::now();
+			$salidaproductos->save();
+
+			$cantidades = new Producto;
+			$id = $request->input('idproducto.'.$i);
+			$cantidades= $cantidades->find($id);
+			$cantidades->CAN_PRO -= $request->input('can_sol.'.$i);
+			$cantidades->save();
+		}
+		$mensaje="Salida registrada correctamente";
+        return redirect()->route('respuesta.index')->with('mensaje3',$mensaje);
+	}
 
 	public function notificacionescount()
 	{
@@ -614,6 +694,25 @@ class SolicitudController extends Controller {
 	
 	}
 
+	public function notificacionesalerta3()
+	{	
+		$query2    = new Notificacion;
+		$con5= $query2->orderBy('updated_at','DESC')->first();
+		$usuario= User::where('id','=',$con5->AUT_NOT)->get();
+
+		if($con5->ALE_NOT ==0){
+
+ 		echo "<script type='text/javascript'>";
+        echo "$(document).ready(function() { setTimeout(function(){ $('.mensajelogin').fadeIn(1500); },0000); });";
+        echo "$(document).ready(function() { setTimeout(function(){ $('.mensajelogin').fadeOut(1500); },5000); });";
+        echo "</script>";
+       
+
+			echo "<div class='mensajelogin' id='mensaje'><a href='solicitud'> <h1>Mensaje nuevo</h1>Tiene una nueva solicitud del usuario </br> ".$usuario[0]->NOM_USU.' '.$usuario[0]->APA_USU.' '.$usuario[0]->AMA_USU."</a></div>";
+			
+		}else{}
+	
+	}
 	public function edit($id)
 	{
 		//

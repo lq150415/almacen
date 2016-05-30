@@ -428,7 +428,10 @@ $(document).ready(function()
 					</ul>
 				</li>
 				<li class="submenu">
-					<a href="{{ url('alerta')}}"><span class="icon-alarm"></span>Alertas<div class="alerta"> 0 </div></a>
+				<?php 
+				use almacen\Producto;
+				$contar=Producto::where('CAN_PRO','<=',10)->count();?>
+					<a href="{{ url('alerta')}}"><span class="icon-alarm"></span>Alertas<div class="alerta"> {{$contar}} </div></a>
 					
 				</li>
 				<li class="usuario" >

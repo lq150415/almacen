@@ -4,6 +4,7 @@ use almacen\Http\Requests;
 use almacen\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use almacen\Producto;
 
 class AlertaController extends Controller {
 
@@ -15,7 +16,8 @@ class AlertaController extends Controller {
 	public function index()
 	{
 		if(Auth::user()->NIV_USU==0){
-		return view('alertas');
+			$query= Producto::join('rubros','ID_RUB','=','rubros.id')->join('almacenes','ID_ALM','=','almacenes.id')->select('NOM_ALM','NOM_RUB','DES_PRO','productos.id','PUN_PRO','CAN_PRO')->where('CAN_PRO','<=',10)->get();
+			return view('alertas')->with('query',$query);
 		}else{
 			return response('Unauthorized.', 401);
 		}
