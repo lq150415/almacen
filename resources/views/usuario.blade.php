@@ -3,10 +3,14 @@
 	<script type="text/javascript">
 
 	function verifica(){
-		$(document).ready(function() {   
+		 
 		$(document).ready(function() { setTimeout(function(){ $(".mensajevalidacion").fadeIn(2500); },0500); });
     			$(document).ready(function() { setTimeout(function(){ $(".mensajevalidacion").fadeOut(2500); },5000); }); 
-   		if($('#nic_usu').val()!= ""){
+   	if(document.form1.password.value != document.form1.conf_pas.value) {
+      document.getElementById('mensajevalidacion').innerHTML = '<div class="alert alert-danger mensaje2"> Las contraseñas no coinciden </div>';
+    return false; } 
+    else {
+      if($('#nic_usu').val()!= ""){
         var datos = $('#nic_usu').val();
         $.ajax({
             type: "POST",
@@ -15,38 +19,24 @@
             data: "&datos="+datos,
             dataType: "html",
             success: function (data) {
-           	if(data=="0"){
-            	document.getElementById('mensajevalidacion').innerHTML ='<div class="alert alert-danger mensaje2">Usuario existente </div>';
-				
-				result='false';
-			}else{
-			result='true';
-            }
+           	if(data=="0")
+            {
+            	document.getElementById('mensajevalidacion').innerHTML ='<div class="alert alert-danger mensaje2">Usuario existente </div>';				
+				     result=false;
+			     }
+           else
+           {
+			       result=true;
+           }
             }
         		});
-    	
-    		}
-
-    		}); 
-    		return result;             
+    	   return result; 
+    		}else{
+          document.getElementById('mensajevalidacion').innerHTML ='<div class="alert alert-danger mensaje2">Debe escribir un nombre de usuario </div>';
+          return false;
+        }            
 		}    
-	
-		function compara() { 
-		if (document.form1.password.value != document.form1.conf_pas.value) {
-		$(document).ready(function() { setTimeout(function(){ $(".mensajevalidacion").fadeIn(2500); },0500); });
-    	$(document).ready(function() { setTimeout(function(){ $(".mensajevalidacion").fadeOut(2500); },5000); });
-			document.getElementById('mensajevalidacion').innerHTML = '<div class="alert alert-danger mensaje2"> Las contraseñas no coinciden </div>';
-		return false; } 
-		else {
-		return true;
-		}
-		}
-
-		function valida(){
-			
-			verifica();
-			compara();
-		}
+	}
 	</script>
 		<fieldset class="fieldcuerpo" align="left">
 				<legend style="margin-bottom: 0;">USUARIOS</legend>
@@ -94,7 +84,7 @@
 						<th><?php echo $usuario->ARE_USU;?></th>
 						<th><?php echo $usuario->CAR_USU;?></th>
 						<th><?php echo $usuario->NIV_USU;?></th>
-						<th><button data-toggle = "modal" data-target = "#myModal4" href="" class="btn btn-success" title="Ver"> <span class="glyphicon glyphicon-search"> </span> </button> <button data-toggle = "modal" title="Modificar usuario" data-target = "#myModal2" href="" class="btn btn-primary"> <span class="glyphicon glyphicon-pencil"> </span> </button> <button title="Eliminar Producto" onclick="javascript:idenvio(<?php echo $usuario->id;?>);" data-toggle = "modal" data-target = "#myModal" href="" class="btn btn-danger"><span class="glyphicon glyphicon-trash"> </span> </button></th>	
+						<th><button data-toggle = "modal" data-target = "#myModal4" href="" class="btn btn-success" title="Ver"> <span class="glyphicon glyphicon-search"> </span> </button> <button data-toggle = "modal" title="Modificar usuario" data-target = "#myModal5" href="" class="btn btn-primary"> <span class="glyphicon glyphicon-pencil"> </span> </button> <button title="Eliminar Producto" onclick="javascript:idenvio(<?php echo $usuario->id;?>);" data-toggle = "modal" data-target = "#myModal" href="" class="btn btn-danger"><span class="glyphicon glyphicon-trash"> </span> </button></th>	
 		</tr>
 				<?php	endforeach;
 			
@@ -185,6 +175,12 @@
            		 </select>
         		</div>
          		</div>
+             <div class="form-group">
+              <label class="col-lg-3 control-label">Foto de perfil :</label>
+            <div class="col-md-8">
+               <input type="file" class="form-control" name="img_usu">
+            </div>
+            </div>
          </fieldset>
          <fieldset class="fieldcuerpo solacep">
          	<legend style="margin-bottom: 0;">
@@ -275,25 +271,74 @@
    </div><!-- /.modal-dialog -->
   
 </div><!-- /.modal -->
-<div class = "modal fade" id = "myModal4" tabindex = "-1" role = "dialog" 
+<div class = "modal fade" id = "myModal4" tabindex = "-1" role = "dialog"
    aria-labelledby = "myModalLabel" aria-hidden = "true">
-   
-   <div class = "modal-dialog">
-      <div class = "modal-content">
-         
+  <div class = "modal-dialog ">
+      <div class = "modal-content">         
          <div class = "modal-header">
             <button type = "button" class = "close" data-dismiss = "modal" aria-hidden = "true">
                   &times;
             </button>
             <h4 class = "modal-title" id = "myModalLabel">
-               Usuario -  
+               <h3>Perfil de usuario</h3>
             </h4>
          </div>
-         <form action="" method="POST">
-         <div class = "modal-body">
-         <input type="hidden" id="id" name="id">
-            <div class=" ">Perfil de usuario</div>
-         
+  <form action="" method="POST">
+    <div class = "modal-body" style="padding-top:0px;">
+    <div class="form-group">
+      <input type="hidden" id="id" name="id"> 
+      
+    </div>
+    <div class="row">
+  <div class="col-sm-4"><img width="100%" height="100%" src="{{url('img/perfil.png')}}" alt="..." class="img-circle"></div>
+  <div class="form-group col-sm-8">
+    <label class="control-label label label-primary">Numero de carnet de identidad:</label>
+    <div class="col-sm-17">
+        <input type="text" style="border:none" min="0" name="nro_fac" id="nro_fac1" class="form-control" readonly placeholder="" onpaste="return false">
+    </div>
+    </div>
+    <div class="form-group col-sm-8">
+    <label class="control-label label label-primary">Nombre de usuario :</label>
+    <div class="col-sm-17">
+        <input type="text" style="border:none" min="0" name="nro_fac" id="nro_fac1" class="form-control" readonly placeholder="" onpaste="return false">
+    </div>
+    </div>
+    <div class="form-group col-sm-8">
+    <div class="form-group col-sm-6" style="padding:0px 5px 0px 0px;">
+    <label class="control-label label label-primary">Area:</label>
+    <div class="col-sm-38">
+        <input type="text" style="border:none" min="0" name="nro_fac" id="nro_fac1" class="form-control" readonly placeholder="" onpaste="return false">
+    </div>
+    </div>
+    <div class="form-group col-sm-6" style="padding:0px;">
+    <label class="control-label label label-primary">Cargo :</label>
+    <div class="col-sm-38">
+        <input type="text" style="border:none" min="0" name="nro_fac" id="nro_fac1" class="form-control" readonly placeholder="" onpaste="return false">
+    </div>
+    </div>
+  </div>
+  <div class="form-group col-sm-18">
+  <div class="form-group col-sm-4" >
+    <label class="control-label label label-success">Nick de usuario:</label>
+    <div class="col-sm-17">
+        <input type="text" style="border:none" min="0" name="nro_fac" id="nro_fac1" class="form-control" readonly placeholder="" onpaste="return false">
+    </div>
+    </div>
+    <div class="form-group col-sm-4" >
+    <label class="control-label label label-success">Nivel de usuario:</label>
+    <div class="col-sm-17">
+        <input type="text" style="border:none" min="0" name="nro_fac" id="nro_fac1" class="form-control" readonly placeholder="" onpaste="return false">
+    </div>
+    </div>
+    <div class="form-group col-sm-4">
+    <label class="control-label label label-success">Antiguedad:</label>
+    <div class="col-sm-17">
+        <input type="text" style="border:none" min="0" name="nro_fac" id="nro_fac1" class="form-control" readonly placeholder="" onpaste="return false">
+    </div>
+    </div>
+</div>
+</div>
+  </form> 
          <div class = "modal-footer" style="border-top: none;">
             <button type = "button" class = "btn btn-success" data-dismiss = "modal"><span class="glyphicon glyphicon-ok" style="font-size: 10px; "></span>
                Aceptar
@@ -307,4 +352,97 @@
   
 </div><!-- /.modal -->
 
+<div class = "modal fade" id = "myModal5" tabindex = "-1" role = "dialog"
+   aria-labelledby = "myModalLabel" aria-hidden = "true">
+  <div class = "modal-dialog ">
+      <div class = "modal-content">         
+         <div class = "modal-header">
+            <button type = "button" class = "close" data-dismiss = "modal" aria-hidden = "true">
+                  &times;
+            </button>
+            <h4 class = "modal-title" id = "myModalLabel">
+               <h3>Perfil de usuario</h3>
+            </h4>
+         </div>
+  <form action="" method="POST">
+    <div class = "modal-body" style="padding-top:0px;">
+    <div class="form-group">
+      <input type="hidden" id="id" name="id"> 
+      
+    </div>
+    <div class="row">
+  <div class="col-sm-4"><img width="100%" height="100%" src="{{url('img/perfil.png')}}" alt="..." class="img-circle"></div>
+  <div class="form-group col-sm-8">
+    <label class="control-label label label-primary">Numero de carnet de identidad:</label>
+    <div class="col-sm-17">
+        <input type="text" min="0" name="nro_fac" id="nro_fac1" class="form-control"  placeholder="" onpaste="return false">
+    </div>
+    </div>
+    <div class="form-group col-sm-8">
+    <label class="control-label label label-primary">Nombre de usuario :</label>
+    <div class="col-sm-17">
+        <input type="text" min="0" name="nro_fac" id="nro_fac1" class="form-control"  placeholder="" onpaste="return false">
+    </div>
+    </div>
+    <div class="form-group col-sm-8">
+    <div class="form-group col-sm-6" style="padding:0px 5px 0px 0px;">
+    <label class="control-label label label-primary">Area:</label>
+    <div class="col-sm-38">
+        <select class="form-control" name="are_usu">
+                <option value="">SELECCIONE</option>
+          <option value="Recursos Humanos">Recursos humanos</option>
+          <option value="Tecnologias de Informacion">Tecnologias de Informacion</option>
+          <option value="Otros">Otros</option>
+               </select>
+
+    </div>
+    </div>
+    <div class="form-group col-sm-6" style="padding:0px;">
+    <label class="control-label label label-primary">Cargo :</label>
+    <div class="col-sm-38">
+    
+<select class="form-control" name="car_usu">
+                  <option value="">SELECCIONE</option>
+                  <option value="Director">Director</option>
+                  <option value="Otros1">etc</option>
+                  <option value="Otros2">etc</option>
+                </select>
+
+    </div>
+    </div>
+  </div>
+  <div class="form-group col-sm-18">
+  <div class="form-group col-sm-6" >
+    <label class="control-label label label-success">Nick de usuario:</label>
+    <div class="col-sm-17">
+        <input type="text" min="0" name="nro_fac" id="nro_fac1" class="form-control"  placeholder="" onpaste="return false">
+    </div>
+    </div>
+    <div class="form-group col-sm-6" >
+    <label class="control-label label label-success">Nivel de usuario:</label>
+    <div class="col-sm-17">
+<select class="form-control" name="niv_usu">
+          <option value="">SELECCIONE</option>
+          <option value="0">Administrador</option>
+          <option value="1">Jefe de Recursos</option>
+          <option value="2">Solicitante</option>
+        </select>
+    </div>
+    </div>
+    
+</div>
+</div>
+  </form> 
+         <div class = "modal-footer" style="border-top: none;">
+            <button type = "button" class = "btn btn-success" data-dismiss = "modal"><span class="glyphicon glyphicon-ok" style="font-size: 10px; "></span>
+               Aceptar
+            </button>
+            
+         </div>
+         </div>
+         </form>
+      </div><!-- /.modal-content -->
+   </div><!-- /.modal-dialog -->
+  
+</div><!-- /.modal -->
 	@stop
