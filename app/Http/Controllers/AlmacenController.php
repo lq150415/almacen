@@ -51,9 +51,15 @@ class AlmacenController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id)
+	public function modificar(Request $request)
 	{
-		//
+		$mensaje2="Almacen modificado correctamente";
+		$id= $request->input('id_alm');
+		$modifica= Almacen::find($id);
+		$modifica->NOM_ALM= $request->input('nombre_alm');
+		$modifica->UBI_ALM= $request->input('ubicacion_alm');
+		$modifica->save();
+		return redirect()->route('almacen')->with('mensaje2',$mensaje2);
 	}
 
 	public function elialmacen(Request $request)

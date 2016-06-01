@@ -5,6 +5,14 @@
               $(document).ready(function() { setTimeout(function(){ $(".mensajewarning").fadeIn(2500); },0000); });
               $(document).ready(function() { setTimeout(function(){ $(".mensajewarning").fadeOut(2500); },5000); });
             </script>
+            <script type="text/javascript">
+               function pasadatosalm(data1, data2,data3)
+               {
+                  $('#id_alm').val(data3);
+                  $('#nombre_alm').val(data1);
+                  $('#ubicacion_alm').val(data2);
+               }
+            </script>
          <?php if (Session::has('mensaje')):
             ?>
                   <div class="mensajewarning alert alert-danger" ><label><?php echo Session::get('mensaje');?></label></div>
@@ -38,7 +46,7 @@
 						<th><?php echo $almacen->id;?></th>
 						<th><?php echo $almacen->NOM_ALM;?></th>
             			<th><?php echo $almacen->UBI_ALM;?></th>
-						<th><a class="btn btn-success"  href="rubro/<?php echo $almacen->id;?>" title="Ver rubros"> <span class="glyphicon glyphicon-search"> </span> </a> <button data-toggle = "modal" data-target = "#myModal2" href="" class="btn btn-primary" title="Modificar almacen"> <span class="glyphicon glyphicon-pencil"> </span> </button> <button onclick="javascript:idenvio(<?php echo $almacen->id;?>);" <?php if($almacen->id==1){ echo "disabled";} ?> data-toggle = "modal" data-target = "#myModal" title="Eliminar almacen" class="btn btn-danger"><span class="glyphicon glyphicon-trash"> </span> </button></th>	
+						<th><a class="btn btn-success"  href="rubro/<?php echo $almacen->id;?>" title="Ver rubros"> <span class="glyphicon glyphicon-search"> </span> </a> <button data-toggle = "modal" data-target = "#myModal2" href="" class="btn btn-primary" onclick="javascript:pasadatosalm(<?php echo "'".$almacen->NOM_ALM."','".$almacen->UBI_ALM."','".$almacen->id."'";?>);" title="Modificar almacen"> <span class="glyphicon glyphicon-pencil"> </span> </button> <button onclick="javascript:idenvio(<?php echo $almacen->id;?>);" <?php if($almacen->id==1){ echo "disabled";} ?> data-toggle = "modal" data-target = "#myModal" title="Eliminar almacen" class="btn btn-danger"><span class="glyphicon glyphicon-trash"> </span> </button></th>	
 		</tr>
 				<?php	endforeach; }
 			
@@ -156,17 +164,18 @@
             </h4>
          </div>
          <div class = "modal-body">
-         <form class="form-horizontal" action="actualizarcomp" method="POST">	
+         <form class="form-horizontal" action="modifalmacen" method="POST">	
+         <input type="hidden" name="id_alm" id="id_alm">
          <div class="form-group">
             <label class="col-lg-3 control-label">Nombre :</label>
          <div class="col-md-8">
-            <input class="form-control" id="nomcomp">
+            <input class="form-control" id="nombre_alm" name="nombre_alm">
          </div>
          </div>
                   <div class="form-group">
             <label class="col-lg-3 control-label">Descripcion :</label>
          <div class="col-md-8">
-            <input class="form-control" id="descomp">
+            <input class="form-control" name="ubicacion_alm" id="ubicacion_alm">
          </div>
          </div>
        

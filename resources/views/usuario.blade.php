@@ -38,6 +38,19 @@
 		}    
 	}
 	</script>
+  <script type="text/javascript">
+      function perfil(data1,data2,data3,data4,data5,data6,data7)
+      {
+          $('#ci').val(data1);
+          $('#nombre').val(data2);
+          $('#area').val(data3);
+          $('#cargo').val(data4);
+          $('#nick').val(data5);
+          $('#nivel').val(data6);
+          $('#antiguedad').val(data7);
+
+      }
+  </script>
 		<fieldset class="fieldcuerpo" align="left">
 				<legend style="margin-bottom: 0;">USUARIOS</legend>
 	  	<div>
@@ -84,7 +97,16 @@
 						<th><?php echo $usuario->ARE_USU;?></th>
 						<th><?php echo $usuario->CAR_USU;?></th>
 						<th><?php echo $usuario->NIV_USU;?></th>
-						<th><button data-toggle = "modal" data-target = "#myModal4" href="" class="btn btn-success" title="Ver"> <span class="glyphicon glyphicon-search"> </span> </button> <button data-toggle = "modal" title="Modificar usuario" data-target = "#myModal5" href="" class="btn btn-primary"> <span class="glyphicon glyphicon-pencil"> </span> </button> <button title="Eliminar Producto" onclick="javascript:idenvio(<?php echo $usuario->id;?>);" data-toggle = "modal" data-target = "#myModal" href="" class="btn btn-danger"><span class="glyphicon glyphicon-trash"> </span> </button></th>	
+            <?php 
+              if($usuario->NIV_USU==0){
+                $print='Administrador';
+              }elseif($usuario->NIV_USU==1){
+                $print='Jefe de recursos';
+              }elseif($usuario->NIV_USU==2){
+                $print='Solicitante';
+              }
+            $abc=$usuario->NOM_USU.' '.$usuario->APA_USU.' '.$usuario->AMA_USU;?>
+						<th><button data-toggle = "modal" data-target = "#myModal4" href="" class="btn btn-success" onclick="javascript:perfil(<?php echo $usuario->CI_USU.",'".$abc."','".$usuario->ARE_USU."','".$usuario->CAR_USU."','".$usuario->NIC_USU."','".$print."','".$usuario->created_at->format('d/m/Y')."'";?>);" title="Ver"> <span class="glyphicon glyphicon-search"> </span> </button> <button data-toggle = "modal" title="Modificar usuario" data-target = "#myModal5" href="" class="btn btn-primary"> <span class="glyphicon glyphicon-pencil"> </span> </button> <button title="Eliminar Producto" onclick="javascript:idenvio(<?php echo $usuario->id;?>);" data-toggle = "modal" data-target = "#myModal" href="" class="btn btn-danger"><span class="glyphicon glyphicon-trash"> </span> </button></th>	
 		</tr>
 				<?php	endforeach;
 			
@@ -294,26 +316,26 @@
   <div class="form-group col-sm-8">
     <label class="control-label label label-primary">Numero de carnet de identidad:</label>
     <div class="col-sm-17">
-        <input type="text" style="border:none" min="0" name="nro_fac" id="nro_fac1" class="form-control" readonly placeholder="" onpaste="return false">
+        <input type="text" style="border:none" min="0" name="" id="ci" class="form-control" readonly placeholder="" onpaste="return false">
     </div>
     </div>
     <div class="form-group col-sm-8">
     <label class="control-label label label-primary">Nombre de usuario :</label>
     <div class="col-sm-17">
-        <input type="text" style="border:none" min="0" name="nro_fac" id="nro_fac1" class="form-control" readonly placeholder="" onpaste="return false">
+        <input type="text" style="border:none" min="0" name="" id="nombre" class="form-control" readonly placeholder="" onpaste="return false">
     </div>
     </div>
     <div class="form-group col-sm-8">
     <div class="form-group col-sm-6" style="padding:0px 5px 0px 0px;">
     <label class="control-label label label-primary">Area:</label>
     <div class="col-sm-38">
-        <input type="text" style="border:none" min="0" name="nro_fac" id="nro_fac1" class="form-control" readonly placeholder="" onpaste="return false">
+        <input type="text" style="border:none" min="0" name="area" id="area" class="form-control" readonly placeholder="" onpaste="return false">
     </div>
     </div>
     <div class="form-group col-sm-6" style="padding:0px;">
     <label class="control-label label label-primary">Cargo :</label>
     <div class="col-sm-38">
-        <input type="text" style="border:none" min="0" name="nro_fac" id="nro_fac1" class="form-control" readonly placeholder="" onpaste="return false">
+        <input type="text" style="border:none" min="0" name="cargo" id="cargo" class="form-control" readonly placeholder="" onpaste="return false">
     </div>
     </div>
   </div>
@@ -321,19 +343,19 @@
   <div class="form-group col-sm-4" >
     <label class="control-label label label-success">Nick de usuario:</label>
     <div class="col-sm-17">
-        <input type="text" style="border:none" min="0" name="nro_fac" id="nro_fac1" class="form-control" readonly placeholder="" onpaste="return false">
+        <input type="text" style="border:none" min="0" name="nick" id="nick" class="form-control" readonly placeholder="" onpaste="return false">
     </div>
     </div>
     <div class="form-group col-sm-4" >
     <label class="control-label label label-success">Nivel de usuario:</label>
     <div class="col-sm-17">
-        <input type="text" style="border:none" min="0" name="nro_fac" id="nro_fac1" class="form-control" readonly placeholder="" onpaste="return false">
+        <input type="text" style="border:none" min="0" name="nivel" id="nivel" class="form-control" readonly placeholder="" onpaste="return false">
     </div>
     </div>
     <div class="form-group col-sm-4">
     <label class="control-label label label-success">Antiguedad:</label>
     <div class="col-sm-17">
-        <input type="text" style="border:none" min="0" name="nro_fac" id="nro_fac1" class="form-control" readonly placeholder="" onpaste="return false">
+        <input type="text" style="border:none" min="0" name="antiguedad" id="antiguedad" class="form-control" readonly placeholder="" onpaste="return false">
     </div>
     </div>
 </div>
