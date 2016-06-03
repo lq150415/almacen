@@ -77,11 +77,11 @@
 		<tr>
 			<th width="5%">ID</th>
 			<th width="5%">C.I.</th>
-            <th width="20%">NOMBRE COMPLETO</th>
+            <th width="30%">NOMBRE COMPLETO</th>
 			<th width="5%">AREA</th>
 			<th width="5%">CARGO</th>
 			<th width="5%">NIVEL</th>
-			<th width="15%" data-orderable="false">ACCIONES</th>	
+			<th width="10%" data-orderable="false">ACCIONES</th>	
 		</tr>
 	</thead>
 		<tbody style="font-size:11px;">
@@ -106,7 +106,7 @@
                 $print='Solicitante';
               }
             $abc=$usuario->NOM_USU.' '.$usuario->APA_USU.' '.$usuario->AMA_USU;?>
-						<th><button data-toggle = "modal" data-target = "#myModal4" href="" class="btn btn-success" onclick="javascript:perfil(<?php echo $usuario->CI_USU.",'".$abc."','".$usuario->ARE_USU."','".$usuario->CAR_USU."','".$usuario->NIC_USU."','".$print."','".$usuario->created_at->format('d/m/Y')."'";?>);" title="Ver"> <span class="glyphicon glyphicon-search"> </span> </button> <button data-toggle = "modal" title="Modificar usuario" data-target = "#myModal5" href="" class="btn btn-primary"> <span class="glyphicon glyphicon-pencil"> </span> </button> <button title="Eliminar Producto" onclick="javascript:idenvio(<?php echo $usuario->id;?>);" data-toggle = "modal" data-target = "#myModal" href="" class="btn btn-danger"><span class="glyphicon glyphicon-trash"> </span> </button></th>	
+						<th><button data-toggle = "modal" data-target = "#myModal4" href="" class="btn btn-success" onclick="javascript:perfil(<?php echo $usuario->CI_USU.",'".$abc."','".$usuario->ARE_USU."','".$usuario->CAR_USU."','".$usuario->NIC_USU."','".$print."','".$usuario->created_at->format('d/m/Y')."'";?>);" title="Ver"> <span class="glyphicon glyphicon-search"> </span> </button> <button title="Eliminar Producto" onclick="javascript:idenvio(<?php echo $usuario->id;?>);" data-toggle = "modal" data-target = "#myModal" href="" class="btn btn-danger"><span class="glyphicon glyphicon-trash"> </span> </button></th>	
 		</tr>
 				<?php	endforeach;
 			
@@ -374,97 +374,5 @@
   
 </div><!-- /.modal -->
 
-<div class = "modal fade" id = "myModal5" tabindex = "-1" role = "dialog"
-   aria-labelledby = "myModalLabel" aria-hidden = "true">
-  <div class = "modal-dialog ">
-      <div class = "modal-content">         
-         <div class = "modal-header">
-            <button type = "button" class = "close" data-dismiss = "modal" aria-hidden = "true">
-                  &times;
-            </button>
-            <h4 class = "modal-title" id = "myModalLabel">
-               <h3>Perfil de usuario</h3>
-            </h4>
-         </div>
-  <form action="" method="POST">
-    <div class = "modal-body" style="padding-top:0px;">
-    <div class="form-group">
-      <input type="hidden" id="id" name="id"> 
-      
-    </div>
-    <div class="row">
-  <div class="col-sm-4"><img width="100%" height="100%" src="{{url('img/perfil.png')}}" alt="..." class="img-circle"></div>
-  <div class="form-group col-sm-8">
-    <label class="control-label label label-primary">Numero de carnet de identidad:</label>
-    <div class="col-sm-17">
-        <input type="text" min="0" name="nro_fac" id="nro_fac1" class="form-control"  placeholder="" onpaste="return false">
-    </div>
-    </div>
-    <div class="form-group col-sm-8">
-    <label class="control-label label label-primary">Nombre de usuario :</label>
-    <div class="col-sm-17">
-        <input type="text" min="0" name="nro_fac" id="nro_fac1" class="form-control"  placeholder="" onpaste="return false">
-    </div>
-    </div>
-    <div class="form-group col-sm-8">
-    <div class="form-group col-sm-6" style="padding:0px 5px 0px 0px;">
-    <label class="control-label label label-primary">Area:</label>
-    <div class="col-sm-38">
-        <select class="form-control" name="are_usu">
-                <option value="">SELECCIONE</option>
-          <option value="Recursos Humanos">Recursos humanos</option>
-          <option value="Tecnologias de Informacion">Tecnologias de Informacion</option>
-          <option value="Otros">Otros</option>
-               </select>
 
-    </div>
-    </div>
-    <div class="form-group col-sm-6" style="padding:0px;">
-    <label class="control-label label label-primary">Cargo :</label>
-    <div class="col-sm-38">
-    
-<select class="form-control" name="car_usu">
-                  <option value="">SELECCIONE</option>
-                  <option value="Director">Director</option>
-                  <option value="Otros1">etc</option>
-                  <option value="Otros2">etc</option>
-                </select>
-
-    </div>
-    </div>
-  </div>
-  <div class="form-group col-sm-18">
-  <div class="form-group col-sm-6" >
-    <label class="control-label label label-success">Nick de usuario:</label>
-    <div class="col-sm-17">
-        <input type="text" min="0" name="nro_fac" id="nro_fac1" class="form-control"  placeholder="" onpaste="return false">
-    </div>
-    </div>
-    <div class="form-group col-sm-6" >
-    <label class="control-label label label-success">Nivel de usuario:</label>
-    <div class="col-sm-17">
-<select class="form-control" name="niv_usu">
-          <option value="">SELECCIONE</option>
-          <option value="0">Administrador</option>
-          <option value="1">Jefe de Recursos</option>
-          <option value="2">Solicitante</option>
-        </select>
-    </div>
-    </div>
-    
-</div>
-</div>
-  </form> 
-         <div class = "modal-footer" style="border-top: none;">
-            <button type = "button" class = "btn btn-success" data-dismiss = "modal"><span class="glyphicon glyphicon-ok" style="font-size: 10px; "></span>
-               Aceptar
-            </button>
-            
-         </div>
-         </div>
-         </form>
-      </div><!-- /.modal-content -->
-   </div><!-- /.modal-dialog -->
-  
-</div><!-- /.modal -->
 	@stop

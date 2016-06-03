@@ -204,7 +204,6 @@ $(document).ready(function()
 					<a href="#" ><span class="icon-user-minus"></span><?php echo $nombre=Auth::user()->NOM_USU.' '.Auth::user()->APA_USU.' '.Auth::user()->AMA_USU?><span class="caret icon-arrow-down6"></span></a>
 					<ul class="children">
 						<li><a data-toggle = "modal" data-target = "#myModal7" >Ver Perfil<span class="icon-dot"></span></a></li>
-						<li><a href="#">Editar Perfil<span class="icon-dot"></span></a></li>
 						<li><a href="logout">Cerrar Sesión<span class="icon-dot"></span></a></li>
 					</ul>
 				</li>

@@ -67,6 +67,18 @@ class RubroController extends Controller {
 			  return redirect()->route('rubro',array('id'=>$id))->with('mensaje',$mensaje);
 
 	}
+	public function modificar(Request $request, $id)
+	{
+		$mensaje2="Rubro modificado correctamente";
+		$id2= $request->input('id_rub');
+		$modifica= Rubro::find($id2);
+
+		$modifica->NOM_RUB= $request->input('nombre_rub');
+		$modifica->DES_RUB= $request->input('descripcion_rub');
+		$modifica->save();
+		return redirect()->route('rubro',array('id'=>$id))->with('mensaje',$mensaje2);
+	}
+
 	/**
 	 * Display the specified resource.
 	 *

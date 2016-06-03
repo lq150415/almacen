@@ -8,7 +8,15 @@
 <script type="text/javascript">
               $(document).ready(function() { setTimeout(function(){ $(".mensajewarning").fadeIn(2500); },0000); });
               $(document).ready(function() { setTimeout(function(){ $(".mensajewarning").fadeOut(2500); },5000); });
-            </script>
+</script>
+<script type="text/javascript">
+   function pasadatosrub(data1, data2,data3)
+      {
+         $('#id_rub').val(data3);
+         $('#nombre_rub').val(data1);
+         $('#descripcion_rub').val(data2);
+      }
+</script>
          <?php if (Session::has('mensaje')):
             ?>
                   <div class="mensajewarning alert alert-danger" style="margin-bottom: 10px;"><label><?php echo Session::get('mensaje');?></label></div>
@@ -33,13 +41,13 @@
 	  	</br>
 	  	<fieldset class="fieldcuerpo" align="left">
 	  <legend style="margin-bottom: 0;">Productos mas solicitados</legend>  		  	
-	  	<span class="titulo">Producto #1 : </span><span  class="subtitulo"><?php echo $query2[0]->DES_PRO.' - CANTIDAD   '.$query2[0]->solicitado;?></span> 
+	  	<span class="titulo">Producto #1 : </span><span  class="subtitulo"><?php echo $query2[0]->DES_PRO.' - <b>CANTIDAD</b>   '.$query2[0]->solicitado.' unidades';?></span> 
 	  	</br>	
 	  	</br>	  		  	
-	  	<span class="titulo">Producto #2 : </span><span  class="subtitulo"><?php echo $query2[1]->DES_PRO.' - CANTIDAD   '.$query2[1]->solicitado;?></span>
+	  	<span class="titulo">Producto #2 : </span><span  class="subtitulo"><?php echo $query2[1]->DES_PRO.' - <b>CANTIDAD</b>   '.$query2[1]->solicitado.' unidades';?></span>
 	  	</br>	
 	  	</br>	  		  	
-	  	<span class="titulo">Producto #3 : </span><span  class="subtitulo"><?php echo $query2[2]->DES_PRO.' - CANTIDAD   '.$query2[2]->solicitado;?></span>
+	  	<span class="titulo">Producto #3 : </span><span  class="subtitulo"><?php echo $query2[2]->DES_PRO.' - <b>CANTIDAD</b>   '.$query2[2]->solicitado.' unidades';?></span>
 	  </fieldset> 
 	  	<fieldset class="fieldcuerpo" align="left">
 					<legend style="margin-bottom: 0;">DETALLE</legend>
@@ -70,7 +78,7 @@
 						<th><?php echo $rubro->id;?></th>
 						<th><?php echo $rubro->NOM_RUB;?></th>
             			<th><?php echo $rubro->DES_RUB;?></th>
-						<th><a class="btn btn-success" title="Ver productos" href="producto/<?php echo $rubro->id;?>"><span class="glyphicon glyphicon-search"> </span> </a> <button data-toggle = "modal" title="Modificar rubro" data-target = "#myModal2" href="" class="btn btn-primary"> <span class="glyphicon glyphicon-pencil"> </span> </button> <button onclick="javascript:idenvio(<?php echo $rubro->id;?>);" data-toggle = "modal" title="Eliminar rubro" data-target = "#myModal" href="" class="btn btn-danger"><span class="glyphicon glyphicon-trash"> </span> </button></th>	
+						<th><a class="btn btn-success" title="Ver productos" href="producto/<?php echo $rubro->id;?>"><span class="glyphicon glyphicon-search"> </span> </a> <button data-toggle = "modal" title="Modificar rubro" data-target = "#myModal2" onclick="javascript:pasadatosrub(<?php echo "'".trim($rubro->NOM_RUB)."','".trim($rubro->DES_RUB)."','".$rubro->id."'";?>);" class="btn btn-primary"> <span class="glyphicon glyphicon-pencil"> </span> </button> <button onclick="javascript:idenvio(<?php echo $rubro->id;?>);" data-toggle = "modal" title="Eliminar rubro" data-target = "#myModal" href="" class="btn btn-danger"><span class="glyphicon glyphicon-trash"> </span> </button></th>	
 		</tr>
 				<?php	endforeach;}
 			
@@ -173,21 +181,23 @@
             </button>
             
             <h4 class = "modal-title" id = "myModalLabel">
-               Modificar Almacen
+               Modificar Rubro
             </h4>
          </div>
          <div class = "modal-body">
-         <form class="form-horizontal" action="actualizarcomp" method="POST">	
+         <form class="form-horizontal" action="<?php echo $id;?>/modifrubro"" method="POST">
+         <input type="hidden" name="_token" value="{{ csrf_token() }}">
+          <input type="hidden" name="id_rub" id="id_rub">
          <div class="form-group">
             <label class="col-lg-3 control-label">Nombre :</label>
          <div class="col-md-8">
-            <input class="form-control" id="nomcomp">
+            <input class="form-control" id="nombre_rub" name="nombre_rub">
          </div>
          </div>
                   <div class="form-group">
             <label class="col-lg-3 control-label">Descripcion :</label>
          <div class="col-md-8">
-            <input class="form-control" id="descomp">
+            <textarea class="form-control" id="descripcion_rub" name="descripcion_rub"></textarea>
          </div>
          </div>
        

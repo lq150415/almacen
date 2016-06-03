@@ -15,10 +15,6 @@
 Route::get('login', 'Auth\AuthController@getLogin');
 Route::post('login', 'Auth\AuthController@postLogin');
 Route::get('logout', 'Auth\AuthController@getLogout');
- 
-// Registration routes...
-Route::get('auth/register', 'Auth\AuthController@getRegister');
-Route::post('auth/register', 'Auth\AuthController@postRegister');
 
 Route::group(['middleware' => 'auth'], function () {
     
@@ -28,6 +24,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('almacen', ['as'=>'almacen','uses'=>'AlmacenController@Index']);
         Route::post('elialmacen','AlmacenController@elialmacen');
         Route::post('modifalmacen','AlmacenController@modificar');
+        Route::post('rubro/{id}/modifrubro','RubroController@modificar');
+        Route::post('rubro/producto/{id}/modifpro','ProductoController@modificar');
         Route::post('almacen/registrar', 'AlmacenController@store');
         Route::resource('alerta', 'AlertaController');
         Route::resource('consultapp', 'ConsultaController@index');

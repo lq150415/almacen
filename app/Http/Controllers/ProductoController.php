@@ -66,8 +66,15 @@ class ProductoController extends Controller {
 			  return redirect()->route('producto',array('id'=>$id))->with('mensaje',$mensaje);
 
 	}
-	public function modificacion(){
-
+	public function modificar(Request $request, $id)
+	{
+		$mensaje2="Producto modificado correctamente";
+		$id2= $request->input('id_pro');
+		$modifica= Producto::find($id2);
+		$modifica->ITM_PRO= $request->input('item_pro');
+		$modifica->DES_PRO= $request->input('descripcion_pro');
+		$modifica->save();
+		return redirect()->route('producto',array('id'=>$id))->with('mensaje2',$mensaje2);
 	}
 	/**
 	 * Display the specified resource.

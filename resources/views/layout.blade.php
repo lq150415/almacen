@@ -438,7 +438,6 @@ $(document).ready(function()
 					<a href="#" ><span class="icon-user-minus"></span><?php echo $nombre=Auth::user()->NOM_USU?><span class="caret icon-arrow-down6"></span></a>
 					<ul class="children">
 						<li><a data-toggle = "modal" data-target = "#myModal7" >Ver Perfil<span class="icon-dot"></span></a></li>
-						<li><a href="#">Editar Perfil<span class="icon-dot"></span></a></li>
 						<li><a href="{{ url('logout')}}">Cerrar Sesión<span class="icon-dot"></span></a></li>
 					</ul>
 				</li>
@@ -467,15 +466,7 @@ $(document).ready(function()
 					<li> <a href="{{ url('usuario')}}">USUARIOS</a> </li>
 					<li> <a href="{{ url('solicitud')}}">SOLICITUDES</a><div id="noti">  </div> </li>
 					<li> <a href="{{ url('respuesta')}}">RESPUESTAS</a><div id="noti2"></div>  </li>
-					<li> <a >CONSULTAS</a> 
-						<ul class="children">
-							<li><a href="{{ url('consultapr')}}">Por rubro<span class="icon-dot"></span></a></li>
-							<li><a href="{{ url('consultapp')}}">Por producto<span class="icon-dot"></span></a></li>
-							<li><a href="{{ url('consultapu')}}">Por usuario<span class="icon-dot"></span></a></li>
-							<li><a href="{{ url('consultapf')}}">Por fechas<span class="icon-dot"></span></a></li>
-							
-						</ul>
-					</li>
+					
 				</ul>
 			</nav>
 		</header>
