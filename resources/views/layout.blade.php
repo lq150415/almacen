@@ -171,11 +171,12 @@ $(function(){
 	});
  
 	// Evento que selecciona la fila y la elimina 
+			console.log(ind2);
 
 	$(document).on("click",".eliminar",function(){
 		if(ind2==1){
 			ind--;
-			
+
 			
 			$('#producto').val(' ');
 			$('#producto2').val(' ');

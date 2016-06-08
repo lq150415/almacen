@@ -26,7 +26,10 @@ class SolicitudController extends Controller {
 	public function index()
 	{
 		if(Auth::user()->NIV_USU==0){
-		return view('solicitud');}
+			$productos= Producto::join('rubros','rubros.id','=','productos.ID_RUB')->where('ID_ALM','=','1')
+		->select('productos.id','DES_PRO','ID_ALM')
+		->get();
+		return view('solicitud')->with('productos',$productos);}
 		else{
 
 		$productos= Producto::join('rubros','rubros.id','=','productos.ID_RUB')->where('ID_ALM','=','1')
@@ -40,7 +43,10 @@ class SolicitudController extends Controller {
 		if(Auth::user()->NIV_USU==0){
 			$q = new Notificacion;
 			$q = $q->join('solicitudes', 'notificaciones.ID_PSO','=','solicitudes.id')->join('users', 'solicitudes.ID_USU','=','users.id')->where('TIP_NOT','=','Solicitud')->where('notificaciones.DES_NOT','<=',1)->orderBy('notificaciones.updated_at', 'DESC')->select('REA_NOT','NOM_USU', 'APA_USU','AMA_USU','notificaciones.updated_at', 'notificaciones.created_at','TIP_NOT','ID_PSO')->get();
-		return view('solicitudes')->with('query',$q);}
+			$productos= Producto::join('rubros','rubros.id','=','productos.ID_RUB')->where('ID_ALM','=','1')
+		->select('productos.id','DES_PRO','ID_ALM')
+		->get();
+		return view('solicitudes')->with('query',$q)->with('productos',$productos);}
 		else{
 
 		$productos= Producto::join('rubros','rubros.id','=','productos.ID_RUB')->where('ID_ALM','=','1')
@@ -135,6 +141,7 @@ class SolicitudController extends Controller {
         	$notificaciones->created_at = Carbon::now();
         	$notificaciones->updated_at = Carbon::now();
 			$notificaciones->save();
+
 		for($i=0; $i < count($request->input('idproducto')) ;$i++){
 			$solicitados = new Solicitado;
 			$solicitados->CAN_SOL = $request->input('can_sol.'.$i);
@@ -146,7 +153,7 @@ class SolicitudController extends Controller {
 		}
 		$mensaje="Solicitud enviada";
 		if(Auth::user()->NIV_USU==0){
-			return view('solicitud')->with('mensaje',$mensaje);}
+			return redirect()->route('solicitud')->with('mensaje',$mensaje);}
 			else{
 				$productos= Producto::join('rubros','rubros.id','=','productos.ID_RUB')->where('ID_ALM','=','1')
 		->select('productos.id','DES_PRO','ID_ALM')
@@ -343,7 +350,8 @@ class SolicitudController extends Controller {
 		
 		echo "});";
 		
-		echo "</script>"; 
+		echo "</script>";
+		if(count($productos)>0){ 
 		echo"<table id='tabla' class='table table-responsive table-hover'>
 			<thead>
 			<tr>
@@ -362,7 +370,8 @@ class SolicitudController extends Controller {
         echo "id = $(this).val();";
         echo "$('#idproducto".$key."').val($('#productosol".$key."').val());";
         echo '$.post("disponible", { id: id }, function(data){';
-        echo '$("div[name='."'can_pro_dis[".$key."]'".']").html(data);';
+       echo '$("input[name='."'can_pro[]'".']").attr("value",data);';
+        echo '$("input[name='."'can_sol[]'".']").attr("max",data);';
 		echo "});";
 		echo "});";
 		echo '$("#productosol'.$key.'").change(function () {';
@@ -370,7 +379,8 @@ class SolicitudController extends Controller {
         echo "id = $(this).val();";
         echo "$('#idproducto').val($(this).val());";
         echo '$.post("disponible", { id: id }, function(data){';
-        echo '$("div[name='."'can_pro_dis[".$key."]'".']").html(data);';
+        echo '$("input[name='."'can_pro[]'".']").attr("value",data);';
+        echo '$("input[name='."'can_sol[]'".']").attr("max",data);';
 		echo "});";
 		echo "});";
 		echo "});";
@@ -390,12 +400,12 @@ class SolicitudController extends Controller {
 					<input type='hidden' class='form-control' id='estado' name='estado[]' value='".$producto->REA_NOT."'' readonly='readonly'/>
 					<input type='hidden' class='form-control' id='pro_pin' name='pro_pin[]'  readonly='readonly'/>
 							
-					<td><input type='number' value='".$producto->CAN_SOL."'' id='can_pro' min='1' name='can_sol[]'"; 
+					<td><input type='number' value='".$producto->CAN_SOL."'' id='can_pro' min='1' max='".$producto->CAN_PRO."' name='can_sol[]'"; 
 					if($producto->REA_NOT >= 2){
 						echo " readonly ='readonly' ";
 					}
 					echo "class='form-control' name='can_pro[]'/></td>
-					<td><div name='can_pro_dis[".$key."]'></div></td>";
+					<td><input type='text' readonly='readonly' class='form-control' name='can_pro[]'/></td>";
 					if($producto->REA_NOT < 2){
 				echo "<td class='btn btn-danger eliminar'><span class='glyphicon glyphicon-remove'></span> Eliminar</td>";
 											
@@ -447,6 +457,13 @@ class SolicitudController extends Controller {
             </form>
          </div>";
          }
+     }else{
+     	echo "<div class='alert alert-danger'>La solicitud fue eliminada, </div>
+     	<button type = 'submit' class = 'btn btn-success' ><span class='glyphicon glyphicon-check' style='font-size: 10px; '></span>
+               Aceptar
+            </button>
+            </form>";
+     }
 							
 	}
 
@@ -489,9 +506,113 @@ class SolicitudController extends Controller {
 	public function disponible()
 	{
 		$productos = Producto::where('id','=',$_POST['id'])->first();
-		echo "<input type='text' value='".$productos->CAN_PRO."'' id='can_prod'  readonly='readonly' class='form-control' name='can_pro[]'/>";
+		echo $productos->CAN_PRO;
 	}
 	public function prod_sol3(){
+		$productos= Solicitado::where('ID_SOL','=',$_POST['id'])->join('productos','productos.id','=','solicitados.ID_PRO')->join('notificaciones','notificaciones.ID_PSO','=','solicitados.ID_SOL')->get();
+		$notificacion= Notificacion::where('ID_PSO','=',$_POST['id'])->select('id')->get();
+		$noti = new Notificacion;
+		$noti = $noti->find($notificacion[0]->id);
+		if($noti->REA_NOT==0):
+		$noti->REA_NOT= 1;
+		$noti->save();
+		endif;
+		echo "<script type='text/javascript' language='javascript' class='init'>"; 
+		echo "$(document).on('click','.eliminar',function(){";
+		echo "var parent = $(this).parents().get(0);";
+		echo "$(parent).remove();";
+		echo "ind2--;";
+		
+		echo "});";
+		echo "</script>"; 
+		echo '<script language="JavaScript">';
+		echo "function muestra_oculta(id){";
+		echo"if(document.getElementById){";
+		echo"var el = document.getElementById(id);";
+		echo"el.style.display = (el.style.display == 'none') ? 'block' : 'block';";
+		echo"document.getElementById('despliega').style.display = (document.getElementById('despliega').style.display == 'none') ? 'none' : 'none';";
+		echo"document.getElementById('botones').style.display = (document.getElementById('botones').style.display == 'none') ? 'block' : 'block';";
+		echo"}";
+		echo"}";
+		echo "window.onload = function(){";
+		echo "muestra_oculta('contenido_a_mostrar');";
+		echo "}";
+		echo "</script>";
+		if ($noti->ALE_NOT==2 || $noti->REA_NOT==4){
+			
+     	}else {
+			echo "
+            <button id='despliega' onclick=".'"muestra_oculta('."'contenido_a_mostrar'".')" title=""'." type = 'button' class = 'btn btn-success'><span style='font-size: 10px; ' class='glyphicon glyphicon-check'></span>
+               Proceder salida de productos
+            </button>
+         ";
+  
+     }
+		echo '
+<div id="contenido_a_mostrar" style="display:none;">
+		<div class="form-group">
+			<label class="col-lg-3 control-label">Formulario DGAA</label>
+         		<div class="col-md-8">
+           		 <input type="number" min="0" name="dga_sol" id="" class="form-control" required="yes">
+        		</div>
+			</div>
+		<div class="form-group">
+			<label class="col-lg-3 control-label">Destino:</label>
+         		<div class="col-md-8">
+           		 	<input required="yes" type="text" min="0" name="des_sol" id="fec_sol" class="form-control">
+        		</div>
+        </div>
+</div>';
+		if(count($productos)>0){
+
+		echo"<table id='tabla' class='table table-responsive table-hover'>
+			<thead>
+			<tr>
+				<th width='48%'>Producto</th>
+				<th width='9%'>Cantidad</th>
+				<th width='9%'>Disponible</th>";
+		if($productos[0]->REA_NOT < 2){
+		echo "<th width='10%'>&nbsp;</th>";}
+		echo"</tr>
+			</thead>
+			<tbody>";
+		foreach ($productos as $producto):
+			echo "<tr> 				
+				<td><input type='text' class='form-control' id='producto' name='producto[]' readonly='readonly' value='".$producto->DES_PRO."'/></td>
+					<input type='hidden' class='form-control' id='idproducto' name='idproducto[]' value='".$producto->ID_PRO."' readonly='readonly'/>
+					<input type='hidden' class='form-control' id='pro_pin' name='pro_pin[]'  readonly='readonly'/>
+							
+					<td><input type='number' value='".$producto->CAN_SOL."'' id='can_pro' name='can_sol[]'"; 
+					if($producto->REA_NOT >= 2){
+						echo " readonly ='readonly' ";
+					}
+					echo "class='form-control' name='can_pro[]'/></td>
+					<td><input type='text' value='".$producto->CAN_PRO."'' id='can_prod'  readonly='readonly' class='form-control' name='can_pro[]'/></td>";
+					
+		endforeach;
+		if ($noti->ALE_NOT==2 || $noti->REA_NOT==4){
+			echo "</tr></tbody></table><div class = 'modal-footer' style='border-top: none;'>
+            <button data-dismiss = 'modal'".')" title=""'." type = 'button' class = 'btn btn-success'><span style='font-size: 10px; ' class='glyphicon glyphicon-check'></span>
+               Aceptar
+            </button></div></form>
+         ";
+     	}else {
+			echo "</tr></tbody></table><div class = 'modal-footer' style='border-top: none;'>
+			<div style='display:none;' id='botones'><button type = 'button' class = 'btn btn-danger' data-dismiss = 'modal'><span class='glyphicon glyphicon-remove' style='font-size: 10px; '></span>
+               Cancelar
+            </button>
+            <button type = 'submit' class = 'btn btn-success'><span style='font-size: 10px; ' class='glyphicon glyphicon-check'></span>
+               Registrar salida
+            </button></div></div></form>
+         ";
+  
+     }
+		}
+		else{
+			echo "<div class='alert alert-danger'>La solicitud fue eliminada, descripcion no disponible </div>";
+		}					
+	}
+public function prod_sol4(){
 		$productos= Solicitado::where('ID_SOL','=',$_POST['id'])->join('productos','productos.id','=','solicitados.ID_PRO')->join('notificaciones','notificaciones.ID_PSO','=','solicitados.ID_SOL')->get();
 		$notificacion= Notificacion::where('ID_PSO','=',$_POST['id'])->select('id')->get();
 		$noti = new Notificacion;
@@ -552,7 +673,7 @@ class SolicitudController extends Controller {
 			<tr>
 				<th width='48%'>Producto</th>
 				<th width='9%'>Cantidad</th>
-				<th width='9%'>Disponible</th>";
+				";
 		if($productos[0]->REA_NOT < 2){
 		echo "<th width='10%'>&nbsp;</th>";}
 		echo"</tr>
@@ -569,7 +690,7 @@ class SolicitudController extends Controller {
 						echo " readonly ='readonly' ";
 					}
 					echo "class='form-control' name='can_pro[]'/></td>
-					<td><input type='text' value='".$producto->CAN_PRO."'' id='can_prod'  readonly='readonly' class='form-control' name='can_pro[]'/></td>";
+					";
 					
 		endforeach;
 		if ($noti->ALE_NOT==2 || $noti->REA_NOT==4){
@@ -591,7 +712,6 @@ class SolicitudController extends Controller {
      }
 							
 	}
-
 	public function sal_prod(Request $request)
 	{
 		$id=$request->input('id_sol');
@@ -685,12 +805,11 @@ class SolicitudController extends Controller {
         echo "$(document).ready(function() { setTimeout(function(){ $('.mensajelogin').fadeIn(1500); },0000); });";
         echo "$(document).ready(function() { setTimeout(function(){ $('.mensajelogin').fadeOut(1500); },5000); });";
         echo "</script>";
-       
-
-			echo "<div class='mensajelogin' id='mensaje'> <h1>Mensaje nuevo</h1>Tiene una nueva solicitud del usuario </br> ".$usuario[0]->NOM_USU.' '.$usuario[0]->APA_USU.' '.$usuario[0]->AMA_USU."</div>";
+        echo "<div class='mensajelogin' id='mensaje'> <h1>Mensaje nuevo</h1>Tiene una nueva solicitud del usuario </br> ".$usuario[0]->NOM_USU.' '.$usuario[0]->APA_USU.' '.$usuario[0]->AMA_USU."</div>";
+			
 			$con5->ALE_NOT =1;
 			$con5->save();
-		}else{}
+		}
 	
 	}
 

@@ -1,4 +1,4 @@
-	@extends ('cliente/layout_clie')
+  	@extends ('cliente/layout_clie')
 	@section ('cuerpo')
 	<div class="ventanamodal5 modal-dialog">
 	

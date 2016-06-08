@@ -52,12 +52,14 @@ class NotificacionController extends Controller {
 		
 		echo "});";
 		echo "</script>"; 
+		if(count($productos)>0){
 		echo"<table id='tabla' class='table table-responsive table-hover'>
 			<thead>
 			<tr>
 				<th width='48%'>Producto</th>
 				<th width='9%'>Cantidad</th>
 				<th width='9%'>Disponible</th>";
+		
 		if($productos[0]->REA_NOT < 2){
 		echo "<th width='10%'>&nbsp;</th>";}
 		echo"</tr>
@@ -90,6 +92,13 @@ class NotificacionController extends Controller {
                 Aprobar solicitud
             </button>
          </div>";
+     }else{
+     	echo "<div class='alert alert-danger'>La solicitud fue eliminada, al aceptar automaticamente sera una solicitud rechazada  </div>
+     	<br/>
+     	<button type = 'submit' href='rechazarsol' class = 'btn btn-danger' onclick=this.form.action='rechazarsolicitud'><span class='glyphicon glyphicon-remove' style='font-size: 10px; '></span>
+               Rechazar solicitud
+            </button>";
+     }
      
 	}
 
