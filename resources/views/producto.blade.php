@@ -225,12 +225,7 @@
            		 <input type="number" placeholder="P/U Bs." min="0" step="any" class="form-control" name="pun_pro">
         		</div>
         		
-         		<div class="form-group">
-            	<label class="col-sm-2 control-label">Cantidad:</label>
-         		<div class="col-md-3">
-           		 <input type="number" placeholder="Unidad" min="1"class="form-control" name="can_pro">
-        		</div>
-         		</div>
+         		
         		</div>
          <input type="hidden" id="idalm">
          <div class = "modal-footer" style="border-top: 0;">

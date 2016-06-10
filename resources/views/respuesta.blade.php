@@ -59,7 +59,7 @@
 							$a='Aprobado';
 						}else{
 							$a='Rechazado';
-						}
+						} 
 						 $fechas=$respuesta->created_at->format('Y/m/d');
         				 $nombres=$respuesta->NOM_USU.' '.$respuesta->APA_USU.' '.$respuesta->AMA_USU;
         				 $fecha= "'".$fechas."'";

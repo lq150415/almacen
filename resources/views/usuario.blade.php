@@ -153,35 +153,35 @@
 				 <div class="form-group">
             	<label class="col-lg-3 control-label">CI :</label>
          		<div class="col-md-8">
-           		 <input placeholder="CARNET DE IDENTIDAD" class="form-control" type="number" step="1" min="0" name="ci_usu" id="ci_usu">
+           		 <input placeholder="CARNET DE IDENTIDAD" class="form-control" type="number" required step="1" min="0" name="ci_usu" id="ci_usu">
         		</div>
          		</div>
          		<div class="form-group">
             	<label class="col-lg-3 control-label">Nombre :</label>
          		<div class="col-md-8">
-           		 <input placeholder="NOMBRE DEL USUARIO" class="form-control" name="nom_usu">
+           		 <input placeholder="NOMBRE DEL USUARIO" required class="form-control" name="nom_usu">
         		</div>
          		</div>
          		 <div class="form-group">
             	<label class="col-lg-3 control-label">Apellido Paterno :</label>
          		<div class="col-md-8">
-           		 <input placeholder="APELLIDO PATERNO" class="form-control" name="apa_usu">
+           		 <input placeholder="APELLIDO PATERNO" required class="form-control" name="apa_usu">
         		</div>
          		</div>
          		 <div class="form-group">
             	<label class="col-lg-3 control-label">Apellido Materno :</label>
          		<div class="col-md-8">
-           		 <input placeholder="APELLIDO MATERNO" class="form-control" name="ama_usu">
+           		 <input placeholder="APELLIDO MATERNO" required class="form-control" name="ama_usu">
         		</div>
          		</div>
          		 <div class="form-group">
             	<label class="col-lg-3 control-label">Area :</label>
          		<div class="col-md-8">
-           		 <select class="form-control" name="are_usu">
+           		 <select class="form-control" required name="are_usu">
            		 	<option value="">SELECCIONE</option>
 					<option value="Recursos Humanos">Recursos humanos</option>
 					<option value="Tecnologias de Informacion">Tecnologias de Informacion</option>
-					<option value="Otros">Otros</option>
+					<option value="Otros" >Otros</option>
            		 </select>
         		</div>
          		</div>

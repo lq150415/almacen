@@ -26,13 +26,13 @@ class SolicitudController extends Controller {
 	public function index()
 	{
 		if(Auth::user()->NIV_USU==0){
-			$productos= Producto::join('rubros','rubros.id','=','productos.ID_RUB')->where('ID_ALM','=','1')
+			$productos= Producto::join('rubros','rubros.id','=','productos.ID_RUB')
 		->select('productos.id','DES_PRO','ID_ALM')
 		->get();
 		return view('solicitud')->with('productos',$productos);}
 		else{
 
-		$productos= Producto::join('rubros','rubros.id','=','productos.ID_RUB')->where('ID_ALM','=','1')
+		$productos= Producto::join('rubros','rubros.id','=','productos.ID_RUB')
 		->select('productos.id','DES_PRO','ID_ALM')
 		->get();
 		return view('cliente/form_sol')->with('productos',$productos);
@@ -43,7 +43,7 @@ class SolicitudController extends Controller {
 		if(Auth::user()->NIV_USU==0){
 			$q = new Notificacion;
 			$q = $q->join('solicitudes', 'notificaciones.ID_PSO','=','solicitudes.id')->join('users', 'solicitudes.ID_USU','=','users.id')->where('TIP_NOT','=','Solicitud')->where('notificaciones.DES_NOT','<=',1)->orderBy('notificaciones.updated_at', 'DESC')->select('REA_NOT','NOM_USU', 'APA_USU','AMA_USU','notificaciones.updated_at', 'notificaciones.created_at','TIP_NOT','ID_PSO')->get();
-			$productos= Producto::join('rubros','rubros.id','=','productos.ID_RUB')->where('ID_ALM','=','1')
+			$productos= Producto::join('rubros','rubros.id','=','productos.ID_RUB')
 		->select('productos.id','DES_PRO','ID_ALM')
 		->get();
 		return view('solicitudes')->with('query',$q)->with('productos',$productos);}
@@ -667,13 +667,16 @@ public function prod_sol4(){
         		</div>
         </div>
 </div>';
-
+if(count($productos)>0){
 		echo"<table id='tabla' class='table table-responsive table-hover'>
 			<thead>
 			<tr>
 				<th width='48%'>Producto</th>
 				<th width='9%'>Cantidad</th>
 				";
+		
+
+			
 		if($productos[0]->REA_NOT < 2){
 		echo "<th width='10%'>&nbsp;</th>";}
 		echo"</tr>
@@ -710,6 +713,10 @@ public function prod_sol4(){
          ";
   
      }
+}
+		else{
+			echo "<div class='alert alert-danger'>La solicitud fue eliminada, descripcion no disponible </div>";
+		}		
 							
 	}
 	public function sal_prod(Request $request)
@@ -802,14 +809,18 @@ public function prod_sol4(){
 		if($con5->ALE_NOT ==0){
 
  		echo "<script type='text/javascript'>";
-        echo "$(document).ready(function() { setTimeout(function(){ $('.mensajelogin').fadeIn(1500); },0000); });";
-        echo "$(document).ready(function() { setTimeout(function(){ $('.mensajelogin').fadeOut(1500); },5000); });";
+        echo "$(document).ready(function() { setTimeout(function(){ $('.mensajelogin').fadeIn(2500); },0000); });";
+        echo "$(document).ready(function() { setTimeout(function(){ $('.mensajelogin').fadeOut(2500); },5000); });";
         echo "</script>";
         echo "<div class='mensajelogin' id='mensaje'> <h1>Mensaje nuevo</h1>Tiene una nueva solicitud del usuario </br> ".$usuario[0]->NOM_USU.' '.$usuario[0]->APA_USU.' '.$usuario[0]->AMA_USU."</div>";
-			
+        $ind=1;
+    	}
+    	if($ind==1){
 			$con5->ALE_NOT =1;
 			$con5->save();
+			$ind--;
 		}
+			
 	
 	}
 

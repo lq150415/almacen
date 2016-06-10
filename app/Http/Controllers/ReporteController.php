@@ -36,17 +36,15 @@ class ReporteController extends Controller
     }
     public function kardexpdf($id){
         $producto= Producto::where('id','=',$id)->get();
-        $query= DB::select("SELECT FEC_ING as fecha, NFC_PIN as 'Factura', NOC_PIN as 'compra','' as 'DGAA',
-PRO_PIN as 'PROCEDENCIA', CAN_PIN as Entradas, '' as Salidas
-FROM ingresados join ingresos on(ingresos.id=ID_ING)
-where ingresados.ID_PRO=$id
+        $query= DB::select('SELECT "FEC_ING" as "fecha", "NFC_PIN" as "Factura", "NOC_PIN" as "compra",'."' '".' as "DGAA",
+"PRO_PIN" as "PROCEDENCIA", "CAN_PIN" as "Entradas",'."'0'".' as "Salidas"
+FROM ingresados join ingresos on(ingresos.id="ID_ING")
+where ingresados."ID_PRO"='.$id.' 
 UNION
-SELECT FEC_SAL as fecha, '' as 'Numero de Factura', '' as 'Nº Orden de compra',DGA_SPR as 'DGAA',
-DES_SPR as 'PROCEDENCIA/DESTINO', '' as Entradas, CAN_SPR as Salidas
-FROM salidaproductos join salidas on(salidas.id=ID_SAL)
-where salidaproductos.ID_PRO=$id ORDER BY 1
-
-");
+SELECT "FEC_SAL" as fecha,'."'0'".' as "Numero de Factura", '."'0'".'as "Nº Orden de compra","DGA_SPR" as "DGAA",
+"DES_SPR" as "PROCEDENCIA/DESTINO",'."'0'".' as "Entradas", "CAN_SPR" as "Salidas"
+FROM salidaproductos join salidas on(salidas.id="ID_SAL")
+where salidaproductos."ID_PRO"='.$id.' ORDER BY 1;');
         $pdf = new TCPDF('P','mm', array(164,216), true, 'UTF-8', false);
 
         $pdf->SetTitle('Tarjeta Kardex valorado');
@@ -153,7 +151,20 @@ where salidaproductos.ID_PRO=$id ORDER BY 1
     if(count($query)>0){
         foreach ($query as $q ) {
             $saldos= $saldos + $q->Entradas - $q->Salidas;
+            if($q->compra==0)
+        {
+            $q->compra=' ';
+        }
+          if($q->Entradas==0)
+        {
+            $q->Entradas=' ';
+        }
+          if($q->Salidas==0)
+        {
+            $q->Salidas=' ';
+        }
     if ($i==1){
+
      $html = 
      '<font size="6"> <br/><br/><br/><br/><table border="1" cellspacing="0" cellpadding="2">
     <tr rowspan="2">
@@ -498,11 +509,10 @@ $pdf->SetXY(10,190);
                     foreach ($rubro as $rubros) {
                         $idrub=$rubros->id;
                         $producto2= Producto::where('ID_RUB','=',$idrub)->orderBy('ITM_PRO' )->get();
-                        $producto= DB::select("
-                                SELECT sum(CAN_PRO*PUN_PRO) as TOTAL
+                        $producto= DB::select('
+                                SELECT sum("CAN_PRO"*"PUN_PRO") as "TOTAL"
                                 from productos
-                                where id_rub=$idrub
-                                having sum(CAN_PRO*PUN_PRO)");
+                                where "ID_RUB"='.$idrub);
                         if($k==1)
                         {                           
                             $html2=$html2.'
@@ -531,11 +541,10 @@ $pdf->SetXY(10,190);
                     foreach ($rubro as $rubros) {
                         $idrub=$rubros->id;
                         $producto2= Producto::where('ID_RUB','=',$idrub)->orderBy('ITM_PRO' )->get();
-                        $producto= DB::select("
-                                SELECT sum(CAN_PRO*PUN_PRO) as TOTAL
+                         $producto= DB::select('
+                                SELECT sum("CAN_PRO"*"PUN_PRO") as "TOTAL"
                                 from productos
-                                where id_rub=$idrub
-                                having sum(CAN_PRO*PUN_PRO)");
+                                where "ID_RUB"='.$idrub);   
                         if($k==1)
                         {                           
                             $html2=$html2.'

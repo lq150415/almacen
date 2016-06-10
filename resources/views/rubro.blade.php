@@ -41,13 +41,13 @@
 	  	</br>
 	  	<fieldset class="fieldcuerpo" align="left">
 	  <legend style="margin-bottom: 0;">Productos mas solicitados</legend>  		  	
-	  	<span class="titulo">Producto #1 : </span><span  class="subtitulo"><?php echo $query2[0]->DES_PRO.' - <b>CANTIDAD</b>   '.$query2[0]->solicitado.' unidades';?></span> 
+	  	<span class="titulo">Producto #1 : </span><span  class="subtitulo"><?php if(count($query2)==0){}else{ echo $query2[0]->DES_PRO.' - <b>CANTIDAD</b>   '.$query2[0]->solicitado.' unidades';}?></span> 
 	  	</br>	
 	  	</br>	  		  	
-	  	<span class="titulo">Producto #2 : </span><span  class="subtitulo"><?php echo $query2[1]->DES_PRO.' - <b>CANTIDAD</b>   '.$query2[1]->solicitado.' unidades';?></span>
+	  	<span class="titulo">Producto #2 : </span><span  class="subtitulo"><?php if((count($query2)<=1)){} else{ echo $query2[1]->DES_PRO.' - <b>CANTIDAD</b>   '.$query2[1]->solicitado.' unidades';}?></span>
 	  	</br>	
 	  	</br>	  		  	
-	  	<span class="titulo">Producto #3 : </span><span  class="subtitulo"><?php echo $query2[2]->DES_PRO.' - <b>CANTIDAD</b>   '.$query2[2]->solicitado.' unidades';?></span>
+	  	<span class="titulo">Producto #3 : </span><span  class="subtitulo"><?php if(count($query2)<=2){} else{ echo $query2[2]->DES_PRO.' - <b>CANTIDAD</b>   '.$query2[2]->solicitado.' unidades';}?></span>
 	  </fieldset> 
 	  	<fieldset class="fieldcuerpo" align="left">
 					<legend style="margin-bottom: 0;">DETALLE</legend>
@@ -152,7 +152,7 @@
          </div>
          </div>
         
-         <input type="hidden" id="idalm">
+         <input type="hidden" id="idalm" value="<?php echo $query[0]->id;?>">
          <div class = "modal-footer" style="border-top: 0;">
             <button type = "button" class = "btn btn-danger" data-dismiss = "modal"><span class="glyphicon glyphicon-remove" style="font-size: 10px;"></span>
                Cancelar
@@ -203,7 +203,7 @@
        
 
         
-         <input type="hidden" id="idalm">
+         <input type="hidden" id="idalm" >
          <div class = "modal-footer" style="border-top: 0;">
             <button type = "button" class = "btn btn-danger" data-dismiss = "modal"><span class="glyphicon glyphicon-remove" style="font-size: 10px;"></span>
                Cancelar

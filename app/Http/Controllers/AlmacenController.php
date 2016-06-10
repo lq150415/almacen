@@ -66,7 +66,7 @@ class AlmacenController extends Controller {
 	{
 		Almacen::where('id','=',$request->input('id'))->delete();
 		$mensaje="Almacen eliminado";
-			  return redirect()->route('almacen.index')->with('mensaje',$mensaje);
+			  return redirect()->route('almacen')->with('mensaje',$mensaje);
 	}
 	/**
 	 * Show the form for editing the specified resource.

@@ -194,15 +194,18 @@ $(function(){
 	</thead>
 	
 	<tbody>
+	<?php if(count($productos)>0):?>
 		<tr>
 		<?php
+		
 					foreach ($productos as $producto):
 					?>
 						<th><?php echo $producto->DES_PRO;?></th>
 						<th><button type="button" title="Agregar producto" onClick="agregavalor(<?php echo "'hidden' ,'".$producto->DES_PRO."','".$producto->id."'"?>);" class="btn btn-primary"><span class="glyphicon glyphicon-shopping-cart"></span></button></th>
 		</tr>
 				<?php	endforeach;
-			
+						endif;
+				
 			?>
 	</tbody>
 	</table>

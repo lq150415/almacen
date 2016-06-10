@@ -44,6 +44,8 @@ class NotificacionController extends Controller {
 		$noti->REA_NOT= 1;
 		$noti->save();
 		endif;
+
+		if(count($productos)>0){
 		echo "<script type='text/javascript' language='javascript' class='init'>"; 
 		echo "$(document).on('click','.eliminar',function(){";
 		echo "var parent = $(this).parents().get(0);";
@@ -52,7 +54,7 @@ class NotificacionController extends Controller {
 		
 		echo "});";
 		echo "</script>"; 
-		if(count($productos)>0){
+		
 		echo"<table id='tabla' class='table table-responsive table-hover'>
 			<thead>
 			<tr>
@@ -95,9 +97,10 @@ class NotificacionController extends Controller {
      }else{
      	echo "<div class='alert alert-danger'>La solicitud fue eliminada, al aceptar automaticamente sera una solicitud rechazada  </div>
      	<br/>
-     	<button type = 'submit' href='rechazarsol' class = 'btn btn-danger' onclick=this.form.action='rechazarsolicitud'><span class='glyphicon glyphicon-remove' style='font-size: 10px; '></span>
+     	<div class = 'modal-footer' style='border-top: none;'>
+            <button type = 'submit' href='rechazarsol' class = 'btn btn-danger' onclick=this.form.action='rechazarsolicitud'><span class='glyphicon glyphicon-remove' style='font-size: 10px; '></span>
                Rechazar solicitud
-            </button>";
+            </button></div>";
      }
      
 	}
@@ -133,6 +136,7 @@ class NotificacionController extends Controller {
 		$respuesta->save();
 
 		$mensaje2="Solicitud rechazada";
+		
 		return redirect()->route('notificacionescl')->with('mensaje2',$mensaje2);
 	}
 

@@ -364,17 +364,7 @@ function cargar_push()
 				$('#leidas').html(data);
 			}
 			});	
-			$.ajax({
-			async:	true, 
-			type: "POST",
-			url: "{{ url('notificacionescount')}}",
-			data: "&div="+DES_NOT,
-			dataType:"html",
-			success: function(data2)
-			{	
-				$('#noti').html(data2);
-			}
-			});	
+			
 			$.ajax({
 			async:	true, 
 			type: "POST",
@@ -385,7 +375,18 @@ function cargar_push()
 			{	
 				$('#Notificacionalerta').html(data16);
 			}
-			});	
+			});
+			$.ajax({
+			async:	true, 
+			type: "POST",
+			url: "{{ url('notificacionescount')}}",
+			data: "&div="+DES_NOT,
+			dataType:"html",
+			success: function(data2)
+			{	
+				$('#noti').html(data2);
+			}
+			});		
 		}
 		setTimeout('cargar_push()',6000);
 		    	

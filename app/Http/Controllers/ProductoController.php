@@ -22,7 +22,7 @@ class ProductoController extends Controller {
 		$productos= Producto::where('ID_RUB','=',$id)->get();
 		$rubros= new Rubro;
 		$query = Rubro::where('id','=',$id)->get();
-		$query2 = Producto::where('ID_RUB','=',$id)->orderBy('ID_RUB')->count();
+		$query2 = Producto::where('ID_RUB','=',$id)->orderBy('ID_RUB')->groupBy('ID_RUB')->count();
 		return view('producto')->with('productos', $productos)->with('id',$id)->with('query',$query)->with('query2',$query2);
 		}else{
 			return response('Unauthorized.', 401);
@@ -50,7 +50,7 @@ class ProductoController extends Controller {
 		$productos->ITM_PRO = $request->input('itm_pro');
         $productos->DES_PRO = $request->input('des_pro');
         $productos->PUN_PRO = $request->input('pun_pro');
-        $productos->CAN_PRO = $request->input('can_pro');
+        $productos->CAN_PRO = 0;
         $productos->ID_RUB = $id;
         $productos->created_at = Carbon::now();
         $productos->updated_at = Carbon:: now();

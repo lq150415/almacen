@@ -25,7 +25,7 @@ class RubroController extends Controller {
 		$rubros= Rubro::where('ID_ALM','=',$id)->get();
 		$almacen= new Almacen;
 		$query = Almacen::where('id','=',$id)->get();
-		$query2 = Solicitado::join('productos','productos.id','=','ID_PRO')->select(DB::raw('count(ID_PRO) as solicitado, DES_PRO'))->groupBy('ID_PRO')->orderBy('solicitado','DESC')->get();
+		$query2 = Solicitado::join('productos','productos.id','=','ID_PRO')->select(DB::raw('count("ID_PRO") as solicitado, "DES_PRO"'))->groupBy('DES_PRO')->orderBy('solicitado','DESC')->get();
 
 		return view('rubro')->with('rubros', $rubros)->with('id',$id)->with('query',$query)->with('query2',$query2);
 		}else{
